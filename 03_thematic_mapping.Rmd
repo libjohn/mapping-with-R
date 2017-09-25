@@ -119,33 +119,6 @@ tm_shape(contiguous_states) +
 ```
 
 
-## Make Map Interactive
-```{r}
-tmap_mode("view")
-
-```
-
-
-```{r}
-interactive_helpers <- tm_shape(contiguous_states) +
-  tm_polygons("wages", id = "Name")
-```
-
-
-```{r}
-interactive_helpers
-```
-
-
-```{r}
-
-InteractiveHelpersMap <- tmap_leaflet(interactive_helpers)
-saveWidget(InteractiveHelpersMap,
-           "Substance-Abuse-Social-Worker_Median-Wage.html")
-```
-
-
-
 ## Leaflet View of Same Map
 
 ```{r}
