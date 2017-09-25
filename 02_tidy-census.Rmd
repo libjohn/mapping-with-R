@@ -1,0 +1,109 @@
+---
+title: "TidyCensus"
+output: html_notebook
+---
+
+
+Goal:  Make a choropleth with census data
+
+- define choropleth
+- define poloygons
+- Briefly Introduce ACS census and decennial census 
+
+    - census key 
+
+
+
+```{r}
+library(tidyverse)
+library(tidycensus)
+library(leaflet)
+library(sf)
+library(stringr)
+```
+
+
+This session based on 
+
+- Kyle TidyCensus
+& 
+- Silge leaflet implementation
+
+### Create a Simple Features dataframe using TidyCensus
+```{r}
+nc_pop <- 
+  get_acs(geography = "county",
+          variables = "B01003_001",
+          state = "NC",
+          geometry = TRUE)
+
+nc_pop
+```
+
+
+
+
+## Make Coropleth in Leaflet
+
+Generate a pallet for the colors and legend
+
+```{r}
+pal <- colorQuantile(palette = "viridis", domain = nc_pop$estimate, n = 10)
+```
+
+
+Make Chropleth by filling county polygons (census geography) with correlated value
+
+`st_transform()` - converts coordinate system of simple features
+
+```{r}
+nc_pop %>%
+    st_transform(crs = "+init=epsg:4326") %>%
+    leaflet(width = "100%") %>%
+    addProviderTiles(provider = "CartoDB.Positron") %>%
+    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
+                stroke = FALSE,
+                smoothFactor = 0,
+                fillOpacity = 0.7,
+                color = ~ pal(estimate)) %>%
+    addLegend("bottomright", 
+              pal = pal, 
+              values = ~ estimate,
+              title = "Population percentiles",
+              opacity = 1)
+```
+
+
+
+```{r}
+nc_pop %>%
+    st_transform(crs = "+init=epsg:4326") %>%
+    leaflet(width = "100%") %>%
+    addProviderTiles(provider = "CartoDB.Positron") %>%
+    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
+                stroke = FALSE,
+                smoothFactor = 0,
+                fillOpacity = 0.7,
+                color = ~ pal(estimate)) %>%
+    addLegend("bottomright", 
+              pal = pal, 
+              values = ~ estimate,
+              title = "Population percentiles",
+              opacity = 1) %>% 
+    addTiles() %>% 
+    addCircleMarkers(data = starbucksNC, 
+               lat = ~ Latitude, 
+               lng = ~ Longitude, 
+               popup = starbucksNC$Name,
+               weight = 1,
+               radius = 0.6,
+               opacity = 0.5, 
+               color = "black")
+```
+
+##  Census
+
+- ACS v Decennial
+- Variable Names / Numbers
+- More on Census Geography
+

@@ -35,3 +35,7 @@ vignettes/*.pdf
 
 # Census Key
 00-census-key.Rmd
+
+# Geographies - Shapefiles
+*.zip
+.Rproj.user
