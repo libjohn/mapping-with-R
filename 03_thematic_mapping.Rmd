@@ -78,6 +78,7 @@ BlsWage_ToJoin <- Salary4Helpers %>%
   mutate(State = gsub("\\(\\d{7}\\)", "", Area)) %>% 
   filter(wages != "NA_character_") %>% 
   select(State, wages)
+BlsWage_ToJoin
 ```
 
 
@@ -89,6 +90,7 @@ Using the `append_data()` function of the `tmaptools` package, append BLS data t
 HelperShapeObject <- append_data(us_geo, BlsWage_ToJoin, 
                                  key.shp = "NAME",
                                  key.data = "State")
+as_tibble(HelperShapeObject)
 ```
 
 
@@ -135,7 +137,7 @@ interactive_helpers
 ```
 
 
-```{}
+```{r}
 
 InteractiveHelpersMap <- tmap_leaflet(interactive_helpers)
 saveWidget(InteractiveHelpersMap,
@@ -148,13 +150,12 @@ saveWidget(InteractiveHelpersMap,
 
 ```{r}
 
-ColorPallette <- colorNumeric(palette = "Greens",
+pal <- colorNumeric(palette = "Greens",
                                domain = contiguous_states$wages)
 
 contiguous_states %>% 
   st_transform(crs = "+init=epsg:4326") %>%
   leaflet(width = "100%") %>%
-  # setView(-87, 31.2, zoom =3) %>% 
   addProviderTiles(provider = "CartoDB.Positron") %>% 
   addPolygons(fillOpacity = 0.7,
               smoothFactor = 0,
