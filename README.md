@@ -22,3 +22,4 @@ introduction to leaflet, tidycensus, simple features, and ggmap
 - Claudia Engel's Introduction to Spatial Data Types in R
 - Charlotte Wickham's geospatial introduction in DataCamp
 - Lovelace, Cheshire, Oldroyd - Introduction to visualising spatial data in R
+- tmap in a nutshell - https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html

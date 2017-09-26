@@ -145,11 +145,12 @@ tm_shape(contiguous_states, projection = 5070) +
 
 ```{r}
 tm_shape(contiguous_states, projection = 5070) +
-  tm_borders(col = "black") +
+  tm_borders(col = "black", alpha = 0.4) +
   tm_fill(col = "REGION", alpha = 0.6) +
   tm_style_beaver(title = "Regions of the USA", 
                   attr.color = "navy", 
                   title.position = c("center", "top"), 
                   title.bg.color = "yellow")
 ```
+
 
