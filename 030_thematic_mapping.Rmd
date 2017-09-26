@@ -127,7 +127,8 @@ Mark likes the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection fo
 
 ```{r}
 contiguous_states %>% 
-  st_transform(crs = "+init=epsg:5070") %>% 
+  #st_transform(crs = "+init=epsg:5070") %>% 
+  st_transform(5070) %>% 
   tm_shape() +
   tm_polygons("wages", id = "Name")
 ```
