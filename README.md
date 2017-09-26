@@ -10,7 +10,6 @@ introduction to leaflet, tidycensus, simple features, and ggmap
 1. Geolocation with lat/lon points and leaflet
 1. Choropleth with TidyCensus
 1. Interactive Thematic Mapping with Simple Features
-1. Static Maps
 
 
 ## Resources
