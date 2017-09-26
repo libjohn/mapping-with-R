@@ -1,0 +1,33 @@
+---
+title: "Thematic Mapping -- Outputs 2"
+output: html_notebook
+---
+
+```{r}
+library(htmlwidgets)
+```
+
+
+```{r}
+tmap_mode("view")
+```
+
+
+```{r}
+interactive_sasw <- tm_shape(contiguous_states) +
+  tm_polygons("wages", id = "Name")
+```
+
+
+
+```{r}
+interactive_sasw_map <- tmap_leaflet(interactive_sasw)
+```
+
+
+```{r}
+saveWidget(interactive_sasw_map, "mymap_sasw.html")
+```
+
+
+

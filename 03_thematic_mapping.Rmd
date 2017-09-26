@@ -12,8 +12,6 @@ library(readxl)
 library(tmap)            # Thematic Mapping
 library(tmaptools) 
 library(tigris)          # Get Census Geography Poloygons
-library(htmlwidgets)     # To Save map as an interactive HTML widget
-library(leaflet)         
 library(sf)
 ```
 
@@ -34,7 +32,7 @@ glimpse(us_geo)
 
 ## Look at the Tibble
 ```{r}
-as_tibble(us_geo)
+#as_tibble(us_geo)
 ```
 
 ## Get BLS Data
@@ -63,7 +61,7 @@ Salary4Helpers <-
   read_excel("~/R/github/mapping-with-R/data/OES_Report.xlsx", 
     col_types = c("text", "numeric"), skip = 4)
 
-Salary4Helpers
+#Salary4Helpers
 ```
 
         
@@ -78,7 +76,8 @@ BlsWage_ToJoin <- Salary4Helpers %>%
   mutate(State = gsub("\\(\\d{7}\\)", "", Area)) %>% 
   filter(wages != "NA_character_") %>% 
   select(State, wages)
-BlsWage_ToJoin
+
+#BlsWage_ToJoin
 ```
 
 
@@ -90,7 +89,7 @@ Using the `append_data()` function of the `tmaptools` package, append BLS data t
 HelperShapeObject <- append_data(us_geo, BlsWage_ToJoin, 
                                  key.shp = "NAME",
                                  key.data = "State")
-as_tibble(HelperShapeObject)
+#as_tibble(HelperShapeObject)
 ```
 
 
@@ -100,7 +99,10 @@ as_tibble(HelperShapeObject)
 qtm(HelperShapeObject, fill = "wages")
 ```
 
-# The contiguous 48 states
+
+# Contiguous 48 states
+
+Filter to only the contiuous 48 statses + D.C.
 
 ```{r}
 contiguous_states <- HelperShapeObject %>% 
@@ -119,31 +121,13 @@ tm_shape(contiguous_states) +
 ```
 
 
-## Leaflet View of Same Map
+## Projection
+
+Mark likes the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection for the continental US. `EPSG:5070`
 
 ```{r}
-
-pal <- colorNumeric(palette = "Greens",
-                               domain = contiguous_states$wages)
-
 contiguous_states %>% 
-  st_transform(crs = "+init=epsg:4326") %>%
-  leaflet(width = "100%") %>%
-  addProviderTiles(provider = "CartoDB.Positron") %>% 
-  addPolygons(fillOpacity = 0.7,
-              smoothFactor = 0,
-              stroke = FALSE, 
-              color = ~pal(wages)) %>% 
-  addLegend("bottomleft", 
-              pal = pal, 
-              values = ~ wages,
-              bins = 5,
-              title = "Librarian Median Wages",
-              labFormat = labelFormat(prefix = "$"),
-              opacity = 1)
-
-
-
+  st_transform(crs = "+init=epsg:5070") %>% 
+  tm_shape() +
+  tm_polygons("wages", id = "Name")
 ```
-
-

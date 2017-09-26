@@ -20,7 +20,7 @@ library(leaflet)
 2012 Starbucks locations
 
 ```{r}
-starbucks <- read_csv("https://github.com/data-and-visualization/Intro2R/raw/master/data/All_Starbucks_Locations_in_the_US_-_Map.csv")
+starbucks <- read_csv("data/All_Starbucks_Locations_in_the_US_-_Map.csv")
 ```
 
 ### Filter Data to NC
@@ -34,7 +34,7 @@ starbucksNC
 ### Make the Map
 
 ```{r makemap}
-leaflet() %>% 
+leaflet(width = "100%") %>% 
   addTiles() %>% 
   setView(-78.8310, 35.9867, zoom = 10) %>% 
   addMarkers(data = starbucksNC, lat = ~ Latitude, lng = ~ Longitude, popup = starbucksNC$Name)

@@ -48,7 +48,7 @@ nc_pop
 Generate a pallet for the colors and legend
 
 ```{r}
-pal <- colorQuantile(palette = "viridis", domain = nc_pop$estimate, n = 10)
+MapPalette <- colorQuantile(palette = "viridis", domain = nc_pop$estimate, n = 10)
 ```
 
 
@@ -65,9 +65,9 @@ nc_pop %>%
                 stroke = FALSE,
                 smoothFactor = 0,
                 fillOpacity = 0.7,
-                color = ~ pal(estimate)) %>%
+                color = ~ MapPalette(estimate)) %>%
     addLegend("bottomright", 
-              pal = pal, 
+              pal = MapPalette, 
               values = ~ estimate,
               title = "Population percentiles",
               opacity = 1)
@@ -84,9 +84,9 @@ nc_pop %>%
                 stroke = FALSE,
                 smoothFactor = 0,
                 fillOpacity = 0.7,
-                color = ~ pal(estimate)) %>%
+                color = ~ MapPalette(estimate)) %>%
     addLegend("bottomright", 
-              pal = pal, 
+              pal = MapPalette, 
               values = ~ estimate,
               title = "Population percentiles",
               opacity = 1) %>% 

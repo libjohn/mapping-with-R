@@ -1,0 +1,36 @@
+---
+title: "Thematic Leaflet Example"
+output: html_notebook
+---
+
+```{r}
+library(leaflet)
+```
+
+
+## Leaflet View of Same Map
+
+```{r}
+
+GreenPalette <- colorNumeric(palette = "Greens",
+                               domain = contiguous_states$wages)
+
+contiguous_states %>% 
+  st_transform(crs = "+init=epsg:4326") %>%
+  leaflet(width = "100%") %>%
+  addProviderTiles(provider = "CartoDB.Positron") %>% 
+  addPolygons(fillOpacity = 0.7,
+              smoothFactor = 0,
+              stroke = FALSE, 
+              color = ~GreenPalette(wages)) %>% 
+  addLegend("bottomleft", 
+              pal = GreenPalette, 
+              values = ~ wages,
+              bins = 5,
+              title = "Median Salary - Substance Abuse Social Workers",
+              labFormat = labelFormat(prefix = "$"),
+              opacity = 1)
+
+
+
+```
