@@ -2,3 +2,4 @@
 *.R linguist-language=R
 *.html linguist-documentation
 *.js linguist-documentation
+*.css linguist-documentation
