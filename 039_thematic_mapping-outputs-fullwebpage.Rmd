@@ -31,3 +31,11 @@ saveWidget(interactive_sasw_map, "mymap_sasw.html")
 
 For some reason, my process throws and error indicating the document conversion failed with a pandoc "Out of memory" problem.  **And yet**, the map does get produced and is stored in my files directory as `mymap_sasw.html`.  Open that file in a web browser.
 
+
+## Save a Shapefile
+
+```
+library(sf)
+st_write(contiguous_states, "contiguous_states.shp")
+```
+

@@ -155,11 +155,12 @@ tm_shape(contiguous_states, projection = 5070) +
                   title.bg.color = "yellow")
 ```
 
+## ggplot2 with viridis
 
 ```{r}
 #library(viridis)
 #devtools::install_github("tidyverse/ggplot2")
-#library(ggplot2)
+#library(ggplot2) -- version 2.2.1.90000
 
 contiguous_states %>% 
   ggplot(aes(fill = wages, color = wages)) +
