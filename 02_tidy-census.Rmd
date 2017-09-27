@@ -7,11 +7,11 @@ output: html_notebook
 Goal:  Make a choropleth with census data
 
 - define choropleth
-- define poloygons
+- define polygons
+- define census geography
 - Briefly Introduce ACS census and decennial census 
 
     - census key 
-
 
 
 ```{r}
@@ -25,15 +25,15 @@ library(stringr)
 
 This session based on 
 
-- Kyle TidyCensus
+- Kyle Walker's [TidyCensus](https://walkerke.github.io/tidycensus/) package
 
     - [Searching for Variables](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables)
     - See Also [Tiger Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt)
     - See Also [SocialExplorer Tables](https://www.socialexplorer.com/data/ACS2015_5yr/metadata/?ds=ACS15_5yr)
-& 
-- Silge's [leaflet implementation of tidycensus](https://juliasilge.com/blog/using-tidycensus/)
+    
+- Julia Silge's [leaflet implementation of tidycensus](https://juliasilge.com/blog/using-tidycensus/)
 
-### Create a Simple Features dataframe using TidyCensus
+## Create a Simple Features dataframe using TidyCensus
 ```{r}
 nc_pop <- 
   get_acs(geography = "county",
@@ -47,16 +47,16 @@ nc_pop
 
 
 
-## Make Coropleth in Leaflet
+## Make Choropleth in Leaflet
 
-Generate a pallet for the colors and legend
+Generate a color palette for the colors and legend
 
 ```{r}
 MapPalette <- colorQuantile(palette = "viridis", domain = nc_pop$estimate, n = 10)
 ```
 
 
-Make Chropleth by filling county polygons (census geography) with correlated value
+Make choropleth by filling county polygons (census geography) with correlated value (population variable *B01003_001*)
 
 `st_transform()` - converts coordinate system of simple features
 
@@ -77,7 +77,9 @@ nc_pop %>%
               opacity = 1)
 ```
 
+## Add another layer
 
+Add locations of the the 2012 Starbucks stores.
 
 ```{r}
 nc_pop %>%

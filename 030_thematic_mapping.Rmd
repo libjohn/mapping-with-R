@@ -16,21 +16,21 @@ library(sf)
 ```
 
 
-# Get Shapfiles in a "simple features format"
+## Get shapefiles in a "simple features" format
 
 ```{r}
 us_geo <- states(class = "sf")
 # us_geo_spdf <- states()  # spdf uses @data slots -- old school
 ```
 
-# Structure of a sf file
+## Structure of a sf file
 
 ```{r}
 class(us_geo)
 glimpse(us_geo)
 ```
 
-## Look at the Tibble
+## Look at the sf in a data frame
 ```{r}
 #as_tibble(us_geo)
 ```
@@ -51,15 +51,16 @@ https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographic
         
             - Excel
             
-- Read the Data in with the readr data wizard
+- Read the Data in with the RStudio "Import Dataset" wizard available in the *Environment* tab.  This will generate the code below and ensure the import
+
+    - Skips the first 4 lines
+    - Coerces the 2nd column to numeric
 
 ```{r}
-# Skip first four lines
-# Make second column numeric
-
 Salary4Helpers <- 
-  read_excel("~/R/github/mapping-with-R/data/OES_Report.xlsx", 
-    col_types = c("text", "numeric"), skip = 4)
+  read_excel("data/OES_Report.xlsx",
+             col_types = c("text", "numeric"), 
+             skip = 4)
 
 #Salary4Helpers
 ```
@@ -67,7 +68,7 @@ Salary4Helpers <-
         
         
 
-# Wrangle the Data
+## Wrangle the Data
 
 ```{r}
 BlsWage_ToJoin <- Salary4Helpers %>% 
@@ -100,9 +101,9 @@ qtm(HelperShapeObject, fill = "wages")
 ```
 
 
-# Contiguous 48 states
+## Contiguous 48 states
 
-Filter to only the contiuous 48 statses + D.C.
+Filter to only the contiguous 48 states + D.C.
 
 ```{r}
 contiguous_states <- HelperShapeObject %>% 
@@ -127,20 +128,21 @@ Mark likes the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection fo
 
 ```{r}
 contiguous_states %>% 
-  #st_transform(crs = "+init=epsg:5070") %>% 
   st_transform(5070) %>% 
   tm_shape() +
   tm_polygons("wages", id = "Name")
 ```
 
 
-
+### Alternative Syntax
 
 
 ```{r}
 tm_shape(contiguous_states, projection = 5070) +
   tm_polygons("wages", id = "Name")
 ```
+
+### Explore `tmap` syntax and functions 
 
 
 ```{r}
