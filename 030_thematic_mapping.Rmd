@@ -156,3 +156,18 @@ tm_shape(contiguous_states, projection = 5070) +
 ```
 
 
+```{r}
+#library(viridis)
+#devtools::install_github("tidyverse/ggplot2")
+#library(ggplot2)
+
+contiguous_states %>% 
+  ggplot(aes(fill = wages, color = wages)) +
+  geom_sf() +
+  coord_sf(crs = 5070) +
+  scale_fill_viridis(option = "viridis", direction = -1) + 
+  scale_color_viridis(option = "viridis", direction = -1)
+
+
+```
+
