@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Practical Mapping in R: Lat/Lon plotting &amp; Choropleths</title>
+    <meta charset="utf-8">
+    <meta name="author" content="John Little" />
+    <meta name="date" content="2017-10-02" />
+    <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
+    <link rel="stylesheet" href="duke_color_pallettes_slides.css" type="text/css" />
+    <link rel="stylesheet" href="cc-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="figures.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Practical Mapping in R:<br>Lat/Lon plotting &amp; Choropleths
+## leaflet, tidycensus, tmap, and sf
+### John Little
+### 2017-10-02
+
+---
+
+exclude: true
+
+
+
+
+---
+class: middle, center
+
+Part 4 of the 
+### [Rfun](http://rfun.library.duke.edu) Learning Series of Workshops
+http://rfun.library.duke.edu
+
+---
+exclude: false
+class: top, center
+background-image:  url(http://library.duke.edu/data/sites/default/files/datagis/images/data_gis_logo.png)
+
+## Data &amp; Visualization Services
+### [library.duke.edu/data](http://library.duke.edu/data)
+
+
+&amp;nbsp;  
+
+&amp;nbsp;  
+
+&amp;nbsp;  
+
+&amp;nbsp;  
+
+&amp;nbsp;  
+
+&amp;nbsp;  
+
+&amp;nbsp;  
+
+
+[rfun.library.duke.edu/git/slides](http://rfun.library.duke.edu/git/slides/) &lt;br&gt;for slide annotations, keystroke: *P* 
+
+???
+
+This is a presenter comment for the presenter mode
+
+use 'p' to toggle the presenter mode or '?' or 'h' to toggle the help / key-shortcut options
+
+---
+class: middle, center
+
+### Hands-on and perhaps not purley intellectual
+
+&lt;iframe width="800" height="550"src="https://www.youtube.com/embed/MnKoQbFXemE" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
+---
+## Prequisites
+
+- 023 Lab Workstions  (All packages and versions already installed)
+
+- Intro to R:  Tidyverse, R Notebooks, R Markdown, RStudio
+
+## Background Resources
+
+- [Intro2r](https://rfun.library.duke.edu/intro2r/)
+- [Reproducibility with git &amp; RStudio](https://rfun.library.duke.edu/git/)
+- [Visualization in R using ggplot2](https://github.com/amzoss/ggplot2-F17)
+- [DVS learning materials: handouts, guides, data, and videos](http://library.duke.edu/data/news/past-workshops)
+
+---
+## Resources
+
+- [Five great charts in 5 lines of R code each](https://www.r-bloggers.com/five-great-charts-in-5-lines-of-r-code-each/) by Sharon Maclis
+- [TidyCensus](https://walkerke.github.io/tidycensus/) by Kyle Walker
+- [Using tidycensus and leaflet to Map Census Data](https://juliasilge.com/blog/using-tidycensus/) by Julia Silge
+- Sharon Maclis - [Mapping in R just got a whole lot easier](https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html)
+- [Introduction to Spatial Data Types in R](https://cengel.github.io/rspatial/2_spDataTypes.nb.html#how-to-do-this-in-sf) by Claudia Engel
+- DataCamp.com's [Working with Geospatial Data in R](https://www.datacamp.com/courses/working-with-geospatial-data-in-r) by Charlotte Wickham
+- [Introduction to visualising spatial data in R](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf). Lovelace, Cheshire, and Oldroyd
+- [tmap in a nutshell](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html)
+- [viridis color pallettes](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf)
+
+---
+
+## Outline
+
+.pull-left[
+
+1. Georeferencing with lat/lon points and leaflet
+
+1. Choropleth with TidyCensus
+
+1. Interactive Thematic Mapping with Simple Features
+
+]
+
+.pull-right[
+
+&lt;figure&gt;&lt;img src="https://imgs.xkcd.com/comics/heatmap.png"&gt;&lt;figcaption&gt; Image Credit: XKCD.  &lt;a href="https://xkcd.com/1138/"&gt;HeatMap&lt;/a&gt;&lt;/figcaption&gt;&lt;/figure&gt;
+
+]
+---
+class: center, middle, softblue
+
+## **Git** is a *Version Control System*
+
+---
+class: bottom, right
+background-image:  url(images/flickr_RupertsDogBoye_trail.jpg)
+
+ 
+.small-beige[ Image Credit: [Brandon Rasmussen](https://www.flickr.com/photos/137029081@N02/30943501632/in/photostream/) ]
+
+???
+
+Versioning can be used as a kind of breadcrumb system that helps track the research process.  Using version control, one can easily "roll back" to an earlier moment in the research workflow.
+
+---
+## Repositories
+
+.pull-left[
+
+&lt;figure&gt;&lt;img src="images/repository_small.jpg" alt="image stack"&gt;&lt;figcaption&gt; Image Credit: &lt;a href="https://www.flickr.com/photos/dbloete/274563369"&gt;Dennis Reimann&lt;/a&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;br&gt;
+
+
+- Source Code Management
+
+- Track changes in any file set
+
+]
+
+.pull-right[
+
+&lt;figure&gt;&lt;img src="images/file-extensions.png"&gt;&lt;figcaption&gt; Image Credit: &lt;a href="https://openclipart.org/detail/192197/file-extension-icons"&gt;OpenClipart.org&lt;/a&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;br&gt;
+
+
+]
+
+???
+
+### Source Code Mangement
+By this I simply mean version control on a personal level.  Once can "branch" stages of research and merge successfull operations.  In this way it becomes easier to keep track of the process and the progress.
+
+### Tracking changes in **any file set**
+
+Git can be used to track any files. 
+
+---
+class: center, middle, softblue
+
+## Social **git Repositories**
+
+???
+
+Social Coding = collaboration
+
+Introduce the idea of LOCKSS: "Lots of Copies Keeps Stuff Safe."  Now you have copies in the cloud and on local workstations.  You can work in various locations on various computers (e.g. at home and at work) without worrying about version or file location.
+
+Share trackable progress of your reproducible activity -- even if you are only sharing with yourself until you "publish".
+
+---
+class: center
+.pull-left[ ![](images/gitlab.png)  ]
+.pull-right[ ![](images/github.png)  ]
+
+![](images/bitbucket.png)
+
+???
+
+- Git is not GitHub
+
+- GitLab, GitHub, Bitbucket are all "Public Hubs" which work with Git versioning.
+
+
+---
+## Git Repositories
+
+.pull-left[
+
+&lt;figure&gt;&lt;img src="images/repository.jpg"&gt;&lt;figcaption&gt; Image Credit: &lt;a href="https://commons.wikimedia.org/wiki/File:LDEO_DSS_Repository.jpg"&gt;Wikimedia Commons&lt;/a&gt;&lt;/figcaption&gt;&lt;/figure&gt;&lt;br&gt;
+
+]
+
+.pull-right[
+
+- Social Coding
+
+- Sharing
+
+- Collaboration
+
+- Track Issues
+
+]
+
+---
+class: center
+
+![](images/social-collaboration.jpg)
+.pull-right[
+  .small-txt[
+Image Credit: [PixaBay](https://pixabay.com/en/social-media-personal-1635581/)
+  ]
+]
+
+???
+
+Effective collaboration extends the diversity of input and feedback available to you.  
+
+---
+class: green, middle, center
+
+
+## Duke's GitLab
+
+[gitlab.oit.duke.edu](http://gitlab.oit.duke.edu)
+
+???
+
+- Duke has it's own instance of GitLab
+
+Duke's GitLab instance means you don't have to pay and can still synchronize to larger networks (e.g. GitHub) at any point.
+
+I use it mostly for private work and development.  I like my public presence at GitHub.  Both can be accessed via RStudio.
+
+    
+Public Hubs are defined as GitHub, BitBucket, and the public GitLab.
+
+---
+class: softblue, middle, center
+
+## Markdown
+
+---
+class: bottom
+background-image: url(images/rmarkdown.png)
+
+.small-txt[
+  Image Credit: [RStudio](http://rmarkdown.rstudio.com/)
+]
+
+???
+
+R Markdown -- when combined with various R packages -- makes R a flexible report generation system.  Thus R Notebooks become "literate code" where reports are an outcome of analysis.  If analysis changes at "run-time" reports can change as integrated parts of the whole.  
+
+Notably:  **You Don't have to be a coder** to benefit from Version Control and R Markdown.  The two method/features can be used to compose all of your reporting needs, including MS Word, PDF, LaTex, WebPages, WebSites, Slides, e-books, etc.
+
+I want to emphasize that *R* and *Git* are ideal for *reproducible research*.  However, the added factor of **R Markdown** -- when combined with various R packages -- makes R a flexible report generation system arguably more *open* and *reproducible* than other proprietary collaborations systems.
+
+---
+class: middle
+.pull-left[
+
+&amp;nbsp; 
+
+```
+# Heading
+
+## Sub-heading
+
+### Another deeper heading
+ 
+Text attributes 
+ *italic*, **bold**, `monospace`.
+
+A [link](http://example.com).
+
+Bullet list:
+- apples  
+- oranges  
+- pears  
+
+Numbered list:
+1. apples
+2. oranges
+3. pears
+```
+]
+
+.pull-right[
+## Sub-heading
+
+### Another deeper heading
+
+*italicized*, **bold**, `monospace`
+
+A [link](http://google.com)
+
+Bullet list:
+- applies
+- oranges
+- pears
+
+Numbered list:
+1. apples
+2. oranges
+3. pears
+
+]
+
+---
+class: orange, middle, center
+
+## **Reproducible Research** 
+
+Integrate your reproducible workflow using *Literate Coding* practices in *R* then generate reports directly from analysis 
+
+### R Notebooks + R Markdown + Git
+
+???
+
+This is where **Open** becomes **Awesome** 
+
+
+---
+class: softblue, middle, center
+
+## Rstudio &amp; Git
+
+---
+
+## Orchestrating with RStudio
+
+- Masks the CLI
+
+- Easier to get started
+
+- Power Users can still use commands
+
+&amp;nbsp;
+
+
+![](images/RStudio-Logo-Blue-Gradient.png)
+
+Next:  [Hands-on](../handson.html)
+
+???
+
+Now move to the [hands-on](/handson.html) guided exercises.
+
+---
+## Packages
+
+In order of appearance
+
+.pull-left[- tidyverse
+
+- leaflet
+
+- tidycensus
+
+- tigris
+
+- sf
+
+- stringr
+
+- readxl]
+
+.pull-right[- tmap
+
+- tmaptools
+
+- viridis
+
+- devtools
+
+- ggplot2 (latest version on github as of 9/27/2017)
+
+- htmlwidgets
+]
+
+---
+## Thank You For Attending
+
+.pull-left[
+### I am ...
+
+- John Little
+- https://johnlittle.info
+- http://github.com/libjohn
+
+#### Schedule Me
+
+- [http:&amp;#47;&amp;#47;v.gd&amp;#47;littleconsult](http://duke.libcal.com/appointment/2695)
+]
+
+.pull-right[
+### We are...
+- Data &amp; Visualization Services
+- http://library.duke.edu/data
+- The /Edge, Bostock (1st Floor)
+
+#### Walk-in Hours
+- [Schedule](http://library.duke.edu/data/about/schedule)
+
+#### Our Workshops
+- [Current Workshops](http://library.duke.edu/data/news)
+- [Past Workshops](http://library.duke.edu/data/news/past-workshops)
+
+#### Contact Us
+- askData@Duke.edu
+]
+
+---
+class: center, middle
+## Shareable 
+
+Data, presentation, and handouts 
+
+&lt;span class="cc"&gt;
+&lt;!-- Key: a: SA, b: BY, c: CC Circle, d: ND, n: NC, m: Sampling, s: Share, r: Remix, C: CC Full Logo --&gt;
+C bn
+&lt;/span&gt;
+
+
+[CC BY-NC license](https://creativecommons.org/licenses/by-nc/4.0/)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

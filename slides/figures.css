@@ -1,0 +1,17 @@
+figure {
+  float: left;
+  clear: left;
+  width: 100%;
+  text-align: left;
+  /* font-style: italic; */
+  font-size: xx-small;
+  text-indent: 0;
+  /* border: thin silver solid; */
+  border-radius: 15px;
+  margin: 1% 10%; 
+  padding: 0.5em;
+}  /* when using this, must clear the following tag.  In this case <br>  */
+
+br {
+  clear: both;
+} 
