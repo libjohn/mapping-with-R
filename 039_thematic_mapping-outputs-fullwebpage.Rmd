@@ -39,3 +39,5 @@ library(sf)
 st_write(contiguous_states, "contiguous_states.shp")
 ```
 
+See Also:  [Reading, Writing and Converting Simple Features](https://r-spatial.github.io/sf/articles/sf2.html)
+
