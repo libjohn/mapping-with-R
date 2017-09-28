@@ -136,7 +136,7 @@ Image Credit: [GAO](https://www.flickr.com/photos/usgao/8269791489/)
 ---
 class: center, middle, softblue
 
-## Choropleth Map 
+## Choropleth 
 
 Shading areas with a variable 
 
@@ -150,118 +150,79 @@ Shading areas with a variable
 - Census Geography
 
 ---
-class: center
-<img src="images/GeographicHierarchyWebImage.png" style="height:32em;">
----
-## Repositories
-
-.pull-left[
-
-<figure><img src="images/repository_small.jpg" alt="image stack"><figcaption> Image Credit: <a href="https://www.flickr.com/photos/dbloete/274563369">Dennis Reimann</a></figcaption></figure><br>
-
-
-- Source Code Management
-
-- Track changes in any file set
-
-]
-
-.pull-right[
-
-<figure><img src="images/file-extensions.png"><figcaption> Image Credit: <a href="https://openclipart.org/detail/192197/file-extension-icons">OpenClipart.org</a></figcaption></figure><br>
-
-
-]
+background-image:  url(images/decennial_v_acs.jpg)
 
 ???
 
-### Source Code Mangement
-By this I simply mean version control on a personal level.  Once can "branch" stages of research and merge successfull operations.  In this way it becomes easier to keep track of the process and the progress.
+Census slide deck on [ACS](http://slideplayer.com/slide/10535013/)
 
-### Tracking changes in **any file set**
+---
+class: center
+<img src="images/GeographicHierarchyWebImage.png" style="height:32em;">
 
-Git can be used to track any files. 
+???
+
+https://www.census.gov/geo/reference/webatlas/
+
+---
+class: center, middle
+
+## Polygons
+
+---
+![](images/California_Geomorphic_Provinces.png)
+
+???
+
+https://commons.wikimedia.org/wiki/File:California_Geomorphic_Provinces.svg
+
+---
+## Census Variables
+
+- https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables
+
+- Social Explorer
+
+- https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt
 
 ---
 class: center, middle, softblue
 
-## Social **git Repositories**
+## Thematic Mapping
 
-???
+*tmap*
 
-Social Coding = collaboration
+*sf*
 
-Introduce the idea of LOCKSS: "Lots of Copies Keeps Stuff Safe."  Now you have copies in the cloud and on local workstations.  You can work in various locations on various computers (e.g. at home and at work) without worrying about version or file location.
-
-Share trackable progress of your reproducible activity -- even if you are only sharing with yourself until you "publish".
+*ggplot2*
 
 ---
-class: center
-.pull-left[ ![](images/gitlab.png)  ]
-.pull-right[ ![](images/github.png)  ]
+##  Simple Features
 
-![](images/bitbucket.png)
+- `sp()` - spatial polygons  (legacy)
 
-???
+- `sf()` - simple features (tidyverse compatible)
 
-- Git is not GitHub
+- [Conversion to and from `sp`](https://cran.r-project.org/web/packages/sf/vignettes/sf1.html#conversion-including-to-and-from-sp)
 
-- GitLab, GitHub, Bitbucket are all "Public Hubs" which work with Git versioning.
+- Shapefiles
 
-
----
-## Git Repositories
-
-.pull-left[
-
-<figure><img src="images/repository.jpg"><figcaption> Image Credit: <a href="https://commons.wikimedia.org/wiki/File:LDEO_DSS_Repository.jpg">Wikimedia Commons</a></figcaption></figure><br>
-
-]
-
-.pull-right[
-
-- Social Coding
-
-- Sharing
-
-- Collaboration
-
-- Track Issues
-
-]
+    - `st_read()`
+    - `st_write()`
+    - [sf vingette 2](https://cran.r-project.org/web/packages/sf/vignettes/sf2.html#using-st_read)
 
 ---
-class: center
+class: middle, green
 
-![](images/social-collaboration.jpg)
-.pull-right[
-  .small-txt[
-Image Credit: [PixaBay](https://pixabay.com/en/social-media-personal-1635581/)
-  ]
-]
+## Save, Write, Output
 
-???
+- `leaflet` and/or `htmlwidgets` can
 
-Effective collaboration extends the diversity of input and feedback available to you.  
-
----
-class: green, middle, center
-
-
-## Duke's GitLab
-
-[gitlab.oit.duke.edu](http://gitlab.oit.duke.edu)
-
-???
-
-- Duke has it's own instance of GitLab
-
-Duke's GitLab instance means you don't have to pay and can still synchronize to larger networks (e.g. GitHub) at any point.
-
-I use it mostly for private work and development.  I like my public presence at GitHub.  Both can be accessed via RStudio.
-
+    - Read GeoJSON natively
     
-Public Hubs are defined as GitHub, BitBucket, and the public GitLab.
+    - Export a self contained HTML document
+    
+    - Integrate an HTML widget into an R Notebook
 
 ---
 class: softblue, middle, center
@@ -269,28 +230,14 @@ class: softblue, middle, center
 ## Markdown
 
 ---
-class: bottom
-background-image: url(images/rmarkdown.png)
-
-.small-txt[
-  Image Credit: [RStudio](http://rmarkdown.rstudio.com/)
-]
-
-???
-
-R Markdown -- when combined with various R packages -- makes R a flexible report generation system.  Thus R Notebooks become "literate code" where reports are an outcome of analysis.  If analysis changes at "run-time" reports can change as integrated parts of the whole.  
-
-Notably:  **You Don't have to be a coder** to benefit from Version Control and R Markdown.  The two method/features can be used to compose all of your reporting needs, including MS Word, PDF, LaTex, WebPages, WebSites, Slides, e-books, etc.
-
-I want to emphasize that *R* and *Git* are ideal for *reproducible research*.  However, the added factor of **R Markdown** -- when combined with various R packages -- makes R a flexible report generation system arguably more *open* and *reproducible* than other proprietary collaborations systems.
-
----
-class: middle
 .pull-left[
 
-&nbsp; 
+&nbsp;
+
+&nbsp;
 
 ```
+
 # Heading
 
 ## Sub-heading
@@ -315,6 +262,7 @@ Numbered list:
 ]
 
 .pull-right[
+# Heading
 ## Sub-heading
 
 ### Another deeper heading
@@ -347,33 +295,6 @@ Integrate your reproducible workflow using *Literate Coding* practices in *R* th
 ???
 
 This is where **Open** becomes **Awesome** 
-
-
----
-class: softblue, middle, center
-
-## Rstudio & Git
-
----
-
-## Orchestrating with RStudio
-
-- Masks the CLI
-
-- Easier to get started
-
-- Power Users can still use commands
-
-&nbsp;
-
-
-![](images/RStudio-Logo-Blue-Gradient.png)
-
-Next:  [Hands-on](../handson.html)
-
-???
-
-Now move to the [hands-on](/handson.html) guided exercises.
 
 ---
 ## Packages
