@@ -123,15 +123,11 @@ Plotting X/Y Coordinates (lattitude/longitude)
 *leaflet*
 
 ---
-class: bottom, right
-background-image:  url(images/flickr_RupertsDogBoye_trail.jpg)
+class: center
+background-image:  url(images/xy.png)
 
- 
-.small-beige[ Image Credit: [Brandon Rasmussen](https://www.flickr.com/photos/137029081@N02/30943501632/in/photostream/) ]
+## 2012 Starbucks Locations in the Triangle
 
-???
-
-Versioning can be used as a kind of breadcrumb system that helps track the research process.  Using version control, one can easily "roll back" to an earlier moment in the research workflow.
 
 ---
 ## Repositories
