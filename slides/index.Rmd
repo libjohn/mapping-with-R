@@ -60,13 +60,6 @@ This is a presenter comment for the presenter mode
 use 'p' to toggle the presenter mode or '?' or 'h' to toggle the help / key-shortcut options
 
 ---
-class: middle, center
-
-### Hands-on and perhaps not purley intellectual
-
-<iframe width="800" height="550"src="https://www.youtube.com/embed/MnKoQbFXemE" frameborder="0" allowfullscreen></iframe>
-
----
 ## Prequisites
 
 - 023 Lab Workstions  (All packages and versions already installed)
@@ -81,18 +74,11 @@ class: middle, center
 - [DVS learning materials: handouts, guides, data, and videos](http://library.duke.edu/data/news/past-workshops)
 
 ---
-## Resources
+class: middle, center
 
-- [Five great charts in 5 lines of R code each](https://www.r-bloggers.com/five-great-charts-in-5-lines-of-r-code-each/) by Sharon Maclis
-- [TidyCensus](https://walkerke.github.io/tidycensus/) by Kyle Walker
-- [Using tidycensus and leaflet to Map Census Data](https://juliasilge.com/blog/using-tidycensus/) by Julia Silge
-- Sharon Maclis - [Mapping in R just got a whole lot easier](https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html)
-- [Introduction to Spatial Data Types in R](https://cengel.github.io/rspatial/2_spDataTypes.nb.html#how-to-do-this-in-sf) by Claudia Engel
-- DataCamp.com's [Working with Geospatial Data in R](https://www.datacamp.com/courses/working-with-geospatial-data-in-r) by Charlotte Wickham
-- [Introduction to visualising spatial data in R](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf). Lovelace, Cheshire, and Oldroyd
-- [Simple Features for R](https://r-spatial.github.io/sf/index.html)
-- [tmap in a nutshell](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html)
-- [viridis color pallettes](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf)
+### Hands-on and perhaps not purley intellectual
+
+<iframe width="800" height="550"src="https://www.youtube.com/embed/MnKoQbFXemE" frameborder="0" allowfullscreen></iframe>
 
 ---
 
@@ -179,11 +165,11 @@ https://commons.wikimedia.org/wiki/File:California_Geomorphic_Provinces.svg
 ---
 ## Census Variables
 
-- https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables
+- [tidycensus -- Searching for Variables](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables)
 
 - Social Explorer
 
-- https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt
+- [Example of Census Bureau Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt)
 
 ---
 class: center, middle, softblue
@@ -210,6 +196,24 @@ class: center, middle, softblue
     - `st_read()`
     - `st_write()`
     - [sf vingette 2](https://cran.r-project.org/web/packages/sf/vignettes/sf2.html#using-st_read)
+
+---
+## Workflow for Thematic Mapping
+
+1. Get Tiger Shapefiles (`tigiris`) as simple features (`sf`)
+
+1. Get Data (e.g. BLS Data)  
+
+    - import XLS data (`readxl`)
+    - wrangle data into tidy format (`dplyr`)
+
+1. Join measure to polygon (`tmap::append_data`)
+
+1. Visualize (Fill polygons with variable)
+
+    - `qtm`
+    - `tmap::tm_shape`
+    - `ggplot2::geom_sf`
 
 ---
 class: middle, green
@@ -359,6 +363,33 @@ In order of appearance
 #### Contact Us
 - askData@Duke.edu
 ]
+
+---
+## Resources
+
+- [Five great charts in 5 lines of R code each](https://www.r-bloggers.com/five-great-charts-in-5-lines-of-r-code-each/) by Sharon Maclis
+- [TidyCensus](https://walkerke.github.io/tidycensus/) by Kyle Walker
+- [Using tidycensus and leaflet to Map Census Data](https://juliasilge.com/blog/using-tidycensus/) by Julia Silge
+- Sharon Maclis - [Mapping in R just got a whole lot easier](https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html)
+- [Introduction to Spatial Data Types in R](https://cengel.github.io/rspatial/2_spDataTypes.nb.html#how-to-do-this-in-sf) by Claudia Engel
+- DataCamp.com's [Working with Geospatial Data in R](https://www.datacamp.com/courses/working-with-geospatial-data-in-r) by Charlotte Wickham
+- [Introduction to visualising spatial data in R](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf). Lovelace, Cheshire, and Oldroyd
+- [Simple Features for R](https://r-spatial.github.io/sf/index.html)
+- [tmap in a nutshell](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html)
+- [viridis color pallettes](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf)
+
+
+---
+## Image Credits  
+
+- [GIS Layers](https://www.flickr.com/photos/usgao/8269791489/)
+
+- [Decceial v ACS](http://slideplayer.com/slide/10535013/)
+
+- [Census Geography](https://www.census.gov/geo/reference/webatlas/)
+
+- [CA Polygons](https://commons.wikimedia.org/wiki/File:California_Geomorphic_Provinces.svg)
+
 
 ---
 class: center, middle
