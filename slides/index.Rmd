@@ -18,11 +18,7 @@ output:
 ---
 exclude: true
 
-```{r, message=FALSE, warning=FALSE, include=FALSE}
-library(tidyverse)
-library(DT)
-```
-
+exmple of a test slide, not diplayed.  Next.
 
 ---
 class: middle, center
@@ -120,7 +116,11 @@ class: middle, center
 ---
 class: center, middle, softblue
 
-## **Git** is a *Version Control System*
+## Georeferencing 
+
+Plotting X/Y Coordinates (lattitude/longitude)
+
+*leaflet*
 
 ---
 class: bottom, right
