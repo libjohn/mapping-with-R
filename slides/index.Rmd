@@ -143,20 +143,15 @@ background-image:  url(images/decennial_v_acs.jpg)
 Census slide deck on [ACS](http://slideplayer.com/slide/10535013/)
 
 ---
-class: center
-<img src="images/GeographicHierarchyWebImage.png" style="height:32em;">
+background-image: url(images/hierarchy.png) 
 
 ???
 
 https://www.census.gov/geo/reference/webatlas/
 
 ---
-class: center, middle
-
 ## Polygons
-
----
-![](images/California_Geomorphic_Provinces.png)
+<figure-medium><img src="images/California_Geomorphic_Provinces.png"></figure-medium>
 
 ???
 
@@ -165,11 +160,11 @@ https://commons.wikimedia.org/wiki/File:California_Geomorphic_Provinces.svg
 ---
 ## Census Variables
 
-- [tidycensus -- Searching for Variables](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables)
+- `tidycensus` -- [How To:  *Searching for Variables*](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables)
 
-- Social Explorer
+- Social Explorer has great documentation with ACS/Decennial Tables and Variable IDs
 
-- [Example of Census Bureau Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt)
+- Example of [Census Bureau TIGER Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt) file
 
 ---
 class: center, middle, softblue
@@ -384,9 +379,9 @@ In order of appearance
 
 - [GIS Layers](https://www.flickr.com/photos/usgao/8269791489/)
 
-- [Decceial v ACS](http://slideplayer.com/slide/10535013/)
+- [Decennial v ACS](http://slideplayer.com/slide/10535013/)
 
-- [Census Geography](https://www.census.gov/geo/reference/webatlas/)
+- [Census Geography](https://www.census.gov/geo/reference/webatlas/) | [PDF](https://www2.census.gov/geo/pdfs/reference/geodiagram.pdf)
 
 - [CA Polygons](https://commons.wikimedia.org/wiki/File:California_Geomorphic_Provinces.svg)
 
