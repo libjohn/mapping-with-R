@@ -3,8 +3,6 @@ title: "Thematic Mapping"
 output: html_notebook
 ---
 
-from:  https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html
-
 
 ```{r}
 library(tidyverse)       # Tidyverse for Tidy Data
@@ -172,3 +170,7 @@ contiguous_states %>%
 
 ```
 
+
+## End Notes
+
+This session inspired by  https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html

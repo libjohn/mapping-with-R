@@ -9,7 +9,7 @@ Goal:  Make a choropleth with census data
 - define choropleth
 - define polygons
 - define census geography
-- Briefly Introduce ACS census and decennial census 
+- Briefly Introduce ACS and decennial census 
 
     - census key 
 
@@ -22,16 +22,6 @@ library(sf)
 library(stringr)
 ```
 
-
-This session based on 
-
-- Kyle Walker's [TidyCensus](https://walkerke.github.io/tidycensus/) package
-
-    - [Searching for Variables](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables)
-    - See Also [Tiger Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt)
-    - See Also [SocialExplorer Tables](https://www.socialexplorer.com/data/ACS2015_5yr/metadata/?ds=ACS15_5yr)
-    
-- Julia Silge's [leaflet implementation of tidycensus](https://juliasilge.com/blog/using-tidycensus/)
 
 ## Create a Simple Features dataframe using TidyCensus
 ```{r}
@@ -113,3 +103,14 @@ nc_pop %>%
 - Variable Names / Numbers
 - More on Census Geography
 
+## End Notes
+
+This session based on 
+
+- Kyle Walker's [TidyCensus](https://walkerke.github.io/tidycensus/) package
+
+    - [Searching for Variables](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables)
+    - See Also [Tiger Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt)
+    - See Also [SocialExplorer Tables](https://www.socialexplorer.com/data/ACS2015_5yr/metadata/?ds=ACS15_5yr)
+    
+- Julia Silge's [leaflet implementation of tidycensus](https://juliasilge.com/blog/using-tidycensus/)
