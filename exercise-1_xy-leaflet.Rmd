@@ -2,10 +2,16 @@
 title: "Exercise 1: Georeferencing"
 ---
 
-# Load Libraries
+## Load Libraries
 ```{r}
 
 ```
+
+## Set API key
+```{r}
+census_api_key("long-string-of-numbers-from-census-api-key-generator")
+```
+
 
 ## Load Data
 
