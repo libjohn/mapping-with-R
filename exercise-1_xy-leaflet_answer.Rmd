@@ -1,0 +1,24 @@
+---
+title: "Exercise 1: Georeferencing"
+---
+
+```{r}
+library(tidyverse)
+library(leaflet)
+```
+
+## Load Data
+
+```{r}
+xy_locations <- read_csv("data/mockaroo_latlon.csv")
+```
+
+### Plot XY on the Map
+
+```{r makemap}
+leaflet(width = "100%") %>% 
+  addTiles() %>% 
+  addMarkers(data = xy_locations, lat = ~Latitude, lng = ~ Longitude, popup = xy_locations$Company)
+```
+
+
