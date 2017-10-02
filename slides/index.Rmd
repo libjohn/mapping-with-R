@@ -74,11 +74,9 @@ use 'p' to toggle the presenter mode or '?' or 'h' to toggle the help / key-shor
 - [DVS learning materials: handouts, guides, data, and videos](http://library.duke.edu/data/news/past-workshops)
 
 ---
-class: middle, center
+class: green, middle, center
 
-### Hands-on and perhaps not purley intellectual
-
-<iframe width="800" height="550"src="https://www.youtube.com/embed/MnKoQbFXemE" frameborder="0" allowfullscreen></iframe>
+## Hands-on
 
 ---
 
@@ -129,6 +127,9 @@ Shading areas with a variable
 *tidycensus* 
 
 ---
+background-image: url(images/choropleth_wages.png)
+
+---
 ## Census
 
 - ACS & Decennial Census
@@ -150,12 +151,11 @@ background-image: url(images/hierarchy.png)
 https://www.census.gov/geo/reference/webatlas/
 
 ---
+background-image:  url(images/decennial_v_acs.jpg)
+
+---
+background-image: url(images/polygons.png)
 ## Polygons
-<figure-medium><img src="images/California_Geomorphic_Provinces.png"></figure-medium>
-
-???
-
-https://commons.wikimedia.org/wiki/File:California_Geomorphic_Provinces.svg
 
 ---
 ## Census Variables
@@ -371,7 +371,8 @@ In order of appearance
 - [Introduction to visualising spatial data in R](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf). Lovelace, Cheshire, and Oldroyd
 - [Simple Features for R](https://r-spatial.github.io/sf/index.html)
 - [tmap in a nutshell](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html)
-- [viridis color pallettes](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf)
+- [viridis color palettes](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+- [The Pros & Cons of Choropleth maps](https://viscomvibz.wordpress.com/2012/03/17/the-pros-cons-of-choropleth-maps-blot-maps-patch-maps/)
 
 
 ---

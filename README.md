@@ -22,4 +22,4 @@ The objective of this workshop is to introduce practical georeferencing (lat/lon
 - [Introduction to visualising spatial data in R](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf). Lovelace, Cheshire, and Oldroyd
 - [Simple Features for R](https://r-spatial.github.io/sf/index.html)
 - [tmap in a nutshell](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html)
-- [viridis color pallettes](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf)
+- [viridis color palettes](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
