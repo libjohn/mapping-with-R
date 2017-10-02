@@ -20,7 +20,9 @@ I recommend using one of the following variables.  However, you can use the `tid
 - `B08103_001E` - MEDIAN AGE BY MEANS OF TRANSPORTATION TO WORK: Total: Taxicab, motorcycle, bicycle, or other means: Workers 16 years and over -- (Estimate)
 
 
-## get_acs()
+## B08103_001E
+
+### get_acs()
 
 Load the variable and assign and object name for some USA county using the `get_acs` function.
 
@@ -40,10 +42,10 @@ census_variable
 
 
 
-## Make Choropleth in Leaflet
+### Make Choropleth in Leaflet
 
 
-### Generate a Palette
+#### Generate a Palette
 Using the *estimate* variable in the census_variable sf object, generate a MapPalette.
 
 ```{r}
@@ -55,7 +57,7 @@ MapPalette <- colorBin(palette = "viridis",
 ```
 
 
-### Make Leaflet choropleth
+#### Make Leaflet choropleth
 
 Make choropleth by filling county polygons (census geography) with correlated value (from the ACS)
 
