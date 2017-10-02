@@ -51,7 +51,7 @@ background-image:  url(http://library.duke.edu/data/sites/default/files/datagis/
 &nbsp;  
 
 
-[rfun.library.duke.edu/git/slides](http://rfun.library.duke.edu/git/slides/) <br>for slide annotations, keystroke: *P* 
+[rfun.library.duke.edu](https://rfun.library.duke.edu/) <br>for slide annotations, keystroke: *P* 
 
 ???
 
