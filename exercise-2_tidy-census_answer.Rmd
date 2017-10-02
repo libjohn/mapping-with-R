@@ -78,3 +78,94 @@ census_variable %>%
 ```
 
 
+## For 'B08131_001E'
+
+AGGREGATE TRAVEL TIME TO WORK (IN MINUTES)
+
+```{r}
+census_variable <- 
+  get_acs(geography = "county",
+          variables = "B08131_001E",
+          state = "NC",
+          geometry = TRUE)
+```
+
+AGGREGATE TRAVEL TIME TO WORK (IN MINUTES)
+
+Convert Minutes to hours, hours to months.
+
+```{r}
+census_variable <-  census_variable %>% 
+  rename(estimate_original = estimate) %>% 
+  mutate(estimate = estimate_original / 60 / 730.0008)
+
+```
+
+
+```{r}
+MapPalette <- colorBin(palette = "viridis",
+                       domain = census_variable$estimate,
+                       bins = 7,
+                       pretty = TRUE,
+                       reverse = TRUE)
+```
+
+```{r}
+census_variable %>%
+    st_transform(crs = "+init=epsg:4326") %>%
+    leaflet(width = "100%") %>%
+    addProviderTiles(provider = "CartoDB.Positron") %>%
+    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
+                stroke = FALSE,
+                smoothFactor = 0,
+                fillOpacity = 0.7,
+                color = ~ MapPalette(estimate)) %>%
+    addLegend("bottomright", 
+              pal = MapPalette, 
+              values = ~ estimate,
+              title = "Agregate Travel Time<br>in Months",
+              opacity = 1)
+```
+
+
+
+## B19013_001E - median household income
+
+```{r}
+census_variable <- 
+  get_acs(geography = "county",
+          variables = "B19013_001E",
+          state = "NC",
+          geometry = TRUE)
+```
+
+```{r}
+census_variable
+```
+
+
+```{r}
+MapPalette <- colorNumeric(palette = "viridis",
+                           domain = census_variable$estimate,
+                           reverse = TRUE)
+```
+
+
+```{r}
+census_variable %>%
+    st_transform(crs = "+init=epsg:4326") %>%
+    leaflet(width = "100%") %>%
+    addProviderTiles(provider = "CartoDB.Positron") %>%
+    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
+                stroke = FALSE,
+                smoothFactor = 0,
+                fillOpacity = 0.7,
+                color = ~ MapPalette(estimate)) %>%
+    addLegend("bottomright", 
+              pal = MapPalette, 
+              values = ~ estimate,
+              title = "Median Household Income",
+              labFormat = labelFormat(prefix = "$"),
+              opacity = 1)
+```
+
