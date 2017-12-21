@@ -34,7 +34,7 @@ vignettes/*.pdf
 *.knit.md
 
 # Census Key
-00-census-key.Rmd
+_census-key.Rmd
 
 # Geographies - Shapefiles
 *.zip
