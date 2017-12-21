@@ -26,12 +26,10 @@ output:
 
 ## Supporting Materials
 
-[Hands-on Slides](slides)
-
-[Mapping in R ](/mapping)
-
+[Slides](slides)
 
 &nbsp;
 
+<figure>![](https://imgs.xkcd.com/comics/heatmap.png)<figcaption>KXCD.  Heatmap:  https://xkcd.com/1138/</figcaption></figure><br>
 
 
