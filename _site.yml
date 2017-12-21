@@ -1,0 +1,38 @@
+name: "Mapping"
+output_dir: docs
+exclude:
+  - README.md
+  - license.md
+navbar:
+  title: "Mapping in R"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Lat/Long"
+      href: lat-lon.html
+    - text: "Choropleth"
+      href: choropleth.html
+    - text: "Simple Features"
+      href: thematic_sf.html
+    - text: "Exercises"
+      href: exercises.html
+    - text: "Resources"
+      href: "resources.html"
+  right:
+    - icon: fa-github
+#    - text: "GitHub"
+      href: https://github.com/libjohn/mapping-with-R         
+output:
+  html_document:
+    theme: flatly
+    highlight: tango
+    include:
+      after_body: libs-local/footer.html
+    toc: true
+    toc_depth: 3
+    toc_float:
+      collapsed: false
+    css: 
+      - libs-local/duke.css
+      - libs-local/cc-fonts.css
+    df_print: paged

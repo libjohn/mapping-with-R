@@ -1,0 +1,37 @@
+---
+title: "Mapping in R"
+output: 
+  html_document:
+    toc: FALSE
+---
+
+## Workshop Resource Page
+
+1. [Overview](outline.html)
+
+    - [Prerequisites](outline.html#prerequisites)  
+    
+1. lat/lon -- lat-lon.html
+
+1. Choropleth -- choropleth.html
+
+1. Simple Features -- thematic_sf.html
+
+1. Exercises -- exercises.html
+
+1. [Markdown](markdown.html)  
+
+1. [Resources](resources.html)
+
+
+## Supporting Materials
+
+[Hands-on Slides](slides)
+
+[Mapping in R ](/mapping)
+
+
+&nbsp;
+
+
+

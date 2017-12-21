@@ -1,8 +1,8 @@
 ---
 title: "Practical Mapping in R:<br>Lat/Lon plotting & Choropleths"
 subtitle: "leaflet, tidycensus, tmap, and sf"
-author: "John Little"
-date: "2017-10-02"
+author: "John Little & Drew Keener"
+date: "2018-1-25"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -51,7 +51,7 @@ background-image:  url(http://library.duke.edu/data/sites/default/files/datagis/
 &nbsp;  
 
 
-[rfun.library.duke.edu](https://rfun.library.duke.edu/) <br>for slide annotations, keystroke: *P* 
+[rfun.library.duke.edu](https://rfun.library.duke.edu/) <br>for slide annotations, keystroke: *p* 
 
 ???
 
@@ -70,8 +70,44 @@ use 'p' to toggle the presenter mode or '?' or 'h' to toggle the help / key-shor
 
 - [Intro2r](https://rfun.library.duke.edu/intro2r/)
 - [Reproducibility with git & RStudio](https://rfun.library.duke.edu/git/)
-- [Visualization in R using ggplot2](https://github.com/amzoss/ggplot2-F17)
+- [Visualization in R using ggplot2](https://rfun.netlify.com/2017/09/26/visualization-in-r-using-ggplot2-workshop-fall-2017/)
 - [DVS learning materials: handouts, guides, data, and videos](http://library.duke.edu/data/news/past-workshops)
+
+
+---
+## Thoughts
+
+- Multiple ways of accomplishing the same result
+- Focus on Reproducibility / Automation
+- 
+
+---
+## Best Practices
+
+Drew fill in here
+
+
+---
+## Thoughts 2
+
+- `leaflet` -- best for interactivity
+- `tidycensus` - thematic mapping, Census geography (shapefiles), Census data
+- `ggplot2` -- great for facet maps
+- Thematic Mapping
+    - `tmap`
+    - `sf`
+    - `ggplot2`
+        - to use `geom_sf()` will need to install ggplot2 development version
+        - `devtools::install_github("tidyverse/ggplot2")`
+- `sf` vs. `sp`
+    - sf for simple features.  Modern and current
+    - sp for spatial polygons.  The legacy approach
+- Not Discussing in Detail
+    - `rgdal` (some functionality incorporated into sf)
+    - `raster`
+    - `ggmap`
+
+
 
 ---
 class: green, middle, center
@@ -180,11 +216,11 @@ class: center, middle, softblue
 ---
 ##  Simple Features
 
-- `sp()` - spatial polygons  (legacy)
-
 - `sf()` - simple features (tidyverse compatible)
 
-- [Conversion to and from `sp`](https://cran.r-project.org/web/packages/sf/vignettes/sf1.html#conversion-including-to-and-from-sp)
+    - `sp()` - spatial polygons  (legacy)
+    - To coerce objects: [sf to and from `sp`](https://cran.r-project.org/web/packages/sf/vignettes/sf1.html#conversion-including-to-and-from-sp)
+    - sf will also read rgdal rgeos [documentation](https://cran.r-project.org/web/packages/sf/vignettes/sf1.html#conversion-including-to-and-from-sp) 
 
 - Shapefiles
 
