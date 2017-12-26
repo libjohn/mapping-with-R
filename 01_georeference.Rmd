@@ -1,0 +1,42 @@
+---
+output: 
+  html_document:
+    toc: FALSE
+---
+
+## Charting latitude and longitude coordinates on a map
+
+Introducing the `library(leaflet)` we use 4 lines of code to make an interactive map.^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis]
+
+
+```{r}
+library(tidyverse)
+library(leaflet)
+```
+
+## Load Data
+
+2012 Starbucks locations
+
+```{r}
+starbucks <- read_csv("data/All_Starbucks_Locations_in_the_US_-_Map.csv")
+```
+
+### Filter Data to NC
+```{r filter-dataset}
+starbucksNC <- starbucks  %>% 
+  filter(State == "NC")
+
+starbucksNC
+```
+
+### Make the Map
+
+```{r makemap}
+leaflet(width = "100%") %>% 
+  addTiles() %>% 
+  setView(-78.8310, 35.9867, zoom = 10) %>% 
+  addMarkers(data = starbucksNC, lat = ~ Latitude, lng = ~ Longitude, popup = starbucksNC$Name)
+```
+
+

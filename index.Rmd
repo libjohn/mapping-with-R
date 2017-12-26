@@ -1,10 +1,10 @@
 ---
-title: "Mapping in R"
 output: 
   html_document:
     toc: FALSE
 ---
 
+&nbsp;
 ## Workshop Resource Page
 
 1. [Overview](outline.html)

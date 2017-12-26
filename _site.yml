@@ -8,10 +8,10 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Lat/Long"
-      href: lat-lon.html
+    - text: "Plot Coordinates"
+      href: 01_georeference.html
     - text: "Choropleth"
-      href: choropleth.html
+      href: 02_choropleth.html
     - text: "Simple Features"
       href: thematic_sf.html
     - text: "Exercises"

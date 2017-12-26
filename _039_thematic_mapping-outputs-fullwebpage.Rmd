@@ -1,0 +1,43 @@
+---
+title: "Thematic Mapping -- Outputs 2"
+output: html_notebook
+---
+
+```{r}
+library(htmlwidgets)
+```
+
+
+```{r}
+tmap_mode("view")
+```
+
+
+```{r}
+interactive_sasw <- tm_shape(contiguous_states) +
+  tm_polygons("wages", id = "Name")
+```
+
+
+
+```{r}
+interactive_sasw_map <- tmap_leaflet(interactive_sasw)
+```
+
+
+```{r}
+saveWidget(interactive_sasw_map, "mymap_sasw.html")
+```
+
+For some reason, my process throws and error indicating the document conversion failed with a pandoc "Out of memory" problem.  **And yet**, the map does get produced and is stored in my files directory as `mymap_sasw.html`.  Open that file in a web browser.
+
+
+## Save a Shapefile
+
+```
+library(sf)
+st_write(contiguous_states, "contiguous_states.shp")
+```
+
+See Also:  [Reading, Writing and Converting Simple Features](https://r-spatial.github.io/sf/articles/sf2.html)
+

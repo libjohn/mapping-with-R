@@ -1,5 +1,0 @@
----
-title: "Excercise 3"
----
-
-Download your own BLS data (See the "Get BLS Data section" in the 030_thematic_mapping.Rmd R Notebook), or [other federal agency data](https://www.arilamstein.com/blog/2017/09/18/datasets-building-data-analysis-portfolio/).  Make a choropleth of the data using either ggplot2, tmap, or leaflet.
