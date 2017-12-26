@@ -37,13 +37,6 @@ starbucksNC
 
 Using the `leaflet` function, plot the latitude and longitude on a basemap.  Latitude is *Y*, Longitude is *X*.
 
-```{}
-leaflet(width = "100%") %>% 
-  addTiles() %>% 
-  setView(-78.8310, 35.9867, zoom = 10) %>% 
-  addMarkers(data = ~ starbucksNC, lat = ~ Latitude, lng = ~ Longitude, popup = starbucksNC$Name)
-```
-
 ```{r plotmap}
 starbucksNC %>% 
   leaflet(width = "100%") %>% 
