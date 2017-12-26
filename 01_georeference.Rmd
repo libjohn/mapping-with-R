@@ -32,13 +32,25 @@ starbucksNC <- starbucks  %>%
 starbucksNC
 ```
 
-## Plot Latitude and Longitude on a Map
 
-```{r plotmap}
+## Plot Lat and Lon on a Map
+
+Using the `library(leaflet)`, plot the latitutde and longitude.  Latitude is *Y*, Longitude is *X*.
+
+```{}
 leaflet(width = "100%") %>% 
   addTiles() %>% 
   setView(-78.8310, 35.9867, zoom = 10) %>% 
-  addMarkers(data = starbucksNC, lat = ~ Latitude, lng = ~ Longitude, popup = starbucksNC$Name)
+  addMarkers(data = ~ starbucksNC, lat = ~ Latitude, lng = ~ Longitude, popup = starbucksNC$Name)
 ```
 
+```{r plotmap}
+starbucksNC %>% 
+  leaflet(width = "100%") %>% 
+  addTiles() %>% 
+  setView(-78.8310, 35.9867, zoom = 10) %>% 
+  addMarkers(lat = ~ Latitude, 
+             lng = ~ Longitude, 
+             popup = starbucksNC$Name)
+```
 
