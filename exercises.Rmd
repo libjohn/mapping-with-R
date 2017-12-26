@@ -7,7 +7,7 @@ Please note:  These exercises assume you have downloaded the [mapping-with-R](ht
 
 ## Exercises
 
-1. Georeference XY Cordinates.  In your RStudio editor, open the [`_exercise-1_xy-leaflet.Rmd`](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-1_xy-leaflet.Rmd) file from the project root.  Plot XY (latitude/longitude) coordinates on a leaflet map.
+1. Georeference XY coordinates.  In your RStudio editor, open the [`_exercise-1_xy-leaflet.Rmd`](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-1_xy-leaflet.Rmd) file from the project root.  Plot XY (latitude/longitude) coordinates on a leaflet map.
 2. Choropleth
 3. Simple Features
 3. Thematic Mapping

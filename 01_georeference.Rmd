@@ -35,7 +35,7 @@ starbucksNC
 
 ## Plot Lat and Lon on a Map
 
-Using the `leaflet` function, plot the latitutde and longitude on a basemap.  Latitude is *Y*, Longitude is *X*.
+Using the `leaflet` function, plot the latitude and longitude on a basemap.  Latitude is *Y*, Longitude is *X*.
 
 ```{}
 leaflet(width = "100%") %>% 

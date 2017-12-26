@@ -19,9 +19,6 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
@@ -206,107 +203,6 @@ $(document).ready(function () {
 
 
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -366,18 +262,14 @@ div.tocify {
 <div id="load-data" class="section level2">
 <h2>Load Data</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xy_locations &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/mockaroo_latlon.csv&quot;</span>)</code></pre></div>
-<pre><code>## Parsed with column specification:
-## cols(
-##   id = col_integer(),
-##   Company = col_character(),
-##   Latitude = col_double(),
-##   Longitude = col_double()
-## )</code></pre>
 <div id="plot-xy-on-the-map" class="section level3">
 <h3>Plot XY on the Map</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">leaflet</span>(<span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xy_locations <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">leaflet</span>(<span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">addTiles</span>() <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">addMarkers</span>(<span class="dt">data =</span> xy_locations, <span class="dt">lat =</span> <span class="op">~</span>Latitude, <span class="dt">lng =</span> <span class="op">~</span><span class="st"> </span>Longitude, <span class="dt">popup =</span> xy_locations<span class="op">$</span>Company)</code></pre></div>
+<span class="st">  </span><span class="kw">addMarkers</span>(<span class="dt">lat =</span> <span class="op">~</span>Latitude, 
+             <span class="dt">lng =</span> <span class="op">~</span>Longitude, 
+             <span class="dt">popup =</span> xy_locations<span class="op">$</span>Company)</code></pre></div>
 <div id="htmlwidget-9fb6d8f120f09af8bb7b" style="width:100%;height:480px;" class="leaflet html-widget"></div>
 <script type="application/json" data-for="htmlwidget-9fb6d8f120f09af8bb7b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[40.2487413,-7.9110809,9.49858,-7.0320658,-17.0490108,21.8693003,53.3323703,31.394935,30.274084,14.1313261],[72.1297653,111.4253892,50.8105261,108.4365067,-41.5612423,106.7691712,-6.2152673,92.835795,120.15507,122.8277624],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Ailane","Thoughtbeat","Lazz","Zoomdog","Minyx","Devpulse","Meembee","Quamba","Realcube","Fatz"],null,null,null,null,null,null]}],"limits":{"lat":[-17.0490108,53.3323703],"lng":[-41.5612423,122.8277624]}},"evals":[],"jsHooks":[]}</script>
 </div>
@@ -408,8 +300,6 @@ div.tocify {
 </span>
 
 
-</div>
-</div>
 
 </div>
 
