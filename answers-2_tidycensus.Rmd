@@ -1,8 +1,6 @@
 ---
 title: "Exercise 2 Answers: Choropleths with tidycensus"
-output: 
-  html_document:
-    toc: FALSE
+output: html_document
 ---
 
 ## Load Libraries
@@ -23,7 +21,9 @@ I recommend using one of the following variables.  However, you can use the `tid
 - `B08103_001E` - MEDIAN AGE BY MEANS OF TRANSPORTATION TO WORK: Total: Taxicab, motorcycle, bicycle, or other means: Workers 16 years and over -- (Estimate)
 
 
-## B08103_001E
+## Median Household Income
+
+- B08103_001E
 
 ### get_acs()
 
@@ -42,7 +42,7 @@ census_variable
 
 
 
-### Make Choropleth in Leaflet
+### Make choropleth in Leaflet
 
 
 #### Generate a Palette
@@ -80,7 +80,9 @@ census_variable %>%
 ```
 
 
-## For 'B08131_001E'
+## Travel Time
+
+- B08131_001E
 
 AGGREGATE TRAVEL TIME TO WORK (IN MINUTES)
 
@@ -133,7 +135,9 @@ census_variable %>%
 
 
 
-## B19013_001E - median household income
+## Median Age by Transportation
+
+- B19013_001E
 
 ```{r get_hh_inco}
 census_variable <- 

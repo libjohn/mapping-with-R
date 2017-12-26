@@ -7,9 +7,9 @@ Please note:  These exercises assume you have downloaded the [mapping-with-R](ht
 
 ## Exercises
 
-1. Georeference XY coordinates.  In your RStudio editor, open the [`_exercise-1_xy-leaflet.Rmd`](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-1_xy-leaflet.Rmd) file from the project root.  Plot XY (latitude/longitude) coordinates on a leaflet map.
+1. Georeference XY coordinates.  In your RStudio editor, open the [_exercise-1_xy-leaflet.Rmd](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-1_xy-leaflet.Rmd) file from the project root.  Plot XY (latitude/longitude) coordinates on a leaflet map.
 
-2. Choropleths with tidycensus.  Open the `_exercise-2_tidycensus.Rmd` file.  Plot a new variable and shade that variale by county.  
+2. Choropleths with tidycensus.  Open the [_exercise-2_tidycensus.Rmd](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-2_tidycensus.Rmd) file.  Plot a new variable and shade that variale by county.  
 
 3. Simple Features
 
@@ -19,4 +19,5 @@ Please note:  These exercises assume you have downloaded the [mapping-with-R](ht
 
 ## Answers
 
-1. [Ploting XY](answers-1_xy-leaflet.html)
+1. [Georeferencing latitude and longitude](answers-1_xy-leaflet.html)
+1. [Choropleths with tidycensus](answers-2_tidycensus.html)
