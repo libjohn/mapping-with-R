@@ -6,7 +6,7 @@ output:
 ---
 
 ## Load Libraries
-```{r}
+```{r loadlibraries, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(tidycensus)
 library(leaflet)
@@ -29,19 +29,16 @@ I recommend using one of the following variables.  However, you can use the `tid
 
 Load the variable and assign and object name for some USA county using the `get_acs` function.
 
-```{r}
+```{r get_hh_inc, message=FALSE, warning=FALSE}
 census_variable <- 
   get_acs(geography = "county",
           variables = "B08103_001E",
           state = "NC",
           geometry = TRUE)
 
-```
-
-
-```{r}
 census_variable
 ```
+
 
 
 
@@ -51,7 +48,7 @@ census_variable
 #### Generate a Palette
 Using the *estimate* variable in the census_variable sf object, generate a MapPalette.
 
-```{r}
+```{r make_palette}
 MapPalette <- colorBin(palette = "viridis",
                        domain = census_variable$estimate,
                        bins = 4,
@@ -65,7 +62,7 @@ MapPalette <- colorBin(palette = "viridis",
 Make choropleth by filling county polygons (census geography) with correlated value (from the ACS)
 
 
-```{r}
+```{r make_choropleth}
 census_variable %>%
     st_transform(crs = "+init=epsg:4326") %>%
     leaflet(width = "100%") %>%
@@ -87,19 +84,21 @@ census_variable %>%
 
 AGGREGATE TRAVEL TIME TO WORK (IN MINUTES)
 
-```{r}
+```{r travel_variable}
 census_variable <- 
   get_acs(geography = "county",
           variables = "B08131_001E",
           state = "NC",
           geometry = TRUE)
+
+census_variable
 ```
 
 AGGREGATE TRAVEL TIME TO WORK (IN MINUTES)
 
 Convert Minutes to hours, hours to months.
 
-```{r}
+```{r convert_time}
 census_variable <-  census_variable %>% 
   rename(estimate_original = estimate) %>% 
   mutate(estimate = estimate_original / 60 / 730.0008)
@@ -107,7 +106,7 @@ census_variable <-  census_variable %>%
 ```
 
 
-```{r}
+```{r make_palette2}
 MapPalette <- colorBin(palette = "viridis",
                        domain = census_variable$estimate,
                        bins = 7,
@@ -115,7 +114,7 @@ MapPalette <- colorBin(palette = "viridis",
                        reverse = TRUE)
 ```
 
-```{r}
+```{r make_time_choropleth}
 census_variable %>%
     st_transform(crs = "+init=epsg:4326") %>%
     leaflet(width = "100%") %>%
@@ -136,27 +135,24 @@ census_variable %>%
 
 ## B19013_001E - median household income
 
-```{r}
+```{r get_hh_inco}
 census_variable <- 
   get_acs(geography = "county",
           variables = "B19013_001E",
           state = "NC",
           geometry = TRUE)
-```
 
-```{r}
 census_variable
 ```
 
-
-```{r}
+```{r make_palette_hh_income}
 MapPalette <- colorNumeric(palette = "viridis",
                            domain = census_variable$estimate,
                            reverse = TRUE)
 ```
 
 
-```{r}
+```{r make_choropleth3}
 census_variable %>%
     st_transform(crs = "+init=epsg:4326") %>%
     leaflet(width = "100%") %>%
