@@ -1,5 +1,5 @@
 ---
-title: "TidyCensus"
+title: "Exercise 2: Choropleths with tidycensus"
 ---
 
 ## Load Libraries

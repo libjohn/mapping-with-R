@@ -14,10 +14,10 @@ navbar:
       href: 02_choropleth.html
     - text: "Simple Features"
       href: thematic_sf.html
+    - text: "Tilegram"
+      href: tilegram.html
     - text: "Exercises"
       href: exercises.html
-    - text: "Resources"
-      href: "resources.html"
   right:
     - icon: fa-github
 #    - text: "GitHub"

@@ -1,5 +1,8 @@
 ---
-title: "TidyCensus"
+title: "Exercise 2 Answers: Choropleths with tidycensus"
+output: 
+  html_document:
+    toc: FALSE
 ---
 
 ## Load Libraries

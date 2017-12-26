@@ -7,26 +7,33 @@ output:
 
 ## Workshop Resource Page
 
-1. [Overview](outline.html)
+1. Overview -- outline.html
 
-    - [Prerequisites](outline.html#prerequisites)  
+    - Prerequisites  --  outline.html#prerequisites
     
-1. lat/lon -- lat-lon.html
+1. [Georeferencing](01_georeference.html):  Plotting XY latitude & longitude
 
-1. Choropleth -- choropleth.html
+1. [Choropleths with tidycensus](02_choropleth.html)
 
 1. Simple Features -- thematic_sf.html
 
-1. Exercises -- exercises.html
+1. Tilegram -- foo.html
 
-1. [Markdown](markdown.html)  
+## Hands-on Exercises
 
-1. [Resources](resources.html)
+- [Exercises](exercises.html)
 
 
 ## Supporting Materials
 
-[Slides](slides)
+- [**Slides**](slides)
+
+- [Markdown](https://rfun.library.duke.edu/git/markdown.html)  
+
+- Resources    (resources.html)
+
+- Next Steps: Moving toward GIS analysis, raster analytics, etc.
+
 
 &nbsp;
 
