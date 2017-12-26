@@ -231,7 +231,7 @@ class: center, middle, softblue
 ---
 ## Workflow for Thematic Mapping
 
-1. Get Tiger Shapefiles (`tigiris`) as simple features (`sf`)
+1. Get Tiger Shapefiles (`tigris`) as simple features (`sf`)
 
 1. Get Data (e.g. BLS Data)  
 

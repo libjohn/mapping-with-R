@@ -1,5 +1,6 @@
 ---
-title: "Exercise 1: Georeferencing"
+title: "Exercise 1 Answers: Georeferencing"
+output: html_document
 ---
 
 ```{r}

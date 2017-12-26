@@ -1,0 +1,19 @@
+---
+title: "Exercises & Answers"
+output: html_document
+---
+
+Please note:  These exercises assume you have downloaded the [mapping-with-R](https://github.com/libjohn/mapping-with-R) repository to your local installation of RStudio and are running this as a unique project within RStudio.  You can do these exercises in R without the RStudio IDE (or any other IDE).  However, you may experience minor differences with relative file locations; translation is assumed to be the responsibility of the student in that case.  
+
+## Exercises
+
+1. Georeference XY Cordinates.  In your RStudio editor, open the [`_exercise-1_xy-leaflet.Rmd`](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-1_xy-leaflet.Rmd) file from the project root.  Plot XY (latitude/longitude) coordinates on a leaflet map.
+2. Choropleth
+3. Simple Features
+3. Thematic Mapping
+
+
+
+## Answers
+
+1. [Ploting XY](answers-1_xy-leaflet.html)
