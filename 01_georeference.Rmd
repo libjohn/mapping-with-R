@@ -1,15 +1,17 @@
 ---
-output: 
-  html_document:
-    toc: FALSE
+title: Latitude and Longitude Coordinates
+output: html_document
+#  html_document:
+#    toc: FALSE
 ---
-
-## Charting latitude and longitude coordinates on a map
+&nbsp;
 
 Introducing the `library(leaflet)` we use 4 lines of code to make an interactive map.^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis]
 
 
-```{r}
+## Load Libraries
+
+```{r libraries, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(leaflet)
 ```
@@ -18,11 +20,11 @@ library(leaflet)
 
 2012 Starbucks locations
 
-```{r}
+```{r load-data, message=FALSE, warning=FALSE}
 starbucks <- read_csv("data/All_Starbucks_Locations_in_the_US_-_Map.csv")
 ```
 
-### Filter Data to NC
+### Subset Data to North Carolina
 ```{r filter-dataset}
 starbucksNC <- starbucks  %>% 
   filter(State == "NC")
@@ -30,9 +32,9 @@ starbucksNC <- starbucks  %>%
 starbucksNC
 ```
 
-### Make the Map
+## Plot Latitude and Longitude on a Map
 
-```{r makemap}
+```{r plotmap}
 leaflet(width = "100%") %>% 
   addTiles() %>% 
   setView(-78.8310, 35.9867, zoom = 10) %>% 
