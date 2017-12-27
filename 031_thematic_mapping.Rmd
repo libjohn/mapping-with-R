@@ -64,7 +64,7 @@ https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographic
     - Skips the first 4 lines
     - Coerces the 2nd column to numeric
 
-```{r get-blsdata}
+```{r get-blsdata, message=FALSE, warning=FALSE}
 Salary4Helpers <- 
   read_excel("data/OES_Report.xlsx",
              col_types = c("text", "numeric"), 
@@ -166,6 +166,8 @@ tm_shape(contiguous_states, projection = 5070) +
 ```
 
 ## ggplot2 with viridis
+
+In this section we introduce making shapefiles with ggplot2.  ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community.  As of this writing, there is a development version of ggplot2 that includes the `geom_sf` function demonstrated below.  You may need to install the development version to run this code.
 
 ```{r with-ggplot-geom_sf}
 library(viridis)

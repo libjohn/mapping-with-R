@@ -352,8 +352,8 @@ div.tocify {
 </div>
 
 
-<p>This method of storing an interactive map uses the entire web browser as the delivery mechanism. It’s a nice way to maximize screen estate, a desirable feature for maps.</p>
-<p>Please note that I disabled some of the code chunks for efficiency of processing. This is true, despite reported feedback errors. <a href="mymap_sasw.html">See the example output</a>. This means this method should work for you as well and all the code is below. The only change you’ll need to make is to re-insert the <code>r</code> into the curley braces for the code chunks at the bottom.</p>
+<p>On this page we demonstrate two methods of saving map files for sharing. The first method develops an interactive map that uses the entire web browser as the delivery mechanism. It’s a nice way to maximize screen estate, a desirable feature for maps. The second method saves the file as a <strong>shapefile</strong>, a broadly portable file standard in GIS analysis.</p>
+<p>Please note that I disabled some of the code chunks for efficiency of processing. The process documented below does work, despite reported feedback errors: <a href="mymap_sasw.html">See the example output</a>. This method should work for you as well, all the code is below. If you download this file from the repository, you’ll need to make a simple change to the last two code chunks: re-insert the <code>r</code> into the curley braces in the last two code chunks.</p>
 <div id="save-ineractive-map-as-file" class="section level2">
 <h2>Save ineractive map as file</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(htmlwidgets)</code></pre></div>
@@ -379,9 +379,11 @@ saveWidget(interactive_sasw_map, &quot;mymap_sasw.html&quot;)</code></pre>
 library(sf)
 st_write(contiguous_states, &quot;contiguous_states.shp&quot;)</code></pre>
 </div>
-<div id="section" class="section level2">
-<h2></h2>
-<p>See Also: <a href="https://r-spatial.github.io/sf/articles/sf2.html">Reading, Writing and Converting Simple Features</a></p>
+<div id="see-also" class="section level2">
+<h2>See Also</h2>
+<ul>
+<li><a href="https://r-spatial.github.io/sf/articles/sf2.html">Reading, Writing and Converting Simple Features</a></li>
+</ul>
 </div>
 
 &nbsp;
