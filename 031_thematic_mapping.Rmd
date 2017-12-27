@@ -1,10 +1,10 @@
 ---
 title: "Thematic Mapping"
-output: html_notebook
+output: html_document
 ---
 
 
-```{r}
+```{r load-libraries, message=FALSE, warning=FALSE}
 library(tidyverse)       # Tidyverse for Tidy Data
 library(readxl)
 library(tmap)            # Thematic Mapping
@@ -14,26 +14,36 @@ library(sf)
 ```
 
 
-## Get shapefiles in a "simple features" format
+## Shapefiles as sf 
 
-```{r}
-us_geo <- states(class = "sf")
+Using the `tigris` package get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.
+
+```{r get-data, message=FALSE, warning=FALSE}
+us_geo <- tigris::states(class = "sf")
 # us_geo_spdf <- states()  # spdf uses @data slots -- old school
 ```
 
-## Structure of a sf file
+## Data Structure 
 
-```{r}
+The advantage of importing data as simple features (i.e. sf) over sp is that sp uses the old school @data slots method.  If you're used to this it can be a highly functional data structure.  But if you're inclined toward the tidyverse method, you'll see your data in a more familiar and easy-to-view format, i.e. a data frame rather than a slot.  Below are two methods of viewing the downloaded state shapefiles and associated data, using `class` and `glimpse`
+
+```{r data-structure}
 class(us_geo)
 glimpse(us_geo)
 ```
 
-## Look at the sf in a data frame
-```{r}
-#as_tibble(us_geo)
+## sf as data frame
+
+And as noted, here's the data frame view.
+
+
+```{r see-tibble}
+as_tibble(us_geo)
 ```
 
-## Get BLS Data
+## Get BLS data
+
+Now let's get some data to attached to the shapefiles.  We'll gather some government data from the Bureau of Labor Statistics.  
 
 https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographical%20areas
 
@@ -54,21 +64,23 @@ https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographic
     - Skips the first 4 lines
     - Coerces the 2nd column to numeric
 
-```{r}
+```{r get-blsdata}
 Salary4Helpers <- 
   read_excel("data/OES_Report.xlsx",
              col_types = c("text", "numeric"), 
              skip = 4)
 
-#Salary4Helpers
+Salary4Helpers
 ```
 
         
         
 
-## Wrangle the Data
+## Wrangle the data
 
-```{r}
+Before we join the BLS data to the shapefile we need to transform the structure of the downloaded BLS data
+
+```{r wrangle_bls_data, message=FALSE, warning=FALSE}
 BlsWage_ToJoin <- Salary4Helpers %>% 
   rename(Area = "Area Name") %>% 
   rename(wages = "Annual mean wage(2)") %>% 
@@ -80,21 +92,21 @@ BlsWage_ToJoin <- Salary4Helpers %>%
 ```
 
 
-## Append Data
+## Append data
 
 Using the `append_data()` function of the `tmaptools` package, append BLS data to the previously loaded shape object
 
-```{r}
+```{r make_nice_df}
 HelperShapeObject <- append_data(us_geo, BlsWage_ToJoin, 
                                  key.shp = "NAME",
                                  key.data = "State")
-#as_tibble(HelperShapeObject)
+as_tibble(HelperShapeObject)
 ```
 
 
 ## Quick Thematic Map
 
-```{r}
+```{r make_qtm}
 qtm(HelperShapeObject, fill = "wages")
 ```
 
@@ -103,7 +115,7 @@ qtm(HelperShapeObject, fill = "wages")
 
 Filter to only the contiguous 48 states + D.C.
 
-```{r}
+```{r subset-data}
 contiguous_states <- HelperShapeObject %>% 
   filter(REGION != 9) %>% 
   filter(STUSPS != "AK") %>% 
@@ -114,7 +126,7 @@ contiguous_states <- HelperShapeObject %>%
 
 ## Make Choropleth
 
-```{r}
+```{r make-choropleth}
 tm_shape(contiguous_states) +
   tm_polygons("wages", id = "Name")
 ```
@@ -124,7 +136,7 @@ tm_shape(contiguous_states) +
 
 Mark likes the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection for the continental US. `EPSG:5070`
 
-```{r}
+```{r fix-projection}
 contiguous_states %>% 
   st_transform(5070) %>% 
   tm_shape() +
@@ -135,7 +147,7 @@ contiguous_states %>%
 ### Alternative Syntax
 
 
-```{r}
+```{r alternative-syntax}
 tm_shape(contiguous_states, projection = 5070) +
   tm_polygons("wages", id = "Name")
 ```
@@ -143,7 +155,7 @@ tm_shape(contiguous_states, projection = 5070) +
 ### Explore `tmap` syntax and functions 
 
 
-```{r}
+```{r tmap-syntax}
 tm_shape(contiguous_states, projection = 5070) +
   tm_borders(col = "black", alpha = 0.4) +
   tm_fill(col = "REGION", alpha = 0.6) +
@@ -155,10 +167,10 @@ tm_shape(contiguous_states, projection = 5070) +
 
 ## ggplot2 with viridis
 
-```{r}
-#library(viridis)
+```{r with-ggplot-geom_sf}
+library(viridis)
 #devtools::install_github("tidyverse/ggplot2")
-#library(ggplot2) -- version 2.2.1.90000
+library(ggplot2) #-- version 2.2.1.90000
 
 contiguous_states %>% 
   ggplot(aes(fill = wages, color = wages)) +

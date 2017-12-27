@@ -6,11 +6,18 @@ output: html_document
 
 ## Simple Features
 
-The first sections introduced you to plotting latitude and longitude on an interactive map (`leaflet`), and generating a thematic map using `tidycensus`.  A good next step is to learn how to make other customized thematic maps with some more useful packages: `tmap`, `ggplot2` (ggplot::geom_sf), `sf`).  **The backbone of this type of mapping data manipulation is the `sf` package** -- sf for simple features -- which is a modern, tidyverse compatible, package for encoding spatial vector data.  
+The initial sections of *Mapping in R** introduced you to plotting latitude and longitude on an interactive map (`leaflet`), and generating a thematic map using `tidycensus`.  A good next step is to learn how to make other customized thematic maps with some more useful packages: `tmap`, `ggplot2` (ggplot::geom_sf), `sf`).  
+
+**The backbone of this type of mapping data manipulation is the `sf` package** -- sf for simple features -- which is a modern, tidyverse compatible, package for encoding spatial vector data.  But we'll get to that.  We talk more about `sf` and `sp` during the workshop.  You can review the video if you want to hear the discussion.  Or check the slides \*\*\*jrl\*\*\*.
+
+
+First let's introduce the `tmap` package which you'll see is an easy to use package that builds spatial distributions on geographic maps.
+
+
 
 ## Sections
 
-1. 030 -- basic thematic mapping
+1. [basic thematic mapping](031_thematic_mapping.html): creating choropleth's with tmap
 
 1. 036 -- thematic mapping with interactive maps (using leaflet)
 
