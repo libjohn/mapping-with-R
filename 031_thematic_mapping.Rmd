@@ -25,7 +25,7 @@ us_geo <- tigris::states(class = "sf")
 
 ## Data Structure 
 
-The advantage of importing data as simple features (i.e. sf) over sp is that sp uses the old school @data slots method.  If you're used to this it can be a highly functional data structure.  But if you're inclined toward the tidyverse method, you'll see your data in a more familiar and easy-to-view format, i.e. a data frame rather than a slot.  Below are two methods of viewing the downloaded state shapefiles and associated data, using `class` and `glimpse`
+The advantage of importing data as simple features (i.e. sf) over sp is that sp uses the old school @data slots method.  If you're used to this it can be a highly functional data structure.  But if you're inclined toward the tidyverse method, you'll see your data in a more familiar and easy-to-view format, i.e. a data frame rather than a slot.  Below are two methods of viewing the downloaded shapefiles.
 
 ```{r data-structure}
 class(us_geo)
@@ -43,7 +43,9 @@ as_tibble(us_geo)
 
 ## Get BLS data
 
-Now let's get some data to attached to the shapefiles.  We'll gather some government data from the Bureau of Labor Statistics.  
+I've already downloaded and stored some data from the Bureau of Labor Statistics.  Thoses data are stored in an excel file in the `data` directory of the repository:  `data/OES_Report.xlsx`.  **The goal is to attach this data to the previously downloaded shapefiles.**  
+
+But you may be intersted in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.  
 
 https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographical%20areas
 

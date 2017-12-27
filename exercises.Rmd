@@ -9,11 +9,11 @@ Please note:  These exercises assume you have downloaded the [mapping-with-R](ht
 
 1. Georeference XY coordinates.  In your RStudio editor, open the [_exercise-1_xy-leaflet.Rmd](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-1_xy-leaflet.Rmd) file from the project root.  Plot XY (latitude/longitude) coordinates on a leaflet map.
 
-2. Choropleths with tidycensus.  Open the [_exercise-2_tidycensus.Rmd](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-2_tidycensus.Rmd) file.  Plot a new variable and shade that variale by county.  
+2. Choropleths with tidycensus.  Open the [_exercise-2_tidycensus.Rmd](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-2_tidycensus.Rmd) file.  Plot a new variable and shade that variable by county.  
 
-3. Simple Features
+3. Simple Features.  Open the   [_exercise-3_thematic-map_with_federal_data.Rmd](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-3_thematic-map_with_federal_data.Rmd) file.  Make a choropleth of the data using either ggplot2, tmap, or leaflet.  Use the knowledge you gained in the **Simple Features** module.
 
-3. Thematic Mapping
+
 
 
 

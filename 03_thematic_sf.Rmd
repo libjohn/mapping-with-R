@@ -6,9 +6,9 @@ output: html_document
 
 ## Workshop Sections
 
-1. [basic thematic mapping](031_thematic_mapping.html): creating choropleth's with `tmap`
+1. [Basic thematic mapping](031_thematic_mapping.html): creating choropleth's with `tmap`
 
-1. [interactive thematic mapping](033_thematic_leaflet_example.html) with leaflet
+1. [Interactive thematic mapping](033_thematic_leaflet_example.html) with leaflet
 
 1. [Sharing ouput files](036_thematic_mapping-outputs-fullwebpage.html): saving maps.
 
