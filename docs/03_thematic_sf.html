@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>Thematic Mapping with Simple Features</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -25,6 +25,7 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
 
@@ -303,37 +304,28 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Thematic Mapping with Simple Features</h1>
 
 </div>
 
 
-<div id="readme" class="section level1">
-<h1>README</h1>
-<p>Learning materials for the <em>Mapping with R</em> workshop, part of the <a href="https://rfun.library.duke.edu/">Rfun</a> learning series hosted by the <a href="https://library.duke.edu/data/">Data &amp; Visualization Services</a> Department.</p>
-<p>The objective of this workshop is to introduce practical georeferencing (lat/long plotting) and thematic mapping. The principle library packages used will be: leaflet, tidycensus, sf, tmap, and ggmap</p>
-<div id="outline" class="section level2">
-<h2>Outline</h2>
+<p> </p>
+<div id="simple-features" class="section level2">
+<h2>Simple Features</h2>
+<p>The first sections introduced you to plotting latitude and longitude on an interactive map (<code>leaflet</code>), and generating a thematic map using <code>tidycensus</code>. A good next step is to learn how to make other customized thematic maps with some more useful packages: <code>tmap</code>, <code>ggplot2</code> (ggplot::geom_sf), <code>sf</code>). <strong>The backbone of this type of mapping data manipulation is the <code>sf</code> package</strong> – sf for simple features – which is a modern, tidyverse compatible, package for encoding spatial vector data.</p>
+</div>
+<div id="sections" class="section level2">
+<h2>Sections</h2>
 <ol style="list-style-type: decimal">
-<li>Georeferencing with lat/lon points and leaflet</li>
-<li>Choropleth with TidyCensus</li>
-<li>Interactive Thematic Mapping with Simple Features</li>
+<li><p>030 – basic thematic mapping</p></li>
+<li><p>036 – thematic mapping with interactive maps (using leaflet)</p></li>
+<li><p>039 – Sharing ouputs, saving maps (and files)</p></li>
+<li><p>sf v sp</p></li>
 </ol>
 </div>
-<div id="resources" class="section level2">
-<h2>Resources</h2>
-<ul>
-<li><a href="https://www.r-bloggers.com/five-great-charts-in-5-lines-of-r-code-each/">Five great charts in 5 lines of R code each</a> by Sharon Maclis</li>
-<li><a href="https://walkerke.github.io/tidycensus/">TidyCensus</a> by Kyle Walker</li>
-<li><a href="https://juliasilge.com/blog/using-tidycensus/">Using tidycensus and leaflet to Map Census Data</a> by Julia Silge</li>
-<li>Sharon Maclis - <a href="https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html">Mapping in R just got a whole lot easier</a></li>
-<li><a href="https://cengel.github.io/rspatial/2_spDataTypes.nb.html#how-to-do-this-in-sf">Introduction to Spatial Data Types in R</a> by Claudia Engel</li>
-<li>DataCamp.com’s <a href="https://www.datacamp.com/courses/working-with-geospatial-data-in-r">Working with Geospatial Data in R</a> by Charlotte Wickham</li>
-<li><a href="https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf">Introduction to visualising spatial data in R</a>. Lovelace, Cheshire, and Oldroyd</li>
-<li><a href="https://r-spatial.github.io/sf/index.html">Simple Features for R</a></li>
-<li><a href="https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html">tmap in a nutshell</a></li>
-<li><a href="https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html">viridis color palettes</a></li>
-</ul>
-</div>
+<div id="hands-on" class="section level2">
+<h2>Hands-on</h2>
+<p>Head over to the [exercises section] and try to make your own thematic map.</p>
 </div>
 
 &nbsp;

@@ -1,0 +1,24 @@
+---
+title: "Thematic Mapping with Simple Features"
+output: html_document
+---
+&nbsp;
+
+## Simple Features
+
+The first sections introduced you to plotting latitude and longitude on an interactive map (`leaflet`), and generating a thematic map using `tidycensus`.  A good next step is to learn how to make other customized thematic maps with some more useful packages: `tmap`, `ggplot2` (ggplot::geom_sf), `sf`).  **The backbone of this type of mapping data manipulation is the `sf` package** -- sf for simple features -- which is a modern, tidyverse compatible, package for encoding spatial vector data.  
+
+## Sections
+
+1. 030 -- basic thematic mapping
+
+1. 036 -- thematic mapping with interactive maps (using leaflet)
+
+1. 039 -- Sharing ouputs, saving maps (and files)
+
+1. sf v sp
+
+## Hands-on
+
+Head over to the [exercises section] and try to make your own thematic map.
+

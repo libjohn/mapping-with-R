@@ -13,7 +13,7 @@ navbar:
     - text: "Choropleth"
       href: 02_choropleth.html
     - text: "Simple Features"
-      href: thematic_sf.html
+      href: 03_thematic_sf.html
     - text: "Tilegram"
       href: tilegram.html
     - text: "Exercises"
