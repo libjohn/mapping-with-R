@@ -1,0 +1,60 @@
+---
+title: "Thematic Mapping: Saving Ouput Files"
+output: html_document
+---
+
+On this page we demonstrate two methods of saving map files for sharing.  The first method develops an interactive map that uses the entire web browser as the delivery mechanism.  It's a nice way to maximize screen estate, a desirable feature for maps.  The second method saves the file as a **shapefile**, a broadly portable file standard in GIS analysis.
+
+Please note that I disabled some of the code chunks for efficiency of processing.  The process documented below does work, despite reported feedback errors:  [See the example output](mymap_sasw.html).  This method should work for you as well, all the code is below.  If you download this file from the repository, you'll need to make a simple change to the last two code chunks: re-insert the `r` into the curley braces in the last two code chunks.  
+
+## Save ineractive map as file
+
+```{r load-library}
+library(htmlwidgets)
+```
+
+
+```{r set-tmap-mode}
+tmap_mode("view")
+```
+
+
+```{r make-interactive}
+interactive_sasw <- tm_shape(contiguous_states) +
+  tm_polygons("wages", id = "Name")
+```
+
+
+
+```{r make-leafletInteractive}
+interactive_sasw_map <- tmap_leaflet(interactive_sasw)
+```
+
+
+```{}
+# This is an r code chunk, disabled.  
+# To run this, insert the `r` into the 
+# curley brackets as the first line of this code chunk:  {r}
+
+saveWidget(interactive_sasw_map, "mymap_sasw.html")
+```
+
+For some reason, my process throws and error indicating the document conversion failed with a pandoc "Out of memory" problem.  **And yet**, the map **does** get **produced** and stored as [mymap_sasw.html](mymap_sasw.html).
+
+
+## Save as a Shapefile
+
+```{}
+# This is an r code chunk, disabled.  
+# To run this, insert the `r` into the 
+# curley brackets as the first line of this code chunk:  {r}
+
+
+library(sf)
+st_write(contiguous_states, "contiguous_states.shp")
+```
+
+
+## 
+See Also:  [Reading, Writing and Converting Simple Features](https://r-spatial.github.io/sf/articles/sf2.html)
+
