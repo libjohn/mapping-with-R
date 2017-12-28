@@ -7,15 +7,13 @@ output:
 
 ## Workshop Resource Page
 
-1. Overview -- outline.html
-
-    - Prerequisites  --  outline.html#prerequisites
+1. [Software Installation & Prequisisites](software_prereqs.Rmd)
     
 1. [Georeferencing](01_georeference.html):  Plotting XY latitude & longitude
 
 1. [Choropleths with tidycensus](02_choropleth.html)
 
-1. Simple Features -- thematic_sf.html
+1. Thematic Mapping with [Simple Features](03_thematic_sf.html), plus saving map images and files.
 
 ## Hands-on Exercises
 

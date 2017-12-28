@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Prequisites &amp; Software Installation</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="libs-local\duke.css" type="text/css" />
+<link rel="stylesheet" href="libs-local\cc-fonts.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Mapping in R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="01_georeference.html">Plot Coordinates</a>
+</li>
+<li>
+  <a href="02_choropleth.html">Choropleth</a>
+</li>
+<li>
+  <a href="03_thematic_sf.html">Simple Features</a>
+</li>
+<li>
+  <a href="exercises.html">Exercises</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/libjohn/mapping-with-R">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Prequisites &amp; Software Installation</h1>
+
+</div>
+
+
+<div id="prerequisites" class="section level2">
+<h2>Prerequisites</h2>
+<p>We employ the <a href="//www.tidyverse.org/">Tidyverse</a> approach throughout the <em>Mapping with R</em> workshop and <strong>we assume you are already familiar with R</strong>. If not, please review our <a href="https://rfun.library.duke.edu/intro2r/">Introduction to R</a> in advance of the workshop.</p>
+<p>We will teach in our training lab (023 Bostock) unless otherwise stated in the registration information. The <strong>worksations in the Lab are preconfigured</strong> with all the necessary software and libraries. Therefore, we <em>will not take time to install software or configure personal laptops.</em> All libraries, packages, code, and data are shareable and documented through this website. You can clone the repository</p>
+</div>
+<div id="software-installation" class="section level2">
+<h2>Software Installation</h2>
+<div id="software" class="section level3">
+<h3>Software</h3>
+<p><strong>If you are not attending</strong> the workshop <strong>in person</strong>, to complete the hands-on portion of the workshop you’ll need software preinstalled.</p>
+<ul>
+<li><p><strong>R</strong>: <a href="http://archive.linux.duke.edu/cran/"" target="_blank">http://archive.linux.duke.edu/cran/</a></p>
+<ul>
+<li>If you have not installed R before choose <em>install R for the first time</em></li>
+<li>If you already have R installed on your workstation I recommend running the latest version, but any reasonably current version should be fine.</li>
+</ul></li>
+<li><p><strong>RStudio</strong>: <a href="https://www.rstudio.com/products/rstudio/download/#download" target="_blank">https://www.rstudio.com/products/rstudio/download/#download</a></p></li>
+<li><p><strong>Pacakages</strong>: The packages used for this workshop are listed in the session info below, or in the code at the top of each module or section.</p></li>
+</ul>
+</div>
+</div>
+<div id="workshop-philosophy" class="section level2">
+<h2>Workshop Philosophy</h2>
+<p><em>Mapping with R</em> is a two hour workshop, part of the R learning series entitled <a href="//rfun.library.duke.edu/"><em>R We Having Fun Yet‽</em></a> hosted by the <a href="//library.duke.edu/data/">Data &amp; Visualization Services Department</a> at the Duke University Libraries. We will approach R using the free RStudio IDE, an intent to make reproducible literate code, and a bias towards the tidyverse. We believe this open tool-set provides a context that enables and reinforces reproducible workflows, analysis, and reporting.</p>
+<p>You can find links to previous recordings of this workshop, along with shareable data sets, at the <a href="//rfun.library.duke.edu/categories/mapping/">mapping section</a> of the Rfun site. Similarly you will find links to our broader array of workshop resources at the the <em>Guides</em> or <em>Workshops</em> sections of our <a href="//library.duke.edu/data/">DVS website</a></p>
+</div>
+<div id="session-info" class="section level2">
+<h2>Session Info</h2>
+<ul>
+<li><p>All code and data for this website are shareable through the repository. (See the github icon in the top-right header of this page)</p></li>
+<li><p>Listed below are the <strong>libraries (packages) and session info</strong> used to execute the code in the workshop and create this documentation</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()</code></pre></div>
+<pre><code>## R version 3.4.1 (2017-06-30)
+## Platform: x86_64-w64-mingw32/x64 (64-bit)
+## Running under: Windows 10 x64 (build 15063)
+## 
+## Matrix products: default
+## 
+## locale:
+## [1] LC_COLLATE=English_United States.1252 
+## [2] LC_CTYPE=English_United States.1252   
+## [3] LC_MONETARY=English_United States.1252
+## [4] LC_NUMERIC=C                          
+## [5] LC_TIME=English_United States.1252    
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+##  [1] htmlwidgets_0.9    viridis_0.4.0      viridisLite_0.2.0 
+##  [4] tigris_0.5.3       tmaptools_1.2-2    tmap_1.11         
+##  [7] readxl_1.0.0       sf_0.5-5           tidycensus_0.3.1  
+## [10] bindrcpp_0.2       leaflet_1.1.0      forcats_0.2.0     
+## [13] stringr_1.2.0      dplyr_0.7.4        purrr_0.2.4       
+## [16] readr_1.1.1        tidyr_0.7.2        tibble_1.3.4      
+## [19] ggplot2_2.2.1.9000 tidyverse_1.2.1   
+## 
+## loaded via a namespace (and not attached):
+##   [1] colorspace_1.3-2   deldir_0.1-14      gdalUtils_2.0.1.7 
+##   [4] class_7.3-14       rgdal_1.2-16       rprojroot_1.3-1   
+##   [7] satellite_1.0.1    base64enc_0.1-3    dichromat_2.0-0   
+##  [10] rstudioapi_0.7     lubridate_1.7.1    xml2_1.1.1        
+##  [13] R.methodsS3_1.7.1  codetools_0.2-15   splines_3.4.1     
+##  [16] mnormt_1.5-5       knitr_1.17         geojsonlint_0.2.0 
+##  [19] jsonlite_1.5       broom_0.4.3        png_0.1-7         
+##  [22] R.oo_1.21.0        rgeos_0.3-26       shiny_1.0.5       
+##  [25] compiler_3.4.1     httr_1.3.1         mapview_2.2.0     
+##  [28] backports_1.1.2    assertthat_0.2.0   Matrix_1.2-10     
+##  [31] lazyeval_0.2.1     cli_1.0.0          htmltools_0.3.6   
+##  [34] tools_3.4.1        coda_0.19-1        gtable_0.2.0      
+##  [37] glue_1.2.0         reshape2_1.4.3     rappdirs_0.3.1    
+##  [40] gmodels_2.16.2     V8_1.5             Rcpp_0.12.14      
+##  [43] cellranger_1.1.0   raster_2.6-7       spdep_0.7-4       
+##  [46] gdata_2.18.0       nlme_3.1-131       udunits2_0.13     
+##  [49] iterators_1.0.9    crosstalk_1.0.0    psych_1.7.8       
+##  [52] rvest_0.3.2        mime_0.5           gtools_3.5.0      
+##  [55] XML_3.98-1.9       LearnBayes_2.15    MASS_7.3-47       
+##  [58] scales_0.5.0.9000  hms_0.4.0          parallel_3.4.1    
+##  [61] expm_0.999-2       RColorBrewer_1.1-2 yaml_2.1.16       
+##  [64] curl_3.1           geosphere_1.5-7    gridExtra_2.3     
+##  [67] stringi_1.1.6      jsonvalidate_1.0.0 maptools_0.9-2    
+##  [70] foreach_1.4.4      e1071_1.6-8        boot_1.3-19       
+##  [73] spData_0.2.6.8     rlang_0.1.6        pkgconfig_2.0.1   
+##  [76] bitops_1.0-6       evaluate_0.10.1    lattice_0.20-35   
+##  [79] bindr_0.1          labeling_0.3       tidyselect_0.2.3  
+##  [82] osmar_1.1-7        plyr_1.8.4         magrittr_1.5      
+##  [85] R6_2.2.2           DBI_0.7            haven_1.1.0       
+##  [88] foreign_0.8-69     units_0.4-6        RCurl_1.95-4.8    
+##  [91] sp_1.2-5           modelr_0.1.1       crayon_1.3.4      
+##  [94] rmapshaper_0.3.0   uuid_0.1-2         KernSmooth_2.23-15
+##  [97] rmarkdown_1.8      grid_3.4.1         webshot_0.5.0     
+## [100] digest_0.6.13      classInt_0.1-24    xtable_1.8-2      
+## [103] httpuv_1.3.5       R.utils_2.6.0      stats4_3.4.1      
+## [106] munsell_0.4.3</code></pre>
+</div>
+
+&nbsp;
+
+<hr>
+<span class="footer">
+  
+  <span class="left-foot">
+    
+    <a href="https://rfun.library.duke.edu/">R We Having Fun Yet‽</a> -- Learning Series<br>
+    <a href="http://library.duke.edu/data/">Data & Visualization Services</a><br>
+    <a href="http://library.duke.edu/">Duke University Libraries</a>
+    
+  </span>
+
+  <span class="right-foot">
+  
+    <span class="cc">
+      <!-- Key: a: SA, b: BY, c: CC Circle, d: ND, n: NC, m: Sampling, s: Share, r: Remix, C: CC Full Logo -->
+    C bn</span><br>
+    Shareable via Creative Commons:  CC <a href="https://creativecommons.org/licenses/by-nc/4.0/">By-NC</a>
+
+  </span>
+
+</span>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
