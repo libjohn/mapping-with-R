@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>Next Steps</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
@@ -151,6 +154,107 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -197,42 +301,45 @@ $(document).ready(function () {
 
 
 
+<h1 class="title toc-ignore">Next Steps</h1>
 
 </div>
 
 
-<p> </p>
-<div id="workshop-resource-page" class="section level2">
-<h2>Workshop Resource Page</h2>
-<ul>
-<li><a href="software_prereqs.html">Prequisisites</a></li>
-</ul>
-<ol style="list-style-type: decimal">
-<li><p><a href="01_georeference.html">Georeferencing</a>: Plotting XY latitude &amp; longitude</p></li>
-<li><p><a href="02_choropleth.html">Choropleths with tidycensus</a></p></li>
-<li><p>Thematic Mapping with <a href="03_thematic_sf.html">Simple Features</a>, plus saving map images and files</p></li>
-</ol>
+<div id="preamble" class="section level2">
+<h2>Preamble</h2>
+<p>In this workshop we have barely scratched the surface of how R can enable GIS analysis. Many GIS analysts matriculated through the world of ESRI products such as ArcGIS and ArcGIS Online, or the opensource QGIS option. There are also interesting cloud options such as Carto.com. We do not presume that all your GIS analytics can be accomplished via R. Nor do we presume that they cannot. If you are already an R user, you will find this introduction to mapping is the first step in a satisfying journey of reproducible GIS analytics. However, there are a few points we’d like to make…</p>
 </div>
-<div id="hands-on-exercises" class="section level2">
-<h2>Hands-on Exercises</h2>
-<ul>
-<li><a href="exercises.html">Exercises</a></li>
-</ul>
+<div id="reproducibility" class="section level2">
+<h2>Reproducibility</h2>
+<p><code>ggplot2</code> has a great faceting feature (<code>facet_grid</code> or <code>facet_wrap</code>) which can enable producing multiple ggplot maps that differ by categorical or continuous variables.</p>
 </div>
-<div id="supporting-materials" class="section level2">
-<h2>Supporting Materials</h2>
+<div id="design-best-practices" class="section level2">
+<h2>Design Best Practices</h2>
+<p>Drew Keener has some thing to say here</p>
+</div>
+<div id="other-local-resources" class="section level2">
+<h2>Other Local Resources</h2>
+<p>We highly recommend the <a href="https://sites.duke.edu/saga/">Student Association for Geospatial Analysis</a></p>
+</div>
+<div id="interactivity" class="section level2">
+<h2>Interactivity</h2>
+<p>“You want more‽”…</p>
+<p>Tools such as <a href="https://www.rstudio.com/products/shiny/">Shiny</a> or <a href="http://www.htmlwidgets.org/">HTML Widgets</a> can be used in combination with dashboards (e.g. <a href="http://rmarkdown.rstudio.com/flexdashboard/">Flexdashboard for R</a>) can all be leveraged to maximize interactivity.</p>
+<p>Of course, you may need hosting capabilities as well. Duke has some ready-made Shiny hosting and static-webpage hosting. (To avoid confusion, remember that static webpages can still be interactive, especially when using HTML Widgets.) Alternatively, we’ve used a tool like netlify.com and found it very capable of hosting our static web presence.</p>
+</div>
+<div id="shapefiles" class="section level2">
+<h2>Shapefiles</h2>
+<p>Shapefiles are a stable of portable GIS data. In this course we barely touch on the shapefile format. However, it’s important to highlight that the <code>sf</code> package can read and write shapefiles (or JSON, or a whole host of formats). Consider consulting with our GIS experts in the DVS Department for information about sources of shapefiles.</p>
+</div>
+<div id="raster" class="section level2">
+<h2>Raster</h2>
+<p>There are many more advanced things to learn about GIS analysis in R. One of the most common questions is how to handle Raster files. It’s definitely possible and we hope to offer a workshop about this. In the meantime look into:</p>
 <ul>
-<li><p><a href="slides"><strong>Slides</strong></a></p></li>
-<li><p><a href="next.html">Next Steps</a>: Moving toward GIS analysis, raster analytics, etc.</p></li>
+<li>The <a href="https://cran.r-project.org/web/packages/raster/">raster package</a></li>
+<li>This <a href="http://r-spatial.org/r/2016/09/26/future.html">post</a> by Edzer Pebesma and Robert Hijmans</li>
+<li>This <a href="https://github.com/r-spatial/stars/blob/master/PROPOSAL.md">proposal</a></li>
 </ul>
-<p> </p>
-<figure>
-<img src="https://imgs.xkcd.com/comics/heatmap.png" />
-<figcaption>
-KXCD. Heatmap: <a href="https://xkcd.com/1138/" class="uri">https://xkcd.com/1138/</a>
-</figcaption>
-</figure>
-<p><br></p>
 </div>
 
 &nbsp;
@@ -260,6 +367,8 @@ KXCD. Heatmap: <a href="https://xkcd.com/1138/" class="uri">https://xkcd.com/113
 </span>
 
 
+</div>
+</div>
 
 </div>
 

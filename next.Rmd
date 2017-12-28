@@ -1,0 +1,41 @@
+---
+title: "Next Steps"
+output: html_document
+---
+
+## Preamble
+
+In this workshop we have barely scratched the surface of how R can enable GIS analysis.  Many GIS analysts matriculated through the world of ESRI products such as ArcGIS and ArcGIS Online, or the opensource QGIS option.  There are also interesting cloud options such as Carto.com.  We do not presume that all your GIS analytics can be accomplished via R.  Nor do we presume that they cannot.  If you are already an R user, you will find this introduction to mapping is the first step in a satisfying journey of reproducible GIS analytics.  However, there are a few points we'd like to make...
+
+## Reproducibility
+
+`ggplot2` has a great faceting feature (`facet_grid` or `facet_wrap`) which can enable producing multiple ggplot maps that differ by categorical or continuous variables.
+
+## Design Best Practices
+
+Drew Keener has some thing to say here
+
+## Other Local Resources
+
+We highly recommend the [Student Association for Geospatial Analysis](https://sites.duke.edu/saga/)
+
+## Interactivity 
+
+"You want more‽"...
+
+Tools such as [Shiny](https://www.rstudio.com/products/shiny/) or [HTML Widgets](http://www.htmlwidgets.org/) can be used in combination with dashboards (e.g. [Flexdashboard for R](http://rmarkdown.rstudio.com/flexdashboard/)) can all be leveraged to maximize interactivity.  
+
+Of course, you may need hosting capabilities as well.  Duke has some ready-made Shiny hosting and static-webpage hosting. (To avoid confusion, remember that static webpages can still be interactive, especially when using HTML Widgets.)  Alternatively, we've used a tool like netlify.com and found it very capable of hosting our static web presence.
+
+## Shapefiles
+
+Shapefiles are a stable of portable GIS data.  In this course we barely touch on the shapefile format.  However, it's important to highlight that the `sf` package can read and write shapefiles (or JSON, or a whole host of formats).  Consider consulting with our GIS experts in the DVS Department for information about sources of shapefiles.
+
+## Raster 
+
+There are many more advanced things to learn about GIS analysis in R.  One of the most common questions is how to handle Raster files.  It's definitely possible and we hope to offer a workshop about this.  In the meantime look into:
+
+- The [raster package](https://cran.r-project.org/web/packages/raster/)
+- This [post](http://r-spatial.org/r/2016/09/26/future.html) by Edzer Pebesma and Robert Hijmans
+- This [proposal](https://github.com/r-spatial/stars/blob/master/PROPOSAL.md)
+

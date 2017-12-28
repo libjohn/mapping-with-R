@@ -7,13 +7,13 @@ output:
 
 ## Workshop Resource Page
 
-1. [Software Installation & Prequisisites](software_prereqs.Rmd)
+- [Prequisisites](software_prereqs.html)
     
 1. [Georeferencing](01_georeference.html):  Plotting XY latitude & longitude
 
 1. [Choropleths with tidycensus](02_choropleth.html)
 
-1. Thematic Mapping with [Simple Features](03_thematic_sf.html), plus saving map images and files.
+1. Thematic Mapping with [Simple Features](03_thematic_sf.html), plus saving map images and files
 
 ## Hands-on Exercises
 
@@ -24,7 +24,7 @@ output:
 
 - [**Slides**](slides)
 
-- Next Steps: Moving toward GIS analysis, raster analytics, etc.
+- [Next Steps](next.html): Moving toward GIS analysis, raster analytics, etc.
 
 
 &nbsp;
