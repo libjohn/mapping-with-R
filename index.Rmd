@@ -13,7 +13,7 @@ output:
 
 1. [Choropleths with tidycensus](02_choropleth.html)
 
-1. Thematic Mapping with [Simple Features](03_thematic_sf.html), plus saving map images and files
+1. Thematic Mapping with [Simple Features](030_thematic_sf.html), plus saving map images and files
 
 ## Hands-on Exercises
 
