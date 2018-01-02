@@ -4,7 +4,7 @@ output: html_document
 ---
 We employ the [Tidyverse](//www.tidyverse.org/) approach throughout the *Mapping with R* workshop and **we assume you are already familiar with *Tidyverse* R**.  If not, please review our [Introduction to R](https://rfun.library.duke.edu/intro2r/) in advance of the workshop.  
 
-We will teach in our training lab (023 Bostock) unless otherwise stated in the registration information.  The **workstations in the Lab are preconfigured** with all the necessary software and libraries.  Therefore, we *will not take time to install software or configure personal laptops.*  All libraries, packages, code, and data are shareable and documented through this website. A link to the repository is in the header.
+We will teach in our training lab (023 Bostock) unless otherwise stated in the registration information.  The **workstations in the Lab are preconfigured** with all the necessary [software](#software) and [libraries.](#library_packages)  Therefore, we *will not take time to install software or configure personal laptops.*  All libraries, packages, code, and data are shareable and documented through this website. A link to the repository is in the header.
 
 ## Software
 
@@ -12,7 +12,7 @@ We will teach in our training lab (023 Bostock) unless otherwise stated in the r
 
 - **R**: <a href="https://cran.r-project.org/"" target="_blank">https://cran.r-project.org/</a>
     
-- **RStudio**: <a href="https://www.rstudio.com/products/rstudio/download/#download" target="_blank">https://www.rstudio.com/products/rstudio/download/#download</a>.  Technically, you can do all the work without RStudio.  However, the code was composed, run, and tested in RStudio so that's all I can verify. YMMV.
+- **RStudio**: <a href="https://www.rstudio.com/products/rstudio/download/#download" target="_blank">https://www.rstudio.com/products/rstudio/download/#download</a>.  Technically, you can do all the work without RStudio.  However, the code was composed, run, and tested in RStudio. (I can verify this confiurations.  Others may work. YMMV.)
 
 - **Pacakages**:  The packages used for this workshop are listed in the session info below, or in the code at the top of each module or section.
 
@@ -22,15 +22,17 @@ We will teach in our training lab (023 Bostock) unless otherwise stated in the r
 
 *Mapping with R* is a two hour workshop, part of the R learning series entitled [*R We Having Fun Yet‽*](//rfun.library.duke.edu/) hosted by the [Data & Visualization Services Department](//library.duke.edu/data/) at the Duke University Libraries.  We will approach R using the free RStudio IDE, an intent to make reproducible literate code, and a bias towards the tidyverse. We believe this open tool-set provides a context that enables and reinforces reproducible workflows, analysis, and reporting.
 
+As part of the workshop we create opportunities for reinforced active learning by creating [hands-on exercises](exercises.html).  You will have time to complete these exercises during the workshop.
+
 ## Recordings, Repository, Shareable datasets
 
-There's a link to the repository in the upper-right header.
+There's a link to the repository in the upper right-hand header.
 
 You can find links to previous recordings of this workshop, along with links to the shareable data sets, at the [mapping section](//rfun.library.duke.edu/categories/mapping/) of the Rfun site.  Similarly, you will find links to our broader array of workshop resources at the the *Guides* or *Workshops* sections of our [DVS website](//library.duke.edu/data/) 
 
-All code and data for this website are shareable through the repository under the [CC-BY-NC license](license.html).
+All code and data for this website and workshop are shareable through the repository under the [CC-By-NC license](license.html).
 
-## Session Info
+## Library Packages
 
 - Listed below are the **libraries (packages) and session info** used to execute the code in the workshop and create this documentation 
 
