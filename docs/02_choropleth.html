@@ -415,7 +415,7 @@ nc_pop</code></pre></div>
 </div>
 <div id="add-another-layer" class="section level2">
 <h2>Add another layer</h2>
-<p>Add locations of the the 2012 Starbucks stores. The Starbucks locations were generated and plotted in the previous exercise. Reruning exercise 1 will ensure the starbucks$NC object is in your R envirornment.</p>
+<p>Add locations of the the 2012 Starbucks stores. The Starbucks locations were generated and plotted in the previous exercise. Re-running exercise 1 will ensure the starbucks$NC object is in your R environment.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nc_pop <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">st_transform</span>(<span class="dt">crs =</span> <span class="st">&quot;+init=epsg:4326&quot;</span>) <span class="op">%&gt;%</span>
 <span class="st">    </span><span class="kw">leaflet</span>(<span class="dt">width =</span> <span class="st">&quot;100%&quot;</span>) <span class="op">%&gt;%</span>
@@ -445,22 +445,31 @@ nc_pop</code></pre></div>
 </div>
 <div id="census" class="section level2">
 <h2>Census</h2>
+<p>During the workshop, and in the video recording, I will discuss the following concepts in more detail.</p>
 <ul>
 <li>ACS v Decennial</li>
 <li>Variable Names / Numbers</li>
-<li>More on Census Geography</li>
+<li>More on Census Geography (shapefiles)</li>
 </ul>
+<div id="variables" class="section level3">
+<h3>Variables</h3>
+<p>The Census is a very large collection of data. Many casual users of Census data are interested in a single data point, for example population by County. Given the complexity and richness of available Census data, finding a useful data variable can be quite a bit of work. The links below are a some methods one might use to associate and identify the proper code name with a Census data variable.</p>
+<ul>
+<li><a href="https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables">Searching for Variables</a></li>
+<li>See Also <a href="https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt">Tiger Metadata</a></li>
+<li>See Also <a href="https://www.socialexplorer.com/data/ACS2015_5yr/metadata/?ds=ACS15_5yr">SocialExplorer Tables</a></li>
+</ul>
+</div>
+</div>
+<div id="shapefiles" class="section level2">
+<h2>Shapefiles</h2>
+<p>In the <a href="031_thematic_mapping.html"><em>Basic Thematic Mapping</em> section</a> of the <a href="030_thematic_sf.html">Simple Features module</a> we will use the <code>tigris</code> package to gather State level, Census geography shapefiles. Shapefiles are an important GIS data standard. If you need shapefiles for other geographies, please consult our <a href="https://guides.library.duke.edu/gisdata"><em>GIS Data: Starting Points</em> guide</a> – a very handy collection of GIS data sources, much of which will be in the shapefiles format.</p>
 </div>
 <div id="end-notes" class="section level2">
 <h2>End Notes</h2>
 <p>This session based on</p>
 <ul>
-<li><p>Kyle Walker’s <a href="https://walkerke.github.io/tidycensus/">TidyCensus</a> package</p>
-<ul>
-<li><a href="https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables">Searching for Variables</a></li>
-<li>See Also <a href="https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt">Tiger Metadata</a></li>
-<li>See Also <a href="https://www.socialexplorer.com/data/ACS2015_5yr/metadata/?ds=ACS15_5yr">SocialExplorer Tables</a></li>
-</ul></li>
+<li><p>Kyle Walker’s <a href="https://walkerke.github.io/tidycensus/">TidyCensus</a> package</p></li>
 <li><p>Julia Silge’s <a href="https://juliasilge.com/blog/using-tidycensus/">leaflet implementation of tidycensus</a></p></li>
 </ul>
 </div>

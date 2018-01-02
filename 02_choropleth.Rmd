@@ -69,7 +69,7 @@ nc_pop %>%
 
 ## Add another layer
 
-Add locations of the the 2012 Starbucks stores.  The Starbucks locations were generated and plotted in the previous exercise.  Reruning exercise 1 will ensure the starbucks$NC object is in your R envirornment.
+Add locations of the the 2012 Starbucks stores.  The Starbucks locations were generated and plotted in the previous exercise.  Re-running exercise 1 will ensure the starbucks$NC object is in your R environment.
 
 ```{r add_layer}
 nc_pop %>%
@@ -100,18 +100,28 @@ nc_pop %>%
 
 ##  Census
 
+During the workshop, and in the video recording, I will discuss the following concepts in more detail.
+
 - ACS v Decennial
 - Variable Names / Numbers
-- More on Census Geography
+- More on Census Geography (shapefiles)
+
+### Variables
+
+The Census is a very large collection of data.  Many casual users of Census data are interested in a single data point, for example population by County.  Given the complexity and richness of available Census data, finding a useful data variable can be quite a bit of work.  The links below are a some methods one might use to associate and identify the proper code name with a Census data variable.
+
+- [Searching for Variables](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables)
+- See Also [Tiger Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt)
+- See Also [SocialExplorer Tables](https://www.socialexplorer.com/data/ACS2015_5yr/metadata/?ds=ACS15_5yr)
+
+## Shapefiles
+
+In the [*Basic Thematic Mapping* section](031_thematic_mapping.html) of the [Simple Features module](030_thematic_sf.html) we will use the `tigris` package to gather State level, Census geography shapefiles.  Shapefiles are an important GIS data standard.  If you need shapefiles for other geographies, please consult our [*GIS Data: Starting Points* guide](https://guides.library.duke.edu/gisdata) --  a very handy collection of GIS data sources, much of which will be in the shapefiles format.  
 
 ## End Notes
 
 This session based on 
 
 - Kyle Walker's [TidyCensus](https://walkerke.github.io/tidycensus/) package
-
-    - [Searching for Variables](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables)
-    - See Also [Tiger Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt)
-    - See Also [SocialExplorer Tables](https://www.socialexplorer.com/data/ACS2015_5yr/metadata/?ds=ACS15_5yr)
     
 - Julia Silge's [leaflet implementation of tidycensus](https://juliasilge.com/blog/using-tidycensus/)

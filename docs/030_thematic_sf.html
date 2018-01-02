@@ -307,8 +307,8 @@ div.tocify {
 
 
 <p> </p>
-<div id="workshop-sections" class="section level2">
-<h2>Workshop Sections</h2>
+<div id="sections" class="section level2">
+<h2>Sections</h2>
 <ol style="list-style-type: decimal">
 <li><p><a href="031_thematic_mapping.html">Basic thematic mapping</a>: creating choropleth’s with <code>tmap</code></p></li>
 <li><p><a href="033_thematic_leaflet_example.html">Interactive thematic mapping</a> with leaflet</p></li>
@@ -318,18 +318,17 @@ div.tocify {
 <div id="simple-features" class="section level2">
 <h2>Simple Features</h2>
 <p>The initial modules of <em>Mapping in R</em> introduce plotting latitude and longitude with an interactive map (<code>leaflet</code>), and generating a thematic map using <code>tidycensus.</code> The focus of this module is to introduce other customized thematic map packages: <code>tmap</code>, <code>sf</code>, <code>ggplot2</code> (using ggplot::geom_sf).</p>
-<p><strong>The backbone of this type of mapping data manipulation is the <code>sf</code> package</strong> – sf for simple features – which is a modern tidyverse compatible package for encoding spatial vector data. The advantage of manipulating data as simple features (i.e. sf) over <code>sp</code> is that the <code>sp</code> package (“spatial polygons”) uses the old school <span class="citation">@data</span> slots method. If you’re used to this, <code>sp</code> uses a highly functional data structure. R modernists and tidyverse fans may be inclined toward the <code>sf</code> approach. Among the advantages, you can can see your data in a more familiar and easy-to-view format, a data frame – rather than a slot.</p>
+<p><strong>The backbone of this type of mapping data manipulation is the <code>sf</code> package</strong> – sf for simple features – which is a modern tidyverse compatible package for encoding spatial vector data. The advantage of manipulating data as simple features (i.e. sf) over <code>sp</code> is that the <code>sp</code> package (“spatial polygons”) uses the old school <span class="citation">@data</span> slots method. If you are already used to this approach, <code>sp</code> is a highly functional data structure. Despite the legacy of <code>sp</code>, R modernists and tidyverse fans may be inclined toward the <code>sf</code> approach which is more tidyverse compatible. In other words, among the advantages of <code>sf</code>, you can see your data in a more familiar and easy-to-view data frame format, rather than the <span class="citation">@data</span> slot approach.</p>
 <blockquote>
-<p><code>sf</code> simple features package affords the R coder an easy and familiar method of <strong>storing data</strong> vectors and <strong>shapefile</strong> polygons in a <strong>tidy data frame</strong>.</p>
+<p>The <code>sf</code> simple features package affords the R coder an easy and familiar method of <strong>storing data</strong> vectors and <strong>shapefile</strong> polygons in a <strong>tidy data frame</strong>.</p>
 </blockquote>
-<p>First let’s introduce the <code>tmap</code> package which you’ll see is an easy-to-use package used to build spatial distributions on geographic maps. These maps are png files: easy to produce and share. In this section we’ll use the <code>tigris</code> package to get a Census Shapefile and store the object as an <code>sf</code> object which we will later join into our data frame.</p>
+<p>In the <em>basic thematic</em> section I will introduce the <code>tmap</code> package first. Using the <code>tmap</code> package you will learn about an easy-to-use method for building spatial distributions on geographic maps. These maps are typically <code>.png</code> image files. (.png files are easy to produce and share.) In this section we’ll also use the <code>tigris</code> package – to gather Census shapefiles – and store that object as an <code>sf</code> object. Later we will join that object in a data frame.</p>
 <blockquote>
 <p>You can also store your data in a <strong>slot</strong> using the <code>sp</code> package.</p>
 </blockquote>
-<p>Then we’ll make another interactive choropleth with leaflet. This second section is largely a repeat of the earlier choropleth module, but it is also the set up for the third section about saving maps as files. The map’s interactivity is sparse but functional by moving beyond traditional 2D map-on-a-page images. Indeed, this interactive map allows the end-user to zoom in and out. Just know that this interactive feature is possible <strong>because</strong> we draw the map as a leaflet map. Putting this lesson together with the plotting module, you now have the skills to add additional interactive layers (e.g. pop-up windows). Here we’ll focus on developing another choropleth as a setup for section three.</p>
-<p>Section three introduces techniques for saving these maps as files that can then be shared and distributed as interactive maps, either on the web, as an html file, or as shapefile.</p>
+<p>In the <em>interactive</em> section you will make another interactive choropleth using <code>leaflet</code>. This second section is largely a repeat of the earlier choropleth module. The level of interactivity is sparse, but functional, and moves beyond traditional 2D map-on-a-page images. Just know that this zoom-in/zoom-out interactivity feature is possible <strong>because</strong> we draw the map as a leaflet map. By completing this module after the earlier the plotting module, you now have the skills to add additional interactive layers (e.g. pop-up windows). But, irrespective of layers, this section is a good set-up for the third section which covers saving maps as files. Section three introduces techniques for saving these maps as files that can then be shared and distributed as interactive maps, either on the web, as an html file, or as <a href="next.html#shapefiles">shapefile.</a></p>
 <blockquote>
-<p><code>sf</code> v <code>sp</code>? Leave the debate to others. I like the tidyverse and <code>sf</code> enables tremendous functionality and a familiar data science landscape.</p>
+<p><code>sf</code> v <code>sp</code>? Leave the debate to others. I like the tidyverse which works well with <code>sf</code>. <code>sf</code> enables tremendous functionality and a familiar data science landscape.</p>
 </blockquote>
 </div>
 <div id="converting-between-sf-and-sp" class="section level2">

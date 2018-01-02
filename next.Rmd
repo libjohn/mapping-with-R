@@ -29,7 +29,7 @@ Of course, you may need hosting capabilities as well.  Duke has some ready-made 
 
 ## Shapefiles
 
-Shapefiles are a stable of portable GIS data.  In this course we barely touch on the shapefile format.  However, it's important to highlight that the `sf` package can read and write shapefiles (or JSON, or a whole host of formats).  Consider consulting with our GIS experts in the DVS Department for information about sources of shapefiles.
+Shapefiles are a staple of portable GIS data.  In this course we barely touch on the shapefile format.  However, it's important to highlight that the `sf` package can read and write shapefiles (or GeoJSON files, or a whole host of other formats).  Our [*GIS Data: Starting Points* guide](https://guides.library.duke.edu/gisdata) is a very handy collection of data sources, much of which will be in the shapefiles format.  Consider consulting with our GIS experts in the DVS Department for information about sources of shapefiles.
 
 ## Raster 
 

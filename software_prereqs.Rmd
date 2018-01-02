@@ -4,7 +4,7 @@ output: html_document
 ---
 We employ the [Tidyverse](//www.tidyverse.org/) approach throughout the *Mapping with R* workshop and **we assume you are already familiar with *Tidyverse* R**.  If not, please review our [Introduction to R](https://rfun.library.duke.edu/intro2r/) in advance of the workshop.  
 
-We will teach in our training lab (023 Bostock) unless otherwise stated in the registration information.  The **workstations in the Lab are preconfigured** with all the necessary [software](#software) and [libraries.](#library_packages)  Therefore, we *will not take time to install software or configure personal laptops.*  All libraries, packages, code, and data are shareable and documented through this website. A link to the repository is in the header.
+We will teach in our training lab (023 Bostock) unless otherwise stated in the registration information.  The **workstations in the Lab are preconfigured** with all the necessary [software](#software) and [libraries.](#packages)  Therefore, we *will not take time to install software or configure personal laptops.*  All libraries, packages, code, and data are shareable and documented through this website. A link to the repository is in the header.
 
 ## Software
 
@@ -12,7 +12,7 @@ We will teach in our training lab (023 Bostock) unless otherwise stated in the r
 
 - **R**: <a href="https://cran.r-project.org/"" target="_blank">https://cran.r-project.org/</a>
     
-- **RStudio**: <a href="https://www.rstudio.com/products/rstudio/download/#download" target="_blank">https://www.rstudio.com/products/rstudio/download/#download</a>.  Technically, you can do all the work without RStudio.  However, the code was composed, run, and tested in RStudio. (I can verify this confiurations.  Others may work. YMMV.)
+- **RStudio**: <a href="https://www.rstudio.com/products/rstudio/download/#download" target="_blank">https://www.rstudio.com/products/rstudio/download/#download</a>.  Technically, you can do all the work without RStudio.  However, the code was composed, run, and tested in RStudio. (I can verify this configuration.  Others may work. YMMV.)
 
 - **Pacakages**:  The packages used for this workshop are listed in the session info below, or in the code at the top of each module or section.
 
@@ -32,7 +32,7 @@ You can find links to previous recordings of this workshop, along with links to 
 
 All code and data for this website and workshop are shareable through the repository under the [CC-By-NC license](license.html).
 
-## Library Packages
+## Packages
 
 - Listed below are the **libraries (packages) and session info** used to execute the code in the workshop and create this documentation 
 
