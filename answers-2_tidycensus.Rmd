@@ -16,12 +16,14 @@ library(stringr)
 
 I recommend using one of the following variables.  However, you can use the `tidycensus::load_variables()` and follow the "Searching for variables" [instructions](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables). 
 
-- `B19013_001E` - median household income
-- `B08131_001E`	- AGGREGATE TRAVEL TIME TO WORK (IN MINUTES) OF WORKERS BY PLACE OF WORK--STATE AND COUNTY LEVEL: Worked in State of residence: Workers 16 years and over who did not work at home -- (Estimate)
 - `B08103_001E` - MEDIAN AGE BY MEANS OF TRANSPORTATION TO WORK: Total: Taxicab, motorcycle, bicycle, or other means: Workers 16 years and over -- (Estimate)
+- `B08131_001E`	- AGGREGATE TRAVEL TIME TO WORK (IN MINUTES) OF WORKERS BY PLACE OF WORK--STATE AND COUNTY LEVEL: Worked in State of residence: Workers 16 years and over who did not work at home -- (Estimate)
+- `B19013_001E` - median household income
 
 
-## Median Household Income
+
+
+## Median Age by Means of Transportation to Work
 
 - B08103_001E
 
@@ -75,7 +77,7 @@ census_variable %>%
     addLegend("bottomright", 
               pal = MapPalette, 
               values = ~ estimate,
-              title = "Median Age of<br>Travellers by<br>Taxi/Moto/Bike",
+              title = "Median Age of<br>Travelers by<br>Taxi/Moto/Bike",
               opacity = 1)
 ```
 
@@ -135,7 +137,7 @@ census_variable %>%
 
 
 
-## Median Age by Transportation
+## Median Household Income in the Past 12 Months
 
 - B19013_001E
 
