@@ -12,6 +12,8 @@ output: html_document
 
 1. [Sharing ouput files](036_thematic_mapping-outputs-fullwebpage.html): saving maps.
 
+1. [Faceted Thematic Maps](039_facet_example.html)
+
 ## Simple Features
 
 The initial modules of *Mapping in R* introduce plotting latitude and longitude with an interactive map (`leaflet`), and generating a thematic map using `tidycensus.`  The focus of this module is to introduce other customized thematic map packages: `tmap`, `sf`, `ggplot2` (using ggplot::geom_sf).  

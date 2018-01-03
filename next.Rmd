@@ -9,7 +9,15 @@ In this workshop we have barely scratched the surface of how R can enable GIS an
 
 ## Reproducibility
 
-`ggplot2` has a great faceting feature (`facet_grid` or `facet_wrap`) which can enable producing multiple ggplot maps that differ by categorical or continuous variables.
+<!-- float: right; -->
+
+
+<img src="facet_map.png" height = "100" width = "150" style="float: right">As a blanket statement reproducibility is highly recommended.  As a practical recommendation the more you produce your reports via the Tidy Data + Literate Code + R Markdown methods (i.e. tidyverse), the more likely you can transparently and openly reproduce your processes.  As a side benefit you can reproduce variations on a thematic maps with minimal code.
+
+One specific example of producing multiple maps would be to leverage the `ggplot2` faceting features (`facet_grid` or `facet_wrap`).  These functions enable production of multiple ggplot maps that differ by categorical or continuous variables.
+
+The example on the right was produced with `facet_wrap`.  You can find some documentation of this code in the [Simple Features](030_thematic_sf.html) module.
+
 
 ## Design Best Practices
 
