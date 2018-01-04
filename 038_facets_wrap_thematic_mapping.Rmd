@@ -12,6 +12,9 @@ library(tmaptools)
 library(tigris)          # Get Census Geography Poloygons
 library(sf)
 library(tidycensus)
+library(viridis)        # Loading required package: viridisLite
+library(ggplot2)        #-- version 2.2.1.90000
+              #devtools::install_github("tidyverse/ggplot2")
 ```
 
 
@@ -227,43 +230,12 @@ us_pop <- us_pop %>%
   filter(NAME != "Puerto Rico")
 ```
 
-### Append Data
+### Append Census Data
 
 ```{r make_nice_df2}
 appended_population_and_states_shapefile <- append_data(contiguous_states, us_pop, 
                                  key.shp = "GEOID",
                                  key.data = "GEOID")
-```
-
-
-## ggplot2 with viridis
-
-In this section we introduce making shapefiles with ggplot2.  ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community.  As of this writing, there is a development version of ggplot2 that includes the `geom_sf` function demonstrated below.  You may need to install the development version to run this code.
-
-```{r with-ggplot-geom_sf}
-library(viridis)
-#devtools::install_github("tidyverse/ggplot2")
-library(ggplot2) #-- version 2.2.1.90000
-
-contiguous_states %>% 
-  ggplot(aes(fill = wages, color = wages)) +
-  geom_sf() +
-  coord_sf(crs = 5070) +
-  scale_fill_viridis(option = "viridis", direction = -1) + 
-  scale_color_viridis(option = "viridis", direction = -1)
-
-
-```
-
-
-
-```{r make_wages_map}
-appended_population_and_states_shapefile %>% 
-   ggplot(aes(fill = estimate, color = estimate)) +
-  geom_sf() +
-  coord_sf(crs = 5070) +
-  scale_fill_viridis(option = "viridis", direction = -1) + 
-  scale_color_viridis(option = "viridis", direction = -1)
 ```
 
 

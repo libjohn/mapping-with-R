@@ -355,7 +355,10 @@ div.tocify {
 <span class="kw">library</span>(tmaptools) 
 <span class="kw">library</span>(tigris)          <span class="co"># Get Census Geography Poloygons</span>
 <span class="kw">library</span>(sf)
-<span class="kw">library</span>(tidycensus)</code></pre></div>
+<span class="kw">library</span>(tidycensus)
+<span class="kw">library</span>(viridis)        <span class="co"># Loading required package: viridisLite</span>
+<span class="kw">library</span>(ggplot2)        <span class="co">#-- version 2.2.1.90000</span>
+              <span class="co">#devtools::install_github(&quot;tidyverse/ggplot2&quot;)</span></code></pre></div>
 <div id="shapefiles-as-sf" class="section level2">
 <h2>Shapefiles as sf</h2>
 <p>Using the <code>tigris</code> package get Census Tiger shapefiles for census geographies. Tigris will return the shapefile in the <code>sf</code>, or simple features, format.</p>
@@ -531,36 +534,13 @@ us_pop &lt;-<span class="st"> </span>us_pop <span class="op">%&gt;%</span><span 
 <span class="st">  </span><span class="kw">filter</span>(NAME <span class="op">!=</span><span class="st"> &quot;Hawaii&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(NAME <span class="op">!=</span><span class="st"> &quot;Puerto Rico&quot;</span>)</code></pre></div>
 </div>
-<div id="append-data-1" class="section level3">
-<h3>Append Data</h3>
+<div id="append-census-data" class="section level3">
+<h3>Append Census Data</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">appended_population_and_states_shapefile &lt;-<span class="st"> </span><span class="kw">append_data</span>(contiguous_states, us_pop, 
                                  <span class="dt">key.shp =</span> <span class="st">&quot;GEOID&quot;</span>,
                                  <span class="dt">key.data =</span> <span class="st">&quot;GEOID&quot;</span>)</code></pre></div>
 <pre><code>## Keys match perfectly.</code></pre>
 </div>
-</div>
-<div id="ggplot2-with-viridis" class="section level2">
-<h2>ggplot2 with viridis</h2>
-<p>In this section we introduce making shapefiles with ggplot2. ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. As of this writing, there is a development version of ggplot2 that includes the <code>geom_sf</code> function demonstrated below. You may need to install the development version to run this code.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(viridis)</code></pre></div>
-<pre><code>## Loading required package: viridisLite</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#devtools::install_github(&quot;tidyverse/ggplot2&quot;)</span>
-<span class="kw">library</span>(ggplot2) <span class="co">#-- version 2.2.1.90000</span>
-
-contiguous_states <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> wages, <span class="dt">color =</span> wages)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">5070</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
-<p><img src="038_facets_wrap_thematic_mapping_files/figure-html/with-ggplot-geom_sf-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">appended_population_and_states_shapefile <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">   </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> estimate, <span class="dt">color =</span> estimate)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">5070</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
-<p><img src="038_facets_wrap_thematic_mapping_files/figure-html/make_wages_map-1.png" width="672" /></p>
 </div>
 <div id="make-tall" class="section level2">
 <h2>Make Tall</h2>
