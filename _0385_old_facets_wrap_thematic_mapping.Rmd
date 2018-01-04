@@ -24,6 +24,24 @@ us_geo <- tigris::states(class = "sf")
 # us_geo_spdf <- states()  # spdf uses @data slots -- old school
 ```
 
+## Data Structure 
+
+The advantage of importing data as simple features (i.e. sf) over sp is that sp uses the old school @data slots method.  If you're used to this it can be a highly functional data structure.  But if you're inclined toward the tidyverse method, you'll see your data in a more familiar and easy-to-view format, i.e. a data frame rather than a slot.  Below are two methods of viewing the downloaded shapefiles.
+
+```{r data-structure}
+class(us_geo)
+glimpse(us_geo)
+```
+
+## sf as data frame
+
+And as noted, here's the data frame view.
+
+
+```{r see-tibble}
+as_tibble(us_geo)
+```
+
 ## Get BLS data
 
 I've already downloaded and stored some data from the Bureau of Labor Statistics.  Thoses data are stored in an excel file in the `data` directory of the repository:  `data/OES_Report.xlsx`.  **The goal is to attach this data to the previously downloaded shapefiles.**  
@@ -34,7 +52,7 @@ https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographic
 
 -  One occupation for multiple geographical areas
 
-    - Mental Health and Substance Abuse Social Workers  (Also, Secondary School Teacher, Waiter, Legislator, and Paralegals)
+    - Mental Health and Substance Abuse Social Workers
     
         - State
         
@@ -55,14 +73,12 @@ Salary4Helpers <-
              col_types = c("text", "numeric"), 
              skip = 4)
 
-# Salary4Helpers
+Salary4Helpers
 ```
 
-### Load more BLS Wages 
+### Get Other Occupations
 
-read in the XLXS files for the other occupations:  Secondary School Teacher, Waiter, Legislator, and Paralegals
-
-```{r other_occupations_data, message=FALSE, warning=FALSE}
+```{r other_occupations_data}
 legislators <- 
   read_excel("data/OES_legislator.xlsx",
              col_types = c("text", "numeric"), 
@@ -83,11 +99,16 @@ waiters <-
              col_types = c("text", "numeric"), 
              skip = 4)
 
+legislators
+paralegals
+teachers
+waiters
+
 ```
 
         
 
-### Wrangle the data
+## Wrangle the data
 
 Before we join the BLS data to the shapefile we need to transform the structure of the downloaded BLS data
 
@@ -134,11 +155,15 @@ waiters <- waiters %>%
   filter(wages != "NA_character_") %>% 
   select(State, wages)
 
+
+paralegals
+waiters
+
 ```
 
 
 
-### Append data
+## Append data
 
 Using the `append_data()` function of the `tmaptools` package, append BLS data to the previously loaded shape object
 
@@ -146,29 +171,40 @@ Using the `append_data()` function of the `tmaptools` package, append BLS data t
 paralegals <- append_data(us_geo, paralegals, 
                                  key.shp = "NAME",
                                  key.data = "State")
+as_tibble(paralegals)
 
 waiters <- append_data(us_geo, waiters, 
                                  key.shp = "NAME",
                                  key.data = "State")
+as_tibble(waiters)
+
 
 teachers <- append_data(us_geo, teachers, 
                                  key.shp = "NAME",
                                  key.data = "State")
+as_tibble(teachers)
 
 legislators <- append_data(us_geo, legislators, 
                                  key.shp = "NAME",
                                  key.data = "State")
+as_tibble(legislators)
+
+# teachers
+# legislators
+#paralegals
+# waiters
 ```
 
 ```{r append_bls_data}
 HelperShapeObject <- append_data(us_geo, BlsWage_ToJoin, 
                                  key.shp = "NAME",
                                  key.data = "State")
+as_tibble(HelperShapeObject)
 ```
 
 
 
-### Contiguous 48 states
+## Contiguous 48 states
 
 Filter to only the contiguous 48 states + D.C.
 
@@ -198,6 +234,14 @@ legislators <- legislators %>%
   filter(REGION != 9) %>% 
   filter(STUSPS != "AK") %>% 
   filter(STUSPS != "HI")
+
+# teachers
+# legislators
+  
+
+#contiguous_states
+#paralegals
+#waiters
 ```
 
 
@@ -210,6 +254,8 @@ B06011_001E = Median income in the past 12 months --!!Total:
 
 ```{r identify_ACS_variables}
 variables_census <- load_variables(2015, "acs5", cache = TRUE)
+
+#View(variables_census)
 ```
 
 ### Get Median Income
@@ -225,6 +271,8 @@ us_pop <- us_pop %>%
   filter(NAME != "Alaska") %>% 
   filter(NAME != "Hawaii") %>% 
   filter(NAME != "Puerto Rico")
+
+us_pop
 ```
 
 ### Append Data
@@ -233,6 +281,8 @@ us_pop <- us_pop %>%
 appended_population_and_states_shapefile <- append_data(contiguous_states, us_pop, 
                                  key.shp = "GEOID",
                                  key.data = "GEOID")
+
+as_tibble(appended_population_and_states_shapefile)
 ```
 
 
@@ -267,26 +317,32 @@ appended_population_and_states_shapefile %>%
 ```
 
 
-## Make Tall
-
-Wrangle the data into a tall format and single data frame
+## Tall Bind_rows
 
 ```{r make_tall}
+# glimpse(contiguous_states)
 contiguous_states_slim <- contiguous_states %>% 
   select(GEOID, NAME, wages, geometry) %>% 
   mutate(category = "Substance Abuse Soc.Wrk") %>% 
   rename(variable = wages)
+
+glimpse(contiguous_states_slim)
 ```
 
 ```{r wrangle_pop}
+# glimpse(appended_population_and_states_shapefile)
 population_states_slim <- appended_population_and_states_shapefile %>% 
   select(GEOID, NAME, estimate, geometry) %>% 
   mutate(category = "Median Income") %>% 
   rename(variable = estimate)
+
+glimpse(population_states_slim)
 ```
 
 
 ```{r wrangle_other_bls}
+#paralegals
+
 paralegals <- paralegals %>% 
   select(GEOID, NAME, wages, geometry) %>% 
   mutate(category = "Paralegals") %>% 
@@ -294,25 +350,32 @@ paralegals <- paralegals %>%
 
 waiters <- waiters %>% 
   select(GEOID, NAME, wages, geometry) %>% 
-  mutate(category = "Waiters") %>% 
+  mutate(category = "waiters") %>% 
   rename(variable = wages)
 
 teachers <- teachers %>% 
   select(GEOID, NAME, wages, geometry) %>% 
-  mutate(category = "Teachers") %>% 
+  mutate(category = "teachers") %>% 
   rename(variable = wages)
 
 legislators <- legislators %>% 
   select(GEOID, NAME, wages, geometry) %>% 
-  mutate(category = "Legislators") %>% 
+  mutate(category = "legislators") %>% 
   rename(variable = wages)
+
+# teachers
+# legislators
 ```
 
-### Bind Rows 
 
-To combine all the smaller data frames into one tall format, bind the rows.
 
-base::`rbind` works.  `dplyr::bind_rows` did not work.
+```{r take_a_look}
+as_tibble(paralegals)
+as_tibble(waiters)
+as_tibble(teachers)
+as_tibble(legislators)
+```
+
 
 ```{r bind_tall}
 tall <- rbind(contiguous_states_slim,
@@ -321,27 +384,16 @@ tall <- rbind(contiguous_states_slim,
               waiters,
               teachers,
               legislators)
+
+# tall <- tall %>% 
+#  mutate(category = as_factor(category))
+
+class(tall)
+glimpse(tall)
+as_tibble(tall)
 ```
-
-### More Munging
-
-Make the category variable a categorical factor with levels.  This will improve the order of the facets when displayed.
-
-```{r}
-display_levels <- c("Median Income", "Legislators", 
-                    "Paralegals", "Substance Abuse Soc.Wrk", 
-                    "Teachers", "Waiters")
-
-tall <- tall %>% 
-  mutate(category = factor(category, display_levels)) %>% 
-  rename(Wages = variable)
-```
-
-
 
 ## Facet_grid
-
-`facet_wrap` works better than `facet_grid` because there is more control over the display of the rows and columns.  The first example, below, does not run.  I keep it only to document something that could work.
 
 ```{}
 tall %>% 
@@ -353,9 +405,16 @@ tall %>%
   facet_grid(. ~ category)
 ```
 
-### Display Map
 
 ```{r facet_wrap_it_up}
+
+#glimpse(tall)
+
+tall <- tall %>% 
+  rename(Wages = variable) # %>% 
+#  filter(category != "teachers") %>% 
+#  filter(category != "legislators")
+
 tall %>% 
   ggplot(aes(fill = Wages, color = Wages)) +
   geom_sf() +
@@ -363,9 +422,10 @@ tall %>%
   scale_fill_viridis(option = "viridis", direction = -1) + 
   scale_color_viridis(option = "viridis", direction = -1) +
   facet_wrap(~ category, nrow = 3, ncol = 2)
+  
+# as_tibble(tall)
 ```
 
-### Save Map
 
 ```{r save_it}
 ggsave("facet_map.png", width = 8, height = 8, units = "in")
