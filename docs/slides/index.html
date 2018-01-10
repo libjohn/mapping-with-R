@@ -27,7 +27,7 @@ example of a test slide, not displayed.  Next.
 ---
 class: middle, center
 
-Part 4 of the 
+Part of the 
 ### [Rfun](http://rfun.library.duke.edu) Learning Series of Workshops
 http://rfun.library.duke.edu
 
@@ -79,23 +79,20 @@ use 'p' to toggle the presenter mode or '?' or 'h' to toggle the help / key-shor
 
 
 ---
-## Thoughts
+## Why Make Maps with R
 
-- Multiple ways of accomplishing the same result
-- Focus on Reproducibility / Automation
-- 
+-	Mapping is not necessarily GIS Analysis
 
+-	Know R and not as familiar with 
+    -	ArcGIS
+    -	QGIS
+    -	Python
+  		
 ---
-## Best Practices
-
-Drew fill in here
-
-
----
-## Thoughts 2
+## Library Packages used in this Workshop
 
 - `leaflet` -- best for interactivity
-- `tidycensus` - thematic mapping, Census geography (shapefiles), Census data
+- `tidycensus` -- thematic mapping, Census geography (shapefiles), Census data
 - `ggplot2` -- great for facet maps
 - Thematic Mapping
     - `tmap`
@@ -103,15 +100,27 @@ Drew fill in here
     - `ggplot2`
         - to use `geom_sf()` will need to install ggplot2 development version
         - `devtools::install_github("tidyverse/ggplot2")`
+    - `viridis` -- diverginig colors, sequential, bucketing colors
 - `sf` vs. `sp`
     - sf for simple features.  Modern and current
     - sp for spatial polygons.  The legacy approach
-- Not Discussing in Detail
-    - `rgdal` (some functionality incorporated into sf)
-    - `raster`
-    - `ggmap`
 
+See Also [System Info](http://rfun.library.duke.edu/map/software_prereqs.html#packages)
 
+---
+## Other GIS and mapping packages 
+
+Packages of interst but not part of this workshop include...
+
+- `rgdal` 
+
+- `raster`
+
+- `ggmap`
+
+- `maptools`
+
+- `argeos`
 
 ---
 class: green, middle, center
@@ -335,37 +344,11 @@ Integrate your reproducible workflow using *Literate Coding* practices in *R* th
 
 This is where **Open** becomes **Awesome** 
 
----
-## Packages
+------
+## Design Practices
 
-In order of appearance
+Drew fill in here
 
-.pull-left[- tidyverse
-
-- leaflet
-
-- tidycensus
-
-- tigris
-
-- sf
-
-- stringr
-
-- readxl]
-
-.pull-right[- tmap
-
-- tmaptools
-
-- viridis
-
-- devtools
-
-- ggplot2 (latest version on github as of 9/27/2017)
-
-- htmlwidgets
-]
 
 ---
 ## Thank You For Attending
