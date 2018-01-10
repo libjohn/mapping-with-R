@@ -527,9 +527,9 @@ legislators &lt;-<span class="st"> </span>legislators <span class="op">%&gt;%</s
 <span class="st">  </span><span class="kw">get_acs</span>(<span class="dt">geography =</span> <span class="st">&quot;state&quot;</span>,
           <span class="dt">variables =</span> <span class="st">&quot;B06011_001E&quot;</span>,
           <span class="co"># state = &quot;NC&quot;,</span>
-          <span class="dt">geometry =</span> <span class="ot">FALSE</span>)
-
-us_pop &lt;-<span class="st"> </span>us_pop <span class="op">%&gt;%</span><span class="st"> </span>
+          <span class="dt">geometry =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<pre><code>## Please note: `get_acs()` now defaults to a year or endyear of 2016.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">us_pop &lt;-<span class="st"> </span>us_pop <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(NAME <span class="op">!=</span><span class="st"> &quot;Alaska&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(NAME <span class="op">!=</span><span class="st"> &quot;Hawaii&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(NAME <span class="op">!=</span><span class="st"> &quot;Puerto Rico&quot;</span>)</code></pre></div>

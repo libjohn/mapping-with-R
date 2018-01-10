@@ -352,13 +352,18 @@ Drew fill in here
 .pull-left[
 ### I am ...
 
-- John Little
+- **John Little**
 - https://johnlittle.info
 - https://github.com/libjohn
 
 #### Schedule Me
 
 - [http:&#47;&#47;v.gd&#47;littleconsult](http://duke.libcal.com/appointment/2695)
+
+### With ...
+
+- **Drew Keener**
+- [library.duke.edu/data/../staff/](https://library.duke.edu/data/about/staff/)
 ]
 
 .pull-right[
