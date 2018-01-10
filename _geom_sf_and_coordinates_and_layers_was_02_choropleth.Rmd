@@ -90,7 +90,6 @@ ggmap(nc_via_ggmap)
 ```{r ggplot_sf}
 
 nc_pop %>%
-  #st_transform(crs = "+init=epsg:3632") %>%
   ggplot(aes(fill = estimate, color = estimate)) +
   #geom_sf(show.legend = TRUE) +
   geom_sf() +
