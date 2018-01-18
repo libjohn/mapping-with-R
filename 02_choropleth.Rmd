@@ -24,16 +24,22 @@ library(stringr)
 
 
 ## Create a Simple Features dataframe using TidyCensus
-```{r load-data, message=FALSE, warning=FALSE}
+```{r load-data, message=FALSE, warning=FALSE, include=FALSE}
 nc_pop <- 
   get_acs(geography = "county",
           variables = "B01003_001",
           state = "NC",
           geometry = TRUE)
 
-nc_pop
+#nc_pop
 ```
-
+```{}
+nc_pop <- 
+  get_acs(geography = "county",
+          variables = "B01003_001",
+          state = "NC",
+          geometry = TRUE)
+```
 
 
 
