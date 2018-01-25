@@ -62,7 +62,7 @@ use 'p' to toggle the presenter mode or '?' or 'h' to toggle the help / key-shor
 ---
 ## Prequisites
 
-- 023 Lab Workstions  (All packages and versions already installed)
+- 023 Lab Workstations  (All packages and versions already installed)
 
 - Intro to R:  Tidyverse, R Notebooks, R Markdown, RStudio
 
@@ -96,7 +96,7 @@ use 'p' to toggle the presenter mode or '?' or 'h' to toggle the help / key-shor
     - `ggplot2`
         - to use `geom_sf()` will need to install ggplot2 development version
         - `devtools::install_github("tidyverse/ggplot2")`
-    - `viridis` -- diverginig colors, sequential, bucketing colors
+    - `viridis` -- diverging colors, sequential, bucketing colors
 - `sf` vs. `sp`
     - sf for simple features.  Modern and current
     - sp for spatial polygons.  The legacy approach
@@ -106,7 +106,7 @@ See Also [System Info](http://rfun.library.duke.edu/map/software_prereqs.html#pa
 ---
 ## Other GIS and mapping packages 
 
-Packages of interst but not part of this workshop include...
+Packages of interest but not part of this workshop include...
 
 - `rgdal` 
 
