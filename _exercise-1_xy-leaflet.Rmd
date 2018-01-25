@@ -7,15 +7,6 @@ title: "Exercise 1: Georeferencing"
 
 ```
 
-## Set API key
-
-Insert your own API Key.  You may request a free key from the Census API tool https://api.census.gov/data/key_signup.html
-
-```{r}
-census_api_key("long-string-of-numbers-from-census-api-key-generator")
-```
-
-
 ## Load Data
 
 The data is a CSV file named "mockaroo_latlon.csv" located in the data directory.  
