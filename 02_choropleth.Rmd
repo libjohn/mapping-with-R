@@ -4,7 +4,7 @@ output: html_document
 ---
 
 
-Goal:  Make a choropleth with census data
+Goal:  Make a choropleth with census data.
 
 - define choropleth
 - define polygons
@@ -22,8 +22,24 @@ library(sf)
 library(stringr)
 ```
 
+## Census API Key
 
-## Create a Simple Features dataframe using TidyCensus
+Use the tidycensus package to gather Census data and join that data with Census geography (i.e. geometry, i.e. shapefiles, i.e. polygons).  First, you will need to get a [free Census API key](https://api.census.gov/data/key_signup.html).  Kyle Walker's [*Basic usage of tidycensus*](https://walkerke.github.io/tidycensus/articles/basic-usage.html) documents this process. 
+
+```{}
+census_api_key("YOUR API KEY GOES HERE")
+```
+
+### .Renviron File
+
+See also Kyle's [more detailed documentation](https://walkerke.github.io/tidycensus/reference/census_api_key.html) for putting the key into your environment file.  But skip that for the moment.
+
+
+## TidyCensus -- Get Data
+
+Create a Simple Features dataframe using `tidycensus::get_acs()`
+
+The Census population variable we'll use is "B01003_001".  More information about identifying Census variables is available at the [bottom of this page](#variables).
 ```{r load-data, message=FALSE, warning=FALSE, include=FALSE}
 nc_pop <- 
   get_acs(geography = "county",
@@ -45,14 +61,14 @@ nc_pop <-
 
 ## Make Choropleth in Leaflet
 
+
 Generate a color palette for the colors and legend
 
 ```{r colorpalette}
 MapPalette <- colorQuantile(palette = "viridis", domain = nc_pop$estimate, n = 10)
 ```
 
-
-Make choropleth by filling county polygons (census geography) with correlated value (population variable *B01003_001*)
+Make choropleth by filling county polygons (census geography) with correlated value (population variable *B01003_001*).  
 
 `st_transform()` - converts coordinate system of simple features
 
@@ -75,7 +91,22 @@ nc_pop %>%
 
 ## Add another layer
 
-Add locations of the the 2012 Starbucks stores.  The Starbucks locations were generated and plotted in the previous exercise.  Re-running exercise 1 will ensure the starbucks$NC object is in your R environment.
+Now we'll geolocate the Starbucks stores and add those locations as a layer over our choropleth.  The Starbucks locations were generated and plotted in the previous exercise.  Here we regenerate the StarbuckNC object.
+
+### Load Lat/Long Data
+
+```{r load-data_02, message=FALSE, warning=FALSE}
+starbucks <- read_csv("data/All_Starbucks_Locations_in_the_US_-_Map.csv")
+```
+
+
+Subset Starbucks Data to North Carolina
+```{r filter-dataset}
+starbucksNC <- starbucks  %>% 
+  filter(State == "NC")
+```
+
+Generate the map with multiple layers.
 
 ```{r add_layer}
 nc_pop %>%
@@ -122,7 +153,7 @@ The Census is a very large collection of data.  Many casual users of Census data
 
 ## Shapefiles
 
-In the [*Basic Thematic Mapping* section](031_thematic_mapping.html) of the [Simple Features module](030_thematic_sf.html) we will use the `tigris` package to gather State level, Census geography shapefiles.  Shapefiles are an important GIS data standard.  If you need shapefiles for other geographies, please consult our [*GIS Data: Starting Points* guide](https://guides.library.duke.edu/gisdata) --  a very handy collection of GIS data sources, much of which will be in the shapefiles format.  
+In the [*tmap* section](031_thematic_mapping.html) of the [Simple Features module](030_thematic_sf.html) we will use the `tigris` package to gather State level, Census geography shapefiles.  Shapefiles are an important GIS data standard.  There are many other standards, although shapefiles have a very broad user base.  If you need shapefiles for other geographies, please consult our [*GIS Data: Starting Points* guide](https://guides.library.duke.edu/gisdata) --  a very handy collection of GIS data sources, much of which will be in the shapefiles format.  
 
 ## End Notes
 
