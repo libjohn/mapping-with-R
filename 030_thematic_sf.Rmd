@@ -6,28 +6,29 @@ output: html_document
 
 ## Sections
 
-1. [Basic thematic mapping](031_thematic_mapping.html): creating choropleth's with `tmap`
+1. [Thematic Mapping with tmap](031_thematic_mapping.html): creating choropleth with the `tmap` package
 
-1. [Interactive thematic mapping](033_thematic_leaflet_example.html) with leaflet
+1. [Interactive thematic mapping](033_thematic_leaflet_example.html) with leaflet.  This is largely a repeat of the Choropleth section, but I will focus on some other interactive and stylistics features that I had not discussed before.
 
 1. [Sharing ouput files](036_thematic_mapping-outputs-fullwebpage.html): saving maps.
 
-1. [Faceted Thematic Maps](039_facet_example.html)
+1. [Faceted Thematic Maps](039_facet_example.html) with **ggplot2::geom_sf**
 
 ## Simple Features
 
 The initial modules of *Mapping in R* introduce plotting latitude and longitude with an interactive map (`leaflet`), and generating a thematic map using `tidycensus.`  The focus of this module is to introduce other customized thematic map packages: `tmap`, `sf`, `ggplot2` (using ggplot::geom_sf).  
 
-**The backbone of this type of mapping data manipulation is the `sf` package** -- sf for simple features -- which is a modern tidyverse compatible package for encoding spatial vector data. The advantage of manipulating data as simple features (i.e. sf) over `sp` is that the `sp` package ("spatial polygons") uses the old school @data slots method.  If you are already used to this approach, `sp` is a highly functional data structure.  Despite the legacy of `sp`, R modernists and tidyverse fans may be inclined toward the `sf` approach which is more tidyverse compatible.  In other words, among the advantages of `sf`, you can see your data in a more familiar and easy-to-view data frame format, rather than the @data slot approach.
+**The backbone of this type of mapping data manipulation is the `sf` package** -- sf for simple features -- which is a modern tidyverse compatible package for encoding spatial vector data. One advantage of manipulating data as simple features (i.e. sf) over `sp` is `sf` can easily be viewed as in a rectangular grid (i.e. data frame, or tibble.) The `sp` package ("spatial polygons") uses the old school @data slots method.  If you are already used to this approach, that fine.  `sp` is a highly functional data structure but it was developed about 15 years ago.  `sf` is newer and the successcor to sp.  In short, `sf` is tidyverse compatible.  In other words, among the advantages of `sf`, you can see your data in a more familiar and easy-to-view data frame format, rather than the @data slot approach.  
 
 > The `sf` simple features package affords the R coder an easy and familiar method of **storing data** vectors and **shapefile** polygons in a **tidy data frame**.
 
-In the *basic thematic* section I will introduce the `tmap` package first.  Using the `tmap` package you will learn about an easy-to-use method for building spatial distributions on geographic maps.  These maps are typically `.png` image files.  (.png files are easy to produce and share.)  In this section we'll also use the `tigris` package -- to gather Census shapefiles -- and store that object as an `sf` object.  Later we will join that object in a data frame.  
+In this *Thematic Mapping with Simple Features* section I will introduce the `tmap` package first.  Using the `tmap` package you will learn an easy-to-use package for building spatial distributions on geographic maps.  These maps are typically `.png` image files.  (.png files are easy to produce and share.)  In this section we'll also use the `tigris` package -- to gather Census shapefiles -- and store thos shape objects as in the Simple Features data structure.  (In the [*Chropleth* module](02_choropleth.html) we used `tidycensus` to gather census Geography shape objects, as well as to gather census data variables.)  `tigris` simply gathers the shapefile polygons.  Later we will join the polygon object to a data frame using `tmaptools`.  
 
 > You can also store your data in a **slot** using the `sp` package.
 
-In the *interactive* section you will make another interactive choropleth using `leaflet`.  This second section is largely a repeat of the earlier choropleth module. The level of interactivity is sparse, but functional, and moves beyond traditional 2D map-on-a-page images. Just know that this zoom-in/zoom-out interactivity feature is possible **because** we draw the map as a leaflet map.  By completing this module after the earlier the plotting module, you now have the skills to add additional interactive layers (e.g. pop-up windows).  But, irrespective of layers, this section is a good set-up for the third section which covers saving maps as files. 
-Section three introduces techniques for saving these maps as files that can then be shared and distributed as interactive maps, either on the web, as an html file, or as [shapefile.](next.html#shapefiles)
+In the *interactive thematic mapping* section you will make another interactive choropleth using `leaflet`.  This second section is largely a repeat of the earlier choropleth module. The level of interactivity is sparse, but functional, and moves beyond traditional 2D map-on-a-page images. Just know that this zoom-in/zoom-out interactivity feature is possible because we use `leaflet` to draw the map.  You can add many interactive features, e.g. pop-up windows.  This section is a good set-up for the third section which covers saving maps as files.  
+
+Section three, [Sharing ouput files](036_thematic_mapping-outputs-fullwebpage.html), introduces techniques for saving maps as files that can be shared and distributed as interactive maps (as opposed to 2D static images or printed files).  In this case, you can share either on the web, as an HTML file, or as [shapefile.](next.html#shapefiles)
 
 > `sf` v `sp`?  Leave the debate to others.  I like the tidyverse which works well with `sf`.  `sf` enables tremendous functionality and a familiar data science landscape.  
 
