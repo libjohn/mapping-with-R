@@ -18,7 +18,12 @@ library(sf)
 
 Using the `tigris` package get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.
 
-```{r get-data, message=FALSE, warning=FALSE}
+```{}
+us_geo <- tigris::states(class = "sf")
+# us_geo_spdf <- states()  # spdf uses @data slots -- old school
+```
+
+```{r get-data, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 us_geo <- tigris::states(class = "sf")
 # us_geo_spdf <- states()  # spdf uses @data slots -- old school
 ```
@@ -34,7 +39,7 @@ glimpse(us_geo)
 
 ## sf as data frame
 
-And as noted, here's the data frame view.
+And as noted, here's the data frame view.  Notice the geometry (polygon shape) in the far-right column of the data frame.
 
 
 ```{r see-tibble}
