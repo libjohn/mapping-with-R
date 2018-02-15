@@ -38,6 +38,6 @@ All code and data for this website and workshop are shareable through the reposi
 
 
 ```{r session-info}
-sessionInfo()
+devtools::session_info()
 ```
 
