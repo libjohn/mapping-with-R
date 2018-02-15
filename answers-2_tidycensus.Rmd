@@ -17,7 +17,7 @@ library(stringr)
 Insert your own API Key.  You may request a free key from the Census API tool https://api.census.gov/data/key_signup.html
 
 ```{r}
-census_api_key("did you enter your API key here")
+#census_api_key("did you enter your API key here?")
 ```
 
 ## Choose a census variable

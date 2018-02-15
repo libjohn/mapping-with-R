@@ -1,36 +1,38 @@
-name: "Mapping"
+name: Mapping
 output_dir: docs
 exclude:
-  - README.md
-  - license.md
+- README.md
+- license.md
 navbar:
-  title: "Mapping in R"
+  title: Mapping in R
   left:
-    - text: "Home"
-      href: index.html
-    - text: "Plot Coordinates"
-      href: 01_georeference.html
-    - text: "Choropleth"
-      href: 02_choropleth.html
-    - text: "Simple Features"
-      href: 030_thematic_sf.html
-    - text: "Exercises"
-      href: exercises.html
+  - text: Home
+    href: index.html
+  - text: Plot Coordinates
+    href: 01_georeference.html
+  - text: Choropleth
+    href: 02_choropleth.html
+  - text: Thematic Mapping
+    href: 030_thematic_sf.html
+  - text: Exercises
+    href: exercises.html
   right:
-    - icon: fa-github
-#    - text: "GitHub"
-      href: https://github.com/libjohn/mapping-with-R         
+  - icon: fa-github
+    href: https://github.com/libjohn/mapping-with-R
 output:
   html_document:
     theme: flatly
     highlight: tango
     include:
       after_body: libs-local/footer.html
-    toc: true
+    toc: yes
     toc_depth: 3
     toc_float:
-      collapsed: false
-    css: 
-      - libs-local/duke.css
-      - libs-local/cc-fonts.css
+      collapsed: no
+    css:
+    - libs-local/duke.css
+    - libs-local/cc-fonts.css
     df_print: paged
+    lib_dir: site_libs
+    self_contained: no
+
