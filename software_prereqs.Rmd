@@ -14,7 +14,18 @@ We will teach in our training lab (023 Bostock) unless otherwise stated in the r
     
 - **RStudio**: <a href="https://www.rstudio.com/products/rstudio/download/#download" target="_blank">https://www.rstudio.com/products/rstudio/download/#download</a>.  Technically, you can do all the work without RStudio.  However, the code was composed, run, and tested in RStudio. (I can verify this configuration.  Others may work. YMMV.)
 
-- **Pacakages**:  The packages used for this workshop are listed in the session info below, or in the code at the top of each module or section.
+## Pacakages
+The packages used for this workshop and website are listed in the Session Info section below.  **However**, the primary mapping packages include:
+
+    - leaflet
+    - tidycensus
+    - sf
+    - tmap
+    - tmaptools
+    - tigris
+    - ggplot2 (with geom_sf() function.  i.e. development version of ggplot2)
+    - viridis
+    
 
 
 
@@ -32,9 +43,9 @@ You can find links to previous recordings of this workshop, along with links to 
 
 All code and data for this website and workshop are shareable through the repository under the [CC-By-NC license](license.html).
 
-## Packages
+## Session Info
 
-- Listed below are the **libraries (packages) and session info** used to execute the code in the workshop and create this documentation 
+Listed below are the library **(packages) and session info** used to execute the code in the workshop and create this documentation 
 
 
 ```{r session-info}
