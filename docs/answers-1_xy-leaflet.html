@@ -224,10 +224,34 @@ $(document).ready(function () {
   <a href="01_georeference.html">Plot Coordinates</a>
 </li>
 <li>
-  <a href="02_choropleth.html">Choropleth</a>
+  <a href="02_choropleth.html">tidycensus</a>
 </li>
-<li>
-  <a href="030_thematic_sf.html">Thematic Mapping</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Thematic Mapping
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="030_thematic_sf.html">Overview</a>
+    </li>
+    <li>
+      <a href="031_thematic_mapping.html">tmap</a>
+    </li>
+    <li>
+      <a href="031_thematic_mapping.html#ggplot2_with_viridis">ggplot2 &amp; geom_sf</a>
+    </li>
+    <li>
+      <a href="039_facet_example.html">ggplot2 &amp; faceted mapping</a>
+    </li>
+    <li>
+      <a href="033_thematic_leaflet_example.html">Interactive</a>
+    </li>
+    <li>
+      <a href="036_thematic_mapping-outputs-fullwebpage.html">Saving / Sharing</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="exercises.html">Exercises</a>
@@ -267,8 +291,8 @@ $(document).ready(function () {
 <span class="st">  </span><span class="kw">addMarkers</span>(<span class="dt">lat =</span> <span class="op">~</span>Latitude, 
              <span class="dt">lng =</span> <span class="op">~</span>Longitude, 
              <span class="dt">popup =</span> xy_locations<span class="op">$</span>Company)</code></pre></div>
-<div id="htmlwidget-5ad19c33a36a8dd8f6e4" style="width:100%;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5ad19c33a36a8dd8f6e4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[40.2487413,-7.9110809,9.49858,-7.0320658,-17.0490108,21.8693003,53.3323703,31.394935,30.274084,14.1313261],[72.1297653,111.4253892,50.8105261,108.4365067,-41.5612423,106.7691712,-6.2152673,92.835795,120.15507,122.8277624],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Ailane","Thoughtbeat","Lazz","Zoomdog","Minyx","Devpulse","Meembee","Quamba","Realcube","Fatz"],null,null,null,null,null,null]}],"limits":{"lat":[-17.0490108,53.3323703],"lng":[-41.5612423,122.8277624]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-bab1aaf402b808bd0562" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bab1aaf402b808bd0562">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[40.2487413,-7.9110809,9.49858,-7.0320658,-17.0490108,21.8693003,53.3323703,31.394935,30.274084,14.1313261],[72.1297653,111.4253892,50.8105261,108.4365067,-41.5612423,106.7691712,-6.2152673,92.835795,120.15507,122.8277624],null,null,null,{"clickable":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Ailane","Thoughtbeat","Lazz","Zoomdog","Minyx","Devpulse","Meembee","Quamba","Realcube","Fatz"],null,null,null,null,null,null]}],"limits":{"lat":[-17.0490108,53.3323703],"lng":[-41.5612423,122.8277624]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 

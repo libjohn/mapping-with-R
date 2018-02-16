@@ -6,14 +6,26 @@ exclude:
 navbar:
   title: Mapping in R
   left:
-  - text: Home
+  - text: "Home"
     href: index.html
-  - text: Plot Coordinates
+  - text: "Plot Coordinates"
     href: 01_georeference.html
-  - text: Choropleth
+  - text: "tidycensus"
     href: 02_choropleth.html
-  - text: Thematic Mapping
-    href: 030_thematic_sf.html
+  - text: "Thematic Mapping"
+    menu:
+      - text: "Overview"
+        href: 030_thematic_sf.html
+      - text: "tmap"
+        href: 031_thematic_mapping.html
+      - text:  "ggplot2 & geom_sf"
+        href: 031_thematic_mapping.html#ggplot2_with_viridis
+      - text: "ggplot2 & faceted mapping"
+        href: 039_facet_example.html
+      - text: "Interactive"
+        href: 033_thematic_leaflet_example.html
+      - text: "Saving / Sharing"
+        href: 036_thematic_mapping-outputs-fullwebpage.html
   - text: Exercises
     href: exercises.html
   right:

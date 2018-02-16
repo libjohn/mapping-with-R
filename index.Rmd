@@ -7,7 +7,7 @@ output:
 
 ## Workshop Resource Page
 
-- [Prequisisites](software_prereqs.html)
+- [Prerequisites](software_prereqs.html)
     
 1. [Georeferencing](01_georeference.html):  Plotting XY latitude & longitude
 
