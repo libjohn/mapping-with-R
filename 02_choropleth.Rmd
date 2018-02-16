@@ -1,8 +1,7 @@
 ---
-title: "TidyCensus"
+title: "tidycensus"
 output: html_document
 ---
-
 
 Goal:  Make a choropleth with census data.
 
@@ -12,6 +11,9 @@ Goal:  Make a choropleth with census data.
 - Briefly Introduce ACS and decennial census 
 
     - census key 
+
+
+The [tidycensus](https://walkerke.github.io/tidycensus/index.html) package, developed by [Kyle Walker](https://walkerke.github.io/), is very **convenient and easy to use package for making choropleth maps** from United States Department of **Census data**, specifically from the Decennial and ACS Census reports.  This package makes it possible to gather census variables and conveniently join those variables with "Census Geography" (i.e. aka "shapefiles", or polygons.)  Visualization, or plotting, maps can be done with separate packages.  
 
 
 ```{r libraries, message=FALSE, warning=FALSE}
