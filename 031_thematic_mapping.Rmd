@@ -16,7 +16,7 @@ library(sf)
 
 ## Shapefiles as sf 
 
-Using the `tigris` package, get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.  (See also, [more information on Shaepfiles](02_choropleth.html#shapefiles).)
+Using the `tigris` package, get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.  (See also, [more information on Shapefiles](02_choropleth.html#shapefiles).)
 
 ```{}
 us_geo <- tigris::states(class = "sf")
@@ -48,9 +48,9 @@ as_tibble(us_geo)
 
 ## Get BLS data
 
-I've already downloaded and stored some data from the Bureau of Labor Statistics.  Thoses data are stored in an excel file in the `data` directory of the repository:  `data/OES_Report.xlsx`.  **The goal is to attach this data to the previously downloaded shapefiles.**  
+I've already downloaded and stored some data from the Bureau of Labor Statistics.  Those data are stored in an excel file in the `data` directory of the repository:  `data/OES_Report.xlsx`.  **The goal is to attach this data to the previously downloaded shapefiles.**  
 
-But you may be intersted in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.  
+But you may be interested in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.  
 
 https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographical%20areas
 
