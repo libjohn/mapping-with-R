@@ -12,6 +12,8 @@ This site is built with R Markdown's website feature.  [Read more about websites
     
 3. Copy /docs web to the serving location
 
+**UPDATE**:  I've just written this script using `library(fs)` that creates a link from  ~/blogdown/static/map  to the "docs" directory.  This may obviate the need to run step three continuously.  Not sure if I have to run that script (`_ZZ_move_HTML-docs_to_blog-dir.Rmd`) more than once (i.e. after every site "Build" operation.)
+
     - e.g. github repo served by Netlify
     - in this case:  rfun (blogdown-rfun2 on github)
     - I'm manually copying the /docs directory into the *static/git* directory in rfun - https://github.com/data-and-visualization/blogdown2-rfun

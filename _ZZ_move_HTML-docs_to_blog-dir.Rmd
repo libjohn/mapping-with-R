@@ -1,0 +1,56 @@
+---
+title: "Link Documentation to blogdown Static Directory"
+---
+
+This documentation should only have to be done once.  It creates a symbolic link from the Rfun website's static directory (blgodown's static directory) to the HTML documentation generated here by using RStudio's "Build website feature".
+
+```{r}
+library(fs)
+library(here)
+library(glue)
+```
+
+```{r}
+dir_ls()
+```
+
+```{r}
+#docstoo <- dir_create("docs2")
+#dir_copy("docs", here())
+
+here()
+
+#file_copy("docs", "docs2")
+
+#dir_copy("docs", "docs2")
+#dir_copy("docs", here("docs2"))
+
+#dir_delete("docs2")
+
+#here()
+
+#dir_copy(here("docs"), here("docs2"))
+
+up_1_dir <- ".."
+dir_blogdown_target <- "blogdown2-rfun" 
+dir_blogdown_static_target <- "static"
+dir_map_docs_target <- "map"
+
+target_dircopy_location <- glue(up_1_dir,
+                                dir_blogdown_target,
+                                dir_blogdown_static_target,
+                                dir_map_docs_target,
+                                .sep = "/")
+
+#target_dircopy_location
+here(target_dircopy_location)
+
+#dir_copy(here("docs"), here(target_dircopy_location))
+#file_move(here(target_dircopy_location, "docs"), 
+#          here(target_dircopy_location, "map"))
+
+link_create(here("docs"),
+            here(target_dircopy_location))
+
+```
+
