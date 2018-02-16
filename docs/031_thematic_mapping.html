@@ -357,7 +357,7 @@ div.tocify {
 <span class="kw">library</span>(sf)</code></pre></div>
 <div id="shapefiles-as-sf" class="section level2">
 <h2>Shapefiles as sf</h2>
-<p>Using the <code>tigris</code> package get Census Tiger shapefiles for census geographies. Tigris will return the shapefile in the <code>sf</code>, or simple features, format.</p>
+<p>Using the <code>tigris</code> package, get Census Tiger shapefiles for census geographies. Tigris will return the shapefile in the <code>sf</code>, or simple features, format. (See also, <a href="02_choropleth.html#shapefiles">more information on Shaepfiles</a>.)</p>
 <pre><code>us_geo &lt;- tigris::states(class = &quot;sf&quot;)
 # us_geo_spdf &lt;- states()  # spdf uses @data slots -- old school</code></pre>
 </div>
@@ -387,7 +387,7 @@ div.tocify {
 </div>
 <div id="sf-as-data-frame" class="section level2">
 <h2>sf as data frame</h2>
-<p>And as noted, here’s the data frame view.</p>
+<p>And as noted, here’s the data frame view. Notice the geometry (polygon shape) in the far-right column of the data frame.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(us_geo)</code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">

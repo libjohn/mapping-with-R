@@ -16,7 +16,7 @@ library(sf)
 
 ## Shapefiles as sf 
 
-Using the `tigris` package get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.
+Using the `tigris` package, get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.  (See also, [more information on Shaepfiles](02_choropleth.html#shapefiles).)
 
 ```{}
 us_geo <- tigris::states(class = "sf")
