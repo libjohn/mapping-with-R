@@ -30,7 +30,7 @@ us_geo <- tigris::states(class = "sf")
 
 ## Data Structure 
 
-The advantage of importing data as simple features (i.e. sf) over sp is that sp uses the old school @data slots method.  If you're used to this it can be a highly functional data structure.  But if you're inclined toward the tidyverse method, you'll see your data in a more familiar and easy-to-view format, i.e. a data frame rather than a slot.  Below are two methods of viewing the downloaded shapefiles.
+The advantage of managing your spatial data as "Simple Features" (i.e. sf) over `sp` is that `sf` data can easily be viewed and manipulated as a rectangular data frame, before visualizing.   `sp` is the predecessory to `sf`, but uses the old school @data slots method.  If you're used to this it can be a highly functional data structure.  But if you're inclined toward the tidyverse method, you'll see your data in a more familiar and easy-to-view format.  Below are two methods of viewing the stucture of the downloaded shapefiles.
 
 ```{r data-structure}
 class(us_geo)

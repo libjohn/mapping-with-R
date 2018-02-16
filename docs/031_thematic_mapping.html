@@ -363,7 +363,7 @@ div.tocify {
 </div>
 <div id="data-structure" class="section level2">
 <h2>Data Structure</h2>
-<p>The advantage of importing data as simple features (i.e. sf) over sp is that sp uses the old school <span class="citation">@data</span> slots method. If you’re used to this it can be a highly functional data structure. But if you’re inclined toward the tidyverse method, you’ll see your data in a more familiar and easy-to-view format, i.e. a data frame rather than a slot. Below are two methods of viewing the downloaded shapefiles.</p>
+<p>The advantage of managing your spatial data as “Simple Features” (i.e. sf) over <code>sp</code> is that <code>sf</code> data can easily be viewed and manipulated as a rectangular data frame, before visualizing. <code>sp</code> is the predecessory to <code>sf</code>, but uses the old school <span class="citation">@data</span> slots method. If you’re used to this it can be a highly functional data structure. But if you’re inclined toward the tidyverse method, you’ll see your data in a more familiar and easy-to-view format. Below are two methods of viewing the stucture of the downloaded shapefiles.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">class</span>(us_geo)</code></pre></div>
 <pre><code>## [1] &quot;sf&quot;         &quot;data.frame&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">glimpse</span>(us_geo)</code></pre></div>
@@ -397,8 +397,8 @@ div.tocify {
 </div>
 <div id="get-bls-data" class="section level2">
 <h2>Get BLS data</h2>
-<p>I’ve already downloaded and stored some data from the Bureau of Labor Statistics. Thoses data are stored in an excel file in the <code>data</code> directory of the repository: <code>data/OES_Report.xlsx</code>. <strong>The goal is to attach this data to the previously downloaded shapefiles.</strong></p>
-<p>But you may be intersted in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.</p>
+<p>I’ve already downloaded and stored some data from the Bureau of Labor Statistics. Those data are stored in an excel file in the <code>data</code> directory of the repository: <code>data/OES_Report.xlsx</code>. <strong>The goal is to attach this data to the previously downloaded shapefiles.</strong></p>
+<p>But you may be interested in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.</p>
 <p><a href="https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographical%20areas">https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographical%20areas</a></p>
 <ul>
 <li><p>One occupation for multiple geographical areas</p>
