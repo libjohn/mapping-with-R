@@ -312,8 +312,23 @@ div.tocify {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Home
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">Read ME - Overview</a>
+    </li>
+    <li>
+      <a href="next.html">Some Detail</a>
+    </li>
+    <li>
+      <a href="software_prereqs.html">Software Prequisites</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="01_georeference.html">Plot Coordinates</a>
@@ -407,7 +422,7 @@ div.tocify {
 ## $ AWATER   &lt;dbl&gt; 489902816, 31386038155, 6206693598, 18929176411, 6983...
 ## $ INTPTLAT &lt;chr&gt; &quot;+38.6472854&quot;, &quot;+28.4574302&quot;, &quot;+40.1028754&quot;, &quot;+46.315...
 ## $ INTPTLON &lt;chr&gt; &quot;-080.6183274&quot;, &quot;-082.4091478&quot;, &quot;-089.1526108&quot;, &quot;-094...
-## $ geometry &lt;sf_geometry [degree]&gt; MULTIPOLYGON (((-81.74725 3..., MULT...</code></pre>
+## $ geometry &lt;MULTIPOLYGON [Â°]&gt; MULTIPOLYGON (((-81.74725 3..., MULTIPO...</code></pre>
 </div>
 <div id="sf-as-data-frame" class="section level2">
 <h2>sf as data frame</h2>
@@ -530,7 +545,7 @@ Salary4Helpers</code></pre></div>
 <h2>ggplot2 with viridis</h2>
 <p>In this section we introduce making shapefiles with ggplot2. ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. As of this writing, there is a development version of ggplot2 that includes the <code>geom_sf</code> function demonstrated below. You may need to install the development version to run this code.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(viridis)</code></pre></div>
-<pre><code>## Warning: package &#39;viridis&#39; was built under R version 3.4.3</code></pre>
+<pre><code>## Warning: package &#39;viridis&#39; was built under R version 3.4.4</code></pre>
 <pre><code>## Loading required package: viridisLite</code></pre>
 <pre><code>## Warning: package &#39;viridisLite&#39; was built under R version 3.4.3</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#devtools::install_github(&quot;tidyverse/ggplot2&quot;)</span>

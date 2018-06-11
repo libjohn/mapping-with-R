@@ -7,7 +7,13 @@ navbar:
   title: Mapping in R
   left:
   - text: "Home"
-    href: index.html
+    menu:
+      - text: "Read ME - Overview"
+        href: index.html
+      - text: "Some Detail"
+        href: next.html
+      - text: "Software Prequisites"
+        href: software_prereqs.html
   - text: "Plot Coordinates"
     href: 01_georeference.html
   - text: "tidycensus"

@@ -5,10 +5,21 @@ output:
 ---
 &nbsp;
 
+## Overview
+
+The goal for this set of resource pages is supporting a face-to-face workshop offered via the [Data & Visualization Services] Department of the Duke University Libraries. The primary exercises will help you georeference locations make a  [choropleth](https://en.wikipedia.org/wiki/Choropleth_map) with census data.
+
+During the Workshop we introduce
+
+- Choropleth
+- Polygons (shapes)
+- Census Geography
+- Briefly Introduce ACS and decennial census 
+
+    - Census API Key 
+
 ## Workshop Resource Page
 
-- [Prerequisites](software_prereqs.html)
-    
 1. [Georeferencing](01_georeference.html):  Plotting XY latitude & longitude
 
 1. [Choropleths with tidycensus](02_choropleth.html)
@@ -23,6 +34,8 @@ output:
 ## Supporting Materials
 
 - [**Slides**](slides)
+
+- [Software / Package Prequisites](software_prereqs.html)
 
 - [Next Steps](next.html): Moving toward GIS analysis, raster analytics, etc.
 

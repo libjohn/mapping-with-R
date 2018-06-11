@@ -312,8 +312,23 @@ div.tocify {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Home
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">Read ME - Overview</a>
+    </li>
+    <li>
+      <a href="next.html">Some Detail</a>
+    </li>
+    <li>
+      <a href="software_prereqs.html">Software Prequisites</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="01_georeference.html">Plot Coordinates</a>
@@ -418,21 +433,21 @@ div.tocify {
 ##  language (EN)                        
 ##  collate  English_United States.1252  
 ##  tz       America/New_York            
-##  date     2018-02-16</code></pre>
+##  date     2018-06-11</code></pre>
 <pre><code>## Packages -----------------------------------------------------------------</code></pre>
 <pre><code>##  package      * version    date       source                            
 ##  assertthat     0.2.0      2017-04-11 CRAN (R 3.4.1)                    
 ##  backports      1.1.2      2017-12-13 CRAN (R 3.4.3)                    
 ##  base         * 3.4.1      2017-06-30 local                             
 ##  base64enc      0.1-3      2015-07-28 CRAN (R 3.4.1)                    
-##  bindr          0.1        2016-11-13 CRAN (R 3.4.1)                    
-##  bindrcpp     * 0.2        2017-06-17 CRAN (R 3.4.1)                    
+##  bindr          0.1.1      2018-03-13 CRAN (R 3.4.4)                    
+##  bindrcpp     * 0.2.2      2018-03-29 CRAN (R 3.4.4)                    
 ##  bitops         1.0-6      2013-08-17 CRAN (R 3.4.1)                    
 ##  boot           1.3-19     2017-02-11 CRAN (R 3.4.1)                    
-##  broom          0.4.3      2017-11-20 CRAN (R 3.4.2)                    
+##  broom          0.4.4      2018-03-29 CRAN (R 3.4.4)                    
 ##  cellranger     1.1.0      2016-07-27 CRAN (R 3.4.1)                    
 ##  class          7.3-14     2015-08-30 CRAN (R 3.4.1)                    
-##  classInt       0.1-24     2017-04-16 CRAN (R 3.4.1)                    
+##  classInt       0.2-3      2018-04-16 CRAN (R 3.4.4)                    
 ##  cli            1.0.0      2017-11-05 CRAN (R 3.4.2)                    
 ##  coda           0.19-1     2016-12-08 CRAN (R 3.4.1)                    
 ##  codetools      0.2-15     2016-10-05 CRAN (R 3.4.1)                    
@@ -440,21 +455,21 @@ div.tocify {
 ##  compiler       3.4.1      2017-06-30 local                             
 ##  crayon         1.3.4      2017-09-16 CRAN (R 3.4.2)                    
 ##  crosstalk      1.0.0      2016-12-21 CRAN (R 3.4.1)                    
-##  curl           3.1        2017-12-12 CRAN (R 3.4.3)                    
+##  curl           3.2        2018-03-28 CRAN (R 3.4.4)                    
 ##  datasets     * 3.4.1      2017-06-30 local                             
-##  DBI            0.7        2017-06-18 CRAN (R 3.4.1)                    
-##  deldir         0.1-14     2017-04-22 CRAN (R 3.4.1)                    
-##  devtools       1.13.4     2017-11-09 CRAN (R 3.4.2)                    
+##  DBI            1.0.0      2018-05-02 CRAN (R 3.4.4)                    
+##  deldir         0.1-15     2018-04-01 CRAN (R 3.4.4)                    
+##  devtools       1.13.5     2018-02-18 CRAN (R 3.4.3)                    
 ##  dichromat      2.0-0      2013-01-24 CRAN (R 3.4.1)                    
 ##  digest         0.6.15     2018-01-28 CRAN (R 3.4.3)                    
 ##  dplyr        * 0.7.4      2017-09-28 CRAN (R 3.4.2)                    
 ##  e1071          1.6-8      2017-02-02 CRAN (R 3.4.1)                    
 ##  evaluate       0.10.1     2017-06-24 CRAN (R 3.4.1)                    
 ##  expm           0.999-2    2017-03-29 CRAN (R 3.4.1)                    
-##  forcats      * 0.2.0      2017-01-23 CRAN (R 3.4.1)                    
+##  forcats      * 0.3.0      2018-02-19 CRAN (R 3.4.3)                    
 ##  foreach        1.4.4      2017-12-12 CRAN (R 3.4.3)                    
 ##  foreign        0.8-69     2017-06-22 CRAN (R 3.4.1)                    
-##  gdalUtils      2.0.1.7    2015-10-10 CRAN (R 3.4.1)                    
+##  gdalUtils      2.0.1.14   2018-04-23 CRAN (R 3.4.4)                    
 ##  gdata          2.18.0     2017-06-06 CRAN (R 3.4.1)                    
 ##  geojsonlint    0.2.0      2016-11-03 CRAN (R 3.4.1)                    
 ##  geosphere      1.5-7      2017-11-05 CRAN (R 3.4.2)                    
@@ -468,25 +483,25 @@ div.tocify {
 ##  gtable         0.2.0      2016-02-26 CRAN (R 3.4.1)                    
 ##  gtools         3.5.0      2015-05-29 CRAN (R 3.4.1)                    
 ##  haven          1.1.1      2018-01-18 CRAN (R 3.4.3)                    
-##  hms            0.4.1      2018-01-24 CRAN (R 3.4.3)                    
+##  hms            0.4.2      2018-03-10 CRAN (R 3.4.4)                    
 ##  htmltools      0.3.6      2017-04-28 CRAN (R 3.4.1)                    
-##  htmlwidgets  * 1.0        2018-01-20 CRAN (R 3.4.3)                    
-##  httpuv         1.3.5      2017-07-04 CRAN (R 3.4.1)                    
+##  htmlwidgets  * 1.2        2018-04-19 CRAN (R 3.4.4)                    
+##  httpuv         1.3.6.2    2018-03-02 CRAN (R 3.4.4)                    
 ##  httr           1.3.1      2017-08-20 CRAN (R 3.4.1)                    
 ##  iterators      1.0.9      2017-12-12 CRAN (R 3.4.3)                    
 ##  jsonlite       1.5        2017-06-01 CRAN (R 3.4.1)                    
 ##  jsonvalidate   1.0.0      2016-06-13 CRAN (R 3.4.1)                    
 ##  KernSmooth     2.23-15    2015-06-29 CRAN (R 3.4.1)                    
-##  knitr          1.19       2018-01-29 CRAN (R 3.4.3)                    
+##  knitr          1.20       2018-02-20 CRAN (R 3.4.3)                    
 ##  labeling       0.3        2014-08-23 CRAN (R 3.4.1)                    
 ##  lattice        0.20-35    2017-03-25 CRAN (R 3.4.1)                    
 ##  lazyeval       0.2.1      2017-10-29 CRAN (R 3.4.2)                    
-##  leaflet      * 1.1.0      2017-02-21 CRAN (R 3.4.1)                    
-##  LearnBayes     2.15       2014-05-29 CRAN (R 3.4.1)                    
-##  lubridate      1.7.2      2018-02-06 CRAN (R 3.4.3)                    
+##  leaflet      * 2.0.0      2018-04-20 CRAN (R 3.4.4)                    
+##  LearnBayes     2.15.1     2018-03-18 CRAN (R 3.4.4)                    
+##  lubridate      1.7.4      2018-04-11 CRAN (R 3.4.4)                    
 ##  magrittr       1.5        2014-11-22 CRAN (R 3.4.1)                    
 ##  maptools       0.9-2      2017-03-25 CRAN (R 3.4.1)                    
-##  mapview        2.3.0      2018-01-30 CRAN (R 3.4.3)                    
+##  mapview        2.4.0      2018-04-28 CRAN (R 3.4.4)                    
 ##  MASS           7.3-47     2017-02-26 CRAN (R 3.4.1)                    
 ##  Matrix         1.2-10     2017-05-03 CRAN (R 3.4.1)                    
 ##  memoise        1.1.0      2017-04-21 CRAN (R 3.4.1)                    
@@ -498,66 +513,67 @@ div.tocify {
 ##  nlme           3.1-131    2017-02-06 CRAN (R 3.4.1)                    
 ##  osmar          1.1-7      2013-11-21 CRAN (R 3.4.1)                    
 ##  parallel       3.4.1      2017-06-30 local                             
-##  pillar         1.1.0      2018-01-14 CRAN (R 3.4.3)                    
+##  pillar         1.2.2      2018-04-26 CRAN (R 3.4.4)                    
 ##  pkgconfig      2.0.1      2017-03-21 CRAN (R 3.4.1)                    
 ##  plyr           1.8.4      2016-06-08 CRAN (R 3.4.1)                    
 ##  png            0.1-7      2013-12-03 CRAN (R 3.4.1)                    
-##  psych          1.7.8      2017-09-09 CRAN (R 3.4.2)                    
+##  psych          1.8.3.3    2018-03-30 CRAN (R 3.4.4)                    
 ##  purrr        * 0.2.4      2017-10-18 CRAN (R 3.4.2)                    
 ##  R.methodsS3    1.7.1      2016-02-16 CRAN (R 3.4.1)                    
-##  R.oo           1.21.0     2016-11-01 CRAN (R 3.4.1)                    
+##  R.oo           1.22.0     2018-04-22 CRAN (R 3.4.4)                    
 ##  R.utils        2.6.0      2017-11-05 CRAN (R 3.4.2)                    
 ##  R6             2.2.2      2017-06-17 CRAN (R 3.4.1)                    
 ##  rappdirs       0.3.1      2016-03-28 CRAN (R 3.4.1)                    
 ##  raster         2.6-7      2017-11-13 CRAN (R 3.4.2)                    
 ##  RColorBrewer   1.1-2      2014-12-07 CRAN (R 3.4.1)                    
-##  Rcpp           0.12.15    2018-01-20 CRAN (R 3.4.3)                    
+##  Rcpp           0.12.16    2018-03-13 CRAN (R 3.4.4)                    
 ##  RCurl          1.95-4.10  2018-01-04 CRAN (R 3.4.3)                    
 ##  readr        * 1.1.1      2017-05-16 CRAN (R 3.4.1)                    
-##  readxl       * 1.0.0      2017-04-18 CRAN (R 3.4.1)                    
+##  readxl       * 1.1.0      2018-04-20 CRAN (R 3.4.4)                    
 ##  reshape2       1.4.3      2017-12-11 CRAN (R 3.4.3)                    
-##  rgdal          1.2-16     2017-11-21 CRAN (R 3.4.2)                    
+##  rgdal          1.2-18     2018-03-17 CRAN (R 3.4.4)                    
 ##  rgeos          0.3-26     2017-10-31 CRAN (R 3.4.2)                    
-##  rlang          0.1.6      2017-12-21 CRAN (R 3.4.3)                    
-##  rmapshaper     0.3.0      2017-08-16 CRAN (R 3.4.1)                    
-##  rmarkdown      1.8        2017-11-17 CRAN (R 3.4.2)                    
+##  rlang          0.2.0      2018-02-20 CRAN (R 3.4.3)                    
+##  rmapshaper     0.4.0      2018-04-03 CRAN (R 3.4.4)                    
+##  rmarkdown      1.9        2018-03-01 CRAN (R 3.4.4)                    
+##  RPostgreSQL    0.6-2      2017-06-24 CRAN (R 3.4.4)                    
 ##  rprojroot      1.3-2      2018-01-03 CRAN (R 3.4.3)                    
 ##  rstudioapi     0.7        2017-09-07 CRAN (R 3.4.2)                    
 ##  rvest          0.3.2      2016-06-17 CRAN (R 3.4.1)                    
 ##  satellite      1.0.1      2017-10-18 CRAN (R 3.4.2)                    
 ##  scales         0.5.0.9000 2017-12-27 Github (hadley/scales@d767915)    
-##  sf           * 0.6-0      2018-01-06 CRAN (R 3.4.1)                    
+##  sf           * 0.6-2      2018-04-25 CRAN (R 3.4.4)                    
 ##  shiny          1.0.5      2017-08-23 CRAN (R 3.4.1)                    
 ##  sp             1.2-7      2018-01-19 CRAN (R 3.4.3)                    
-##  spData         0.2.7.4    2018-02-11 CRAN (R 3.4.3)                    
-##  spdep          0.7-4      2017-11-22 CRAN (R 3.4.2)                    
+##  spData         0.2.8.3    2018-03-25 CRAN (R 3.4.4)                    
+##  spdep          0.7-7      2018-04-03 CRAN (R 3.4.4)                    
 ##  splines        3.4.1      2017-06-30 local                             
 ##  stats        * 3.4.1      2017-06-30 local                             
 ##  stats4         3.4.1      2017-06-30 local                             
-##  stringi        1.1.6      2017-11-17 CRAN (R 3.4.2)                    
-##  stringr      * 1.2.0      2017-02-18 CRAN (R 3.4.1)                    
+##  stringi        1.1.7      2018-03-12 CRAN (R 3.4.4)                    
+##  stringr      * 1.3.0      2018-02-19 CRAN (R 3.4.3)                    
 ##  tibble       * 1.4.2      2018-01-22 CRAN (R 3.4.3)                    
-##  tidycensus   * 0.4.1      2018-01-31 CRAN (R 3.4.3)                    
+##  tidycensus   * 0.4.6      2018-04-15 CRAN (R 3.4.4)                    
 ##  tidyr        * 0.8.0      2018-01-29 CRAN (R 3.4.3)                    
-##  tidyselect     0.2.3      2017-11-06 CRAN (R 3.4.2)                    
+##  tidyselect     0.2.4      2018-02-26 CRAN (R 3.4.1)                    
 ##  tidyverse    * 1.2.1      2017-11-14 CRAN (R 3.4.2)                    
-##  tigris       * 0.6.2      2018-01-04 CRAN (R 3.4.3)                    
-##  tmap         * 1.11-1     2018-02-13 CRAN (R 3.4.1)                    
-##  tmaptools    * 1.2-3      2018-02-13 CRAN (R 3.4.1)                    
+##  tigris       * 0.7        2018-04-14 CRAN (R 3.4.4)                    
+##  tmap         * 1.11-2     2018-04-10 CRAN (R 3.4.4)                    
+##  tmaptools    * 1.2-4      2018-04-10 CRAN (R 3.4.4)                    
 ##  tools          3.4.1      2017-06-30 local                             
 ##  udunits2       0.13       2016-11-17 CRAN (R 3.4.1)                    
 ##  units          0.5-1      2018-01-08 CRAN (R 3.4.1)                    
 ##  utils        * 3.4.1      2017-06-30 local                             
 ##  uuid           0.1-2      2015-07-28 CRAN (R 3.4.1)                    
 ##  V8             1.5        2017-04-25 CRAN (R 3.4.1)                    
-##  viridis      * 0.5.0      2018-02-02 CRAN (R 3.4.3)                    
+##  viridis      * 0.5.1      2018-03-29 CRAN (R 3.4.4)                    
 ##  viridisLite  * 0.3.0      2018-02-01 CRAN (R 3.4.3)                    
 ##  webshot        0.5.0      2017-11-29 CRAN (R 3.4.2)                    
-##  withr          2.1.1.9000 2017-12-27 Github (jimhester/withr@df18523)  
-##  XML            3.98-1.9   2017-06-19 CRAN (R 3.4.1)                    
+##  withr          2.1.2      2018-03-15 CRAN (R 3.4.4)                    
+##  XML            3.98-1.11  2018-04-16 CRAN (R 3.4.4)                    
 ##  xml2           1.2.0      2018-01-24 CRAN (R 3.4.3)                    
 ##  xtable         1.8-2      2016-02-05 CRAN (R 3.4.1)                    
-##  yaml           2.1.16     2017-12-12 CRAN (R 3.4.3)</code></pre>
+##  yaml           2.1.19     2018-05-01 CRAN (R 3.4.4)</code></pre>
 </div>
 
 &nbsp;

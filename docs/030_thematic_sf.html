@@ -269,8 +269,23 @@ div.tocify {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Home
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">Read ME - Overview</a>
+    </li>
+    <li>
+      <a href="next.html">Some Detail</a>
+    </li>
+    <li>
+      <a href="software_prereqs.html">Software Prequisites</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="01_georeference.html">Plot Coordinates</a>
@@ -335,7 +350,7 @@ div.tocify {
 <h2>Sections</h2>
 <ol style="list-style-type: decimal">
 <li><p><a href="031_thematic_mapping.html">Thematic Mapping with tmap</a>: creating choropleth with the <code>tmap</code> package</p></li>
-<li><p><a href="033_thematic_leaflet_example.html">Interactive thematic mapping</a> with leaflet. This is largely a repeat of the Choropleth section, but I will focus on some other interactive and stylistics features that I had not discussed before.</p></li>
+<li><p><a href="033_thematic_leaflet_example.html">Interactive thematic mapping</a> with leaflet. This is largely a repeat of the Choropleth section (tidyverse), but focused on other interactive and stylistics features not previously discussed.</p></li>
 <li><p><a href="036_thematic_mapping-outputs-fullwebpage.html">Sharing ouput files</a>: saving maps.</p></li>
 <li><p><a href="039_facet_example.html">Faceted Thematic Maps</a> with <strong>ggplot2::geom_sf</strong></p></li>
 </ol>

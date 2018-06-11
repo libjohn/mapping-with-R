@@ -8,7 +8,7 @@ output: html_document
 
 1. [Thematic Mapping with tmap](031_thematic_mapping.html): creating choropleth with the `tmap` package
 
-1. [Interactive thematic mapping](033_thematic_leaflet_example.html) with leaflet.  This is largely a repeat of the Choropleth section, but I will focus on some other interactive and stylistics features that I had not discussed before.
+1. [Interactive thematic mapping](033_thematic_leaflet_example.html) with leaflet.  This is largely a repeat of the Choropleth section (tidyverse), but focused on other interactive and stylistics features not previously discussed.
 
 1. [Sharing ouput files](036_thematic_mapping-outputs-fullwebpage.html): saving maps.
 

@@ -312,8 +312,23 @@ div.tocify {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Home
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">Read ME - Overview</a>
+    </li>
+    <li>
+      <a href="next.html">Some Detail</a>
+    </li>
+    <li>
+      <a href="software_prereqs.html">Software Prequisites</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="01_georeference.html">Plot Coordinates</a>
@@ -378,7 +393,7 @@ div.tocify {
 <div id="save-ineractive-map-as-file" class="section level2">
 <h2>Save ineractive map as file</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(htmlwidgets)</code></pre></div>
-<pre><code>## Warning: package &#39;htmlwidgets&#39; was built under R version 3.4.3</code></pre>
+<pre><code>## Warning: package &#39;htmlwidgets&#39; was built under R version 3.4.4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tmap_mode</span>(<span class="st">&quot;view&quot;</span>)</code></pre></div>
 <pre><code>## tmap mode set to interactive viewing</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">interactive_sasw &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(contiguous_states) <span class="op">+</span>

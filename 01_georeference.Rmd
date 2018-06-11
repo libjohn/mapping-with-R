@@ -6,7 +6,7 @@ output: html_document
 ---
 &nbsp;
 
-Introducing the `library(leaflet)` we use 5 lines of code to make an interactive map.^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis]
+Introducing the `library(leaflet)` Use 5 lines of code to make an interactive map (Adapted from Machlis.)^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis]
 
 
 ## Load Libraries

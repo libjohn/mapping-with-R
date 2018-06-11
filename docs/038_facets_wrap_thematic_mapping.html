@@ -312,8 +312,23 @@ div.tocify {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li>
-  <a href="index.html">Home</a>
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Home
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">Read ME - Overview</a>
+    </li>
+    <li>
+      <a href="next.html">Some Detail</a>
+    </li>
+    <li>
+      <a href="software_prereqs.html">Software Prequisites</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="01_georeference.html">Plot Coordinates</a>
@@ -552,7 +567,7 @@ legislators &lt;-<span class="st"> </span>legislators <span class="op">%&gt;%</s
           <span class="dt">variables =</span> <span class="st">&quot;B06011_001E&quot;</span>,
           <span class="co"># state = &quot;NC&quot;,</span>
           <span class="dt">geometry =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<pre><code>## Please note: `get_acs()` now defaults to a year or endyear of 2016.</code></pre>
+<pre><code>## Getting data from the 2012-2016 5-year ACS</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">us_pop &lt;-<span class="st"> </span>us_pop <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(NAME <span class="op">!=</span><span class="st"> &quot;Alaska&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">filter</span>(NAME <span class="op">!=</span><span class="st"> &quot;Hawaii&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
