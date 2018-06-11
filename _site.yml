@@ -8,12 +8,12 @@ navbar:
   left:
   - text: "Home"
     menu:
-      - text: "Read ME - Overview"
+      - text: "Overview"
         href: index.html
-      - text: "Some Detail"
-        href: next.html
       - text: "Software Prequisites"
         href: software_prereqs.html
+      - text: "Next Steps"
+        href: next.html
   - text: "Plot Coordinates"
     href: 01_georeference.html
   - text: "tidycensus"

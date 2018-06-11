@@ -277,13 +277,13 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="index.html">Read ME - Overview</a>
-    </li>
-    <li>
-      <a href="next.html">Some Detail</a>
+      <a href="index.html">Overview</a>
     </li>
     <li>
       <a href="software_prereqs.html">Software Prequisites</a>
+    </li>
+    <li>
+      <a href="next.html">Next Steps</a>
     </li>
   </ul>
 </li>
@@ -358,19 +358,13 @@ div.tocify {
 <div id="simple-features" class="section level2">
 <h2>Simple Features</h2>
 <p>The initial modules of <em>Mapping in R</em> introduce plotting latitude and longitude with an interactive map (<code>leaflet</code>), and generating a thematic map using <code>tidycensus.</code> The focus of this module is to introduce other customized thematic map packages: <code>tmap</code>, <code>sf</code>, <code>ggplot2</code> (using ggplot::geom_sf).</p>
-<p><strong>The backbone of this type of mapping data manipulation is the <code>sf</code> package</strong> – sf for simple features – which is a modern tidyverse compatible package for encoding spatial vector data. One advantage of manipulating data as simple features (i.e. sf) over <code>sp</code> is <code>sf</code> can easily be viewed as in a rectangular grid (i.e. data frame, or tibble.) The <code>sp</code> package (“spatial polygons”) uses the old school <span class="citation">@data</span> slots method. If you are already used to this approach, that fine. <code>sp</code> is a highly functional data structure but it was developed about 15 years ago. <code>sf</code> is newer and the successcor to sp. In short, <code>sf</code> is tidyverse compatible. In other words, among the advantages of <code>sf</code>, you can see your data in a more familiar and easy-to-view data frame format, rather than the <span class="citation">@data</span> slot approach.</p>
+<p><strong>The backbone of this type of mapping data manipulation is the <code>sf</code> package</strong> – sf for simple features – a modern tidyverse compatible package for encoding spatial vector data. <code>sf</code> the successcor to <code>sp</code>. Since <code>sf</code> is tidyverse compatible, among the advantages is the fact that you can see your numeric data in a more familiar (and easier-to-view) data frame format rather than the <span class="citation">@data</span> slot approach.</p>
 <blockquote>
 <p>The <code>sf</code> simple features package affords the R coder an easy and familiar method of <strong>storing data</strong> vectors and <strong>shapefile</strong> polygons in a <strong>tidy data frame</strong>.</p>
 </blockquote>
-<p>In this <em>Thematic Mapping with Simple Features</em> section I will introduce the <code>tmap</code> package first. Using the <code>tmap</code> package you will learn an easy-to-use package for building spatial distributions on geographic maps. These maps are typically <code>.png</code> image files. (.png files are easy to produce and share.) In this section we’ll also use the <code>tigris</code> package – to gather Census shapefiles – and store thos shape objects as in the Simple Features data structure. (In the <a href="02_choropleth.html"><em>Chropleth</em> module</a> we used <code>tidycensus</code> to gather census Geography shape objects, as well as to gather census data variables.) <code>tigris</code> simply gathers the shapefile polygons. Later we will join the polygon object to a data frame using <code>tmaptools</code>.</p>
-<blockquote>
-<p>You can also store your data in a <strong>slot</strong> using the <code>sp</code> package.</p>
-</blockquote>
-<p>In the <em>interactive thematic mapping</em> section you will make another interactive choropleth using <code>leaflet</code>. This second section is largely a repeat of the earlier choropleth module. The level of interactivity is sparse, but functional, and moves beyond traditional 2D map-on-a-page images. Just know that this zoom-in/zoom-out interactivity feature is possible because we use <code>leaflet</code> to draw the map. You can add many interactive features, e.g. pop-up windows. This section is a good set-up for the third section which covers saving maps as files.</p>
-<p>Section three, <a href="036_thematic_mapping-outputs-fullwebpage.html">Sharing ouput files</a>, introduces techniques for saving maps as files that can be shared and distributed as interactive maps (as opposed to 2D static images or printed files). In this case, you can share either on the web, as an HTML file, or as <a href="next.html#shapefiles">shapefile.</a></p>
-<blockquote>
-<p><code>sf</code> v <code>sp</code>? Leave the debate to others. I like the tidyverse which works well with <code>sf</code>. <code>sf</code> enables tremendous functionality and a familiar data science landscape.</p>
-</blockquote>
+<p>In this <em>Thematic Mapping with Simple Features</em> section we introduce the <code>tmap</code> package first. Through the the <code>tmap</code> package you will learn an easy-to-use package for building spatial distributions on geographic maps. These maps are typically <code>.png</code> image files. (.png files are easy to produce and share.) In this section we’ll also use the <code>tigris</code> package – to gather Census shapefiles – and store thos shape objects as in the Simple Features data structure. (In the <a href="02_choropleth.html"><em>Chropleth</em> module</a> we used <code>tidycensus</code> to gather census Geography shape objects, as well as to gather census data variables.) <code>tigris</code> simply gathers the shapefile polygons. Later we will join the polygon object to a data frame using <code>tmaptools</code>.</p>
+<p>Later, in the <em>interactive thematic mapping</em> section, you will make a different interactive choropleth using <code>leaflet</code>. This section is largely a repeat of the earlier choropleth module. The level of interactivity is sparse, but functional, and moves beyond traditional 2D map-on-a-page images. Just know that this zoom-in/zoom-out interactivity feature is possible because we use <code>leaflet</code> to draw the map and therefore you can add many interactive features, e.g. pop-up windows. This section is a good set-up for the third section which covers saving maps as files.</p>
+<p>Section three, <a href="036_thematic_mapping-outputs-fullwebpage.html">Sharing ouput files</a>, introduces techniques for saving maps as files that can be shared and distributed as interactive maps (as opposed to 2D static images or printed files). In this case, you can share maps either on the web, as an HTML file, or as <a href="next.html#shapefiles">shapefile.</a></p>
 </div>
 <div id="converting-between-sf-and-sp" class="section level2">
 <h2>Converting between <code>sf</code> and <code>sp</code></h2>
