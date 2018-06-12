@@ -29,8 +29,10 @@
 <script src="site_libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
 <script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
 <link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
-<script src="site_libs/leaflet-binding-2.0.0/leaflet.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="site_libs/leaflet-binding-2.0.1/leaflet.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -129,6 +131,9 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
 }
@@ -224,13 +229,13 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="index.html">Read ME - Overview</a>
-    </li>
-    <li>
-      <a href="next.html">Some Detail</a>
+      <a href="index.html">Overview</a>
     </li>
     <li>
       <a href="software_prereqs.html">Software Prequisites</a>
+    </li>
+    <li>
+      <a href="next.html">Next Steps</a>
     </li>
   </ul>
 </li>
@@ -305,8 +310,8 @@ $(document).ready(function () {
 <span class="st">  </span><span class="kw">addMarkers</span>(<span class="dt">lat =</span> <span class="op">~</span>Latitude, 
              <span class="dt">lng =</span> <span class="op">~</span>Longitude, 
              <span class="dt">popup =</span> xy_locations<span class="op">$</span>Company)</code></pre></div>
-<div id="htmlwidget-589ae36b17bf509b3d3c" style="width:100%;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-589ae36b17bf509b3d3c">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[40.2487413,-7.9110809,9.49858,-7.0320658,-17.0490108,21.8693003,53.3323703,31.394935,30.274084,14.1313261],[72.1297653,111.4253892,50.8105261,108.4365067,-41.5612423,106.7691712,-6.2152673,92.835795,120.15507,122.8277624],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Ailane","Thoughtbeat","Lazz","Zoomdog","Minyx","Devpulse","Meembee","Quamba","Realcube","Fatz"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-17.0490108,53.3323703],"lng":[-41.5612423,122.8277624]}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-02846376884053e6d90a" style="width:100%;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-02846376884053e6d90a">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[40.2487413,-7.9110809,9.49858,-7.0320658,-17.0490108,21.8693003,53.3323703,31.394935,30.274084,14.1313261],[72.1297653,111.4253892,50.8105261,108.4365067,-41.5612423,106.7691712,-6.2152673,92.835795,120.15507,122.8277624],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Ailane","Thoughtbeat","Lazz","Zoomdog","Minyx","Devpulse","Meembee","Quamba","Realcube","Fatz"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-17.0490108,53.3323703],"lng":[-41.5612423,122.8277624]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 
