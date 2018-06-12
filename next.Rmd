@@ -3,9 +3,7 @@ title: "Next Steps"
 output: html_document
 ---
 
-## Preamble
-
-In this workshop we have barely scratched the surface of how R can enable GIS analysis.  Many GIS analysts matriculated through the world of ESRI products such as ArcGIS and ArcGIS Online, or the opensource QGIS option.  There are also interesting cloud options such as Carto.com.  We do not presume that all your GIS analytics can be accomplished via R.  Nor do we presume that they cannot.  If you are already an R user, you will find this introduction to mapping is the first step in a satisfying journey of reproducible GIS analytics.  However, there are a few points we'd like to make...
+In this workshop we briefly describe and demonstrate how R can enable GIS analysis.  We do not presume that all your GIS analytics can be accomplished via R.  Nor do we presume that they cannot.  Other tools such as QGIS, ArcGIS, and Carto.com are also quite popoular.  However, if you are already an R user, you will find the `sf` package is a very useful and tidy approach to reproducible GIS analytics.  
 
 ## Reproducibility
 
