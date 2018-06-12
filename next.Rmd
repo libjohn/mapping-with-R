@@ -3,7 +3,7 @@ title: "Next Steps"
 output: html_document
 ---
 
-In this workshop we briefly describe and demonstrate how R can enable GIS analysis.  We do not presume that all your GIS analytics can be accomplished via R.  Nor do we presume that they cannot.  Other tools such as QGIS, ArcGIS, and Carto.com are also quite popoular.  However, if you are already an R user, you will find the `sf` package is a very useful and tidy approach to reproducible GIS analytics.  
+In this workshop we briefly describe and demonstrate how R can enable GIS analysis.  We do not presume that all your GIS analytics can be accomplished via R.  Nor do we presume that they cannot.  Other tools such as QGIS, ArcGIS, and Carto.com are also quite popular.  However, if you are already an R user, you will find the `sf` package is a very useful and tidy approach to reproducible GIS analytics.  
 
 ## Reproducibility
 
@@ -26,7 +26,7 @@ We highly recommend the [Student Association for Geospatial Analysis](https://si
 
 Tools such as [Shiny](https://www.rstudio.com/products/shiny/) or [HTML Widgets](http://www.htmlwidgets.org/) can be used in combination with dashboards. (e.g. In particular, [Flexdashboard for R](http://rmarkdown.rstudio.com/flexdashboard/)) can be leveraged to showcase interactivity of Shiny and HTML Widgets.  
 
-Of course, you may need hosting capabilities andDuke has some ready-made Shiny hosting and static-webpage hosting. (Remember that static webpages can still be interactive, especially when using HTML Widgets.)  Alternatively, for hosting we've used a tool like netlify.com and found it very capable of hosting our static web presence.
+Of course, you may need hosting capabilities and Duke has some ready-made Shiny hosting and static-webpage hosting. (Remember that static webpages can still be interactive, especially when using HTML Widgets.)  Alternatively, for hosting we've used a tool like netlify.com and found it very capable of hosting our static web presence.
 
 ## Shapefiles
 
