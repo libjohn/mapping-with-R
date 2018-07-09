@@ -320,8 +320,8 @@ tall %>%
   ggplot(aes(fill = variable, color = variable)) +
   geom_sf() +
   coord_sf(crs = 5070) +
-  scale_fill_viridis(option = "viridis", direction = -1) + 
-  scale_color_viridis(option = "viridis", direction = -1) +
+  scale_fill_viridis(option = "viridis") + 
+  scale_color_viridis(option = "viridis") +
   facet_grid(. ~ category)
 ```
 
@@ -332,8 +332,8 @@ tall %>%
   ggplot(aes(fill = Wages, color = Wages)) +
   geom_sf() +
   coord_sf(crs = 5070) +
-  scale_fill_viridis(option = "viridis", direction = -1) + 
-  scale_color_viridis(option = "viridis", direction = -1) +
+  scale_fill_viridis(option = "viridis") + 
+  scale_color_viridis(option = "viridis") +
   facet_wrap(~ category, nrow = 3, ncol = 2)
 ```
 
