@@ -335,8 +335,20 @@ div.tocify {
     </li>
   </ul>
 </li>
-<li>
-  <a href="01_georeference.html">Plot Coordinates</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Plot Coordinates
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="01_georeference.html">Interactive map (leaflet)</a>
+    </li>
+    <li>
+      <a href="01_ggmap_georef.html">Static Map (ggmap)</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="02_choropleth.html">tidycensus</a>
@@ -355,10 +367,10 @@ div.tocify {
       <a href="031_thematic_mapping.html">tmap</a>
     </li>
     <li>
-      <a href="031_thematic_mapping.html#ggplot2_with_viridis">ggplot2 &amp; geom_sf</a>
+      <a href="032_thematic_mapping_geom_sf.html">ggplot2 &amp; geom_sf</a>
     </li>
     <li>
-      <a href="039_facet_example.html">ggplot2 &amp; faceted mapping</a>
+      <a href="039_facet_example.html">ggplot2 &amp; facet mapping</a>
     </li>
     <li>
       <a href="033_thematic_leaflet_example.html">Interactive</a>
@@ -398,9 +410,7 @@ div.tocify {
 <div id="save-ineractive-map-as-file" class="section level2">
 <h2>Save ineractive map as file</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(htmlwidgets)</code></pre></div>
-<pre><code>## Warning: package &#39;htmlwidgets&#39; was built under R version 3.4.4</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tmap_mode</span>(<span class="st">&quot;view&quot;</span>)</code></pre></div>
-<pre><code>## tmap mode set to interactive viewing</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">interactive_sasw &lt;-<span class="st"> </span><span class="kw">tm_shape</span>(contiguous_states) <span class="op">+</span>
 <span class="st">  </span><span class="kw">tm_polygons</span>(<span class="st">&quot;wages&quot;</span>, <span class="dt">id =</span> <span class="st">&quot;Name&quot;</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">interactive_sasw_map &lt;-<span class="st"> </span><span class="kw">tmap_leaflet</span>(interactive_sasw)</code></pre></div>

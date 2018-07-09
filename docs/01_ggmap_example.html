@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>ggmap – Latitude and Longitude Coordinates</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="libs-local\duke.css" type="text/css" />
+<link rel="stylesheet" href="libs-local\cc-fonts.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Mapping in R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Home
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">Overview</a>
+    </li>
+    <li>
+      <a href="software_prereqs.html">Software Prequisites</a>
+    </li>
+    <li>
+      <a href="next.html">Next Steps</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Plot Coordinates
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="01_georeference.html">Interactive map (leaflet)</a>
+    </li>
+    <li>
+      <a href="01_ggmap_georef.html">Static Map (ggmap)</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="02_choropleth.html">tidycensus</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Thematic Mapping
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="030_thematic_sf.html">Overview</a>
+    </li>
+    <li>
+      <a href="031_thematic_mapping.html">tmap</a>
+    </li>
+    <li>
+      <a href="032_thematic_mapping_geom_sf.html">ggplot2 &amp; geom_sf</a>
+    </li>
+    <li>
+      <a href="039_facet_example.html">ggplot2 &amp; facet mapping</a>
+    </li>
+    <li>
+      <a href="033_thematic_leaflet_example.html">Interactive</a>
+    </li>
+    <li>
+      <a href="036_thematic_mapping-outputs-fullwebpage.html">Saving / Sharing</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="exercises.html">Exercises</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/libjohn/mapping-with-R">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">ggmap – Latitude and Longitude Coordinates</h1>
+
+</div>
+
+
+<p> </p>
+<p>Using the same data as in the <a href="01_georeference.html">previous exercise</a>, <strong>build a static map quickly and easily using <code>ggmap</code></strong>. The <code>ggmap</code> package enables the integration of popular raster base-maps with ggplot2 syntax. This example</p>
+<div id="load-packages" class="section level2">
+<h2>Load Packages</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(ggmap)</code></pre></div>
+</div>
+<div id="load-data" class="section level2">
+<h2>Load Data</h2>
+<p>2012 Starbucks locations (<a href="https://github.com/libjohn/mapping-with-R/blob/master/data/All_Starbucks_Locations_in_the_US_-_Map.csv">data source</a>)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starbucks &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/All_Starbucks_Locations_in_the_US_-_Map.csv&quot;</span>)</code></pre></div>
+<div id="subset-data-to-north-carolina" class="section level3">
+<h3>Subset Data to North Carolina</h3>
+<p>Using the same Starbucks from the previous example…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starbucksNC &lt;-<span class="st"> </span>starbucks  <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(State <span class="op">==</span><span class="st"> &quot;NC&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="ggmap" class="section level2">
+<h2>ggmap</h2>
+<div id="indentify-base-map-and-mapping-location" class="section level3">
+<h3>Indentify base map and mapping location</h3>
+<p>Some of the most popular base maps come from the Google Maps source. Using ggmap, the following map types are available from the Google Maps source …</p>
+<ul>
+<li>terrain</li>
+<li>satellite</li>
+<li>roadmap</li>
+<li>hybrid</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_local_spot &lt;-<span class="st">  </span><span class="kw">get_map</span>(<span class="st">&quot;Durham North Carolina&quot;</span>, <span class="dt">maptype =</span> <span class="st">&quot;roadmap&quot;</span>, <span class="dt">zoom =</span> <span class="dv">10</span>) </code></pre></div>
+<p>Alternatively, use <code>help(get_map)</code> to identify additional map sources and other arguments for <code>maptype</code>. For example…</p>
+<ul>
+<li>Stamen maps: “terrain”, “watercolor”, and “toner”</li>
+<li>or a positive integer for cloudmade maps (see ?get_cloudmademap)</li>
+</ul>
+</div>
+<div id="display-base-map" class="section level3">
+<h3>Display Base Map</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggmap</span>(get_local_spot)</code></pre></div>
+<p><img src="01_ggmap_example_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="display-points-with-geom_point" class="section level3">
+<h3>Display points with geom_point</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggmap</span>(get_local_spot) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> starbucksNC, <span class="kw">aes</span>(<span class="dt">x =</span> Longitude, <span class="dt">y =</span> Latitude), <span class="dt">color =</span> <span class="st">&quot;navy&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)</code></pre></div>
+<p><img src="01_ggmap_example_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="frame-the-map" class="section level3">
+<h3>Frame the Map</h3>
+<p>Altering the map frame from a square to a rectangle requires knowing the coordinates of the Southwest and Northeast corners of the map frame. This time, display a different basemap using the the Stamen source and the Toner <code>maptype</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mapbox &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">80</span>, <span class="fl">35.6</span>, <span class="op">-</span><span class="fl">78.5</span>, <span class="fl">36.25</span>)
+piedmont_coffee &lt;-<span class="st"> </span><span class="kw">get_map</span>(<span class="dt">location =</span> mapbox, <span class="dt">source =</span> <span class="st">&quot;stamen&quot;</span>, <span class="dt">maptype =</span> <span class="st">&quot;toner&quot;</span>, <span class="dt">zoom =</span> <span class="dv">9</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggmap</span>(piedmont_coffee)</code></pre></div>
+<p><img src="01_ggmap_example_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<div id="plot-coffee-shops" class="section level4">
+<h4>Plot Coffee Shops</h4>
+<p>ggplot2 syntax comes in handy for creating various map views.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggmap</span>(piedmont_coffee) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> starbucksNC, 
+             <span class="kw">aes</span>(<span class="dt">x =</span> Longitude, <span class="dt">y =</span> Latitude), 
+             <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>, 
+             <span class="dt">size =</span> <span class="dv">2</span>,
+             <span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">rect =</span> <span class="kw">element_blank</span>(),
+      <span class="dt">axis.title.y=</span><span class="kw">element_blank</span>(),
+      <span class="dt">axis.title.x=</span><span class="kw">element_blank</span>())</code></pre></div>
+<p><img src="01_ggmap_example_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+
+&nbsp;
+
+<hr>
+<span class="footer">
+  
+  <span class="left-foot">
+    
+    <a href="https://rfun.library.duke.edu/">R We Having Fun Yet‽</a> -- Learning Series<br>
+    <a href="http://library.duke.edu/data/">Data & Visualization Services</a><br>
+    <a href="http://library.duke.edu/">Duke University Libraries</a>
+    
+  </span>
+
+  <span class="right-foot">
+  
+    <span class="cc">
+      <!-- Key: a: SA, b: BY, c: CC Circle, d: ND, n: NC, m: Sampling, s: Share, r: Remix, C: CC Full Logo -->
+    C bn</span><br>
+    Shareable via Creative Commons:  CC <a href="https://creativecommons.org/licenses/by-nc/4.0/">By-NC</a>
+
+  </span>
+
+</span>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

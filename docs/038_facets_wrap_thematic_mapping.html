@@ -335,8 +335,20 @@ div.tocify {
     </li>
   </ul>
 </li>
-<li>
-  <a href="01_georeference.html">Plot Coordinates</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Plot Coordinates
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="01_georeference.html">Interactive map (leaflet)</a>
+    </li>
+    <li>
+      <a href="01_ggmap_georef.html">Static Map (ggmap)</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="02_choropleth.html">tidycensus</a>
@@ -355,10 +367,10 @@ div.tocify {
       <a href="031_thematic_mapping.html">tmap</a>
     </li>
     <li>
-      <a href="031_thematic_mapping.html#ggplot2_with_viridis">ggplot2 &amp; geom_sf</a>
+      <a href="032_thematic_mapping_geom_sf.html">ggplot2 &amp; geom_sf</a>
     </li>
     <li>
-      <a href="039_facet_example.html">ggplot2 &amp; faceted mapping</a>
+      <a href="039_facet_example.html">ggplot2 &amp; facet mapping</a>
     </li>
     <li>
       <a href="033_thematic_leaflet_example.html">Interactive</a>
@@ -646,8 +658,8 @@ tall &lt;-<span class="st"> </span>tall <span class="op">%&gt;%</span><span clas
   ggplot(aes(fill = variable, color = variable)) +
   geom_sf() +
   coord_sf(crs = 5070) +
-  scale_fill_viridis(option = &quot;viridis&quot;, direction = -1) + 
-  scale_color_viridis(option = &quot;viridis&quot;, direction = -1) +
+  scale_fill_viridis(option = &quot;viridis&quot;) + 
+  scale_color_viridis(option = &quot;viridis&quot;) +
   facet_grid(. ~ category)</code></pre>
 <div id="display-map" class="section level3">
 <h3>Display Map</h3>
@@ -655,8 +667,8 @@ tall &lt;-<span class="st"> </span>tall <span class="op">%&gt;%</span><span clas
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Wages, <span class="dt">color =</span> Wages)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">5070</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>category, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</code></pre></div>
 <p><img src="038_facets_wrap_thematic_mapping_files/figure-html/facet_wrap_it_up-1.png" width="672" /></p>
 </div>

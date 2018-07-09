@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Thematic Mapping with geom_sf</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="libs-local\duke.css" type="text/css" />
+<link rel="stylesheet" href="libs-local\cc-fonts.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Mapping in R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Home
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">Overview</a>
+    </li>
+    <li>
+      <a href="software_prereqs.html">Software Prequisites</a>
+    </li>
+    <li>
+      <a href="next.html">Next Steps</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Plot Coordinates
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="01_georeference.html">Interactive map (leaflet)</a>
+    </li>
+    <li>
+      <a href="01_ggmap_georef.html">Static Map (ggmap)</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="02_choropleth.html">tidycensus</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Thematic Mapping
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="030_thematic_sf.html">Overview</a>
+    </li>
+    <li>
+      <a href="031_thematic_mapping.html">tmap</a>
+    </li>
+    <li>
+      <a href="032_thematic_mapping_geom_sf.html">ggplot2 &amp; geom_sf</a>
+    </li>
+    <li>
+      <a href="039_facet_example.html">ggplot2 &amp; facet mapping</a>
+    </li>
+    <li>
+      <a href="033_thematic_leaflet_example.html">Interactive</a>
+    </li>
+    <li>
+      <a href="036_thematic_mapping-outputs-fullwebpage.html">Saving / Sharing</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="exercises.html">Exercises</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/libjohn/mapping-with-R">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Thematic Mapping with geom_sf</h1>
+
+</div>
+
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)       <span class="co"># Tidyverse for Tidy Data</span>
+<span class="kw">library</span>(readxl)
+<span class="kw">library</span>(tigris)
+<span class="kw">library</span>(sf)
+<span class="kw">library</span>(viridis)
+<span class="kw">library</span>(ggplot2) </code></pre></div>
+<div id="shapefiles-as-sf" class="section level2">
+<h2>Shapefiles as sf</h2>
+<p>Repeating steps from the <a href="031_thematic_mapping.html">previous section</a>, using the <code>tigris</code> package, get Census Tiger shapefiles for census geographies.</p>
+<pre><code>us_geo &lt;- tigris::states(class = &quot;sf&quot;)</code></pre>
+</div>
+<div id="get-bls-data" class="section level2">
+<h2>Get BLS data</h2>
+<p>As mentioned before, the data are from the Bureau of Labor Statistics. These data are stored in an excel file in the <code>data</code> directory of the <a href="https://github.com/libjohn/mapping-with-R">repository</a>: <code>data/OES_Report.xlsx</code>.</p>
+<p>Again, from the previous section you will see how these data were gathered, loaded, transformed, and joined.</p>
+<pre><code>Salary4Helpers &lt;- 
+  read_excel(&quot;data/OES_Report.xlsx&quot;,
+             col_types = c(&quot;text&quot;, &quot;numeric&quot;), 
+             skip = 4)
+
+Salary4Helpers</code></pre>
+</div>
+<div id="wrangle-the-data" class="section level2">
+<h2>Wrangle the data</h2>
+<p>As before…</p>
+<pre><code>BlsWage_ToJoin &lt;- Salary4Helpers %&gt;% 
+  rename(Area = &quot;Area Name&quot;) %&gt;% 
+  rename(wages = &quot;Annual mean wage(2)&quot;) %&gt;% 
+  mutate(State = gsub(&quot;\\(\\d{7}\\)&quot;, &quot;&quot;, Area)) %&gt;% 
+  filter(wages != &quot;NA_character_&quot;) %&gt;% 
+  select(State, wages)</code></pre>
+</div>
+<div id="append-data" class="section level2">
+<h2>Append data</h2>
+<p>As before, using the <code>append_data()</code> function of the <code>tmaptools</code> package, append BLS data to the previously loaded shape object</p>
+<pre><code>HelperShapeObject &lt;- append_data(us_geo, BlsWage_ToJoin, 
+                                 key.shp = &quot;NAME&quot;,
+                                 key.data = &quot;State&quot;)
+as_tibble(HelperShapeObject)</code></pre>
+</div>
+<div id="contiguous-48-states" class="section level2">
+<h2>Contiguous 48 states</h2>
+<p>As before, filter to only the contiguous 48 states + D.C.</p>
+<pre><code>contiguous_states &lt;- HelperShapeObject %&gt;% 
+  filter(REGION != 9) %&gt;% 
+  filter(STUSPS != &quot;AK&quot;) %&gt;% 
+  filter(STUSPS != &quot;HI&quot;)
+  </code></pre>
+</div>
+<div id="projection" class="section level2">
+<h2>Projection</h2>
+<p>Using the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection for the continental US. <code>EPSG:5070</code></p>
+<pre><code>contiguous_states %&gt;% 
+  st_transform(5070) %&gt;% 
+  tm_shape() +
+  tm_polygons(&quot;wages&quot;, id = &quot;Name&quot;)</code></pre>
+</div>
+<div id="ggplot2-with-geom_sf-and-viridis" class="section level2">
+<h2>ggplot2 with geom_sf and viridis</h2>
+<p>In this section we introduce making shapefiles with ggplot2. ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. I also reveresed the direction of the color scale. After consulting with my visualization colleagues it seems this may have been a non-standard action on my part. But I leave the <code>direction</code> argument here for the curious.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">contiguous_states <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> wages, <span class="dt">color =</span> wages)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">5070</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
+<p><img src="032_thematic_mapping_geom_sf_files/figure-html/with-ggplot-geom_sf-1.png" width="672" /></p>
+</div>
+<div id="end-notes" class="section level2">
+<h2>End Notes</h2>
+<p>This session inspired by <a href="https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html" class="uri">https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html</a></p>
+</div>
+
+&nbsp;
+
+<hr>
+<span class="footer">
+  
+  <span class="left-foot">
+    
+    <a href="https://rfun.library.duke.edu/">R We Having Fun Yet‽</a> -- Learning Series<br>
+    <a href="http://library.duke.edu/data/">Data & Visualization Services</a><br>
+    <a href="http://library.duke.edu/">Duke University Libraries</a>
+    
+  </span>
+
+  <span class="right-foot">
+  
+    <span class="cc">
+      <!-- Key: a: SA, b: BY, c: CC Circle, d: ND, n: NC, m: Sampling, s: Share, r: Remix, C: CC Full Logo -->
+    C bn</span><br>
+    Shareable via Creative Commons:  CC <a href="https://creativecommons.org/licenses/by-nc/4.0/">By-NC</a>
+
+  </span>
+
+</span>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -188,8 +188,20 @@ $(document).ready(function () {
     </li>
   </ul>
 </li>
-<li>
-  <a href="01_georeference.html">Plot Coordinates</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Plot Coordinates
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="01_georeference.html">Interactive map (leaflet)</a>
+    </li>
+    <li>
+      <a href="01_ggmap_georef.html">Static Map (ggmap)</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="02_choropleth.html">tidycensus</a>
@@ -208,10 +220,10 @@ $(document).ready(function () {
       <a href="031_thematic_mapping.html">tmap</a>
     </li>
     <li>
-      <a href="031_thematic_mapping.html#ggplot2_with_viridis">ggplot2 &amp; geom_sf</a>
+      <a href="032_thematic_mapping_geom_sf.html">ggplot2 &amp; geom_sf</a>
     </li>
     <li>
-      <a href="039_facet_example.html">ggplot2 &amp; faceted mapping</a>
+      <a href="039_facet_example.html">ggplot2 &amp; facet mapping</a>
     </li>
     <li>
       <a href="033_thematic_leaflet_example.html">Interactive</a>
@@ -251,8 +263,8 @@ $(document).ready(function () {
   ggplot(aes(fill = Wages, color = Wages)) +
   geom_sf() +
   coord_sf(crs = 5070) +
-  scale_fill_viridis(option = &quot;viridis&quot;, direction = -1) + 
-  scale_color_viridis(option = &quot;viridis&quot;, direction = -1) +
+  scale_fill_viridis(option = &quot;viridis&quot;) + 
+  scale_color_viridis(option = &quot;viridis&quot;) +
   facet_wrap(~ category, nrow = 3, ncol = 2)</code></pre>
 <p> </p>
 <p>Produced this faceted map</p>
