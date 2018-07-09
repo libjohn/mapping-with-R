@@ -15,7 +15,11 @@ navbar:
       - text: "Next Steps"
         href: next.html
   - text: "Plot Coordinates"
-    href: 01_georeference.html
+    menu:
+      - text: Interactive map (leaflet)
+        href: 01_georeference.html
+      - text: Static Map (ggmap)
+        href: 01_ggmap_georef.html
   - text: "tidycensus"
     href: 02_choropleth.html
   - text: "Thematic Mapping"
@@ -25,8 +29,8 @@ navbar:
       - text: "tmap"
         href: 031_thematic_mapping.html
       - text:  "ggplot2 & geom_sf"
-        href: 031_thematic_mapping.html#ggplot2_with_viridis
-      - text: "ggplot2 & faceted mapping"
+        href: 032_thematic_mapping_geom_sf.html
+      - text: "ggplot2 & facet mapping"
         href: 039_facet_example.html
       - text: "Interactive"
         href: 033_thematic_leaflet_example.html

@@ -9,17 +9,17 @@ Please note that I disabled some of the code chunks for efficiency of processing
 
 ## Save ineractive map as file
 
-```{r load-library}
+```{r load-library, message=FALSE, warning=FALSE}
 library(htmlwidgets)
 ```
 
 
-```{r set-tmap-mode}
+```{r set-tmap-mode, message=FALSE, warning=FALSE}
 tmap_mode("view")
 ```
 
 
-```{r make-interactive}
+```{r make-interactive, message=FALSE, warning=FALSE}
 interactive_sasw <- tm_shape(contiguous_states) +
   tm_polygons("wages", id = "Name")
 ```

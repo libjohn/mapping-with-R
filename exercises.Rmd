@@ -1,6 +1,8 @@
 ---
 title: "Exercises & Answers"
-output: html_document
+output: 
+  html_document:
+    toc: FALSE
 ---
 
 Please note:  These exercises assume you have downloaded the [mapping-with-R](https://github.com/libjohn/mapping-with-R) repository to your local installation of RStudio and are running this as a unique project within RStudio.  You can do these exercises in R without the RStudio IDE (or any other IDE).  However, you may experience minor differences with relative file locations; translation is assumed to be the responsibility of the student in that case.  

@@ -8,6 +8,8 @@ output: html_document
 
 1. [Thematic Mapping with tmap](031_thematic_mapping.html): creating choropleth with the `tmap` package
 
+1. Thematic Mapping with [sf & ggplot::geom_sf](032_thematic_mapping_geom_sf.html): creating choropleth with `ggplot2`, `sf`, and `viridis` packages
+
 1. [Interactive thematic mapping](033_thematic_leaflet_example.html) with leaflet.  This is largely a repeat of the Choropleth section (tidyverse), but focused on other interactive and stylistics features not previously discussed.
 
 1. [Sharing ouput files](036_thematic_mapping-outputs-fullwebpage.html): saving maps.
@@ -16,22 +18,24 @@ output: html_document
 
 ## Simple Features
 
-The initial modules of *Mapping in R* introduce plotting latitude and longitude with an interactive map (`leaflet`), and generating a thematic map using `tidycensus.`  The focus of this module is to introduce other customized thematic map packages: `tmap`, `sf`, `ggplot2` (using ggplot::geom_sf).  
+The initial modules of *Mapping in R* introduce plotting latitude and longitude with an interactive map (`leaflet`), a static map (`ggmap`), and generating a thematic map using `tidycensus.`  The focus of this module is to introduce other customized thematic map packages: `tmap`, `sf`, `ggplot2`.  
 
-**The backbone of this type of mapping data manipulation is the `sf` package** -- sf for simple features -- a modern tidyverse compatible package for encoding spatial vector data. `sf` the successcor to `sp`. Since `sf` is tidyverse compatible, among the advantages is the fact that you can see your numeric data in a more familiar (and easier-to-view) data frame format rather than the @data slot approach.  
+**The backbone of this type of mapping data manipulation is the `sf` package** -- sf for simple features -- a modern tidyverse compatible package for encoding spatial vector data. `sf` is the successor to `sp`. Since `sf` is tidyverse compatible, among the advantages is the fact that you can see your numeric data in a more familiar (and easier-to-view) data frame .  
 
 > The `sf` simple features package affords the R coder an easy and familiar method of **storing data** vectors and **shapefile** polygons in a **tidy data frame**.
 
-In this *Thematic Mapping with Simple Features* section we introduce the `tmap` package first.  Through the the `tmap` package you will learn an easy-to-use package for building spatial distributions on geographic maps.  These maps are typically `.png` image files.  (.png files are easy to produce and share.)  In this section we'll also use the `tigris` package -- to gather Census shapefiles -- and store thos shape objects as in the Simple Features data structure.  (In the [*Chropleth* module](02_choropleth.html) we used `tidycensus` to gather census Geography shape objects, as well as to gather census data variables.)  `tigris` simply gathers the shapefile polygons.  Later we will join the polygon object to a data frame using `tmaptools`.  
+In these *Thematic Mapping with Simple Features* sections, we introduce the `tmap` package first.  Through the the `tmap` package you will learn an easy-to-use package for building spatial distributions on geographic maps.  These maps are typically `.png` image files.  (.png files are easy to produce and share.)  In this section we'll also use the `tigris` package -- to gather Census shapefiles -- and store those shape objects as in the Simple Features data structure.  (In the [*Chropleth* module](02_choropleth.html) we used `tidycensus` to gather census Geography shape objects, as well as to gather census data variables.)  `tigris` simply gathers the shapefile polygons.  Later we will join the polygon object to a data frame using `tmaptools`.  
 
-Later, in the *interactive thematic mapping* section, you will make a different interactive choropleth using `leaflet`.  This section is largely a repeat of the earlier choropleth module. The level of interactivity is sparse, but functional, and moves beyond traditional 2D map-on-a-page images. Just know that this zoom-in/zoom-out interactivity feature is possible because we use `leaflet` to draw the map and therefore you can add many interactive features, e.g. pop-up windows.  This section is a good set-up for the third section which covers saving maps as files.  
+Next, we'll use the `ggplot::geom_sf` function to create our mapping visualiations using the widely adopted ggplot2 syntax.
 
-Section three, [Sharing ouput files](036_thematic_mapping-outputs-fullwebpage.html), introduces techniques for saving maps as files that can be shared and distributed as interactive maps (as opposed to 2D static images or printed files).  In this case, you can share maps either on the web, as an HTML file, or as [shapefile.](next.html#shapefiles)
+Later, in the *interactive thematic mapping* section, you will make a different interactive choropleth using `leaflet`.  This section is largely a repeat of the earlier choropleth module. The level of interactivity is sparse, but functional.  Interactivity demonstrates how you can generate maps which move beyond traditional 2D map-on-a-page images. Just know that this zoom-in/zoom-out interactivity feature is possible because we use `leaflet` to draw the map.  By extension, you can add many interactive features, e.g. pop-up windows.  This section is a good set-up for the last section which covers how to save maps as files.  
+
+[Sharing ouput files](036_thematic_mapping-outputs-fullwebpage.html), introduces the file saving techniques for saving maps.  Even interactive maps can be shared and distributed.  You can share maps either on the web, as an HTML file, or as [shapefile.](next.html#shapefiles)
 
 
 ## Converting between `sf` and `sp`
 
-It's easy! See [Reading, Writing and Converting Simple Features](https://r-spatial.github.io/sf/articles/sf2.html) 
+`sf` is developed by the same [person](https://github.com/edzer)/people who developed `sp`.  `sf` is the modern approach.  However, if you need to convert between the two formats, it's easy! See [Reading, Writing and Converting Simple Features](https://r-spatial.github.io/sf/articles/sf2.html) 
 
 
 ## Hands-on Exercises

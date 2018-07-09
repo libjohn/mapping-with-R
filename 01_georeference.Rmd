@@ -18,14 +18,14 @@ library(leaflet)
 
 ## Load Data
 
-2012 Starbucks locations
+2012 Starbucks locations ([data source](https://github.com/libjohn/mapping-with-R/blob/master/data/All_Starbucks_Locations_in_the_US_-_Map.csv))
 
 ```{r load-data, message=FALSE, warning=FALSE}
 starbucks <- read_csv("data/All_Starbucks_Locations_in_the_US_-_Map.csv")
 ```
 
 ### Subset Data to North Carolina
-```{r filter-dataset}
+```{r filter-dataset, message=FALSE, warning=FALSE}
 starbucksNC <- starbucks  %>% 
   filter(State == "NC")
 

@@ -1,5 +1,5 @@
 ---
-title: "Thematic Mapping"
+title: "Thematic Mapping with tmap"
 output: html_document
 ---
 
@@ -30,7 +30,7 @@ us_geo <- tigris::states(class = "sf")
 
 ## Data Structure 
 
-The advantage of managing your spatial data as "Simple Features" (i.e. sf) over `sp` is that `sf` data can easily be viewed and manipulated as a rectangular data frame, before visualizing.   `sp` is the predecessory to `sf`, but uses the old school @data slots method.  If you're used to this it can be a highly functional data structure.  But if you're inclined toward the tidyverse method, you'll see your data in a more familiar and easy-to-view format.  Below are two methods of viewing the stucture of the downloaded shapefiles.
+The advantage of managing your spatial data as "Simple Features" (i.e. sf) over `sp` is that `sf` data can easily be viewed and manipulated as a rectangular data frame, before visualizing.   `sp` is the predecessor to `sf`, but uses the old school @data slots method.  If you're used to this it can be a highly functional data structure.  But if you're inclined toward the tidyverse method, you'll see your data in a more familiar and easy-to-view format.  Below are two methods of viewing the structure of the downloaded shapefiles.
 
 ```{r data-structure}
 class(us_geo)
@@ -48,7 +48,7 @@ as_tibble(us_geo)
 
 ## Get BLS data
 
-I've already downloaded and stored some data from the Bureau of Labor Statistics.  Those data are stored in an excel file in the `data` directory of the repository:  `data/OES_Report.xlsx`.  **The goal is to attach this data to the previously downloaded shapefiles.**  
+I've already downloaded and stored some data from the Bureau of Labor Statistics.  Those data are stored in an excel file in the `data` directory of the [repository](https://github.com/libjohn/mapping-with-R):  `data/OES_Report.xlsx`.  **The goal is to attach this data to the previously downloaded shapefiles.**  
 
 But you may be interested in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.  
 
@@ -103,7 +103,7 @@ BlsWage_ToJoin <- Salary4Helpers %>%
 
 Using the `append_data()` function of the `tmaptools` package, append BLS data to the previously loaded shape object
 
-```{r make_nice_df}
+```{r make_nice_df, message=FALSE, warning=FALSE}
 HelperShapeObject <- append_data(us_geo, BlsWage_ToJoin, 
                                  key.shp = "NAME",
                                  key.data = "State")
@@ -172,24 +172,6 @@ tm_shape(contiguous_states, projection = 5070) +
                   title.bg.color = "yellow")
 ```
 
-## ggplot2 with viridis
-
-In this section we introduce making shapefiles with ggplot2.  ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community.  As of this writing, there is a development version of ggplot2 that includes the `geom_sf` function demonstrated below.  You may need to install the development version to run this code.
-
-```{r with-ggplot-geom_sf}
-library(viridis)
-#devtools::install_github("tidyverse/ggplot2")
-library(ggplot2) #-- version 2.2.1.90000
-
-contiguous_states %>% 
-  ggplot(aes(fill = wages, color = wages)) +
-  geom_sf() +
-  coord_sf(crs = 5070) +
-  scale_fill_viridis(option = "viridis", direction = -1) + 
-  scale_color_viridis(option = "viridis", direction = -1)
-
-
-```
 
 
 ## End Notes

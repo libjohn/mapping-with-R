@@ -19,11 +19,11 @@ During the Workshop we introduce
 
 ## Workshop Resource Page
 
-1. [Georeferencing](01_georeference.html):  Plotting XY latitude & longitude
+1. Georeferencing, Plotting XY latitude & longitude: with [interactive leaflet maps](01_georeference.html), with static [ggplot maps](01_ggmap_georef.html)
 
 1. [Choropleths with tidycensus](02_choropleth.html)
 
-1. Thematic Mapping with [Simple Features](030_thematic_sf.html), plus saving map images and files
+1. [Thematic Mapping](030_thematic_sf.html) with `tmap`, `geom_sf`, `tigris`, and `viridis`.  Plus, saving map images and files.
 
 ## Hands-on Exercises
 
