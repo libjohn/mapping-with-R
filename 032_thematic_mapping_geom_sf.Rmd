@@ -1,0 +1,110 @@
+---
+title: "Thematic Mapping with geom_sf"
+output: html_document
+---
+
+
+```{r load-libraries, message=FALSE, warning=FALSE}
+library(tidyverse)       # Tidyverse for Tidy Data
+library(readxl)
+library(tigris)
+library(sf)
+library(viridis)
+library(ggplot2) 
+```
+
+
+## Shapefiles as sf 
+
+Repeating steps from the [previous section](031_thematic_mapping.html), using the `tigris` package, get Census Tiger shapefiles for census geographies.  
+
+```{}
+us_geo <- tigris::states(class = "sf")
+```
+
+## Get BLS data
+
+As mentioned before, the data are from the Bureau of Labor Statistics.  These data are stored in an excel file in the `data` directory of the [repository](https://github.com/libjohn/mapping-with-R):  `data/OES_Report.xlsx`.  
+
+Again, from the previous section you will see how these data were gathered, loaded, transformed, and joined. 
+
+```{}
+Salary4Helpers <- 
+  read_excel("data/OES_Report.xlsx",
+             col_types = c("text", "numeric"), 
+             skip = 4)
+
+Salary4Helpers
+```
+
+## Wrangle the data
+
+As before...  
+
+```{}
+BlsWage_ToJoin <- Salary4Helpers %>% 
+  rename(Area = "Area Name") %>% 
+  rename(wages = "Annual mean wage(2)") %>% 
+  mutate(State = gsub("\\(\\d{7}\\)", "", Area)) %>% 
+  filter(wages != "NA_character_") %>% 
+  select(State, wages)
+```
+
+
+## Append data
+
+As before, using the `append_data()` function of the `tmaptools` package, append BLS data to the previously loaded shape object
+
+```{}
+HelperShapeObject <- append_data(us_geo, BlsWage_ToJoin, 
+                                 key.shp = "NAME",
+                                 key.data = "State")
+as_tibble(HelperShapeObject)
+```
+
+
+## Contiguous 48 states
+
+As before, filter to only the contiguous 48 states + D.C.
+
+```{}
+contiguous_states <- HelperShapeObject %>% 
+  filter(REGION != 9) %>% 
+  filter(STUSPS != "AK") %>% 
+  filter(STUSPS != "HI")
+  
+```
+
+
+
+## Projection
+
+Using the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection for the continental US. `EPSG:5070`
+
+```{}
+contiguous_states %>% 
+  st_transform(5070) %>% 
+  tm_shape() +
+  tm_polygons("wages", id = "Name")
+```
+
+
+## ggplot2 with geom_sf and viridis
+
+In this section we introduce making shapefiles with ggplot2.  ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. I also reveresed the direction of the color scale.  After consulting with my visualization colleagues it seems this may have been a non-standard action on my part.  But I leave the `direction` argument here for the curious.
+
+```{r with-ggplot-geom_sf}
+contiguous_states %>% 
+  ggplot(aes(fill = wages, color = wages)) +
+  geom_sf() +
+  coord_sf(crs = 5070) +
+  scale_fill_viridis(option = "viridis", direction = -1) + 
+  scale_color_viridis(option = "viridis", direction = -1)
+
+
+```
+
+
+## End Notes
+
+This session inspired by  https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html
