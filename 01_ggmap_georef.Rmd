@@ -6,7 +6,7 @@ output: html_document
 ---
 &nbsp;
 
-In this exmaple, build a static map quickly and easily using `ggmap`. The `ggmap` package enables the integration of popular raster base-maps with ggplot2 syntax.  This example
+In this example, build a static map quickly and easily using `ggmap`. The `ggmap` package enables the integration of popular raster base-maps with ggplot2 syntax.  This example
 
 
 ## Load Packages
@@ -36,7 +36,7 @@ starbucksNC <- starbucks  %>%
 
 ### Indentify base map and mapping location
 
-Some of the most popular base maps come from the Google Maps source.  Using ggmap, the following maptypes are available from the Google Maps source ...
+Some of the most popular base maps come from the Google Maps source.  Using ggmap, the following map types are available from the Google Maps source ...
 
 - terrain
 - satellite
@@ -67,7 +67,7 @@ ggmap(get_local_spot) +
 
 ### Frame the Map
 
-Altering the map frame from a square to a rectangle requires knowing the coordinates of the Southwest and Northeast corners of the map frame.  This time, display a different basemapusing the the Stamen source and the Toner maptype.
+Altering the map frame from a square to a rectangle requires knowing the coordinates of the Southwest and Northeast corners of the map frame.  This time, display a different basemap using the the Stamen source and the Toner maptype.
 
 ```{r message=FALSE, warning=FALSE}
 mapbox <- c(-80, 35.6, -78.5, 36.25)
