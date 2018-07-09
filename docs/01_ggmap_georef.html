@@ -406,7 +406,7 @@ div.tocify {
 
 
 <p> </p>
-<p>In this exmaple, build a static map quickly and easily using <code>ggmap</code>. The <code>ggmap</code> package enables the integration of popular raster base-maps with ggplot2 syntax. This example</p>
+<p>In this example, build a static map quickly and easily using <code>ggmap</code>. The <code>ggmap</code> package enables the integration of popular raster base-maps with ggplot2 syntax. This example</p>
 <div id="load-packages" class="section level2">
 <h2>Load Packages</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
@@ -427,7 +427,7 @@ div.tocify {
 <h2>ggmap</h2>
 <div id="indentify-base-map-and-mapping-location" class="section level3">
 <h3>Indentify base map and mapping location</h3>
-<p>Some of the most popular base maps come from the Google Maps source. Using ggmap, the following maptypes are available from the Google Maps source …</p>
+<p>Some of the most popular base maps come from the Google Maps source. Using ggmap, the following map types are available from the Google Maps source …</p>
 <ul>
 <li>terrain</li>
 <li>satellite</li>
@@ -454,7 +454,7 @@ div.tocify {
 </div>
 <div id="frame-the-map" class="section level3">
 <h3>Frame the Map</h3>
-<p>Altering the map frame from a square to a rectangle requires knowing the coordinates of the Southwest and Northeast corners of the map frame. This time, display a different basemapusing the the Stamen source and the Toner maptype.</p>
+<p>Altering the map frame from a square to a rectangle requires knowing the coordinates of the Southwest and Northeast corners of the map frame. This time, display a different basemap using the the Stamen source and the Toner maptype.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mapbox &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">80</span>, <span class="fl">35.6</span>, <span class="op">-</span><span class="fl">78.5</span>, <span class="fl">36.25</span>)
 piedmont_coffee &lt;-<span class="st"> </span><span class="kw">get_map</span>(<span class="dt">location =</span> mapbox, <span class="dt">source =</span> <span class="st">&quot;stamen&quot;</span>, <span class="dt">maptype =</span> <span class="st">&quot;toner&quot;</span>, <span class="dt">zoom =</span> <span class="dv">9</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggmap</span>(piedmont_coffee)</code></pre></div>
