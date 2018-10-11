@@ -391,6 +391,22 @@ div.tocify {
      
   </a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-home"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="https://rfun.library.duke.edu/">Rfun Home</a>
+    </li>
+    <li>
+      <a href="https://library.duke.edu/data/">Data &amp; Visualization Srvc</a>
+    </li>
+  </ul>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -406,7 +422,11 @@ div.tocify {
 
 
 <p> </p>
-<p>In this example, build a static map quickly and easily using <code>ggmap</code>. The <code>ggmap</code> package enables the integration of popular raster base-maps with ggplot2 syntax. This example</p>
+<p>Using the same data as in the <a href="01_georeference.html">previous exercise</a>, <strong>build a static map quickly and easily using <code>ggmap</code></strong>. The <code>ggmap</code> package enables the integration of popular raster base-maps with ggplot2 syntax.</p>
+<p>The examples below documents ggmap syntax, starting with google basemaps as examples. <strong>HOWEVER</strong>, the last examples, <strong>stamen maps, work best.</strong> This is because 2018 changes in the Google Maps API render ggmap for google maps far less convenient than was previously when generating quick static maps. <strong>None the less</strong>, using the <code>ggmap</code> with <em>stamen</em> map features is still an excellent way to generate high contrast black and white maps that are quite useful for printed publications.</p>
+<blockquote>
+<p>Skip to the <a href="#frame_the_map">Frame the Map</a> section to practice workable solutions. Prior sections are useful for learning syntax. (See above for explanation.)</p>
+</blockquote>
 <div id="load-packages" class="section level2">
 <h2>Load Packages</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
@@ -414,7 +434,7 @@ div.tocify {
 </div>
 <div id="load-data" class="section level2">
 <h2>Load Data</h2>
-<p>2012 Starbucks locations</p>
+<p>2012 Starbucks locations (<a href="https://github.com/libjohn/mapping-with-R/blob/master/data/All_Starbucks_Locations_in_the_US_-_Map.csv">data source</a>)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">starbucks &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data/All_Starbucks_Locations_in_the_US_-_Map.csv&quot;</span>)</code></pre></div>
 <div id="subset-data-to-north-carolina" class="section level3">
 <h3>Subset Data to North Carolina</h3>
@@ -444,13 +464,23 @@ div.tocify {
 <div id="display-base-map" class="section level3">
 <h3>Display Base Map</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggmap</span>(get_local_spot)</code></pre></div>
-<p><img src="01_ggmap_georef_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<div class="figure" style="text-align: center">
+<img src="images/gg_google_basemap.png" alt="Base map via ggmap" width="672" />
+<p class="caption">
+Base map via ggmap
+</p>
+</div>
 </div>
 <div id="display-points-with-geom_point" class="section level3">
 <h3>Display points with geom_point</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggmap</span>(get_local_spot) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> starbucksNC, <span class="kw">aes</span>(<span class="dt">x =</span> Longitude, <span class="dt">y =</span> Latitude), <span class="dt">color =</span> <span class="st">&quot;navy&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)</code></pre></div>
-<p><img src="01_ggmap_georef_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="figure" style="text-align: center">
+<img src="images/gg_google_with-points.png" alt="Google map with points added" width="672" />
+<p class="caption">
+Google map with points added
+</p>
+</div>
 </div>
 <div id="frame-the-map" class="section level3">
 <h3>Frame the Map</h3>
@@ -458,7 +488,7 @@ div.tocify {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mapbox &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">80</span>, <span class="fl">35.6</span>, <span class="op">-</span><span class="fl">78.5</span>, <span class="fl">36.25</span>)
 piedmont_coffee &lt;-<span class="st"> </span><span class="kw">get_map</span>(<span class="dt">location =</span> mapbox, <span class="dt">source =</span> <span class="st">&quot;stamen&quot;</span>, <span class="dt">maptype =</span> <span class="st">&quot;toner&quot;</span>, <span class="dt">zoom =</span> <span class="dv">9</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggmap</span>(piedmont_coffee)</code></pre></div>
-<p><img src="01_ggmap_georef_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="01_ggmap_georef_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <div id="plot-coffee-shops" class="section level4">
 <h4>Plot Coffee Shops</h4>
 <p>ggplot2 syntax comes in handy for creating various map views.</p>
@@ -474,7 +504,7 @@ piedmont_coffee &lt;-<span class="st"> </span><span class="kw">get_map</span>(<s
       <span class="dt">rect =</span> <span class="kw">element_blank</span>(),
       <span class="dt">axis.title.y=</span><span class="kw">element_blank</span>(),
       <span class="dt">axis.title.x=</span><span class="kw">element_blank</span>())</code></pre></div>
-<p><img src="01_ggmap_georef_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="01_ggmap_georef_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
 </div>
 </div>

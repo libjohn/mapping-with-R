@@ -41,6 +41,12 @@ navbar:
   right:
   - icon: fa-github
     href: https://github.com/libjohn/mapping-with-R
+  - icon: fa-home
+    menu:
+      - text: "Rfun Home"
+        href: "https://rfun.library.duke.edu/"
+      - text: "Data & Visualization Srvc"
+        href: https://library.duke.edu/data/  
 output:
   html_document:
     theme: flatly

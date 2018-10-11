@@ -6,7 +6,11 @@ output: html_document
 ---
 &nbsp;
 
-Using the same data as in the [previous exercise](01_georeference.html), **build a static map quickly and easily using `ggmap`**. The `ggmap` package enables the integration of popular raster base-maps with ggplot2 syntax.  This example
+Using the same data as in the [previous exercise](01_georeference.html), **build a static map quickly and easily using `ggmap`**. The `ggmap` package enables the integration of popular raster base-maps with ggplot2 syntax.  
+
+The examples below documents ggmap syntax, starting with google basemaps as examples.  **HOWEVER**, the last examples, **stamen maps, work best.**  This is because 2018 changes in the Google Maps API render ggmap for google maps far less convenient than was previously when generating quick static maps.  **None the less**, using the `ggmap` with *stamen* map features is still an excellent way to generate high contrast black and white maps that are quite useful for printed publications.
+
+> Skip to the [Frame the Map](#frame_the_map) section to practice workable solutions.  Prior sections are useful for learning syntax. (See above for explanation.)
 
 
 ## Load Packages
@@ -43,10 +47,9 @@ Some of the most popular base maps come from the Google Maps source.  Using ggma
 - roadmap
 - hybrid
 
-```{r message=FALSE, warning=FALSE}
+``` r 
 get_local_spot <-  get_map("Durham North Carolina", maptype = "roadmap", zoom = 10) 
 ```
-
 Alternatively, use `help(get_map)` to identify additional map sources and other arguments for `maptype`.  For example...
 
 - Stamen maps: "terrain", "watercolor", and "toner" 
@@ -54,15 +57,23 @@ Alternatively, use `help(get_map)` to identify additional map sources and other 
 
 ### Display Base Map
 
-```{r}
+``` r
 ggmap(get_local_spot)
+```
+
+```{r echo=FALSE, fig.align="center", fig.cap="Base map via ggmap"}
+knitr::include_graphics("images/gg_google_basemap.png") 
 ```
 
 ### Display points with geom_point
 
-```{r message=FALSE, warning=FALSE}
+``` r
 ggmap(get_local_spot) + 
   geom_point(data = starbucksNC, aes(x = Longitude, y = Latitude), color = "navy", size = 1)
+```
+
+```{r echo=FALSE, fig.align="center", fig.cap= "Google map with points added"}
+knitr::include_graphics("images/gg_google_with-points.png") 
 ```
 
 ### Frame the Map
