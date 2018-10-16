@@ -10,9 +10,18 @@ This site is built with R Markdown's website feature.  [Read more about websites
     - knit Rmd docs one at a time from within the script editor
     - In console:  `rmarkdown::render_site(encoding = 'UTF-8')`
     
-3. Copy /docs web to the serving location
+3. Hosted by Netlify.com
 
-**UPDATE**:  I've just written this script using `library(fs)` that creates a link from  ~/blogdown/static/map  to the "docs" directory.  This may obviate the need to run step three continuously.  Not sure if I have to run that script (`_ZZ_move_HTML-docs_to_blog-dir.Rmd`) more than once (i.e. after every site "Build" operation.)
+    1. After committing and pushing to github
+    1. Login as the owner of the GitHub repo
+    1. Separate tab, login to Netlify.com
+    1. Associate Netlify New Site deploy with the GitHub Repo
+    1. Associate Netlify to the `docs` subdir of the gitHub repo
+    1. Now each GitHub commit will result in a new deploy on Netlify.
+    1. You May want to check how the domains are handled on Netlify.  And, you may want to check how redirects are handled, e.g. netlify.toml
+
+
+**UPDATE-OLD  No Longer in effect**, but keeping around b/c the code might be useful to me again some day.  This script using `library(fs)` that creates a link from  ~/blogdown/static/map  to the "docs" directory.  This script uses `library(here)` and `library(usethis)` to create a sym-link from one repo to another on my local file system.  But this is clunky and so I've moved to the above, step 3 above. (`_ZZ_move_HTML-docs_to_blog-dir.Rmd`) 
 
     - e.g. github repo served by Netlify
     - in this case:  rfun (blogdown-rfun2 on github)
