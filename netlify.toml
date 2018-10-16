@@ -1,0 +1,10 @@
+# COMMENT: redirect rules with all the fields expanded
+# According to netlify domain management
+# https://app.netlify.com/sites/mapping/settings/domain#custom-domains
+# # Redirect default Netlify subdomain to primary domain
+# https://mapping.netlify.com/* https://map-rfun.library.duke.edu/:splat 301!
+[[redirects]]
+  from = "https://mapping.netlify.com/*"
+  to = "https://map-rfun.library.duke.edu/:splat"
+  status = 301
+  force = true
