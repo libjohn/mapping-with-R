@@ -55,11 +55,10 @@ BlsWage_ToJoin <- Salary4Helpers %>%
 
 As before, using the `append_data()` function of the `tmaptools` package, append BLS data to the previously loaded shape object
 
-```{}
-HelperShapeObject <- append_data(us_geo, BlsWage_ToJoin, 
-                                 key.shp = "NAME",
-                                 key.data = "State")
-as_tibble(HelperShapeObject)
+``` r
+HelperShapeObject <- us_geo %>% 
+  left_join(BlsWage_ToJoin,
+            by = c("NAME" = "State"))
 ```
 
 

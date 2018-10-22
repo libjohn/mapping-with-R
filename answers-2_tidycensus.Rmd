@@ -76,7 +76,7 @@ Make choropleth by filling county polygons (census geography) with correlated va
 census_variable %>%
     st_transform(crs = "+init=epsg:4326") %>%
     leaflet(width = "100%") %>%
-    addProviderTiles(provider = "CartoDB.Positron") %>%
+    addProviderTiles(provider = "Stamen.TonerLines") %>%
     addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
                 stroke = FALSE,
                 smoothFactor = 0,
@@ -130,7 +130,7 @@ MapPalette <- colorBin(palette = "viridis",
 census_variable %>%
     st_transform(crs = "+init=epsg:4326") %>%
     leaflet(width = "100%") %>%
-    addProviderTiles(provider = "CartoDB.Positron") %>%
+    addProviderTiles(provider = "Stamen.TonerLines") %>%
     addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
                 stroke = FALSE,
                 smoothFactor = 0,
@@ -170,7 +170,7 @@ MapPalette <- colorNumeric(palette = "viridis",
 census_variable %>%
     st_transform(crs = "+init=epsg:4326") %>%
     leaflet(width = "100%") %>%
-    addProviderTiles(provider = "CartoDB.Positron") %>%
+    addProviderTiles(provider = "Stamen.TonerLines") %>%
     addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
                 stroke = FALSE,
                 smoothFactor = 0,

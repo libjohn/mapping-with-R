@@ -456,10 +456,9 @@ Salary4Helpers</code></pre>
 <div id="append-data" class="section level2">
 <h2>Append data</h2>
 <p>As before, using the <code>append_data()</code> function of the <code>tmaptools</code> package, append BLS data to the previously loaded shape object</p>
-<pre><code>HelperShapeObject &lt;- append_data(us_geo, BlsWage_ToJoin, 
-                                 key.shp = &quot;NAME&quot;,
-                                 key.data = &quot;State&quot;)
-as_tibble(HelperShapeObject)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HelperShapeObject &lt;-<span class="st"> </span>us_geo <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(BlsWage_ToJoin,
+            <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;NAME&quot;</span> =<span class="st"> &quot;State&quot;</span>))</code></pre></div>
 </div>
 <div id="contiguous-48-states" class="section level2">
 <h2>Contiguous 48 states</h2>
