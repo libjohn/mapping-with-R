@@ -1,14 +1,16 @@
 ---
 title: "Practical Mapping in R:<br>Lat/Lon plotting & Choropleths"
-subtitle: "leaflet, tidycensus, tmap, and sf"
-author: "John Little & Drew Keener"
+subtitle: "leaflet, tidycensus, and sf"
+author: "John Little"
 date: "2018-1-25"
 output:
   xaringan::moon_reader:
     lib_dir: libs
     css: 
       - default
-      - duke_color_pallettes_slides.css
+      - default-fonts
+      - duke-blue
+      - hygge-duke
       - cc-fonts.css
       - figures.css
     nature:
@@ -119,7 +121,7 @@ Packages of interest but not part of this workshop include...
 - `argeos`
 
 ---
-class: green, middle, center
+class: duke-green, middle, center
 
 ## Hands-on
 
@@ -143,7 +145,7 @@ class: green, middle, center
 
 ]
 ---
-class: center, middle, softblue
+class: center, middle, duke-softblue
 
 ## Georeferencing 
 
@@ -163,7 +165,7 @@ background-image:  url(images/xy.png)
 ???
 Image Credit: [GAO](https://www.flickr.com/photos/usgao/8269791489/)
 ---
-class: center, middle, softblue
+class: center, middle, duke-softblue
 
 ## Choropleth 
 
@@ -212,7 +214,7 @@ background-image: url(images/polygons.png)
 - Example of [Census Bureau TIGER Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt) file
 
 ---
-class: center, middle, softblue
+class: center, middle, duke-softblue
 
 ## Thematic Mapping
 
@@ -256,7 +258,7 @@ class: center, middle, softblue
     - `ggplot2::geom_sf`
 
 ---
-class: middle, green
+class: middle, duke-green
 
 ## Save, Write, Output
 
@@ -269,7 +271,7 @@ class: middle, green
     - Integrate an HTML widget into an R Notebook
 
 ---
-class: softblue, middle, center
+class: duke-softblue, middle, center
 
 ## Markdown
 
@@ -328,7 +330,7 @@ Numbered list:
 ]
 
 ---
-class: orange, middle, center
+class: duke-orange, middle, center
 
 ## **Reproducible Research** 
 

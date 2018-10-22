@@ -3,9 +3,11 @@
   <head>
     <title>Practical Mapping in R: Lat/Lon plotting &amp; Choropleths</title>
     <meta charset="utf-8">
-    <meta name="author" content="John Little &amp; Drew Keener" />
-    <link href="libs/remark-css-0.0.1/example.css" rel="stylesheet" />
-    <link rel="stylesheet" href="duke_color_pallettes_slides.css" type="text/css" />
+    <meta name="author" content="John Little" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/duke-blue.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge-duke.css" rel="stylesheet" />
     <link rel="stylesheet" href="cc-fonts.css" type="text/css" />
     <link rel="stylesheet" href="figures.css" type="text/css" />
   </head>
@@ -14,8 +16,8 @@
 class: center, middle, inverse, title-slide
 
 # Practical Mapping in R:<br>Lat/Lon plotting &amp; Choropleths
-## leaflet, tidycensus, tmap, and sf
-### John Little &amp; Drew Keener
+## leaflet, tidycensus, and sf
+### John Little
 ### 2018-1-25
 
 ---
@@ -123,7 +125,7 @@ Packages of interest but not part of this workshop include...
 - `argeos`
 
 ---
-class: green, middle, center
+class: duke-green, middle, center
 
 ## Hands-on
 
@@ -147,7 +149,7 @@ class: green, middle, center
 
 ]
 ---
-class: center, middle, softblue
+class: center, middle, duke-softblue
 
 ## Georeferencing 
 
@@ -167,7 +169,7 @@ background-image:  url(images/xy.png)
 ???
 Image Credit: [GAO](https://www.flickr.com/photos/usgao/8269791489/)
 ---
-class: center, middle, softblue
+class: center, middle, duke-softblue
 
 ## Choropleth 
 
@@ -216,7 +218,7 @@ background-image: url(images/polygons.png)
 - Example of [Census Bureau TIGER Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt) file
 
 ---
-class: center, middle, softblue
+class: center, middle, duke-softblue
 
 ## Thematic Mapping
 
@@ -260,7 +262,7 @@ class: center, middle, softblue
     - `ggplot2::geom_sf`
 
 ---
-class: middle, green
+class: middle, duke-green
 
 ## Save, Write, Output
 
@@ -273,7 +275,7 @@ class: middle, green
     - Integrate an HTML widget into an R Notebook
 
 ---
-class: softblue, middle, center
+class: duke-softblue, middle, center
 
 ## Markdown
 
@@ -332,7 +334,7 @@ Numbered list:
 ]
 
 ---
-class: orange, middle, center
+class: duke-orange, middle, center
 
 ## **Reproducible Research** 
 
@@ -435,15 +437,33 @@ C bn
 "highlightLines": true,
 "countIncrementalSlides": false
 });
-if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
-(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-  }
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
 });
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+})();
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
