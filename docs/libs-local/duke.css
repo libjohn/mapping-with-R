@@ -1,6 +1,7 @@
 a, a > code {
-  color: rgb(161,183,13);
-  text-decoration: none;
+  /* color: rgb(161,183,13);   Daul fixed this */
+  color: rgb(94, 103, 33);
+  text-decoration: underline;
 }
 
 h1, h2, h3 {
@@ -112,3 +113,10 @@ figure {
 br {
   clear: both;
 }  /* Use "clear" in companion with the "figure" styles */
+
+/* Michael helped me with this image placement */
+.picture1 {
+  float: right;
+  margin: 0 0 30px 30px;
+  width: 450px;
+}

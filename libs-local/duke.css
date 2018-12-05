@@ -113,3 +113,10 @@ figure {
 br {
   clear: both;
 }  /* Use "clear" in companion with the "figure" styles */
+
+/* Michael helped me with this image placement */
+.picture1 {
+  float: right;
+  margin: 0 0 30px 30px;
+  width: 450px;
+}
