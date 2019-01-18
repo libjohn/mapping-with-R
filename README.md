@@ -23,3 +23,9 @@ The objective of this workshop is to introduce practical georeferencing (lat/lon
 - [Simple Features for R](https://r-spatial.github.io/sf/index.html)
 - [tmap in a nutshell](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html)
 - [viridis color palettes](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+
+Major Revisions:  
+
+- 2018, Fall
+- 2019, Spring
+
