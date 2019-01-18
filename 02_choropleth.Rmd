@@ -8,10 +8,11 @@ The [tidycensus](https://walkerke.github.io/tidycensus/index.html) package, deve
 
 ```{r libraries, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(tidycensus)
-library(leaflet)
-library(sf)
 library(stringr)
+library(tidycensus)
+library(sf)
+library(leaflet)
+library(mapview)
 ```
 
 ## Census API Key
@@ -52,35 +53,15 @@ nc_pop <-
 
 
 
-## Make Choropleth in Leaflet
+## Make Choropleth via mapview
 
+Identify which variable will be used to create the color ramp shading.  Assign this variable with the `zcol` argument.  The `estimate` variable was extracted via the `tidycensus::get_acs()` function.
 
-Generate a color palette for the colors and legend
-
-```{r colorpalette}
-MapPalette <- colorQuantile(palette = "viridis", domain = nc_pop$estimate, n = 10)
-```
-
-Make choropleth by filling county polygons (census geography) with correlated value (population variable *B01003_001*).  
-
-`st_transform()` - converts coordinate system of simple features
 
 ```{r make_choropleth}
-nc_pop %>%
-    st_transform(crs = "+init=epsg:4326") %>%
-    leaflet(width = "100%") %>%
-    addProviderTiles(provider = "Stamen.TonerLines") %>%
-    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
-                stroke = FALSE,
-                smoothFactor = 0,
-                fillOpacity = 0.7,
-                color = ~ MapPalette(estimate)) %>%
-    addLegend("bottomright", 
-              pal = MapPalette, 
-              values = ~ estimate,
-              title = "Population percentiles",
-              opacity = 1)
+mapview(nc_pop, zcol = "estimate")
 ```
+
 
 ## Add another layer
 
@@ -99,33 +80,32 @@ starbucksNC <- starbucks  %>%
   filter(State == "NC")
 ```
 
-Generate the map with multiple layers.
+Convert the `starbuckNC` dataframe to a spatial (sf) object and assign the same projection as the `nc_pop` spatial object.
 
-```{r add_layer}
-nc_pop %>%
-    st_transform(crs = "+init=epsg:4326") %>%
-    leaflet(width = "100%") %>%
-    addProviderTiles(provider = "Stamen.TonerLines") %>%
-    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
-                stroke = FALSE,
-                smoothFactor = 0,
-                fillOpacity = 0.7,
-                color = ~ MapPalette(estimate)) %>%
-    addLegend("bottomright", 
-              pal = MapPalette, 
-              values = ~ estimate,
-              title = "Population percentiles",
-              opacity = 1) %>% 
-    addTiles() %>% 
-  # The next paragraph adds a layer from exercise 01
-    addCircleMarkers(data = starbucksNC, 
-               lat = ~ Latitude, 
-               lng = ~ Longitude, 
-               popup = starbucksNC$Name,
-               weight = 1,
-               radius = 0.6,
-               opacity = 0.5, 
-               color = "black")
+```{r}
+starbucksNC <- st_as_sf(starbucksNC, coords = c("Longitude", "Latitude"),  crs = st_crs(nc_pop))
+```
+
+
+
+Generate the map with multiple layers.  You can read more about additional arguments such as `homebutton, legend, alpha, cex` in the [`mapview()` documentation](https://r-spatial.github.io/mapview/reference/mapView.html).  Read about the many more mapview functions in the [full documentation](https://r-spatial.github.io/mapview/reference/index.html).
+
+```{r}
+mymap <- mapview(nc_pop, 
+                 zcol = "estimate", 
+                 homebutton = FALSE) + 
+  mapview(starbucksNC, 
+          zcol = "Name", 
+          legend = FALSE, 
+          alpha = 0.5, cex = 3, 
+          homebutton = FALSE) 
+
+addLogo(mymap, "images/Rfun3.png",
+        position = "bottomright",
+        offset.x = 8,
+        offset.y = 38,
+        width = 100,
+        height = 100)
 ```
 
 ##  Census
@@ -153,5 +133,3 @@ In the [*tmap* section](031_thematic_mapping.html) of the [Simple Features modul
 This session based on 
 
 - Kyle Walker's [TidyCensus](https://walkerke.github.io/tidycensus/) package
-    
-- Julia Silge's [leaflet implementation of tidycensus](https://juliasilge.com/blog/using-tidycensus/)

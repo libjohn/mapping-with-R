@@ -6,7 +6,7 @@ output: html_document
 ---
 &nbsp;
 
-To introduce the `library(mapview)` package, make an interactive map with Starbucks coffee shop locations in North Carolina (2012).  (Adapted from Machlis.)^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis]
+To introduce the [`mapview` package](https://r-spatial.github.io/mapview/index.html), make an interactive map with Starbucks coffee shop locations in North Carolina (2012).  (Adapted from Machlis.)^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis]
 
 
 ## Load Libraries
@@ -42,7 +42,9 @@ Transform our standard tibble (i.e. the starbucksNC data frame) into a spacial d
 sbuxsfc <- st_as_sf(starbucksNC, coords = c("Longitude", "Latitude"),  crs=4326)
 ```
 
-Below, you can set the `map.types` argument to `openStreetMap`.  Base maps are set with `map.types`.  For example a high contrast, black and white basemap can be set with the argument `map.types = "Stamen.Toner"`. See avaiable [map types](http://leaflet-extras.github.io/leaflet-providers/preview/), or leave out the map.types argument for a set of default base maps to choose via the layering button.
+## Visualize the Map
+
+Below, you can plot the latitude and longitude coordinate, and set the `map.types` argument to `openStreetMap`.  Base maps are set with `map.types`.  For example a high contrast, black and white basemap can be set with the argument `map.types = "Stamen.Toner"`. See available [map types](http://leaflet-extras.github.io/leaflet-providers/preview/), or leave out the map.types argument for a set of default base maps to choose via the layering button.
 
 ```{r plotmap}
 #mapview(sbuxsfc, map.types = "Stamen.Toner")
@@ -53,7 +55,7 @@ mapview(sbuxsfc)
 
 ## Save the Map
 
-You can save a map as an interalctive HTML page or a static `.png, .pdf, or .jpeg` file with the [`mapshot` function](https://r-spatial.github.io/mapview/reference/mapshot.html).  For example:
+You can save a map as an interactive HTML page or a static `.png, .pdf, or .jpeg` file with the [`mapshot` function](https://r-spatial.github.io/mapview/reference/mapshot.html).  For example:
 
 - `mapshot(starNCmap, file = "map.png")`
 - `mapshot(starNCmap, url = "map.html")`
