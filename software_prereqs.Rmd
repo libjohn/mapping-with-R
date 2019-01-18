@@ -49,6 +49,6 @@ Listed below are the library **(packages) and session info** used to execute the
 
 
 ```{r session-info}
-devtools::session_info()
+sessioninfo::session_info()
 ```
 

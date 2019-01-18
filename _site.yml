@@ -6,7 +6,7 @@ exclude:
 navbar:
   title: Mapping in R
   left:
-  - text: "Home"
+  - text: "Preface"
     menu:
       - text: "Overview"
         href: index.html
@@ -15,11 +15,7 @@ navbar:
       - text: "Next Steps"
         href: next.html
   - text: "Plot Coordinates"
-    menu:
-      - text: Interactive map (leaflet)
-        href: 01_georeference.html
-      - text: Static Map (ggmap)
-        href: 01_ggmap_georef.html
+    href: 01_georeference.html
   - text: "tidycensus"
     href: 02_choropleth.html
   - text: "Thematic Mapping"
