@@ -6,6 +6,8 @@ output: html_document
 ---
 &nbsp;
 
+This page is deprecated.  The `mapview` packages seems to do much of the same thing, and with less effort.  Explore our introduction to the [plotting coordinates with mapview](01_georeference.html).
+
 Using the same data as in the [previous exercise](01_georeference.html), **build a static map quickly and easily using `ggmap`**. The `ggmap` package enables the integration of popular raster base-maps with ggplot2 syntax.  
 
 The examples below documents ggmap syntax, starting with Google basemaps as examples.  **HOWEVER**, the output for the last examples, **stamen maps, work best.**  Google made significant changes to their Maps API in 2018.  Because of this, ggmap for Google maps is less convenient than before, especially when generating quick static maps.  **None the less**, using the `ggmap` with *stamen* map features is still an excellent way to generate high contrast black and white maps that are quite useful for printed publications.
