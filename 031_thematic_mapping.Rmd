@@ -16,11 +16,10 @@ library(sf)
 
 ## Shapefiles as sf 
 
-Using the `tigris` package, get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.  (See also, [more information on Shapefiles](02_choropleth.html#shapefiles).)
+Using the `tigris` package, get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.  
 
 ```{}
 us_geo <- tigris::states(class = "sf")
-# us_geo_spdf <- states()  # spdf uses @data slots -- old school
 ```
 
 ```{r get-data, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
@@ -30,7 +29,7 @@ us_geo <- tigris::states(class = "sf")
 
 ## Data Structure 
 
-The advantage of managing your spatial data as "Simple Features" (i.e. sf) over `sp` is that `sf` data can easily be viewed and manipulated as a rectangular data frame, before visualizing.   `sp` is the predecessor to `sf`, but uses the old school @data slots method.  If you're used to this it can be a highly functional data structure.  But if you're inclined toward the tidyverse method, you'll see your data in a more familiar and easy-to-view format.  Below are two methods of viewing the structure of the downloaded shapefiles.
+The "Simple Features" (`sf`) data structure can easily be viewed and manipulated as a rectangular data frame, before visualizing.   As an historical note -- an `sf` predecessor -- the `sp` data structure uses `@data` slots to hold data.  We'll focus on the `sf` package.  Below are two methods of viewing the structure of the downloaded shapefiles.
 
 ```{r data-structure}
 class(us_geo)
@@ -45,6 +44,18 @@ And as noted, here's the data frame view.  Notice the geometry (polygon shape) i
 ```{r see-tibble}
 as_tibble(us_geo)
 ```
+
+### Quick Plotting
+
+If you want to see a very quick view of your mapping data, you can plot the geometry data with the `plot` function.  In this case we use the `sf::st_geometry()` function to plot only the geometry.  You can quickly generate a faceted map by excluding the `st_geometry` function:  e.g. `plot(us_geo)` but that will consume computation cycles (i.e. wait time).  Therefore, I recommend trying the smaller layer for now.
+
+> **Note:** Census geography for the USA will span the globe in part becuase Region 9 includes a multitude of pacific islands.  Later we will limit to simply the "lower 48" states.
+
+```{r}
+plot(st_geometry(us_geo))
+```
+
+
 
 ## Get BLS data
 
@@ -147,7 +158,7 @@ Mark likes the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection fo
 contiguous_states %>% 
   st_transform(5070) %>% 
   tm_shape() +
-  tm_polygons("wages", id = "Name")
+  tm_polygons("wages", id = "Name") 
 ```
 
 

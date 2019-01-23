@@ -3,6 +3,9 @@ title: "Thematic Mapping: Saving Ouput Files"
 output: html_document
 ---
 
+
+> This page is **deprecated**.  The `mapview` packages deliveres much of the same functionality, and with less effort.  Please explore the introduction to the [saving maps with mapview](01_georeference.html#save_the_map).
+
 On this page we demonstrate two methods of saving map files for sharing.  The first method develops an interactive map that uses the entire web browser as the delivery mechanism.  It's a nice way to maximize screen estate, a desirable feature for maps.  The second method saves the file as a **shapefile**, a broadly portable file standard in GIS analysis.
 
 Please note that I disabled some of the code chunks for efficiency of processing.  The process documented below does work, despite reported feedback errors:  [See the example output](mymap_sasw.html).  This method should work for you as well, all the code is below.  If you download this file from the repository, you'll need to make a simple change to the last two code chunks: re-insert the `r` into the curley braces in the last two code chunks.  

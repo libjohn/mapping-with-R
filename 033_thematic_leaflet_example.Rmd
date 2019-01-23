@@ -5,6 +5,9 @@ output:
     toc: FALSE
 ---
 
+> This page is **deprecated**.  The `mapview` packages deliveres much of the same functionality, and with less effort.  Please explore the introduction to the [plotting coordinates with mapview](01_georeference.html).
+
+
 ```{r}
 library(leaflet)
 ```

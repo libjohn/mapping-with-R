@@ -6,7 +6,7 @@ output: html_document
 ---
 &nbsp;
 
-This page is deprecated.  The `mapview` packages seems to do much of the same thing, and with less effort.  Explore our introduction to the [plotting coordinates with mapview](01_georeference.html).
+> This page is **deprecated**.  The `mapview` packages deliveres much of the same functionality, and with less effort.  Please explore the introduction to the [plotting coordinates with mapview](01_georeference.html).
 
 Using the same data as in the [previous exercise](01_georeference.html), **build a static map quickly and easily using `ggmap`**. The `ggmap` package enables the integration of popular raster base-maps with ggplot2 syntax.  
 

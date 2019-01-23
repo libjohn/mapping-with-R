@@ -480,10 +480,7 @@ div.tocify {
       <a href="039_facet_example.html">ggplot2 &amp; facet mapping</a>
     </li>
     <li>
-      <a href="033_thematic_leaflet_example.html">Interactive</a>
-    </li>
-    <li>
-      <a href="036_thematic_mapping-outputs-fullwebpage.html">Saving / Sharing</a>
+      <a href="01_georeference.html#save_the_map">Saving / Sharing</a>
     </li>
   </ul>
 </li>
@@ -529,9 +526,11 @@ div.tocify {
 
 
 <p>We employ the <a href="//www.tidyverse.org/">Tidyverse</a> approach throughout the <em>Mapping with R</em> workshop and <strong>we assume you are already familiar with <em>Tidyverse</em> R</strong>. If not, please review our <a href="https://rfun.library.duke.edu/intro2r/">Introduction to R</a> in advance of the workshop.</p>
-<p>We will teach in our training lab (023 Bostock) unless otherwise stated in the registration information. The <strong>workstations in the Lab are preconfigured</strong> with all the necessary <a href="#software">software</a> and <a href="#packages">libraries.</a> Therefore, we <em>will not take time to install software or configure personal laptops.</em> All libraries, packages, code, and data are shareable and documented through this website. A link to the repository is in the header.</p>
 <div id="software" class="section level2">
 <h2>Software</h2>
+<blockquote>
+<p>If you need help installing these applications/packages, please refer to these very handy and <a href="https://tutorials.shinyapps.io/00-setup/">brief video installation instructions</a>.</p>
+</blockquote>
 <p><strong>If you are not attending</strong> the workshop <strong>in person</strong>, you will need to install the following software to complete the hands-on portions of the workshop.</p>
 <ul>
 <li><p><strong>R</strong>: <a href="https://cran.r-project.org/"" target="_blank">https://cran.r-project.org/</a></p></li>
@@ -541,24 +540,26 @@ div.tocify {
 <div id="packages" class="section level2">
 <h2>Packages</h2>
 <p>The packages used for this workshop and website are listed in the Session Info section below. <strong>However</strong>, the primary mapping packages include:</p>
-<pre><code>- leaflet
+<pre><code>- tidyverse
+- mapview
+- leaflet
 - tidycensus
 - sf
 - tmap
 - tmaptools
 - tigris
-- ggplot2 (with geom_sf() function.  i.e. development version of ggplot2)
+- ggplot2 
 - viridis</code></pre>
 </div>
 <div id="workshop-philosophy" class="section level2">
 <h2>Workshop Philosophy</h2>
-<p><em>Mapping with R</em> is a two hour workshop, part of the R learning series entitled <a href="//rfun.library.duke.edu/"><em>R We Having Fun Yet‽</em></a> hosted by the <a href="//library.duke.edu/data/">Data &amp; Visualization Services Department</a> at the Duke University Libraries. We will approach R using the free RStudio IDE, an intent to make reproducible literate code, and a bias towards the tidyverse. We believe this open tool-set provides a context that enables and reinforces reproducible workflows, analysis, and reporting.</p>
+<p><em>Mapping with R</em> is a two hour workshop, part of the R learning series entitled <a href="https://rfun.library.duke.edu/"><em>R We Having Fun Yet‽</em></a> hosted by the <a href="https://library.duke.edu/data/">Data &amp; Visualization Services Department</a> at the Duke University Libraries. We will approach R using the free RStudio IDE, an intent to make reproducible literate code, and a bias towards the tidyverse. We believe this open tool-set provides a context that enables and reinforces reproducible workflows, analysis, and reporting.</p>
 <p>As part of the workshop we create opportunities for reinforced active learning by creating <a href="exercises.html">hands-on exercises</a>. You will have time to complete these exercises during the workshop.</p>
 </div>
 <div id="recordings-repository-shareable-datasets" class="section level2">
 <h2>Recordings, Repository, Shareable datasets</h2>
 <p>There’s a link to the repository in the upper right-hand header.</p>
-<p>You can find links to previous recordings of this workshop, along with links to the shareable data sets, at the <a href="//rfun.library.duke.edu/categories/mapping/">mapping section</a> of the Rfun site. Similarly, you will find links to our broader array of workshop resources at the the <em>Guides</em> or <em>Workshops</em> sections of our <a href="//library.duke.edu/data/">DVS website</a></p>
+<p>You can find links to previous recordings of this workshop, along with links to the shareable data sets, at the <a href="https://rfun.library.duke.edu/portfolio/mapping_workshop/">mapping section</a> of the Rfun site. Similarly, you will find links to our broader array of workshop resources at the the <em>Guides</em> or <em>Workshops</em> sections of our <a href="https://library.duke.edu/data/">DVS website</a></p>
 <p>All code and data for this website and workshop are shareable through the repository under the <a href="license.html">CC-By-NC license</a>.</p>
 </div>
 <div id="session-info" class="section level2">
@@ -575,7 +576,7 @@ div.tocify {
 ##  collate  English_United States.1252  
 ##  ctype    English_United States.1252  
 ##  tz       America/New_York            
-##  date     2019-01-22                  
+##  date     2019-01-23                  
 ## 
 ## - Packages --------------------------------------------------------------
 ##  package      * version   date       lib source        

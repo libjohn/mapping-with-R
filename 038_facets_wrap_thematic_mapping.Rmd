@@ -342,4 +342,3 @@ tall %>%
 ```{r save_it}
 ggsave("facet_map.png", width = 8, height = 8, units = "in")
 ```
-

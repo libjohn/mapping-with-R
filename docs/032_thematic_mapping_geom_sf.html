@@ -480,10 +480,7 @@ div.tocify {
       <a href="039_facet_example.html">ggplot2 &amp; facet mapping</a>
     </li>
     <li>
-      <a href="033_thematic_leaflet_example.html">Interactive</a>
-    </li>
-    <li>
-      <a href="036_thematic_mapping-outputs-fullwebpage.html">Saving / Sharing</a>
+      <a href="01_georeference.html#save_the_map">Saving / Sharing</a>
     </li>
   </ul>
 </li>
@@ -586,11 +583,11 @@ Salary4Helpers</code></pre>
 </div>
 <div id="ggplot2-with-geom_sf-and-viridis" class="section level2">
 <h2>ggplot2 with geom_sf and viridis</h2>
-<p>In this section we introduce making shapefiles with ggplot2. ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. I also reveresed the direction of the color scale. After consulting with my visualization colleagues it seems this may have been a non-standard action on my part. But I leave the <code>direction</code> argument here for the curious.</p>
+<p>In this section we introduce making shapefiles with ggplot2. ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. I also reversed the direction of the color scale. After consulting with my visualization colleagues it seems this may have been a non-standard action on my part. But, I leave the <code>direction</code> argument here for the curious. Finally, please note the easiest way to remove the <a href="https://en.wikipedia.org/wiki/Graticule">graticules</a> is as follows: <code>coords_sf(datum = NA)</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">contiguous_states <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> wages, <span class="dt">color =</span> wages)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span>
-<span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">5070</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">5070</span>, <span class="dt">datum =</span> <span class="ot">NA</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
 <p><img src="032_thematic_mapping_geom_sf_files/figure-html/with-ggplot-geom_sf-1.png" width="672" /></p>

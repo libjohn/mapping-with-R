@@ -90,17 +90,15 @@ contiguous_states %>%
 
 ## ggplot2 with geom_sf and viridis
 
-In this section we introduce making shapefiles with ggplot2.  ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. I also reveresed the direction of the color scale.  After consulting with my visualization colleagues it seems this may have been a non-standard action on my part.  But I leave the `direction` argument here for the curious.
+In this section we introduce making shapefiles with ggplot2.  ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. I also reversed the direction of the color scale.  After consulting with my visualization colleagues it seems this may have been a non-standard action on my part.  But, I leave the `direction` argument here for the curious.  Finally, please note the easiest way to remove the [graticules](https://en.wikipedia.org/wiki/Graticule) is as follows:  `coords_sf(datum = NA)` 
 
 ```{r with-ggplot-geom_sf}
 contiguous_states %>% 
   ggplot(aes(fill = wages, color = wages)) +
   geom_sf() +
-  coord_sf(crs = 5070) +
+  coord_sf(crs = 5070, datum = NA) +
   scale_fill_viridis(option = "viridis", direction = -1) + 
   scale_color_viridis(option = "viridis", direction = -1)
-
-
 ```
 
 

@@ -28,10 +28,8 @@ navbar:
         href: 032_thematic_mapping_geom_sf.html
       - text: "ggplot2 & facet mapping"
         href: 039_facet_example.html
-      - text: "Interactive"
-        href: 033_thematic_leaflet_example.html
       - text: "Saving / Sharing"
-        href: 036_thematic_mapping-outputs-fullwebpage.html
+        href: 01_georeference.html#save_the_map
   - text: Exercises
     href: exercises.html
   right:
