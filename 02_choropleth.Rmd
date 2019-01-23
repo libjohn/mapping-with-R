@@ -82,13 +82,11 @@ starbucksNC <- starbucks  %>%
 
 Convert the `starbuckNC` dataframe to a spatial (sf) object and assign the same projection as the `nc_pop` spatial object.
 
-```{r}
+```{r convert2sf}
 starbucksNC <- st_as_sf(starbucksNC, coords = c("Longitude", "Latitude"),  crs = st_crs(nc_pop))
 ```
 
-
-
-Generate the map with multiple layers.  You can read more about additional arguments such as `homebutton, legend, alpha, cex` in the [`mapview()` documentation](https://r-spatial.github.io/mapview/reference/mapView.html).  Read about the many more mapview functions in the [full documentation](https://r-spatial.github.io/mapview/reference/index.html).
+Generate the map with multiple layers.  You can read more about additional arguments such as `homebutton, legend, alpha, cex` in the [`mapview()` documentation](https://r-spatial.github.io/mapview/reference/mapView.html).  Read about the many more mapview functions in the [full documentation](https://r-spatial.github.io/mapview/reference/).
 
 ```{r}
 mymap <- mapview(nc_pop, 
@@ -98,6 +96,7 @@ mymap <- mapview(nc_pop,
           zcol = "Name", 
           legend = FALSE, 
           alpha = 0.5, cex = 3, 
+          col.regions = "orange",
           homebutton = FALSE) 
 
 addLogo(mymap, "images/Rfun3.png",
@@ -108,9 +107,11 @@ addLogo(mymap, "images/Rfun3.png",
         height = 100)
 ```
 
+
+
 ##  Census
 
-During the workshop, and in the video recording, I will discuss the following concepts in more detail.
+During the workshop I will discuss the following concepts in more detail.
 
 - ACS v Decennial
 - Variable Names / Numbers
@@ -118,7 +119,7 @@ During the workshop, and in the video recording, I will discuss the following co
 
 ### Variables
 
-The Census is a very large collection of data.  Many casual users of Census data are interested in a single data point, for example population by County.  Given the complexity and richness of available Census data, finding a useful data variable can be quite a bit of work.  The links below are a some methods one might use to associate and identify the proper code name with a Census data variable.
+The Census is a very large collection of data.  Many casual users of Census data are interested in a single data point, for example population by County.  Given the complexity and richness of available Census data, finding a useful data variable can be quite a bit of work.  The links below are a some methods one might use to identify the proper code name with a Census data variable.
 
 - [Searching for Variables](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables)
 - See Also [Tiger Metadata](https://www2.census.gov/geo/tiger/TIGER_DP/2015ACS/Metadata/STATE_METADATA_2015.txt)
