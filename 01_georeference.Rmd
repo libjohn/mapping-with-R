@@ -23,7 +23,7 @@ library(mapview)
 2012 Starbucks locations ([data source](https://github.com/libjohn/mapping-with-R/blob/master/data/All_Starbucks_Locations_in_the_US_-_Map.csv))
 
 ```{r load-data, message=FALSE, warning=FALSE}
-starbucks <- read_csv("data/All_Starbucks_Locations_in_the_US_-_Map.csv")
+starbucks <- read_csv("https://raw.githubusercontent.com/libjohn/mapping-with-R/master/data/All_Starbucks_Locations_in_the_US_-_Map.csv")
 ```
 
 ### Subset Data to North Carolina
@@ -34,21 +34,29 @@ starbucksNC <- starbucks  %>%
 starbucksNC
 ```
 
-## Transform to Spatial Data
+## Make the Map
 
-Transform our standard tibble (i.e. the starbucksNC data frame) into a spacial data frame via the simple features function, `st_as_sf()`. Here we set the [map projection](https://en.wikipedia.org/wiki/Map_projection) to a common standard, WGS84, via the argument `crs = 4326`.)
+In this example, plot latitude (y coordinates) and longitude (x coordinates), then set the map projection to a common projection standard, WGS84, via the argument `crs = 4326`.)
 
-```{r convert2spacial}
-sbuxsfc <- st_as_sf(starbucksNC, coords = c("Longitude", "Latitude"),  crs=4326)
+```{r map1}
+mapview(starbucksNC, xcol = "Longitude", ycol = "Latitude", crs = 4269, grid = FALSE)
 ```
 
-## Visualize the Map
+## Alternative: Transform data to Spatial object
+
+Another way to plot the x & y coordinates is by transforming the starbucksNC tibble (i.e. the starbucksNC data frame) into a spacial data frame via the simple features function, `st_as_sf()`. It's important to set the [map projection](https://en.wikipedia.org/wiki/Map_projection) to a common standard, WGS84, via the argument `crs = 4326`.)
+
+```{r convert2spacial}
+sbux_sf <- st_as_sf(starbucksNC, coords = c("Longitude", "Latitude"),  crs=4326)
+```
+
+### Now Map the sf object.
 
 Below, you can plot the latitude and longitude coordinate, and set the `map.types` argument to `openStreetMap`.  Base maps are set with `map.types`.  For example a high contrast, black and white basemap can be set with the argument `map.types = "Stamen.Toner"`. See available [map types](http://leaflet-extras.github.io/leaflet-providers/preview/), or leave out the map.types argument for a set of default base maps to choose via the layering button.
 
 ```{r plotmap}
 #mapview(sbuxsfc, map.types = "Stamen.Toner")
-mapview(sbuxsfc)
+mapview(sbux_sf)
 ```
 
 
