@@ -7,7 +7,7 @@ output:
 
 [**Slides**](/slides/)
 
-[Code for Hands-on Workshop -- Fall 2018](https://github.com/libjohn/map-fall2018)
+[Code for Hands-on Workshop -- Fall 2018](https://github.com/libjohn/map-spring2019)
 
 ## Overview
 
