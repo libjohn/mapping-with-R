@@ -471,13 +471,13 @@ div.tocify {
       <a href="030_thematic_sf.html">Overview</a>
     </li>
     <li>
-      <a href="031_thematic_mapping.html">tmap</a>
-    </li>
-    <li>
       <a href="032_thematic_mapping_geom_sf.html">ggplot2 &amp; geom_sf</a>
     </li>
     <li>
       <a href="039_facet_example.html">ggplot2 &amp; facet mapping</a>
+    </li>
+    <li>
+      <a href="031_thematic_mapping.html">tmap</a>
     </li>
     <li>
       <a href="01_georeference.html#save_the_map">Saving / Sharing</a>
@@ -533,63 +533,63 @@ div.tocify {
 <span class="kw">library</span>(ggplot2) </code></pre></div>
 <div id="shapefiles-as-sf" class="section level2">
 <h2>Shapefiles as sf</h2>
-<p>Repeating steps from the <a href="031_thematic_mapping.html">previous section</a>, using the <code>tigris</code> package, get Census Tiger shapefiles for census geographies.</p>
-<pre><code>us_geo &lt;- tigris::states(class = &quot;sf&quot;)</code></pre>
+<p>Repeating steps from the <a href="031_thematic_mapping.html">previous section</a>, using the <code>tigris</code> package, get Census Tiger shapefiles for census geographies. Coastal boundaries can be gathered with the tigris argument: <code>cb = TRUE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">us_geo &lt;-<span class="st"> </span>tigris<span class="op">::</span><span class="kw">states</span>(<span class="dt">class =</span> <span class="st">&quot;sf&quot;</span>, <span class="dt">cb =</span> <span class="ot">TRUE</span>)</code></pre></div>
 </div>
 <div id="get-bls-data" class="section level2">
 <h2>Get BLS data</h2>
 <p>As mentioned before, the data are from the Bureau of Labor Statistics. These data are stored in an excel file in the <code>data</code> directory of the <a href="https://github.com/libjohn/mapping-with-R">repository</a>: <code>data/OES_Report.xlsx</code>.</p>
 <p>Again, from the previous section you will see how these data were gathered, loaded, transformed, and joined.</p>
-<pre><code>Salary4Helpers &lt;- 
-  read_excel(&quot;data/OES_Report.xlsx&quot;,
-             col_types = c(&quot;text&quot;, &quot;numeric&quot;), 
-             skip = 4)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Salary4Helpers &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">read_excel</span>(<span class="st">&quot;data/OES_Report.xlsx&quot;</span>,
+             <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;numeric&quot;</span>), 
+             <span class="dt">skip =</span> <span class="dv">4</span>)
 
-Salary4Helpers</code></pre>
+Salary4Helpers</code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Area Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Annual mean wage(2)"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alabama(0100000)","2":"38080"},{"1":"Alaska(0200000)","2":"46050"},{"1":"Arizona(0400000)","2":"34560"},{"1":"Arkansas(0500000)","2":"40480"},{"1":"California(0600000)","2":"64320"},{"1":"Colorado(0800000)","2":"43480"},{"1":"Connecticut(0900000)","2":"60450"},{"1":"Delaware(1000000)","2":"54450"},{"1":"District of Columbia(1100000)","2":"57210"},{"1":"Florida(1200000)","2":"43410"},{"1":"Georgia(1300000)","2":"52750"},{"1":"Guam(6600000)","2":"40080"},{"1":"Hawaii(1500000)","2":"57290"},{"1":"Idaho(1600000)","2":"39580"},{"1":"Illinois(1700000)","2":"53240"},{"1":"Indiana(1800000)","2":"42100"},{"1":"Iowa(1900000)","2":"45380"},{"1":"Kansas(2000000)","2":"41050"},{"1":"Kentucky(2100000)","2":"38130"},{"1":"Louisiana(2200000)","2":"37270"},{"1":"Maine(2300000)","2":"59360"},{"1":"Maryland(2400000)","2":"47560"},{"1":"Massachusetts(2500000)","2":"44960"},{"1":"Michigan(2600000)","2":"49420"},{"1":"Minnesota(2700000)","2":"49310"},{"1":"Mississippi(2800000)","2":"34880"},{"1":"Missouri(2900000)","2":"35510"},{"1":"Montana(3000000)","2":"37710"},{"1":"Nebraska(3100000)","2":"36620"},{"1":"Nevada(3200000)","2":"57460"},{"1":"New Hampshire(3300000)","2":"51320"},{"1":"New Jersey(3400000)","2":"71600"},{"1":"New Mexico(3500000)","2":"37420"},{"1":"New York(3600000)","2":"56430"},{"1":"North Carolina(3700000)","2":"46490"},{"1":"North Dakota(3800000)","2":"50270"},{"1":"Ohio(3900000)","2":"41190"},{"1":"Oklahoma(4000000)","2":"35430"},{"1":"Oregon(4100000)","2":"46330"},{"1":"Pennsylvania(4200000)","2":"37600"},{"1":"Puerto Rico(7200000)","2":"23050"},{"1":"Rhode Island(4400000)","2":"47420"},{"1":"South Carolina(4500000)","2":"34680"},{"1":"South Dakota(4600000)","2":"36980"},{"1":"Tennessee(4700000)","2":"35540"},{"1":"Texas(4800000)","2":"42790"},{"1":"Utah(4900000)","2":"47140"},{"1":"Vermont(5000000)","2":"40150"},{"1":"Virginia(5100000)","2":"49250"},{"1":"Washington(5300000)","2":"51980"},{"1":"West Virginia(5400000)","2":"30920"},{"1":"Wisconsin(5500000)","2":"46220"},{"1":"Wyoming(5600000)","2":"56110"},{"1":"NA","2":"NA"},{"1":"(2)Annual wages have been calculated by multiplying the hourly mean wage by 2,080 hours.","2":"NA"},{"1":"NA","2":"NA"},{"1":"SOC code: Standard Occupational Classification code -- see http://www.bls.gov/soc/home.htm","2":"NA"},{"1":"Date extracted on :Sep 25, 2017","2":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 <div id="wrangle-the-data" class="section level2">
 <h2>Wrangle the data</h2>
 <p>As before…</p>
-<pre><code>BlsWage_ToJoin &lt;- Salary4Helpers %&gt;% 
-  rename(Area = &quot;Area Name&quot;) %&gt;% 
-  rename(wages = &quot;Annual mean wage(2)&quot;) %&gt;% 
-  mutate(State = gsub(&quot;\\(\\d{7}\\)&quot;, &quot;&quot;, Area)) %&gt;% 
-  filter(wages != &quot;NA_character_&quot;) %&gt;% 
-  select(State, wages)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">BlsWage_ToJoin &lt;-<span class="st"> </span>Salary4Helpers <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">wages =</span> <span class="st">&quot;Annual mean wage(2)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">State =</span> <span class="kw">str_extract</span>(<span class="st">`</span><span class="dt">Area Name</span><span class="st">`</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">w+.*(?=</span><span class="ch">\\</span><span class="st">()&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">drop_na</span>(wages) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(State, wages)</code></pre></div>
 </div>
-<div id="append-data" class="section level2">
-<h2>Append data</h2>
-<p>As before, using the <code>append_data()</code> function of the <code>tmaptools</code> package, append BLS data to the previously loaded shape object</p>
+<div id="join-data" class="section level2">
+<h2>Join data</h2>
+<p>Use the <code>dplyr::left_join</code> function to append BLS variable to the <code>sf</code> tibble (data frame).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">HelperShapeObject &lt;-<span class="st"> </span>us_geo <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">left_join</span>(BlsWage_ToJoin,
             <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;NAME&quot;</span> =<span class="st"> &quot;State&quot;</span>))</code></pre></div>
 </div>
 <div id="contiguous-48-states" class="section level2">
 <h2>Contiguous 48 states</h2>
-<p>As before, filter to only the contiguous 48 states + D.C.</p>
-<pre><code>contiguous_states &lt;- HelperShapeObject %&gt;% 
-  filter(REGION != 9) %&gt;% 
-  filter(STUSPS != &quot;AK&quot;) %&gt;% 
-  filter(STUSPS != &quot;HI&quot;)
-  </code></pre>
-</div>
-<div id="projection" class="section level2">
-<h2>Projection</h2>
-<p>Using the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection for the continental US. <code>EPSG:5070</code></p>
-<pre><code>contiguous_states %&gt;% 
-  st_transform(5070) %&gt;% 
-  tm_shape() +
-  tm_polygons(&quot;wages&quot;, id = &quot;Name&quot;)</code></pre>
+<p>Filter to only the contiguous 48 states + D.C.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">contiguous_states &lt;-<span class="st"> </span>HelperShapeObject <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(GEOID <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;AK&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;HI&quot;</span>)</code></pre></div>
 </div>
 <div id="ggplot2-with-geom_sf-and-viridis" class="section level2">
 <h2>ggplot2 with geom_sf and viridis</h2>
-<p>In this section we introduce making shapefiles with ggplot2. ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. I also reversed the direction of the color scale. After consulting with my visualization colleagues it seems this may have been a non-standard action on my part. But, I leave the <code>direction</code> argument here for the curious. Finally, please note the easiest way to remove the <a href="https://en.wikipedia.org/wiki/Graticule">graticules</a> is as follows: <code>coords_sf(datum = NA)</code></p>
+<p>In this section we introduce making shapefiles with ggplot2. ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. (<a href="https://rfun.library.duke.edu/#portfolio">Learn more</a> about ggplot2.</p>
+<p>In this plot I reversed the direction of the color scale. After consulting with my visualization colleagues it seems this may have been a non-standard action on my part. But, I leave the <code>direction</code> argument here for the curious.</p>
+<p>Use a pleasing projection, in this case assigned the crs projection to ‘5070’ (<code>coord_sf(crs = 5070)</code>), and removed the gridlines (i.e <a href="https://en.wikipedia.org/wiki/Graticule">graticules</a>) <code>coords_sf(datum = NA)</code></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">contiguous_states <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> wages, <span class="dt">color =</span> wages)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">5070</span>, <span class="dt">datum =</span> <span class="ot">NA</span>) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>, <span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>)</code></pre></div>
+<span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>, <span class="dt">label =</span> scales<span class="op">::</span>dollar) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">direction =</span> <span class="op">-</span><span class="dv">1</span>, <span class="dt">label =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Annual Mean Wages by State&quot;</span>,
+       <span class="dt">subtitle =</span> <span class="st">&quot;Mental Health and Substance Abuse Social Workers(SOC Code211023)&quot;</span>, 
+       <span class="dt">caption =</span> <span class="st">&quot;Data Source: BLS.gov - Occupational Employment Statistics ; 2016&quot;</span>)</code></pre></div>
 <p><img src="032_thematic_mapping_geom_sf_files/figure-html/with-ggplot-geom_sf-1.png" width="672" /></p>
 </div>
 <div id="end-notes" class="section level2">

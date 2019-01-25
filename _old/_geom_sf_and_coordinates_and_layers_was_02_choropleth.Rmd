@@ -1,0 +1,166 @@
+---
+title: "some work with geom_sf and coordinates -- formerly TidyCensus"
+---
+
+
+Goal:  Make a choropleth with census data
+
+- define choropleth
+- define polygons
+- define census geography
+- Briefly Introduce ACS and decennial census 
+
+    - census key 
+
+
+```{r libraries, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidycensus)
+library(leaflet)
+library(sf)
+library(stringr)
+```
+
+
+## Create a Simple Features dataframe using TidyCensus
+```{r load-data, message=FALSE, warning=FALSE}
+nc_pop <- 
+  get_acs(geography = "county",
+          variables = "B01003_001",
+          state = "NC",
+          geometry = TRUE)
+
+as_tibble(nc_pop)
+```
+
+
+
+
+## Make Choropleth in Leaflet
+
+Generate a color palette for the colors and legend
+
+```{r colorpalette}
+MapPalette <- colorQuantile(palette = "viridis", domain = nc_pop$estimate, n = 10)
+```
+
+## Leaflet Example
+
+Make choropleth by filling county polygons (census geography) with correlated value (population variable *B01003_001*)
+
+`st_transform()` - converts coordinate system of simple features
+
+```{r make_choropleth}
+nc_pop %>%
+    st_transform(crs = "+init=epsg:4326") %>%
+    leaflet(width = "100%") %>%
+    addProviderTiles(provider = "CartoDB.Positron") %>%
+    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
+                stroke = FALSE,
+                smoothFactor = 0,
+                fillOpacity = 0.7,
+                color = ~ MapPalette(estimate)) %>%
+    addLegend("bottomright", 
+              pal = MapPalette, 
+              values = ~ estimate,
+              title = "Population percentiles",
+              opacity = 1)
+```
+
+## ggplot::geom_sf & ggmap
+
+```{r message=FALSE, warning=FALSE}
+library(ggmap)
+library(ggplot2)
+```
+
+###  Get ggmap
+
+```{r get_ggmap}
+nc_via_ggmap <- get_map("burlington, NC", 
+                        source = "google", 
+                        maptype = "roadmap", 
+                        zoom = 7)
+ggmap(nc_via_ggmap)
+```
+
+### ggplot::geom_sf
+
+
+```{r ggplot_sf}
+
+nc_pop %>%
+  ggplot(aes(fill = estimate, color = estimate)) +
+  #geom_sf(show.legend = TRUE) +
+  geom_sf() +
+  coord_sf(crs = 3632) +
+  # coord_sf(crs = st_crs(nc))
+  theme(panel.background = element_rect(fill = "transparent"),
+        panel.grid.major = element_line(color = "transparent"),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks = element_blank()) #+
+  #guides(fill = guide_legend(title = "foo"))
+
+```
+
+## Riffing 1
+
+From: https://blog.dominodatalab.com/geographic-visualization-with-rs-ggmaps/
+
+
+```{r}
+
+nc_center = as.numeric(geocode("North Carolina"))
+
+nc_ggmap <- ggmap(get_googlemap(center = nc_center, 
+                                scale=2, 
+                                zoom=6), 
+                  extent="normal")
+
+nc_ggmap
+```
+
+
+## Riff 2
+
+### Getmap Raster Map from ggmap
+
+```{r}
+nc_basemap <- get_map(location="Burlington, NC", zoom=7, maptype = 'satellite')
+
+ggmap(nc_basemap)
+```
+
+### Add a layer
+
+```{r}
+
+#ggmap(nc_basemap) +
+#  ggplot(aes(fill = estimate, color = estimate)) +
+#  geom_sf
+
+# aes(x=long, lat, group = group, fill = cut_number(HOMIC_R, 5))
+
+nc_wgs84 <-  nc_pop %>%
+  ggplot(aes(fill = estimate, color = estimate)) +
+  geom_sf() +
+  coord_sf(crs = 4326)
+
+nc_wgs84
+
+#ggmap(nc_basemap) +
+#  geom_polygon(data = nc_wgs84,
+#               x = long,
+#               y = lat,
+#               group = group,
+#               fill = estimate) +
+  #ggplot(data = nc_wgs84,
+  #       aes(fill = estimate, 
+  #           color = estimate)
+  #       ) +
+ # geom_sf()
+
+
+```
+

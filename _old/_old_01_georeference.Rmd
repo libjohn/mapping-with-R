@@ -1,0 +1,49 @@
+---
+title: Latitude and Longitude Coordinates
+output: html_document
+#  html_document:
+#    toc: FALSE
+---
+&nbsp;
+
+Introducing the `library(leaflet)` Use 5 lines of code to make an interactive map (Adapted from Machlis.)^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis]
+
+
+## Load Libraries
+
+```{r libraries, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(leaflet)
+```
+
+## Load Data
+
+2012 Starbucks locations ([data source](https://github.com/libjohn/mapping-with-R/blob/master/data/All_Starbucks_Locations_in_the_US_-_Map.csv))
+
+```{r load-data, message=FALSE, warning=FALSE}
+starbucks <- read_csv("data/All_Starbucks_Locations_in_the_US_-_Map.csv")
+```
+
+### Subset Data to North Carolina
+```{r filter-dataset, message=FALSE, warning=FALSE}
+starbucksNC <- starbucks  %>% 
+  filter(State == "NC")
+
+starbucksNC
+```
+
+
+## Plot Lat and Lon on a Map
+
+Using the `leaflet` function, plot the latitude and longitude on a basemap.  Latitude is *Y*, Longitude is *X*.
+
+```{r plotmap}
+starbucksNC %>% 
+  leaflet(width = "100%") %>% 
+  addTiles() %>% 
+  setView(-78.8310, 35.9867, zoom = 10) %>% 
+  addMarkers(lat = ~Latitude, 
+             lng = ~Longitude, 
+             popup = starbucksNC$Name)
+```
+

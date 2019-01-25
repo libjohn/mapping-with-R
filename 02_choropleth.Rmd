@@ -8,9 +8,8 @@ The [tidycensus](https://walkerke.github.io/tidycensus/index.html) package, deve
 
 ```{r libraries, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(stringr)
-library(tidycensus)
 library(sf)
+library(tidycensus)
 library(leaflet)
 library(mapview)
 ```
@@ -105,6 +104,30 @@ addLogo(mymap, "images/Rfun3.png",
         offset.y = 38,
         width = 100,
         height = 100)
+```
+
+
+## Alaska & Hawaii - Shift 
+
+Shift and re-scale Alaska and Hawaii for better cartographic display of the entire US.
+
+```{r shiftgeoakhi, message=FALSE, warning=FALSE}
+
+population <- get_acs(geography = "state",
+                variables = "B01003_001",
+                geometry = TRUE,
+                shift_geo = TRUE)
+
+ 
+```
+
+
+```{r buildshift, message=FALSE, warning=FALSE}
+mapviewOptions(legend.pos = "bottomright")
+mapviewOptions(leafletWidth = 800)
+#mapviewOptions()
+#mapviewOptions(default = TRUE)
+mapview(poopulation, zcol = "estimate", native.crs = TRUE, crs = 5070)
 ```
 
 

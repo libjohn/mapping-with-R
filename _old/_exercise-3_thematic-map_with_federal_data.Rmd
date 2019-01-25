@@ -1,0 +1,16 @@
+---
+title: "Excercise 3 -- make a thematic map via simple features"
+---
+
+1. Make a choropleth of the data using either ggplot2, tmap, or leaflet.  Use the knowledge you gained in the **Simple Features** module.
+
+    a. For example, download your own BLS data (See [Get BLS Data](031_thematic_mapping.html#get_bls_data) in the  **Basic Thematic Mapping** sectin of the [Simple Features](030_thematic_sf.html) module).  Another option for getting data is to review Ari Lamstein's nice blog entry summarizing some [federal agency data](https://www.arilamstein.com/blog/2017/09/18/datasets-building-data-analysis-portfolio/).  
+    b. Gather appropriate shapefile data using the tigris package ([documentation](https://github.com/walkerke/tigris#tigris))
+    c. Practice methods of saving the maps as a file.
+    
+    
+    
+```{r}
+
+```
+

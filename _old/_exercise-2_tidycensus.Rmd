@@ -1,0 +1,86 @@
+---
+title: "Exercise 2: Choropleths with tidycensus"
+---
+
+## Load Libraries
+```{r}
+library(tidyverse)
+library(tidycensus)
+library(leaflet)
+library(sf)
+library(stringr)
+```
+
+## Set API key
+
+Insert your own API Key.  You may request a free key from the Census API tool https://api.census.gov/data/key_signup.html
+
+```{r}
+# census_api_key("long-string-of-numbers-from-census-api-key-generator")
+```
+
+
+## Choose a census variable
+
+I recommend using one of the following variables.  However, you can use the `tidycensus::load_variables()` and follow the "Searching for variables" [instructions](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables). 
+
+- `B19013_001E` - median household income
+- `B08131_001E`	- AGGREGATE TRAVEL TIME TO WORK (IN MINUTES) OF WORKERS BY PLACE OF WORK--STATE AND COUNTY LEVEL: Worked in State of residence: Workers 16 years and over who did not work at home -- (Estimate)
+- `B08103_001E` - MEDIAN AGE BY MEANS OF TRANSPORTATION TO WORK: Total: Taxicab, motorcycle, bicycle, or other means: Workers 16 years and over -- (Estimate)
+
+
+## get_acs()
+
+Load the variable and assign and object name for some USA county using the `get_acs` function.
+
+```{r}
+census_variable <- 
+  get_acs(geography = "",
+          variables = "",
+          state = "",
+          geometry = TRUE)
+
+```
+
+
+
+
+## Make Choropleth in Leaflet
+
+
+### Generate a Palette
+Using the *estimate* variable in the census_variable object, generate a MapPalette using the `leaflet::colorBin` function.
+
+```{r}
+MapPalette <- colorBin(palette = "viridis",
+                       domain = ,
+                       bins = )
+```
+
+
+### Make Leaflet choropleth
+
+Make choropleth by filling county polygons (census geography) with correlated value (from the ACS)
+
+1. Start with your "census_variable"
+2. Set crs projection using `st_transform()` to EPSG "4326"
+3. Pipe this to `leaflet()`
+4. Assign the basemap with `addProviderTiles(provider = "CartoDB.Positron")`
+5. using the `addPolygons()` function
+
+    a. Assign a cleaned named to the popup window with `popup` argument and `= ~ str_extract(NAME, "^([^,]*)")`
+    b. Assign the color palette with `color = ~ MapPalette(estimate))`
+    c. use `stroke`, `smoothFactor`, and `fillOpacity` as you like
+    
+6. add a legend with `addLegend()`
+
+```{r}
+census_variable %>%
+   
+  
+  
+  
+    
+```
+
+

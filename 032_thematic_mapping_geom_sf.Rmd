@@ -16,10 +16,13 @@ library(ggplot2)
 
 ## Shapefiles as sf 
 
-Repeating steps from the [previous section](031_thematic_mapping.html), using the `tigris` package, get Census Tiger shapefiles for census geographies.  
+Repeating steps from the [previous section](031_thematic_mapping.html), using the `tigris` package, get Census Tiger shapefiles for census geographies.  Coastal boundaries can be gathered with the tigris argument:  `cb = TRUE`.
 
-```{}
-us_geo <- tigris::states(class = "sf")
+```{r getuscb, message=FALSE, warning=FALSE, include=FALSE}
+us_geo <- tigris::states(class = "sf", cb = TRUE)
+```
+``` r 
+us_geo <- tigris::states(class = "sf", cb = TRUE)
 ```
 
 ## Get BLS data
@@ -28,7 +31,7 @@ As mentioned before, the data are from the Bureau of Labor Statistics.  These da
 
 Again, from the previous section you will see how these data were gathered, loaded, transformed, and joined. 
 
-```{}
+```{r getblsdata, message=FALSE, warning=FALSE}
 Salary4Helpers <- 
   read_excel("data/OES_Report.xlsx",
              col_types = c("text", "numeric"), 
@@ -41,21 +44,20 @@ Salary4Helpers
 
 As before...  
 
-```{}
+```{r wrangleblsdata, message=FALSE, warning=FALSE}
 BlsWage_ToJoin <- Salary4Helpers %>% 
-  rename(Area = "Area Name") %>% 
   rename(wages = "Annual mean wage(2)") %>% 
-  mutate(State = gsub("\\(\\d{7}\\)", "", Area)) %>% 
-  filter(wages != "NA_character_") %>% 
+  mutate(State = str_extract(`Area Name`, "\\w+.*(?=\\()")) %>% 
+  drop_na(wages) %>% 
   select(State, wages)
 ```
 
 
-## Append data
+## Join data
 
-As before, using the `append_data()` function of the `tmaptools` package, append BLS data to the previously loaded shape object
+Use the `dplyr::left_join` function to append BLS variable to the `sf` tibble (data frame). 
 
-``` r
+```{r leftjoin_usgeo, warning=FALSE}
 HelperShapeObject <- us_geo %>% 
   left_join(BlsWage_ToJoin,
             by = c("NAME" = "State"))
@@ -64,41 +66,36 @@ HelperShapeObject <- us_geo %>%
 
 ## Contiguous 48 states
 
-As before, filter to only the contiguous 48 states + D.C.
+Filter to only the contiguous 48 states + D.C.
 
-```{}
+```{r filterlower48, message=FALSE, warning=FALSE}
 contiguous_states <- HelperShapeObject %>% 
-  filter(REGION != 9) %>% 
+  filter(GEOID < 60) %>% 
   filter(STUSPS != "AK") %>% 
   filter(STUSPS != "HI")
-  
 ```
 
-
-
-## Projection
-
-Using the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection for the continental US. `EPSG:5070`
-
-```{}
-contiguous_states %>% 
-  st_transform(5070) %>% 
-  tm_shape() +
-  tm_polygons("wages", id = "Name")
-```
 
 
 ## ggplot2 with geom_sf and viridis
 
-In this section we introduce making shapefiles with ggplot2.  ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. I also reversed the direction of the color scale.  After consulting with my visualization colleagues it seems this may have been a non-standard action on my part.  But, I leave the `direction` argument here for the curious.  Finally, please note the easiest way to remove the [graticules](https://en.wikipedia.org/wiki/Graticule) is as follows:  `coords_sf(datum = NA)` 
+In this section we introduce making shapefiles with ggplot2.  ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. ([Learn more](https://rfun.library.duke.edu/#portfolio) about ggplot2. 
 
-```{r with-ggplot-geom_sf}
+In this plot I reversed the direction of the color scale.  After consulting with my visualization colleagues it seems this may have been a non-standard action on my part.  But, I leave the `direction` argument here for the curious.  
+
+Use a pleasing projection, in this case assigned the crs projection to '5070' (`coord_sf(crs = 5070)`), and removed the gridlines (i.e [graticules](https://en.wikipedia.org/wiki/Graticule)) `coords_sf(datum = NA)` 
+
+```{r with-ggplot-geom_sf, message=FALSE, warning=FALSE}
 contiguous_states %>% 
   ggplot(aes(fill = wages, color = wages)) +
   geom_sf() +
   coord_sf(crs = 5070, datum = NA) +
-  scale_fill_viridis(option = "viridis", direction = -1) + 
-  scale_color_viridis(option = "viridis", direction = -1)
+  scale_fill_viridis(direction = -1, label = scales::dollar) + 
+  scale_color_viridis(direction = -1, label = scales::dollar) +
+  labs(title = "Annual Mean Wages by State",
+       subtitle = "Mental Health and Substance Abuse Social Workers(SOC Code211023)", 
+       caption = "Data Source: BLS.gov - Occupational Employment Statistics ; 2016")
+  
 ```
 
 

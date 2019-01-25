@@ -5,21 +5,18 @@ output:
     toc: FALSE
 ---
 
-Please note:  These exercises assume you have downloaded the [mapping-with-R](https://github.com/libjohn/mapping-with-R) repository to your local installation of RStudio and are running this as a unique project within RStudio.  You can do these exercises in R without the RStudio IDE (or any other IDE).  However, you may experience minor differences with relative file locations; translation is assumed to be the responsibility of the student in that case.  
+Please note:  These exercises assume you have downloaded the [mapping-with-R](https://github.com/libjohn/mapping-with-R) repository to your local installation of RStudio and are running this as a unique project within RStudio.  You should **also download the practice code** repository -- find that link on the main page of this guide.  
 
 ## Exercises
 
-1. Georeference XY coordinates.  In your RStudio editor, open the [_exercise-1_xy-leaflet.Rmd](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-1_xy-leaflet.Rmd) file from the project root.  Plot XY (latitude/longitude) coordinates on a leaflet map.
+1. Georeference XY coordinates.  In your RStudio editor, open the `exercise-1_xy.Rmd file.  Plot XY (latitude/longitude) coordinates.
 
-2. Choropleths with tidycensus.  Open the [_exercise-2_tidycensus.Rmd](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-2_tidycensus.Rmd) file.  Plot a new variable and shade that variable by county.  
+2. Choropleths with tidycensus.  Open `exercise-2_tidycensus.Rmd`.  Plot a new variable and shade that variable by county.  
 
-3. Simple Features.  Open the   [_exercise-3_thematic-map_with_federal_data.Rmd](https://raw.githubusercontent.com/libjohn/mapping-with-R/master/_exercise-3_thematic-map_with_federal_data.Rmd) file.  Make a choropleth of the data using either ggplot2, tmap, or leaflet.  Use the knowledge you gained in the **Simple Features** module.
-
-
+3. Simple Features.  Open `exercise-3_thematic-map_with_federal_data.Rmd`.  Make a choropleth of the data using either ggplot2, tmap, or leaflet.  Use the knowledge you gained in the **Thematic Mapping** module on this site.
 
 
 
 ## Answers
 
-1. [Georeferencing latitude and longitude](answers-1_xy-leaflet.html)
-1. [Choropleths with tidycensus](answers-2_tidycensus.html)
+Answers can also be found in the practice code repository.

@@ -14,6 +14,8 @@ navbar:
         href: software_prereqs.html
       - text: "Next Steps"
         href: next.html
+      - text: "Resources"
+        href: resources.html
   - text: "Plot Coordinates"
     href: 01_georeference.html
   - text: "tidycensus"
@@ -22,12 +24,12 @@ navbar:
     menu:
       - text: "Overview"
         href: 030_thematic_sf.html
-      - text: "tmap"
-        href: 031_thematic_mapping.html
       - text:  "ggplot2 & geom_sf"
         href: 032_thematic_mapping_geom_sf.html
       - text: "ggplot2 & facet mapping"
         href: 039_facet_example.html
+      - text: "tmap"
+        href: 031_thematic_mapping.html
       - text: "Saving / Sharing"
         href: 01_georeference.html#save_the_map
   - text: Exercises

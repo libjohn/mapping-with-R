@@ -1,0 +1,186 @@
+---
+title: "Exercise 2 Answers: Choropleths with tidycensus"
+output: html_document
+---
+
+## Load Libraries
+```{r loadlibraries, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidycensus)
+library(leaflet)
+library(sf)
+library(stringr)
+```
+
+## Set API key
+
+Insert your own API Key.  You may request a free key from the Census API tool https://api.census.gov/data/key_signup.html
+
+```{r}
+#census_api_key("did you enter your API key here?")
+```
+
+## Choose a census variable
+
+I recommend using one of the following variables.  However, you can use the `tidycensus::load_variables()` and follow the "Searching for variables" [instructions](https://walkerke.github.io/tidycensus/articles/basic-usage.html#searching-for-variables). 
+
+- `B08103_001E` - MEDIAN AGE BY MEANS OF TRANSPORTATION TO WORK: Total: Taxicab, motorcycle, bicycle, or other means: Workers 16 years and over -- (Estimate)
+- `B08131_001E`	- AGGREGATE TRAVEL TIME TO WORK (IN MINUTES) OF WORKERS BY PLACE OF WORK--STATE AND COUNTY LEVEL: Worked in State of residence: Workers 16 years and over who did not work at home -- (Estimate)
+- `B19013_001E` - median household income
+
+
+
+
+## Median Age by Means of Transportation to Work
+
+- B08103_001E
+
+### get_acs()
+
+Load the variable and assign and object name for some USA county using the `get_acs` function.
+
+```{r get_hh_inc, message=FALSE, warning=FALSE}
+census_variable <- 
+  get_acs(geography = "county",
+          variables = "B08103_001E",
+          state = "NC",
+          geometry = TRUE)
+
+census_variable
+```
+
+
+
+
+### Make choropleth in Leaflet
+
+
+#### Generate a Palette
+Using the *estimate* variable in the census_variable sf object, generate a MapPalette.
+
+```{r make_palette}
+MapPalette <- colorBin(palette = "viridis",
+                       domain = census_variable$estimate,
+                       bins = 4,
+                       pretty = TRUE,
+                       reverse = TRUE)
+```
+
+
+#### Make Leaflet choropleth
+
+Make choropleth by filling county polygons (census geography) with correlated value (from the ACS)
+
+
+```{r make_choropleth}
+census_variable %>%
+    st_transform(crs = "+init=epsg:4326") %>%
+    leaflet(width = "100%") %>%
+    addProviderTiles(provider = "Stamen.TonerLines") %>%
+    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
+                stroke = FALSE,
+                smoothFactor = 0,
+                fillOpacity = 0.7,
+                color = ~ MapPalette(estimate)) %>%
+    addLegend("bottomright", 
+              pal = MapPalette, 
+              values = ~ estimate,
+              title = "Median Age of<br>Travelers by<br>Taxi/Moto/Bike",
+              opacity = 1)
+```
+
+
+## Travel Time
+
+- B08131_001E
+
+AGGREGATE TRAVEL TIME TO WORK (IN MINUTES)
+
+```{r travel_variable}
+census_variable <- 
+  get_acs(geography = "county",
+          variables = "B08131_001E",
+          state = "NC",
+          geometry = TRUE)
+
+census_variable
+```
+
+AGGREGATE TRAVEL TIME TO WORK (IN MINUTES)
+
+Convert Minutes to hours, hours to months.
+
+```{r convert_time}
+census_variable <-  census_variable %>% 
+  rename(estimate_original = estimate) %>% 
+  mutate(estimate = estimate_original / 60 / 730.0008)
+
+```
+
+
+```{r make_palette2}
+MapPalette <- colorBin(palette = "viridis",
+                       domain = census_variable$estimate,
+                       bins = 7,
+                       pretty = TRUE,
+                       reverse = TRUE)
+```
+
+```{r make_time_choropleth}
+census_variable %>%
+    st_transform(crs = "+init=epsg:4326") %>%
+    leaflet(width = "100%") %>%
+    addProviderTiles(provider = "Stamen.TonerLines") %>%
+    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
+                stroke = FALSE,
+                smoothFactor = 0,
+                fillOpacity = 0.7,
+                color = ~ MapPalette(estimate)) %>%
+    addLegend("bottomright", 
+              pal = MapPalette, 
+              values = ~ estimate,
+              title = "Agregate Travel Time<br>in Months",
+              opacity = 1)
+```
+
+
+
+## Median Household Income in the Past 12 Months
+
+- B19013_001E
+
+```{r get_hh_inco}
+census_variable <- 
+  get_acs(geography = "county",
+          variables = "B19013_001E",
+          state = "NC",
+          geometry = TRUE)
+
+census_variable
+```
+
+```{r make_palette_hh_income}
+MapPalette <- colorNumeric(palette = "viridis",
+                           domain = census_variable$estimate,
+                           reverse = TRUE)
+```
+
+
+```{r make_choropleth3}
+census_variable %>%
+    st_transform(crs = "+init=epsg:4326") %>%
+    leaflet(width = "100%") %>%
+    addProviderTiles(provider = "Stamen.TonerLines") %>%
+    addPolygons(popup = ~ str_extract(NAME, "^([^,]*)"),
+                stroke = FALSE,
+                smoothFactor = 0,
+                fillOpacity = 0.7,
+                color = ~ MapPalette(estimate)) %>%
+    addLegend("bottomright", 
+              pal = MapPalette, 
+              values = ~ estimate,
+              title = "Median Household Income",
+              labFormat = labelFormat(prefix = "$"),
+              opacity = 1)
+```
+

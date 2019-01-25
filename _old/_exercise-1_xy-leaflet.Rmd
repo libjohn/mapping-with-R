@@ -1,0 +1,31 @@
+---
+title: "Exercise 1: Georeferencing"
+---
+
+## Load Libraries
+```{r}
+
+```
+
+## Load Data
+
+The data is a CSV file named "mockaroo_latlon.csv" located in the data directory.  
+
+1. Use the `read_csv()` function to import the data and assign to an object named "xy_location"
+
+```{r}
+
+```
+
+### Plot XY on the Map
+
+1. Using the `leaflet()` function, with the `addTiles()` and `addMarkers()` functions, 
+2. Plot the latitude and longitude variables for the data object "xy_location" with in `addMarkers()`
+3. Add a popup window with the "Company" variable
+4. You *do not* need to `setView()`
+
+```{r makemap}
+
+```
+
+

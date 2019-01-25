@@ -1,0 +1,15 @@
+---
+title: "Resources"
+output: html_document
+---
+
+- [R We having Fun Yet‽](https://rfun.library.duke.edu/#portfolio): aka "**Rfun**".  Free face-to-face, hands-on learning lab series for the Duke University Community.  **Recordings, code and  materials** are shareable under a [CC BY-NC license](https://creativecommons.org/licenses/by-nc/4.0/).
+- [simple features](https://r-spatial.github.io/sf/) package
+- [mapview](https://r-spatial.github.io/mapview/) - package
+- [Geocomputation with R](https://geocompr.robinlovelace.net/) by Lovelace, Nowosad, and Muenchow
+- [Spatial Data Science](https://keen-swartz-3146c4.netlify.com/) - by Pebesma and Bivand
+- [Interactive Primers](https://rstudio.cloud/learn/primers):  Free interactive mini-labs for learning R/Tidyverse 
+- [R for Data Science](https://r4ds.had.co.nz/): Book by Garrett Grolemund and Hadley Wickham.  Free, online.
+- [DataCamp.com](https://datacamp.com): Freemium, Interactive tools course -- include video lectures and many data science topics
+- [**Tidyverse Documentation**](https://www.tidyverse.org/packages/)
+
