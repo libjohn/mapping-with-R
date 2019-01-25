@@ -387,6 +387,9 @@ div.tocify {
     <li>
       <a href="next.html">Next Steps</a>
     </li>
+    <li>
+      <a href="resources.html">Resources</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -478,7 +481,7 @@ div.tocify {
 <p>The <code>sf</code> simple features package affords the R coder an easy and familiar method of <strong>storing data</strong> vectors and <strong>shapefile</strong> polygons in a <strong>tidy data frame</strong>.</p>
 </blockquote>
 <p>In these <em>Thematic Mapping with Simple Features</em> sections, we introduce the <code>tmap</code> package first. Through the the <code>tmap</code> package you will learn an easy-to-use package for building spatial distributions on geographic maps. These maps are typically <code>.png</code> image files. (.png files are easy to produce and share.) In this section we’ll also use the <code>tigris</code> package – to gather Census shapefiles – and store those shape objects in the Simple Features data structure. (In the <a href="02_choropleth.html"><em>Chropleth</em> module</a> we used <code>tidycensus</code> to gather census Geography shape objects, as well as to gather census data variables.) <code>tigris</code> simply gathers the shapefile polygons. Later we will join the polygon object to a data frame using <code>tmaptools</code>.</p>
-<p>Next, we’ll use the <code>ggplot::geom_sf</code> function to create our mapping visualiations using the widely adopted ggplot2 syntax.</p>
+<p>Next, we’ll use the <code>ggplot::geom_sf</code> function to create our mapping visualizations using the widely adopted ggplot2 syntax.</p>
 <p>Later, in the <em>interactive thematic mapping</em> section, you will make a different interactive choropleth using <code>leaflet</code>. This section is largely a repeat of the earlier choropleth module. The level of interactivity is sparse, but functional. Interactivity demonstrates how you can generate maps which move beyond traditional 2D map-on-a-page images. Just know that this zoom-in/zoom-out interactivity feature is possible because we use <code>leaflet</code> to draw the map. By extension, you can add many interactive features, e.g. pop-up windows. This section is a good set-up for the last section which covers how to save maps as files.</p>
 <p><a href="01_georeference.html#save_the_map">Saving / sharing ouput files</a>. Even interactive maps can be shared and distributed. You can share maps either on the web, as an HTML file.</p>
 </div>

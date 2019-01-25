@@ -127,7 +127,7 @@ mapviewOptions(legend.pos = "bottomright")
 mapviewOptions(leafletWidth = 800)
 #mapviewOptions()
 #mapviewOptions(default = TRUE)
-mapview(poopulation, zcol = "estimate", native.crs = TRUE, crs = 5070)
+mapview(population, zcol = "estimate", native.crs = TRUE, crs = 5070)
 ```
 
 
