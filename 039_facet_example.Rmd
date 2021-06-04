@@ -5,22 +5,19 @@ output:
     toc: FALSE
 ---
 
-This example code
+![](facet_map.png)
+
+Ignoring the data wrangling, the faceted map above was created with the following simplified code.  See also the [full code](038_facets_wrap_thematic_mapping.html) including wrangling and workflow.
 
 ```{}
 sf_data %>% 
-  ggplot(aes(fill = Wages, color = Wages)) +
+  ggplot(aes(fill = wages, color = wages)) +
   geom_sf() +
   coord_sf(crs = 5070, datum = NA) +
-  scale_fill_viridis(option = "viridis") + 
-  scale_color_viridis(option = "viridis") +
-  facet_wrap(~ category, nrow = 3, ncol = 2)
+  scale_fill_viridis_c() + 
+  scale_color_viridis_c() +
+  facet_wrap(~ category, 
+             nrow = 3, ncol = 2)
 ```
 
-&nbsp;
-
-Produced this faceted map  
-
-![](facet_map.png)
-
-See the [code that produced the above image](038_facets_wrap_thematic_mapping.html).  
+ 

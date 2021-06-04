@@ -327,18 +327,16 @@ $(document).ready(function () {
 </div>
 
 
-<p>This example code</p>
+<p><img src="facet_map.png" /></p>
+<p>Ignoring the data wrangling, the faceted map above was created with the following simplified code. See also the <a href="038_facets_wrap_thematic_mapping.html">full code</a> including wrangling and workflow.</p>
 <pre><code>sf_data %&gt;% 
-  ggplot(aes(fill = Wages, color = Wages)) +
+  ggplot(aes(fill = wages, color = wages)) +
   geom_sf() +
   coord_sf(crs = 5070, datum = NA) +
-  scale_fill_viridis(option = &quot;viridis&quot;) + 
-  scale_color_viridis(option = &quot;viridis&quot;) +
-  facet_wrap(~ category, nrow = 3, ncol = 2)</code></pre>
-<p> </p>
-<p>Produced this faceted map</p>
-<p><img src="facet_map.png" /></p>
-<p>See the <a href="038_facets_wrap_thematic_mapping.html">code that produced the above image</a>.</p>
+  scale_fill_viridis_c() + 
+  scale_color_viridis_c() +
+  facet_wrap(~ category, 
+             nrow = 3, ncol = 2)</code></pre>
 
 &nbsp;
 
