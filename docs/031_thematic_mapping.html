@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -14,12 +13,22 @@
 
 <title>Thematic Mapping with tmap</title>
 
+<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -29,29 +38,47 @@
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -60,9 +87,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -115,42 +142,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
-<link rel="stylesheet" href="libs-local\duke.css" type="text/css" />
-<link rel="stylesheet" href="libs-local\cc-fonts.css" type="text/css" />
+
+<link rel="stylesheet" href="libs-local/duke.css" type="text/css" />
+<link rel="stylesheet" href="libs-local/cc-fonts.css" type="text/css" />
 
 
 
@@ -159,10 +156,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -179,40 +172,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -240,7 +206,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -252,7 +218,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -263,10 +229,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -278,7 +257,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -314,6 +292,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -342,6 +321,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -403,7 +388,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -484,13 +469,13 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/libjohn/mapping-with-R">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
      
     <span class="caret"></span>
@@ -509,7 +494,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -518,12 +503,12 @@ div.tocify {
 </div>
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)       <span class="co"># Tidyverse for Tidy Data</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(readxl)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(tmap)            <span class="co"># Thematic Mapping</span></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(tmaptools) </a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="kw">library</span>(tigris)          <span class="co"># Get Census Geography Poloygons</span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="kw">library</span>(sf)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)       <span class="co"># Tidyverse for Tidy Data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)            <span class="co"># Thematic Mapping</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmaptools) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)          <span class="co"># Get Census Geography Poloygons</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
 <div id="shapefiles-as-sf" class="section level2">
 <h2>Shapefiles as sf</h2>
 <p>Using the <code>tigris</code> package, get Census Tiger shapefiles for census geographies. Tigris will return the shapefile in the <code>sf</code>, or simple features, format.</p>
@@ -532,34 +517,34 @@ div.tocify {
 <div id="data-structure" class="section level2">
 <h2>Data Structure</h2>
 <p>The “Simple Features” (<code>sf</code>) data structure can easily be viewed and manipulated as a rectangular data frame, before visualizing. As an historical note – an <code>sf</code> predecessor – the <code>sp</code> data structure uses <code>@data</code> slots to hold data. We’ll focus on the <code>sf</code> package. Below are two methods of viewing the structure of the downloaded shapefiles.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">class</span>(us_geo)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(us_geo)</span></code></pre></div>
 <pre><code>## [1] &quot;sf&quot;         &quot;data.frame&quot;</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">glimpse</span>(us_geo)</a></code></pre></div>
-<pre><code>## Observations: 56
-## Variables: 15
-## $ REGION   &lt;chr&gt; &quot;3&quot;, &quot;3&quot;, &quot;2&quot;, &quot;2&quot;, &quot;3&quot;, &quot;1&quot;, &quot;4&quot;, &quot;1&quot;, &quot;3&quot;, &quot;1&quot;, &quot;1&quot;...
-## $ DIVISION &lt;chr&gt; &quot;5&quot;, &quot;5&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;1&quot;, &quot;8&quot;, &quot;1&quot;, &quot;5&quot;, &quot;1&quot;, &quot;1&quot;...
-## $ STATEFP  &lt;chr&gt; &quot;54&quot;, &quot;12&quot;, &quot;17&quot;, &quot;27&quot;, &quot;24&quot;, &quot;44&quot;, &quot;16&quot;, &quot;33&quot;, &quot;37&quot;,...
-## $ STATENS  &lt;chr&gt; &quot;01779805&quot;, &quot;00294478&quot;, &quot;01779784&quot;, &quot;00662849&quot;, &quot;0171...
-## $ GEOID    &lt;chr&gt; &quot;54&quot;, &quot;12&quot;, &quot;17&quot;, &quot;27&quot;, &quot;24&quot;, &quot;44&quot;, &quot;16&quot;, &quot;33&quot;, &quot;37&quot;,...
-## $ STUSPS   &lt;chr&gt; &quot;WV&quot;, &quot;FL&quot;, &quot;IL&quot;, &quot;MN&quot;, &quot;MD&quot;, &quot;RI&quot;, &quot;ID&quot;, &quot;NH&quot;, &quot;NC&quot;,...
-## $ NAME     &lt;chr&gt; &quot;West Virginia&quot;, &quot;Florida&quot;, &quot;Illinois&quot;, &quot;Minnesota&quot;, ...
-## $ LSAD     &lt;chr&gt; &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;,...
-## $ MTFCC    &lt;chr&gt; &quot;G4000&quot;, &quot;G4000&quot;, &quot;G4000&quot;, &quot;G4000&quot;, &quot;G4000&quot;, &quot;G4000&quot;,...
-## $ FUNCSTAT &lt;chr&gt; &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;...
-## $ ALAND    &lt;dbl&gt; 62265662566, 138911437206, 143784114293, 206229176104...
-## $ AWATER   &lt;dbl&gt; 489840834, 31398800291, 6211277447, 18944967530, 6980...
-## $ INTPTLAT &lt;chr&gt; &quot;+38.6472854&quot;, &quot;+28.4574302&quot;, &quot;+40.1028754&quot;, &quot;+46.315...
-## $ INTPTLON &lt;chr&gt; &quot;-080.6183274&quot;, &quot;-082.4091478&quot;, &quot;-089.1526108&quot;, &quot;-094...
-## $ geometry &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-81.74725 3..., MULTIPOL...</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(us_geo)</span></code></pre></div>
+<pre><code>## Rows: 56
+## Columns: 15
+## $ REGION   &lt;chr&gt; &quot;3&quot;, &quot;3&quot;, &quot;2&quot;, &quot;2&quot;, &quot;3&quot;, &quot;1&quot;, &quot;4&quot;, &quot;1&quot;, &quot;3&quot;, &quot;1&quot;, &quot;1&quot;, &quot;3&quot;, &quot;~
+## $ DIVISION &lt;chr&gt; &quot;5&quot;, &quot;5&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;1&quot;, &quot;8&quot;, &quot;1&quot;, &quot;5&quot;, &quot;1&quot;, &quot;1&quot;, &quot;5&quot;, &quot;~
+## $ STATEFP  &lt;chr&gt; &quot;54&quot;, &quot;12&quot;, &quot;17&quot;, &quot;27&quot;, &quot;24&quot;, &quot;44&quot;, &quot;16&quot;, &quot;33&quot;, &quot;37&quot;, &quot;50&quot;, &quot;~
+## $ STATENS  &lt;chr&gt; &quot;01779805&quot;, &quot;00294478&quot;, &quot;01779784&quot;, &quot;00662849&quot;, &quot;01714934&quot;, &quot;~
+## $ GEOID    &lt;chr&gt; &quot;54&quot;, &quot;12&quot;, &quot;17&quot;, &quot;27&quot;, &quot;24&quot;, &quot;44&quot;, &quot;16&quot;, &quot;33&quot;, &quot;37&quot;, &quot;50&quot;, &quot;~
+## $ STUSPS   &lt;chr&gt; &quot;WV&quot;, &quot;FL&quot;, &quot;IL&quot;, &quot;MN&quot;, &quot;MD&quot;, &quot;RI&quot;, &quot;ID&quot;, &quot;NH&quot;, &quot;NC&quot;, &quot;VT&quot;, &quot;~
+## $ NAME     &lt;chr&gt; &quot;West Virginia&quot;, &quot;Florida&quot;, &quot;Illinois&quot;, &quot;Minnesota&quot;, &quot;Marylan~
+## $ LSAD     &lt;chr&gt; &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;00&quot;, &quot;~
+## $ MTFCC    &lt;chr&gt; &quot;G4000&quot;, &quot;G4000&quot;, &quot;G4000&quot;, &quot;G4000&quot;, &quot;G4000&quot;, &quot;G4000&quot;, &quot;G4000&quot;~
+## $ FUNCSTAT &lt;chr&gt; &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;~
+## $ ALAND    &lt;dbl&gt; 62266231560, 138947364717, 143779863817, 206230065476, 251517~
+## $ AWATER   &lt;dbl&gt; 489271086, 31362872853, 6215723896, 18942261495, 6979340970, ~
+## $ INTPTLAT &lt;chr&gt; &quot;+38.6472854&quot;, &quot;+28.4574302&quot;, &quot;+40.1028754&quot;, &quot;+46.3159573&quot;, &quot;~
+## $ INTPTLON &lt;chr&gt; &quot;-080.6183274&quot;, &quot;-082.4091477&quot;, &quot;-089.1526108&quot;, &quot;-094.1996043~
+## $ geometry &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-81.74725 3..., MULTIPOLYGON (((~</code></pre>
 </div>
 <div id="sf-as-data-frame" class="section level2">
 <h2>sf as data frame</h2>
 <p>And as noted, here’s the data frame view. Notice the geometry (polygon shape) in the far-right column of the data frame.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">as_tibble</span>(us_geo)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(us_geo)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["REGION"],"name":[1],"type":["chr"],"align":["left"]},{"label":["DIVISION"],"name":[2],"type":["chr"],"align":["left"]},{"label":["STATEFP"],"name":[3],"type":["chr"],"align":["left"]},{"label":["STATENS"],"name":[4],"type":["chr"],"align":["left"]},{"label":["GEOID"],"name":[5],"type":["chr"],"align":["left"]},{"label":["STUSPS"],"name":[6],"type":["chr"],"align":["left"]},{"label":["NAME"],"name":[7],"type":["chr"],"align":["left"]},{"label":["LSAD"],"name":[8],"type":["chr"],"align":["left"]},{"label":["MTFCC"],"name":[9],"type":["chr"],"align":["left"]},{"label":["FUNCSTAT"],"name":[10],"type":["chr"],"align":["left"]},{"label":["ALAND"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["AWATER"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["INTPTLAT"],"name":[13],"type":["chr"],"align":["left"]},{"label":["INTPTLON"],"name":[14],"type":["chr"],"align":["left"]},{"label":["geometry"],"name":[15],"type":["S3: sfc_MULTIPOLYGON"],"align":["right"]}],"data":[{"1":"3","2":"5","3":"54","4":"01779805","5":"54","6":"WV","7":"West Virginia","8":"00","9":"G4000","10":"A","11":"6.226566e+10","12":"489840834","13":"+38.6472854","14":"-080.6183274","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"12","4":"00294478","5":"12","6":"FL","7":"Florida","8":"00","9":"G4000","10":"A","11":"1.389114e+11","12":"31398800291","13":"+28.4574302","14":"-082.4091478","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"3","3":"17","4":"01779784","5":"17","6":"IL","7":"Illinois","8":"00","9":"G4000","10":"A","11":"1.437841e+11","12":"6211277447","13":"+40.1028754","14":"-089.1526108","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"27","4":"00662849","5":"27","6":"MN","7":"Minnesota","8":"00","9":"G4000","10":"A","11":"2.062292e+11","12":"18944967530","13":"+46.3158148","14":"-094.1996628","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"24","4":"01714934","5":"24","6":"MD","7":"Maryland","8":"00","9":"G4000","10":"A","11":"2.515070e+10","12":"6980371026","13":"+38.9466584","14":"-076.6744939","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"44","4":"01219835","5":"44","6":"RI","7":"Rhode Island","8":"00","9":"G4000","10":"A","11":"2.677998e+09","12":"1323452846","13":"+41.5974187","14":"-071.5272723","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"16","4":"01779783","5":"16","6":"ID","7":"Idaho","8":"00","9":"G4000","10":"A","11":"2.140482e+11","12":"2393355752","13":"+44.3484222","14":"-114.5588538","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"33","4":"01779794","5":"33","6":"NH","7":"New Hampshire","8":"00","9":"G4000","10":"A","11":"2.318745e+10","12":"1028643155","13":"+43.6726907","14":"-071.5843145","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"37","4":"01027616","5":"37","6":"NC","7":"North Carolina","8":"00","9":"G4000","10":"A","11":"1.259197e+11","12":"13470113896","13":"+35.5397100","14":"-079.1308636","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"50","4":"01779802","5":"50","6":"VT","7":"Vermont","8":"00","9":"G4000","10":"A","11":"2.387346e+10","12":"1031134839","13":"+44.0604795","14":"-072.6733274","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"09","4":"01779780","5":"09","6":"CT","7":"Connecticut","8":"00","9":"G4000","10":"A","11":"1.254262e+10","12":"1815495323","13":"+41.5798637","14":"-072.7466572","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"10","4":"01779781","5":"10","6":"DE","7":"Delaware","8":"00","9":"G4000","10":"A","11":"5.047241e+09","12":"1398670234","13":"+38.9986239","14":"-075.4416920","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"35","4":"00897535","5":"35","6":"NM","7":"New Mexico","8":"00","9":"G4000","10":"A","11":"3.141914e+11","12":"733669653","13":"+34.4346843","14":"-106.1316181","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"9","3":"06","4":"01779778","5":"06","6":"CA","7":"California","8":"00","9":"G4000","10":"A","11":"4.034832e+11","12":"20484637928","13":"+37.1551773","14":"-119.5434183","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"2","3":"34","4":"01779795","5":"34","6":"NJ","7":"New Jersey","8":"00","9":"G4000","10":"A","11":"1.904972e+10","12":"3542963551","13":"+40.1072744","14":"-074.6652012","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"3","3":"55","4":"01779806","5":"55","6":"WI","7":"Wisconsin","8":"00","9":"G4000","10":"A","11":"1.402755e+11","12":"29359527964","13":"+44.6309071","14":"-089.7093916","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"9","3":"41","4":"01155107","5":"41","6":"OR","7":"Oregon","8":"00","9":"G4000","10":"A","11":"2.486043e+11","12":"6195045325","13":"+43.9717125","14":"-120.6229578","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"31","4":"01779792","5":"31","6":"NE","7":"Nebraska","8":"00","9":"G4000","10":"A","11":"1.989580e+11","12":"1370523694","13":"+41.5433014","14":"-099.8118616","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"2","3":"42","4":"01779798","5":"42","6":"PA","7":"Pennsylvania","8":"00","9":"G4000","10":"A","11":"1.158815e+11","12":"3397554419","13":"+40.9024957","14":"-077.8334514","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"9","3":"53","4":"01779804","5":"53","6":"WA","7":"Washington","8":"00","9":"G4000","10":"A","11":"1.721118e+11","12":"12560067439","13":"+47.4073238","14":"-120.5757999","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"7","3":"22","4":"01629543","5":"22","6":"LA","7":"Louisiana","8":"00","9":"G4000","10":"A","11":"1.119048e+11","12":"23746413153","13":"+30.8634368","14":"-091.7987173","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"13","4":"01705317","5":"13","6":"GA","7":"Georgia","8":"00","9":"G4000","10":"A","11":"1.491775e+11","12":"4733385577","13":"+32.6295789","14":"-083.4235109","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"6","3":"01","4":"01779775","5":"01","6":"AL","7":"Alabama","8":"00","9":"G4000","10":"A","11":"1.311744e+11","12":"4592944701","13":"+32.7396323","14":"-086.8434593","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"49","4":"01455989","5":"49","6":"UT","7":"Utah","8":"00","9":"G4000","10":"A","11":"2.128848e+11","12":"7000199770","13":"+39.3349925","14":"-111.6563326","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"3","3":"39","4":"01085497","5":"39","6":"OH","7":"Ohio","8":"00","9":"G4000","10":"A","11":"1.058333e+11","12":"10264451012","13":"+40.4149297","14":"-082.7119975","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"7","3":"48","4":"01779801","5":"48","6":"TX","7":"Texas","8":"00","9":"G4000","10":"A","11":"6.766419e+11","12":"19017521093","13":"+31.4347032","14":"-099.2818238","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"08","4":"01779779","5":"08","6":"CO","7":"Colorado","8":"00","9":"G4000","10":"A","11":"2.684260e+11","12":"1178495763","13":"+38.9938482","14":"-105.5083165","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"45","4":"01779799","5":"45","6":"SC","7":"South Carolina","8":"00","9":"G4000","10":"A","11":"7.786273e+10","12":"5071381300","13":"+33.8741776","14":"-080.8542639","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"7","3":"40","4":"01102857","5":"40","6":"OK","7":"Oklahoma","8":"00","9":"G4000","10":"A","11":"1.776645e+11","12":"3373087228","13":"+35.5900512","14":"-097.4868149","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"6","3":"47","4":"01325873","5":"47","6":"TN","7":"Tennessee","8":"00","9":"G4000","10":"A","11":"1.067980e+11","12":"2354836197","13":"+35.8585557","14":"-086.3493580","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"56","4":"01779807","5":"56","6":"WY","7":"Wyoming","8":"00","9":"G4000","10":"A","11":"2.514656e+11","12":"1860628076","13":"+42.9918024","14":"-107.5419255","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"9","3":"15","4":"01779782","5":"15","6":"HI","7":"Hawaii","8":"00","9":"G4000","10":"A","11":"1.663412e+10","12":"11777681513","13":"+22.0120383","14":"-159.7059653","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"38","4":"01779797","5":"38","6":"ND","7":"North Dakota","8":"00","9":"G4000","10":"A","11":"1.787104e+11","12":"4400396641","13":"+47.4421740","14":"-100.4608258","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"6","3":"21","4":"01779786","5":"21","6":"KY","7":"Kentucky","8":"00","9":"G4000","10":"A","11":"1.022661e+11","12":"2388731561","13":"+37.5336844","14":"-085.2929801","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"9","2":"0","3":"78","4":"01802710","5":"78","6":"VI","7":"United States Virgin Islands","8":"00","9":"G4000","10":"A","11":"3.480137e+08","12":"1550244357","13":"+18.3267484","14":"-064.9712505","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"9","2":"0","3":"69","4":"01779809","5":"69","6":"MP","7":"Commonwealth of the Northern Mariana Islands","8":"00","9":"G4000","10":"A","11":"4.722844e+08","12":"4644260632","13":"+14.9367835","14":"+145.6010210","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"9","2":"0","3":"66","4":"01802705","5":"66","6":"GU","7":"Guam","8":"00","9":"G4000","10":"A","11":"5.435583e+08","12":"934334983","13":"+13.4382886","14":"+144.7729493","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"23","4":"01779787","5":"23","6":"ME","7":"Maine","8":"00","9":"G4000","10":"A","11":"7.988581e+10","12":"11748168571","13":"+45.4092789","14":"-068.6665979","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"2","3":"36","4":"01779796","5":"36","6":"NY","7":"New York","8":"00","9":"G4000","10":"A","11":"1.220490e+11","12":"19247151848","13":"+42.9133974","14":"-075.5962723","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"32","4":"01779793","5":"32","6":"NV","7":"Nevada","8":"00","9":"G4000","10":"A","11":"2.843293e+11","12":"2047350803","13":"+39.3310928","14":"-116.6151469","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"9","3":"02","4":"01785533","5":"02","6":"AK","7":"Alaska","8":"00","9":"G4000","10":"A","11":"1.478588e+12","12":"277723861311","13":"+63.2813242","14":"-152.5730397","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"9","2":"0","3":"60","4":"01802701","5":"60","6":"AS","7":"American Samoa","8":"00","9":"G4000","10":"A","11":"1.977591e+08","12":"1307243753","13":"-14.2668475","14":"-170.6671854","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"3","3":"26","4":"01779789","5":"26","6":"MI","7":"Michigan","8":"00","9":"G4000","10":"A","11":"1.464881e+11","12":"103998746281","13":"+44.8441757","14":"-085.6604930","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"7","3":"05","4":"00068085","5":"05","6":"AR","7":"Arkansas","8":"00","9":"G4000","10":"A","11":"1.347681e+11","12":"2963631791","13":"+34.8955256","14":"-092.4446262","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"6","3":"28","4":"01779790","5":"28","6":"MS","7":"Mississippi","8":"00","9":"G4000","10":"A","11":"1.215303e+11","12":"3930182746","13":"+32.6864714","14":"-089.6561377","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"29","4":"01779791","5":"29","6":"MO","7":"Missouri","8":"00","9":"G4000","10":"A","11":"1.780520e+11","12":"2488190402","13":"+38.3507500","14":"-092.4567826","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"30","4":"00767982","5":"30","6":"MT","7":"Montana","8":"00","9":"G4000","10":"A","11":"3.769609e+11","12":"3871059371","13":"+47.0511771","14":"-109.6348174","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"20","4":"00481813","5":"20","6":"KS","7":"Kansas","8":"00","9":"G4000","10":"A","11":"2.117532e+11","12":"1346325556","13":"+38.4985464","14":"-098.3834298","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"3","3":"18","4":"00448508","5":"18","6":"IN","7":"Indiana","8":"00","9":"G4000","10":"A","11":"9.278777e+10","12":"1539541677","13":"+39.9030256","14":"-086.2839503","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"9","2":"0","3":"72","4":"01779808","5":"72","6":"PR","7":"Puerto Rico","8":"00","9":"G4000","10":"A","11":"8.868735e+09","12":"4922543816","13":"+18.2176480","14":"-066.4107992","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"46","4":"01785534","5":"46","6":"SD","7":"South Dakota","8":"00","9":"G4000","10":"A","11":"1.963452e+11","12":"3384471850","13":"+44.4467957","14":"-100.2381762","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"25","4":"00606926","5":"25","6":"MA","7":"Massachusetts","8":"00","9":"G4000","10":"A","11":"2.020429e+10","12":"7130763257","13":"+42.1565196","14":"-071.4895915","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"51","4":"01779803","5":"51","6":"VA","7":"Virginia","8":"00","9":"G4000","10":"A","11":"1.022542e+11","12":"8532012665","13":"+37.5222512","14":"-078.6681938","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"11","4":"01702382","5":"11","6":"DC","7":"District of Columbia","8":"00","9":"G4000","10":"A","11":"1.583516e+08","12":"18675956","13":"+38.9041031","14":"-077.0172290","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"19","4":"01779785","5":"19","6":"IA","7":"Iowa","8":"00","9":"G4000","10":"A","11":"1.446642e+11","12":"1081293682","13":"+42.0700243","14":"-093.4933473","15":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"04","4":"01779777","5":"04","6":"AZ","7":"Arizona","8":"00","9":"G4000","10":"A","11":"2.941987e+11","12":"1027245114","13":"+34.2039355","14":"-111.6063565","15":"<S3: sfc_MULTIPOLYGON>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["REGION"],"name":[1],"type":["chr"],"align":["left"]},{"label":["DIVISION"],"name":[2],"type":["chr"],"align":["left"]},{"label":["STATEFP"],"name":[3],"type":["chr"],"align":["left"]},{"label":["STATENS"],"name":[4],"type":["chr"],"align":["left"]},{"label":["GEOID"],"name":[5],"type":["chr"],"align":["left"]},{"label":["STUSPS"],"name":[6],"type":["chr"],"align":["left"]},{"label":["NAME"],"name":[7],"type":["chr"],"align":["left"]},{"label":["LSAD"],"name":[8],"type":["chr"],"align":["left"]},{"label":["MTFCC"],"name":[9],"type":["chr"],"align":["left"]},{"label":["FUNCSTAT"],"name":[10],"type":["chr"],"align":["left"]},{"label":["ALAND"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["AWATER"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["INTPTLAT"],"name":[13],"type":["chr"],"align":["left"]},{"label":["INTPTLON"],"name":[14],"type":["chr"],"align":["left"]},{"label":["geometry"],"name":[15],"type":["s_MULTIP"],"align":["right"]}],"data":[{"1":"3","2":"5","3":"54","4":"01779805","5":"54","6":"WV","7":"West Virginia","8":"00","9":"G4000","10":"A","11":"6.226623e+10","12":"489271086","13":"+38.6472854","14":"-080.6183274","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"12","4":"00294478","5":"12","6":"FL","7":"Florida","8":"00","9":"G4000","10":"A","11":"1.389474e+11","12":"31362872853","13":"+28.4574302","14":"-082.4091477","15":"<s_MULTIP>"},{"1":"2","2":"3","3":"17","4":"01779784","5":"17","6":"IL","7":"Illinois","8":"00","9":"G4000","10":"A","11":"1.437799e+11","12":"6215723896","13":"+40.1028754","14":"-089.1526108","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"27","4":"00662849","5":"27","6":"MN","7":"Minnesota","8":"00","9":"G4000","10":"A","11":"2.062301e+11","12":"18942261495","13":"+46.3159573","14":"-094.1996043","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"24","4":"01714934","5":"24","6":"MD","7":"Maryland","8":"00","9":"G4000","10":"A","11":"2.515173e+10","12":"6979340970","13":"+38.9466584","14":"-076.6744939","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"44","4":"01219835","5":"44","6":"RI","7":"Rhode Island","8":"00","9":"G4000","10":"A","11":"2.677787e+09","12":"1323663210","13":"+41.5974187","14":"-071.5272723","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"16","4":"01779783","5":"16","6":"ID","7":"Idaho","8":"00","9":"G4000","10":"A","11":"2.140499e+11","12":"2391604238","13":"+44.3484222","14":"-114.5588538","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"33","4":"01779794","5":"33","6":"NH","7":"New Hampshire","8":"00","9":"G4000","10":"A","11":"2.318920e+10","12":"1026903434","13":"+43.6726907","14":"-071.5843145","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"37","4":"01027616","5":"37","6":"NC","7":"North Carolina","8":"00","9":"G4000","10":"A","11":"1.259259e+11","12":"13463401534","13":"+35.5397100","14":"-079.1308636","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"50","4":"01779802","5":"50","6":"VT","7":"Vermont","8":"00","9":"G4000","10":"A","11":"2.387420e+10","12":"1030383955","13":"+44.0685773","14":"-072.6691839","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"09","4":"01779780","5":"09","6":"CT","7":"Connecticut","8":"00","9":"G4000","10":"A","11":"1.254250e+10","12":"1815617293","13":"+41.5798637","14":"-072.7466572","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"10","4":"01779781","5":"10","6":"DE","7":"Delaware","8":"00","9":"G4000","10":"A","11":"5.046620e+09","12":"1399291164","13":"+38.9985661","14":"-075.4416440","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"35","4":"00897535","5":"35","6":"NM","7":"New Mexico","8":"00","9":"G4000","10":"A","11":"3.141973e+11","12":"727781442","13":"+34.4346843","14":"-106.1316181","15":"<s_MULTIP>"},{"1":"4","2":"9","3":"06","4":"01779778","5":"06","6":"CA","7":"California","8":"00","9":"G4000","10":"A","11":"4.036601e+11","12":"20305454540","13":"+37.1551773","14":"-119.5434183","15":"<s_MULTIP>"},{"1":"1","2":"2","3":"34","4":"01779795","5":"34","6":"NJ","7":"New Jersey","8":"00","9":"G4000","10":"A","11":"1.904885e+10","12":"3543837357","13":"+40.1072744","14":"-074.6652012","15":"<s_MULTIP>"},{"1":"2","2":"3","3":"55","4":"01779806","5":"55","6":"WI","7":"Wisconsin","8":"00","9":"G4000","10":"A","11":"1.402930e+11","12":"29344176961","13":"+44.6309071","14":"-089.7093916","15":"<s_MULTIP>"},{"1":"4","2":"9","3":"41","4":"01155107","5":"41","6":"OR","7":"Oregon","8":"00","9":"G4000","10":"A","11":"2.486078e+11","12":"6191602576","13":"+43.9717125","14":"-120.6229578","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"31","4":"01779792","5":"31","6":"NE","7":"Nebraska","8":"00","9":"G4000","10":"A","11":"1.989538e+11","12":"1374686302","13":"+41.5433053","14":"-099.8118646","15":"<s_MULTIP>"},{"1":"1","2":"2","3":"42","4":"01779798","5":"42","6":"PA","7":"Pennsylvania","8":"00","9":"G4000","10":"A","11":"1.158805e+11","12":"3398574954","13":"+40.9046013","14":"-077.8275298","15":"<s_MULTIP>"},{"1":"4","2":"9","3":"53","4":"01779804","5":"53","6":"WA","7":"Washington","8":"00","9":"G4000","10":"A","11":"1.721180e+11","12":"12549727444","13":"+47.4073238","14":"-120.5757999","15":"<s_MULTIP>"},{"1":"3","2":"7","3":"22","4":"01629543","5":"22","6":"LA","7":"Louisiana","8":"00","9":"G4000","10":"A","11":"1.118991e+11","12":"23752001883","13":"+30.8634368","14":"-091.7987173","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"13","4":"01705317","5":"13","6":"GA","7":"Georgia","8":"00","9":"G4000","10":"A","11":"1.494846e+11","12":"4420380296","13":"+32.6295789","14":"-083.4235109","15":"<s_MULTIP>"},{"1":"3","2":"6","3":"01","4":"01779775","5":"01","6":"AL","7":"Alabama","8":"00","9":"G4000","10":"A","11":"1.311742e+11","12":"4593183334","13":"+32.7396323","14":"-086.8434593","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"49","4":"01455989","5":"49","6":"UT","7":"Utah","8":"00","9":"G4000","10":"A","11":"2.133551e+11","12":"6529910339","13":"+39.3349925","14":"-111.6563326","15":"<s_MULTIP>"},{"1":"2","2":"3","3":"39","4":"01085497","5":"39","6":"OH","7":"Ohio","8":"00","9":"G4000","10":"A","11":"1.058237e+11","12":"10274036690","13":"+40.4149297","14":"-082.7119975","15":"<s_MULTIP>"},{"1":"3","2":"7","3":"48","4":"01779801","5":"48","6":"TX","7":"Texas","8":"00","9":"G4000","10":"A","11":"6.766682e+11","12":"18991880422","13":"+31.4347032","14":"-099.2818238","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"08","4":"01779779","5":"08","6":"CO","7":"Colorado","8":"00","9":"G4000","10":"A","11":"2.684199e+11","12":"1184637800","13":"+38.9938482","14":"-105.5083165","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"45","4":"01779799","5":"45","6":"SC","7":"South Carolina","8":"00","9":"G4000","10":"A","11":"7.786466e+10","12":"5075874513","13":"+33.8741776","14":"-080.8542639","15":"<s_MULTIP>"},{"1":"3","2":"7","3":"40","4":"01102857","5":"40","6":"OK","7":"Oklahoma","8":"00","9":"G4000","10":"A","11":"1.776627e+11","12":"3374950118","13":"+35.5900512","14":"-097.4868149","15":"<s_MULTIP>"},{"1":"3","2":"6","3":"47","4":"01325873","5":"47","6":"TN","7":"Tennessee","8":"00","9":"G4000","10":"A","11":"1.068058e+11","12":"2347012319","13":"+35.8608030","14":"-086.3499896","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"56","4":"01779807","5":"56","6":"WY","7":"Wyoming","8":"00","9":"G4000","10":"A","11":"2.514586e+11","12":"1867637632","13":"+42.9896591","14":"-107.5443922","15":"<s_MULTIP>"},{"1":"4","2":"9","3":"15","4":"01779782","5":"15","6":"HI","7":"Hawaii","8":"00","9":"G4000","10":"A","11":"1.663401e+10","12":"11777792811","13":"+19.5977643","14":"-155.5024434","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"38","4":"01779797","5":"38","6":"ND","7":"North Dakota","8":"00","9":"G4000","10":"A","11":"1.786956e+11","12":"4411365971","13":"+47.4421740","14":"-100.4608258","15":"<s_MULTIP>"},{"1":"3","2":"6","3":"21","4":"01779786","5":"21","6":"KY","7":"Kentucky","8":"00","9":"G4000","10":"A","11":"1.022822e+11","12":"2372611005","13":"+37.5336844","14":"-085.2929801","15":"<s_MULTIP>"},{"1":"9","2":"0","3":"78","4":"01802710","5":"78","6":"VI","7":"United States Virgin Islands","8":"00","9":"G4000","10":"A","11":"3.480219e+08","12":"1550236199","13":"+18.3267480","14":"-064.9712508","15":"<s_MULTIP>"},{"1":"9","2":"0","3":"69","4":"01779809","5":"69","6":"MP","7":"Commonwealth of the Northern Mariana Islands","8":"00","9":"G4000","10":"A","11":"4.722925e+08","12":"4644252458","13":"+14.9367835","14":"+145.6010210","15":"<s_MULTIP>"},{"1":"9","2":"0","3":"66","4":"01802705","5":"66","6":"GU","7":"Guam","8":"00","9":"G4000","10":"A","11":"5.435558e+08","12":"934337453","13":"+13.4417451","14":"+144.7719021","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"23","4":"01779787","5":"23","6":"ME","7":"Maine","8":"00","9":"G4000","10":"A","11":"7.988766e+10","12":"11745717739","13":"+45.4092843","14":"-068.6666160","15":"<s_MULTIP>"},{"1":"1","2":"2","3":"36","4":"01779796","5":"36","6":"NY","7":"New York","8":"00","9":"G4000","10":"A","11":"1.220500e+11","12":"19246143659","13":"+42.9133974","14":"-075.5962723","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"32","4":"01779793","5":"32","6":"NV","7":"Nevada","8":"00","9":"G4000","10":"A","11":"2.845370e+11","12":"1839662829","13":"+39.3310928","14":"-116.6151469","15":"<s_MULTIP>"},{"1":"4","2":"9","3":"02","4":"01785533","5":"02","6":"AK","7":"Alaska","8":"00","9":"G4000","10":"A","11":"1.478927e+12","12":"245394222619","13":"+63.3473560","14":"-152.8397334","15":"<s_MULTIP>"},{"1":"9","2":"0","3":"60","4":"01802701","5":"60","6":"AS","7":"American Samoa","8":"00","9":"G4000","10":"A","11":"1.977591e+08","12":"1307243751","13":"-14.2671590","14":"-170.6682674","15":"<s_MULTIP>"},{"1":"2","2":"3","3":"26","4":"01779789","5":"26","6":"MI","7":"Michigan","8":"00","9":"G4000","10":"A","11":"1.466087e+11","12":"103878116983","13":"+44.8441768","14":"-085.6604907","15":"<s_MULTIP>"},{"1":"3","2":"7","3":"05","4":"00068085","5":"05","6":"AR","7":"Arkansas","8":"00","9":"G4000","10":"A","11":"1.347766e+11","12":"2956395922","13":"+34.8955256","14":"-092.4446262","15":"<s_MULTIP>"},{"1":"3","2":"6","3":"28","4":"01779790","5":"28","6":"MS","7":"Mississippi","8":"00","9":"G4000","10":"A","11":"1.215366e+11","12":"3923863925","13":"+32.6864714","14":"-089.6561377","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"29","4":"01779791","5":"29","6":"MO","7":"Missouri","8":"00","9":"G4000","10":"A","11":"1.780499e+11","12":"2489250399","13":"+38.3507500","14":"-092.4567826","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"30","4":"00767982","5":"30","6":"MT","7":"Montana","8":"00","9":"G4000","10":"A","11":"3.769668e+11","12":"3869031338","13":"+47.0511771","14":"-109.6348174","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"20","4":"00481813","5":"20","6":"KS","7":"Kansas","8":"00","9":"G4000","10":"A","11":"2.117535e+11","12":"1346010601","13":"+38.4985464","14":"-098.3834298","15":"<s_MULTIP>"},{"1":"2","2":"3","3":"18","4":"00448508","5":"18","6":"IN","7":"Indiana","8":"00","9":"G4000","10":"A","11":"9.279005e+10","12":"1537252652","13":"+39.9013136","14":"-086.2919129","15":"<s_MULTIP>"},{"1":"9","2":"0","3":"72","4":"01779808","5":"72","6":"PR","7":"Puerto Rico","8":"00","9":"G4000","10":"A","11":"8.868702e+09","12":"4922576715","13":"+18.2176480","14":"-066.4107992","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"46","4":"01785534","5":"46","6":"SD","7":"South Dakota","8":"00","9":"G4000","10":"A","11":"1.963462e+11","12":"3383460688","13":"+44.4467957","14":"-100.2381762","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"25","4":"00606926","5":"25","6":"MA","7":"Massachusetts","8":"00","9":"G4000","10":"A","11":"2.020439e+10","12":"7130663019","13":"+42.1565196","14":"-071.4895915","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"51","4":"01779803","5":"51","6":"VA","7":"Virginia","8":"00","9":"G4000","10":"A","11":"1.022583e+11","12":"8527942672","13":"+37.5222512","14":"-078.6681938","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"11","4":"01702382","5":"11","6":"DC","7":"District of Columbia","8":"00","9":"G4000","10":"A","11":"1.583404e+08","12":"18687196","13":"+38.9042474","14":"-077.0165167","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"19","4":"01779785","5":"19","6":"IA","7":"Iowa","8":"00","9":"G4000","10":"A","11":"1.446605e+11","12":"1084981626","13":"+42.0700243","14":"-093.4933473","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"04","4":"01779777","5":"04","6":"AZ","7":"Arizona","8":"00","9":"G4000","10":"A","11":"2.943603e+11","12":"859561204","13":"+34.2039355","14":"-111.6063565","15":"<s_MULTIP>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <div id="quick-plotting" class="section level3">
@@ -568,7 +553,7 @@ div.tocify {
 <blockquote>
 <p><strong>Note:</strong> Census geography for the USA will span the globe in part becuase Region 9 includes a multitude of pacific islands. Later we will limit to simply the “lower 48” states.</p>
 </blockquote>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">plot</span>(<span class="kw">st_geometry</span>(us_geo))</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(us_geo))</span></code></pre></div>
 <p><img src="031_thematic_mapping_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 </div>
 </div>
@@ -596,12 +581,12 @@ div.tocify {
 <li>Coerces the 2nd column to numeric</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">Salary4Helpers &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw">read_excel</span>(<span class="st">&quot;data/OES_Report.xlsx&quot;</span>,</a>
-<a class="sourceLine" id="cb9-3" title="3">             <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;numeric&quot;</span>), </a>
-<a class="sourceLine" id="cb9-4" title="4">             <span class="dt">skip =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb9-5" title="5"></a>
-<a class="sourceLine" id="cb9-6" title="6">Salary4Helpers</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Salary4Helpers <span class="ot">&lt;-</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(<span class="st">&quot;data/OES_Report.xlsx&quot;</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;numeric&quot;</span>), </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">skip =</span> <span class="dv">4</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>Salary4Helpers</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["Area Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Annual mean wage(2)"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alabama(0100000)","2":"38080"},{"1":"Alaska(0200000)","2":"46050"},{"1":"Arizona(0400000)","2":"34560"},{"1":"Arkansas(0500000)","2":"40480"},{"1":"California(0600000)","2":"64320"},{"1":"Colorado(0800000)","2":"43480"},{"1":"Connecticut(0900000)","2":"60450"},{"1":"Delaware(1000000)","2":"54450"},{"1":"District of Columbia(1100000)","2":"57210"},{"1":"Florida(1200000)","2":"43410"},{"1":"Georgia(1300000)","2":"52750"},{"1":"Guam(6600000)","2":"40080"},{"1":"Hawaii(1500000)","2":"57290"},{"1":"Idaho(1600000)","2":"39580"},{"1":"Illinois(1700000)","2":"53240"},{"1":"Indiana(1800000)","2":"42100"},{"1":"Iowa(1900000)","2":"45380"},{"1":"Kansas(2000000)","2":"41050"},{"1":"Kentucky(2100000)","2":"38130"},{"1":"Louisiana(2200000)","2":"37270"},{"1":"Maine(2300000)","2":"59360"},{"1":"Maryland(2400000)","2":"47560"},{"1":"Massachusetts(2500000)","2":"44960"},{"1":"Michigan(2600000)","2":"49420"},{"1":"Minnesota(2700000)","2":"49310"},{"1":"Mississippi(2800000)","2":"34880"},{"1":"Missouri(2900000)","2":"35510"},{"1":"Montana(3000000)","2":"37710"},{"1":"Nebraska(3100000)","2":"36620"},{"1":"Nevada(3200000)","2":"57460"},{"1":"New Hampshire(3300000)","2":"51320"},{"1":"New Jersey(3400000)","2":"71600"},{"1":"New Mexico(3500000)","2":"37420"},{"1":"New York(3600000)","2":"56430"},{"1":"North Carolina(3700000)","2":"46490"},{"1":"North Dakota(3800000)","2":"50270"},{"1":"Ohio(3900000)","2":"41190"},{"1":"Oklahoma(4000000)","2":"35430"},{"1":"Oregon(4100000)","2":"46330"},{"1":"Pennsylvania(4200000)","2":"37600"},{"1":"Puerto Rico(7200000)","2":"23050"},{"1":"Rhode Island(4400000)","2":"47420"},{"1":"South Carolina(4500000)","2":"34680"},{"1":"South Dakota(4600000)","2":"36980"},{"1":"Tennessee(4700000)","2":"35540"},{"1":"Texas(4800000)","2":"42790"},{"1":"Utah(4900000)","2":"47140"},{"1":"Vermont(5000000)","2":"40150"},{"1":"Virginia(5100000)","2":"49250"},{"1":"Washington(5300000)","2":"51980"},{"1":"West Virginia(5400000)","2":"30920"},{"1":"Wisconsin(5500000)","2":"46220"},{"1":"Wyoming(5600000)","2":"56110"},{"1":"NA","2":"NA"},{"1":"(2)Annual wages have been calculated by multiplying the hourly mean wage by 2,080 hours.","2":"NA"},{"1":"NA","2":"NA"},{"1":"SOC code: Standard Occupational Classification code -- see http://www.bls.gov/soc/home.htm","2":"NA"},{"1":"Date extracted on :Sep 25, 2017","2":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -611,73 +596,69 @@ div.tocify {
 <div id="wrangle-the-data" class="section level2">
 <h2>Wrangle the data</h2>
 <p>Before we join the BLS data to the shapefile we need to transform the structure of the downloaded BLS data</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">BlsWage_ToJoin &lt;-<span class="st"> </span>Salary4Helpers <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Area =</span> <span class="st">&quot;Area Name&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">wages =</span> <span class="st">&quot;Annual mean wage(2)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">State =</span> <span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">d{7}</span><span class="ch">\\</span><span class="st">)&quot;</span>, <span class="st">&quot;&quot;</span>, Area)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="st">  </span><span class="kw">filter</span>(wages <span class="op">!=</span><span class="st"> &quot;NA_character_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-6" title="6"><span class="st">  </span><span class="kw">select</span>(State, wages)</a>
-<a class="sourceLine" id="cb10-7" title="7"></a>
-<a class="sourceLine" id="cb10-8" title="8"><span class="co">#BlsWage_ToJoin</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>BlsWage_ToJoin <span class="ot">&lt;-</span> Salary4Helpers <span class="sc">%&gt;%</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Area =</span> <span class="st">&quot;Area Name&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">wages =</span> <span class="st">&quot;Annual mean wage(2)&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">State =</span> <span class="fu">gsub</span>(<span class="st">&quot;</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">d{7}</span><span class="sc">\\</span><span class="st">)&quot;</span>, <span class="st">&quot;&quot;</span>, Area)) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wages <span class="sc">!=</span> <span class="st">&quot;NA_character_&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(State, wages)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#BlsWage_ToJoin</span></span></code></pre></div>
 </div>
-<div id="append-data" class="section level2">
-<h2>Append data</h2>
-<p>Using the <code>append_data()</code> function of the <code>tmaptools</code> package, append BLS data to the previously loaded shape object</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">HelperShapeObject &lt;-<span class="st"> </span><span class="kw">append_data</span>(us_geo, BlsWage_ToJoin, </a>
-<a class="sourceLine" id="cb11-2" title="2">                                 <span class="dt">key.shp =</span> <span class="st">&quot;NAME&quot;</span>,</a>
-<a class="sourceLine" id="cb11-3" title="3">                                 <span class="dt">key.data =</span> <span class="st">&quot;State&quot;</span>)</a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="kw">as_tibble</span>(HelperShapeObject)</a></code></pre></div>
+<div id="join-data" class="section level2">
+<h2>Join data</h2>
+<p>Use the <code>dplyr::left_join()</code> function or the base-R <code>merge()</code> function to append BLS data to the previously loaded shape object</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>HelperShapeObject <span class="ot">&lt;-</span> <span class="fu">left_join</span>(us_geo, BlsWage_ToJoin, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;NAME&quot;</span> <span class="ot">=</span> <span class="st">&quot;State&quot;</span>))</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(HelperShapeObject)</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["REGION"],"name":[1],"type":["chr"],"align":["left"]},{"label":["DIVISION"],"name":[2],"type":["chr"],"align":["left"]},{"label":["STATEFP"],"name":[3],"type":["chr"],"align":["left"]},{"label":["STATENS"],"name":[4],"type":["chr"],"align":["left"]},{"label":["GEOID"],"name":[5],"type":["chr"],"align":["left"]},{"label":["STUSPS"],"name":[6],"type":["chr"],"align":["left"]},{"label":["NAME"],"name":[7],"type":["chr"],"align":["left"]},{"label":["LSAD"],"name":[8],"type":["chr"],"align":["left"]},{"label":["MTFCC"],"name":[9],"type":["chr"],"align":["left"]},{"label":["FUNCSTAT"],"name":[10],"type":["chr"],"align":["left"]},{"label":["ALAND"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["AWATER"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["INTPTLAT"],"name":[13],"type":["chr"],"align":["left"]},{"label":["INTPTLON"],"name":[14],"type":["chr"],"align":["left"]},{"label":["wages"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["geometry"],"name":[16],"type":["S3: sfc_MULTIPOLYGON"],"align":["right"]}],"data":[{"1":"3","2":"5","3":"54","4":"01779805","5":"54","6":"WV","7":"West Virginia","8":"00","9":"G4000","10":"A","11":"6.226566e+10","12":"489840834","13":"+38.6472854","14":"-080.6183274","15":"30920","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"12","4":"00294478","5":"12","6":"FL","7":"Florida","8":"00","9":"G4000","10":"A","11":"1.389114e+11","12":"31398800291","13":"+28.4574302","14":"-082.4091478","15":"43410","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"3","3":"17","4":"01779784","5":"17","6":"IL","7":"Illinois","8":"00","9":"G4000","10":"A","11":"1.437841e+11","12":"6211277447","13":"+40.1028754","14":"-089.1526108","15":"53240","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"27","4":"00662849","5":"27","6":"MN","7":"Minnesota","8":"00","9":"G4000","10":"A","11":"2.062292e+11","12":"18944967530","13":"+46.3158148","14":"-094.1996628","15":"49310","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"24","4":"01714934","5":"24","6":"MD","7":"Maryland","8":"00","9":"G4000","10":"A","11":"2.515070e+10","12":"6980371026","13":"+38.9466584","14":"-076.6744939","15":"47560","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"44","4":"01219835","5":"44","6":"RI","7":"Rhode Island","8":"00","9":"G4000","10":"A","11":"2.677998e+09","12":"1323452846","13":"+41.5974187","14":"-071.5272723","15":"47420","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"16","4":"01779783","5":"16","6":"ID","7":"Idaho","8":"00","9":"G4000","10":"A","11":"2.140482e+11","12":"2393355752","13":"+44.3484222","14":"-114.5588538","15":"39580","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"33","4":"01779794","5":"33","6":"NH","7":"New Hampshire","8":"00","9":"G4000","10":"A","11":"2.318745e+10","12":"1028643155","13":"+43.6726907","14":"-071.5843145","15":"51320","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"37","4":"01027616","5":"37","6":"NC","7":"North Carolina","8":"00","9":"G4000","10":"A","11":"1.259197e+11","12":"13470113896","13":"+35.5397100","14":"-079.1308636","15":"46490","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"50","4":"01779802","5":"50","6":"VT","7":"Vermont","8":"00","9":"G4000","10":"A","11":"2.387346e+10","12":"1031134839","13":"+44.0604795","14":"-072.6733274","15":"40150","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"09","4":"01779780","5":"09","6":"CT","7":"Connecticut","8":"00","9":"G4000","10":"A","11":"1.254262e+10","12":"1815495323","13":"+41.5798637","14":"-072.7466572","15":"60450","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"10","4":"01779781","5":"10","6":"DE","7":"Delaware","8":"00","9":"G4000","10":"A","11":"5.047241e+09","12":"1398670234","13":"+38.9986239","14":"-075.4416920","15":"54450","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"35","4":"00897535","5":"35","6":"NM","7":"New Mexico","8":"00","9":"G4000","10":"A","11":"3.141914e+11","12":"733669653","13":"+34.4346843","14":"-106.1316181","15":"37420","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"9","3":"06","4":"01779778","5":"06","6":"CA","7":"California","8":"00","9":"G4000","10":"A","11":"4.034832e+11","12":"20484637928","13":"+37.1551773","14":"-119.5434183","15":"64320","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"2","3":"34","4":"01779795","5":"34","6":"NJ","7":"New Jersey","8":"00","9":"G4000","10":"A","11":"1.904972e+10","12":"3542963551","13":"+40.1072744","14":"-074.6652012","15":"71600","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"3","3":"55","4":"01779806","5":"55","6":"WI","7":"Wisconsin","8":"00","9":"G4000","10":"A","11":"1.402755e+11","12":"29359527964","13":"+44.6309071","14":"-089.7093916","15":"46220","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"9","3":"41","4":"01155107","5":"41","6":"OR","7":"Oregon","8":"00","9":"G4000","10":"A","11":"2.486043e+11","12":"6195045325","13":"+43.9717125","14":"-120.6229578","15":"46330","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"31","4":"01779792","5":"31","6":"NE","7":"Nebraska","8":"00","9":"G4000","10":"A","11":"1.989580e+11","12":"1370523694","13":"+41.5433014","14":"-099.8118616","15":"36620","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"2","3":"42","4":"01779798","5":"42","6":"PA","7":"Pennsylvania","8":"00","9":"G4000","10":"A","11":"1.158815e+11","12":"3397554419","13":"+40.9024957","14":"-077.8334514","15":"37600","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"9","3":"53","4":"01779804","5":"53","6":"WA","7":"Washington","8":"00","9":"G4000","10":"A","11":"1.721118e+11","12":"12560067439","13":"+47.4073238","14":"-120.5757999","15":"51980","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"7","3":"22","4":"01629543","5":"22","6":"LA","7":"Louisiana","8":"00","9":"G4000","10":"A","11":"1.119048e+11","12":"23746413153","13":"+30.8634368","14":"-091.7987173","15":"37270","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"13","4":"01705317","5":"13","6":"GA","7":"Georgia","8":"00","9":"G4000","10":"A","11":"1.491775e+11","12":"4733385577","13":"+32.6295789","14":"-083.4235109","15":"52750","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"6","3":"01","4":"01779775","5":"01","6":"AL","7":"Alabama","8":"00","9":"G4000","10":"A","11":"1.311744e+11","12":"4592944701","13":"+32.7396323","14":"-086.8434593","15":"38080","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"49","4":"01455989","5":"49","6":"UT","7":"Utah","8":"00","9":"G4000","10":"A","11":"2.128848e+11","12":"7000199770","13":"+39.3349925","14":"-111.6563326","15":"47140","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"3","3":"39","4":"01085497","5":"39","6":"OH","7":"Ohio","8":"00","9":"G4000","10":"A","11":"1.058333e+11","12":"10264451012","13":"+40.4149297","14":"-082.7119975","15":"41190","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"7","3":"48","4":"01779801","5":"48","6":"TX","7":"Texas","8":"00","9":"G4000","10":"A","11":"6.766419e+11","12":"19017521093","13":"+31.4347032","14":"-099.2818238","15":"42790","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"08","4":"01779779","5":"08","6":"CO","7":"Colorado","8":"00","9":"G4000","10":"A","11":"2.684260e+11","12":"1178495763","13":"+38.9938482","14":"-105.5083165","15":"43480","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"45","4":"01779799","5":"45","6":"SC","7":"South Carolina","8":"00","9":"G4000","10":"A","11":"7.786273e+10","12":"5071381300","13":"+33.8741776","14":"-080.8542639","15":"34680","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"7","3":"40","4":"01102857","5":"40","6":"OK","7":"Oklahoma","8":"00","9":"G4000","10":"A","11":"1.776645e+11","12":"3373087228","13":"+35.5900512","14":"-097.4868149","15":"35430","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"6","3":"47","4":"01325873","5":"47","6":"TN","7":"Tennessee","8":"00","9":"G4000","10":"A","11":"1.067980e+11","12":"2354836197","13":"+35.8585557","14":"-086.3493580","15":"35540","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"56","4":"01779807","5":"56","6":"WY","7":"Wyoming","8":"00","9":"G4000","10":"A","11":"2.514656e+11","12":"1860628076","13":"+42.9918024","14":"-107.5419255","15":"56110","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"9","3":"15","4":"01779782","5":"15","6":"HI","7":"Hawaii","8":"00","9":"G4000","10":"A","11":"1.663412e+10","12":"11777681513","13":"+22.0120383","14":"-159.7059653","15":"57290","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"38","4":"01779797","5":"38","6":"ND","7":"North Dakota","8":"00","9":"G4000","10":"A","11":"1.787104e+11","12":"4400396641","13":"+47.4421740","14":"-100.4608258","15":"50270","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"6","3":"21","4":"01779786","5":"21","6":"KY","7":"Kentucky","8":"00","9":"G4000","10":"A","11":"1.022661e+11","12":"2388731561","13":"+37.5336844","14":"-085.2929801","15":"38130","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"9","2":"0","3":"78","4":"01802710","5":"78","6":"VI","7":"United States Virgin Islands","8":"00","9":"G4000","10":"A","11":"3.480137e+08","12":"1550244357","13":"+18.3267484","14":"-064.9712505","15":"NA","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"9","2":"0","3":"69","4":"01779809","5":"69","6":"MP","7":"Commonwealth of the Northern Mariana Islands","8":"00","9":"G4000","10":"A","11":"4.722844e+08","12":"4644260632","13":"+14.9367835","14":"+145.6010210","15":"NA","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"9","2":"0","3":"66","4":"01802705","5":"66","6":"GU","7":"Guam","8":"00","9":"G4000","10":"A","11":"5.435583e+08","12":"934334983","13":"+13.4382886","14":"+144.7729493","15":"40080","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"23","4":"01779787","5":"23","6":"ME","7":"Maine","8":"00","9":"G4000","10":"A","11":"7.988581e+10","12":"11748168571","13":"+45.4092789","14":"-068.6665979","15":"59360","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"2","3":"36","4":"01779796","5":"36","6":"NY","7":"New York","8":"00","9":"G4000","10":"A","11":"1.220490e+11","12":"19247151848","13":"+42.9133974","14":"-075.5962723","15":"56430","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"32","4":"01779793","5":"32","6":"NV","7":"Nevada","8":"00","9":"G4000","10":"A","11":"2.843293e+11","12":"2047350803","13":"+39.3310928","14":"-116.6151469","15":"57460","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"9","3":"02","4":"01785533","5":"02","6":"AK","7":"Alaska","8":"00","9":"G4000","10":"A","11":"1.478588e+12","12":"277723861311","13":"+63.2813242","14":"-152.5730397","15":"46050","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"9","2":"0","3":"60","4":"01802701","5":"60","6":"AS","7":"American Samoa","8":"00","9":"G4000","10":"A","11":"1.977591e+08","12":"1307243753","13":"-14.2668475","14":"-170.6671854","15":"NA","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"3","3":"26","4":"01779789","5":"26","6":"MI","7":"Michigan","8":"00","9":"G4000","10":"A","11":"1.464881e+11","12":"103998746281","13":"+44.8441757","14":"-085.6604930","15":"49420","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"7","3":"05","4":"00068085","5":"05","6":"AR","7":"Arkansas","8":"00","9":"G4000","10":"A","11":"1.347681e+11","12":"2963631791","13":"+34.8955256","14":"-092.4446262","15":"40480","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"6","3":"28","4":"01779790","5":"28","6":"MS","7":"Mississippi","8":"00","9":"G4000","10":"A","11":"1.215303e+11","12":"3930182746","13":"+32.6864714","14":"-089.6561377","15":"34880","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"29","4":"01779791","5":"29","6":"MO","7":"Missouri","8":"00","9":"G4000","10":"A","11":"1.780520e+11","12":"2488190402","13":"+38.3507500","14":"-092.4567826","15":"35510","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"30","4":"00767982","5":"30","6":"MT","7":"Montana","8":"00","9":"G4000","10":"A","11":"3.769609e+11","12":"3871059371","13":"+47.0511771","14":"-109.6348174","15":"37710","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"20","4":"00481813","5":"20","6":"KS","7":"Kansas","8":"00","9":"G4000","10":"A","11":"2.117532e+11","12":"1346325556","13":"+38.4985464","14":"-098.3834298","15":"41050","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"3","3":"18","4":"00448508","5":"18","6":"IN","7":"Indiana","8":"00","9":"G4000","10":"A","11":"9.278777e+10","12":"1539541677","13":"+39.9030256","14":"-086.2839503","15":"42100","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"9","2":"0","3":"72","4":"01779808","5":"72","6":"PR","7":"Puerto Rico","8":"00","9":"G4000","10":"A","11":"8.868735e+09","12":"4922543816","13":"+18.2176480","14":"-066.4107992","15":"23050","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"46","4":"01785534","5":"46","6":"SD","7":"South Dakota","8":"00","9":"G4000","10":"A","11":"1.963452e+11","12":"3384471850","13":"+44.4467957","14":"-100.2381762","15":"36980","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"1","2":"1","3":"25","4":"00606926","5":"25","6":"MA","7":"Massachusetts","8":"00","9":"G4000","10":"A","11":"2.020429e+10","12":"7130763257","13":"+42.1565196","14":"-071.4895915","15":"44960","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"51","4":"01779803","5":"51","6":"VA","7":"Virginia","8":"00","9":"G4000","10":"A","11":"1.022542e+11","12":"8532012665","13":"+37.5222512","14":"-078.6681938","15":"49250","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"3","2":"5","3":"11","4":"01702382","5":"11","6":"DC","7":"District of Columbia","8":"00","9":"G4000","10":"A","11":"1.583516e+08","12":"18675956","13":"+38.9041031","14":"-077.0172290","15":"57210","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"2","2":"4","3":"19","4":"01779785","5":"19","6":"IA","7":"Iowa","8":"00","9":"G4000","10":"A","11":"1.446642e+11","12":"1081293682","13":"+42.0700243","14":"-093.4933473","15":"45380","16":"<S3: sfc_MULTIPOLYGON>"},{"1":"4","2":"8","3":"04","4":"01779777","5":"04","6":"AZ","7":"Arizona","8":"00","9":"G4000","10":"A","11":"2.941987e+11","12":"1027245114","13":"+34.2039355","14":"-111.6063565","15":"34560","16":"<S3: sfc_MULTIPOLYGON>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["REGION"],"name":[1],"type":["chr"],"align":["left"]},{"label":["DIVISION"],"name":[2],"type":["chr"],"align":["left"]},{"label":["STATEFP"],"name":[3],"type":["chr"],"align":["left"]},{"label":["STATENS"],"name":[4],"type":["chr"],"align":["left"]},{"label":["GEOID"],"name":[5],"type":["chr"],"align":["left"]},{"label":["STUSPS"],"name":[6],"type":["chr"],"align":["left"]},{"label":["NAME"],"name":[7],"type":["chr"],"align":["left"]},{"label":["LSAD"],"name":[8],"type":["chr"],"align":["left"]},{"label":["MTFCC"],"name":[9],"type":["chr"],"align":["left"]},{"label":["FUNCSTAT"],"name":[10],"type":["chr"],"align":["left"]},{"label":["ALAND"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["AWATER"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["INTPTLAT"],"name":[13],"type":["chr"],"align":["left"]},{"label":["INTPTLON"],"name":[14],"type":["chr"],"align":["left"]},{"label":["wages"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["geometry"],"name":[16],"type":["s_MULTIP"],"align":["right"]}],"data":[{"1":"3","2":"5","3":"54","4":"01779805","5":"54","6":"WV","7":"West Virginia","8":"00","9":"G4000","10":"A","11":"6.226623e+10","12":"489271086","13":"+38.6472854","14":"-080.6183274","15":"30920","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"12","4":"00294478","5":"12","6":"FL","7":"Florida","8":"00","9":"G4000","10":"A","11":"1.389474e+11","12":"31362872853","13":"+28.4574302","14":"-082.4091477","15":"43410","16":"<s_MULTIP>"},{"1":"2","2":"3","3":"17","4":"01779784","5":"17","6":"IL","7":"Illinois","8":"00","9":"G4000","10":"A","11":"1.437799e+11","12":"6215723896","13":"+40.1028754","14":"-089.1526108","15":"53240","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"27","4":"00662849","5":"27","6":"MN","7":"Minnesota","8":"00","9":"G4000","10":"A","11":"2.062301e+11","12":"18942261495","13":"+46.3159573","14":"-094.1996043","15":"49310","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"24","4":"01714934","5":"24","6":"MD","7":"Maryland","8":"00","9":"G4000","10":"A","11":"2.515173e+10","12":"6979340970","13":"+38.9466584","14":"-076.6744939","15":"47560","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"44","4":"01219835","5":"44","6":"RI","7":"Rhode Island","8":"00","9":"G4000","10":"A","11":"2.677787e+09","12":"1323663210","13":"+41.5974187","14":"-071.5272723","15":"47420","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"16","4":"01779783","5":"16","6":"ID","7":"Idaho","8":"00","9":"G4000","10":"A","11":"2.140499e+11","12":"2391604238","13":"+44.3484222","14":"-114.5588538","15":"39580","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"33","4":"01779794","5":"33","6":"NH","7":"New Hampshire","8":"00","9":"G4000","10":"A","11":"2.318920e+10","12":"1026903434","13":"+43.6726907","14":"-071.5843145","15":"51320","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"37","4":"01027616","5":"37","6":"NC","7":"North Carolina","8":"00","9":"G4000","10":"A","11":"1.259259e+11","12":"13463401534","13":"+35.5397100","14":"-079.1308636","15":"46490","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"50","4":"01779802","5":"50","6":"VT","7":"Vermont","8":"00","9":"G4000","10":"A","11":"2.387420e+10","12":"1030383955","13":"+44.0685773","14":"-072.6691839","15":"40150","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"09","4":"01779780","5":"09","6":"CT","7":"Connecticut","8":"00","9":"G4000","10":"A","11":"1.254250e+10","12":"1815617293","13":"+41.5798637","14":"-072.7466572","15":"60450","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"10","4":"01779781","5":"10","6":"DE","7":"Delaware","8":"00","9":"G4000","10":"A","11":"5.046620e+09","12":"1399291164","13":"+38.9985661","14":"-075.4416440","15":"54450","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"35","4":"00897535","5":"35","6":"NM","7":"New Mexico","8":"00","9":"G4000","10":"A","11":"3.141973e+11","12":"727781442","13":"+34.4346843","14":"-106.1316181","15":"37420","16":"<s_MULTIP>"},{"1":"4","2":"9","3":"06","4":"01779778","5":"06","6":"CA","7":"California","8":"00","9":"G4000","10":"A","11":"4.036601e+11","12":"20305454540","13":"+37.1551773","14":"-119.5434183","15":"64320","16":"<s_MULTIP>"},{"1":"1","2":"2","3":"34","4":"01779795","5":"34","6":"NJ","7":"New Jersey","8":"00","9":"G4000","10":"A","11":"1.904885e+10","12":"3543837357","13":"+40.1072744","14":"-074.6652012","15":"71600","16":"<s_MULTIP>"},{"1":"2","2":"3","3":"55","4":"01779806","5":"55","6":"WI","7":"Wisconsin","8":"00","9":"G4000","10":"A","11":"1.402930e+11","12":"29344176961","13":"+44.6309071","14":"-089.7093916","15":"46220","16":"<s_MULTIP>"},{"1":"4","2":"9","3":"41","4":"01155107","5":"41","6":"OR","7":"Oregon","8":"00","9":"G4000","10":"A","11":"2.486078e+11","12":"6191602576","13":"+43.9717125","14":"-120.6229578","15":"46330","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"31","4":"01779792","5":"31","6":"NE","7":"Nebraska","8":"00","9":"G4000","10":"A","11":"1.989538e+11","12":"1374686302","13":"+41.5433053","14":"-099.8118646","15":"36620","16":"<s_MULTIP>"},{"1":"1","2":"2","3":"42","4":"01779798","5":"42","6":"PA","7":"Pennsylvania","8":"00","9":"G4000","10":"A","11":"1.158805e+11","12":"3398574954","13":"+40.9046013","14":"-077.8275298","15":"37600","16":"<s_MULTIP>"},{"1":"4","2":"9","3":"53","4":"01779804","5":"53","6":"WA","7":"Washington","8":"00","9":"G4000","10":"A","11":"1.721180e+11","12":"12549727444","13":"+47.4073238","14":"-120.5757999","15":"51980","16":"<s_MULTIP>"},{"1":"3","2":"7","3":"22","4":"01629543","5":"22","6":"LA","7":"Louisiana","8":"00","9":"G4000","10":"A","11":"1.118991e+11","12":"23752001883","13":"+30.8634368","14":"-091.7987173","15":"37270","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"13","4":"01705317","5":"13","6":"GA","7":"Georgia","8":"00","9":"G4000","10":"A","11":"1.494846e+11","12":"4420380296","13":"+32.6295789","14":"-083.4235109","15":"52750","16":"<s_MULTIP>"},{"1":"3","2":"6","3":"01","4":"01779775","5":"01","6":"AL","7":"Alabama","8":"00","9":"G4000","10":"A","11":"1.311742e+11","12":"4593183334","13":"+32.7396323","14":"-086.8434593","15":"38080","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"49","4":"01455989","5":"49","6":"UT","7":"Utah","8":"00","9":"G4000","10":"A","11":"2.133551e+11","12":"6529910339","13":"+39.3349925","14":"-111.6563326","15":"47140","16":"<s_MULTIP>"},{"1":"2","2":"3","3":"39","4":"01085497","5":"39","6":"OH","7":"Ohio","8":"00","9":"G4000","10":"A","11":"1.058237e+11","12":"10274036690","13":"+40.4149297","14":"-082.7119975","15":"41190","16":"<s_MULTIP>"},{"1":"3","2":"7","3":"48","4":"01779801","5":"48","6":"TX","7":"Texas","8":"00","9":"G4000","10":"A","11":"6.766682e+11","12":"18991880422","13":"+31.4347032","14":"-099.2818238","15":"42790","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"08","4":"01779779","5":"08","6":"CO","7":"Colorado","8":"00","9":"G4000","10":"A","11":"2.684199e+11","12":"1184637800","13":"+38.9938482","14":"-105.5083165","15":"43480","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"45","4":"01779799","5":"45","6":"SC","7":"South Carolina","8":"00","9":"G4000","10":"A","11":"7.786466e+10","12":"5075874513","13":"+33.8741776","14":"-080.8542639","15":"34680","16":"<s_MULTIP>"},{"1":"3","2":"7","3":"40","4":"01102857","5":"40","6":"OK","7":"Oklahoma","8":"00","9":"G4000","10":"A","11":"1.776627e+11","12":"3374950118","13":"+35.5900512","14":"-097.4868149","15":"35430","16":"<s_MULTIP>"},{"1":"3","2":"6","3":"47","4":"01325873","5":"47","6":"TN","7":"Tennessee","8":"00","9":"G4000","10":"A","11":"1.068058e+11","12":"2347012319","13":"+35.8608030","14":"-086.3499896","15":"35540","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"56","4":"01779807","5":"56","6":"WY","7":"Wyoming","8":"00","9":"G4000","10":"A","11":"2.514586e+11","12":"1867637632","13":"+42.9896591","14":"-107.5443922","15":"56110","16":"<s_MULTIP>"},{"1":"4","2":"9","3":"15","4":"01779782","5":"15","6":"HI","7":"Hawaii","8":"00","9":"G4000","10":"A","11":"1.663401e+10","12":"11777792811","13":"+19.5977643","14":"-155.5024434","15":"57290","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"38","4":"01779797","5":"38","6":"ND","7":"North Dakota","8":"00","9":"G4000","10":"A","11":"1.786956e+11","12":"4411365971","13":"+47.4421740","14":"-100.4608258","15":"50270","16":"<s_MULTIP>"},{"1":"3","2":"6","3":"21","4":"01779786","5":"21","6":"KY","7":"Kentucky","8":"00","9":"G4000","10":"A","11":"1.022822e+11","12":"2372611005","13":"+37.5336844","14":"-085.2929801","15":"38130","16":"<s_MULTIP>"},{"1":"9","2":"0","3":"78","4":"01802710","5":"78","6":"VI","7":"United States Virgin Islands","8":"00","9":"G4000","10":"A","11":"3.480219e+08","12":"1550236199","13":"+18.3267480","14":"-064.9712508","15":"NA","16":"<s_MULTIP>"},{"1":"9","2":"0","3":"69","4":"01779809","5":"69","6":"MP","7":"Commonwealth of the Northern Mariana Islands","8":"00","9":"G4000","10":"A","11":"4.722925e+08","12":"4644252458","13":"+14.9367835","14":"+145.6010210","15":"NA","16":"<s_MULTIP>"},{"1":"9","2":"0","3":"66","4":"01802705","5":"66","6":"GU","7":"Guam","8":"00","9":"G4000","10":"A","11":"5.435558e+08","12":"934337453","13":"+13.4417451","14":"+144.7719021","15":"40080","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"23","4":"01779787","5":"23","6":"ME","7":"Maine","8":"00","9":"G4000","10":"A","11":"7.988766e+10","12":"11745717739","13":"+45.4092843","14":"-068.6666160","15":"59360","16":"<s_MULTIP>"},{"1":"1","2":"2","3":"36","4":"01779796","5":"36","6":"NY","7":"New York","8":"00","9":"G4000","10":"A","11":"1.220500e+11","12":"19246143659","13":"+42.9133974","14":"-075.5962723","15":"56430","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"32","4":"01779793","5":"32","6":"NV","7":"Nevada","8":"00","9":"G4000","10":"A","11":"2.845370e+11","12":"1839662829","13":"+39.3310928","14":"-116.6151469","15":"57460","16":"<s_MULTIP>"},{"1":"4","2":"9","3":"02","4":"01785533","5":"02","6":"AK","7":"Alaska","8":"00","9":"G4000","10":"A","11":"1.478927e+12","12":"245394222619","13":"+63.3473560","14":"-152.8397334","15":"46050","16":"<s_MULTIP>"},{"1":"9","2":"0","3":"60","4":"01802701","5":"60","6":"AS","7":"American Samoa","8":"00","9":"G4000","10":"A","11":"1.977591e+08","12":"1307243751","13":"-14.2671590","14":"-170.6682674","15":"NA","16":"<s_MULTIP>"},{"1":"2","2":"3","3":"26","4":"01779789","5":"26","6":"MI","7":"Michigan","8":"00","9":"G4000","10":"A","11":"1.466087e+11","12":"103878116983","13":"+44.8441768","14":"-085.6604907","15":"49420","16":"<s_MULTIP>"},{"1":"3","2":"7","3":"05","4":"00068085","5":"05","6":"AR","7":"Arkansas","8":"00","9":"G4000","10":"A","11":"1.347766e+11","12":"2956395922","13":"+34.8955256","14":"-092.4446262","15":"40480","16":"<s_MULTIP>"},{"1":"3","2":"6","3":"28","4":"01779790","5":"28","6":"MS","7":"Mississippi","8":"00","9":"G4000","10":"A","11":"1.215366e+11","12":"3923863925","13":"+32.6864714","14":"-089.6561377","15":"34880","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"29","4":"01779791","5":"29","6":"MO","7":"Missouri","8":"00","9":"G4000","10":"A","11":"1.780499e+11","12":"2489250399","13":"+38.3507500","14":"-092.4567826","15":"35510","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"30","4":"00767982","5":"30","6":"MT","7":"Montana","8":"00","9":"G4000","10":"A","11":"3.769668e+11","12":"3869031338","13":"+47.0511771","14":"-109.6348174","15":"37710","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"20","4":"00481813","5":"20","6":"KS","7":"Kansas","8":"00","9":"G4000","10":"A","11":"2.117535e+11","12":"1346010601","13":"+38.4985464","14":"-098.3834298","15":"41050","16":"<s_MULTIP>"},{"1":"2","2":"3","3":"18","4":"00448508","5":"18","6":"IN","7":"Indiana","8":"00","9":"G4000","10":"A","11":"9.279005e+10","12":"1537252652","13":"+39.9013136","14":"-086.2919129","15":"42100","16":"<s_MULTIP>"},{"1":"9","2":"0","3":"72","4":"01779808","5":"72","6":"PR","7":"Puerto Rico","8":"00","9":"G4000","10":"A","11":"8.868702e+09","12":"4922576715","13":"+18.2176480","14":"-066.4107992","15":"23050","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"46","4":"01785534","5":"46","6":"SD","7":"South Dakota","8":"00","9":"G4000","10":"A","11":"1.963462e+11","12":"3383460688","13":"+44.4467957","14":"-100.2381762","15":"36980","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"25","4":"00606926","5":"25","6":"MA","7":"Massachusetts","8":"00","9":"G4000","10":"A","11":"2.020439e+10","12":"7130663019","13":"+42.1565196","14":"-071.4895915","15":"44960","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"51","4":"01779803","5":"51","6":"VA","7":"Virginia","8":"00","9":"G4000","10":"A","11":"1.022583e+11","12":"8527942672","13":"+37.5222512","14":"-078.6681938","15":"49250","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"11","4":"01702382","5":"11","6":"DC","7":"District of Columbia","8":"00","9":"G4000","10":"A","11":"1.583404e+08","12":"18687196","13":"+38.9042474","14":"-077.0165167","15":"57210","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"19","4":"01779785","5":"19","6":"IA","7":"Iowa","8":"00","9":"G4000","10":"A","11":"1.446605e+11","12":"1084981626","13":"+42.0700243","14":"-093.4933473","15":"45380","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"04","4":"01779777","5":"04","6":"AZ","7":"Arizona","8":"00","9":"G4000","10":"A","11":"2.943603e+11","12":"859561204","13":"+34.2039355","14":"-111.6063565","15":"34560","16":"<s_MULTIP>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
 <div id="quick-thematic-map" class="section level2">
 <h2>Quick Thematic Map</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">qtm</span>(HelperShapeObject, <span class="dt">fill =</span> <span class="st">&quot;wages&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qtm</span>(HelperShapeObject, <span class="at">fill =</span> <span class="st">&quot;wages&quot;</span>)</span></code></pre></div>
 <p><img src="031_thematic_mapping_files/figure-html/make_qtm-1.png" width="672" /></p>
 </div>
 <div id="contiguous-48-states" class="section level2">
 <h2>Contiguous 48 states</h2>
 <p>Filter to only the contiguous 48 states + D.C.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">contiguous_states &lt;-<span class="st"> </span>HelperShapeObject <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span><span class="kw">filter</span>(REGION <span class="op">!=</span><span class="st"> </span><span class="dv">9</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-3" title="3"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;AK&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;HI&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>contiguous_states <span class="ot">&lt;-</span> HelperShapeObject <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(REGION <span class="sc">!=</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STUSPS <span class="sc">!=</span> <span class="st">&quot;AK&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(STUSPS <span class="sc">!=</span> <span class="st">&quot;HI&quot;</span>)</span></code></pre></div>
 </div>
 <div id="make-choropleth" class="section level2">
 <h2>Make Choropleth</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">tm_shape</span>(contiguous_states) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="st">&quot;wages&quot;</span>, <span class="dt">id =</span> <span class="st">&quot;Name&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(contiguous_states) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">&quot;wages&quot;</span>, <span class="at">id =</span> <span class="st">&quot;Name&quot;</span>)</span></code></pre></div>
 <p><img src="031_thematic_mapping_files/figure-html/make-choropleth-1.png" width="672" /></p>
 </div>
 <div id="projection" class="section level2">
 <h2>Projection</h2>
 <p>Mark likes the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection for the continental US. <code>EPSG:5070</code></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">contiguous_states <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="st">  </span><span class="kw">st_transform</span>(<span class="dv">5070</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-3" title="3"><span class="st">  </span><span class="kw">tm_shape</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="st">&quot;wages&quot;</span>, <span class="dt">id =</span> <span class="st">&quot;Name&quot;</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>contiguous_states <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">5070</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">&quot;wages&quot;</span>, <span class="at">id =</span> <span class="st">&quot;Name&quot;</span>) </span></code></pre></div>
 <p><img src="031_thematic_mapping_files/figure-html/fix-projection-1.png" width="672" /></p>
 <div id="alternative-syntax" class="section level3">
 <h3>Alternative Syntax</h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">tm_shape</span>(contiguous_states, <span class="dt">projection =</span> <span class="dv">5070</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw">tm_polygons</span>(<span class="st">&quot;wages&quot;</span>, <span class="dt">id =</span> <span class="st">&quot;Name&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(contiguous_states, <span class="at">projection =</span> <span class="dv">5070</span>) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">&quot;wages&quot;</span>, <span class="at">id =</span> <span class="st">&quot;Name&quot;</span>)</span></code></pre></div>
 <p><img src="031_thematic_mapping_files/figure-html/alternative-syntax-1.png" width="672" /></p>
 </div>
 <div id="explore-tmap-syntax-and-functions" class="section level3">
 <h3>Explore <code>tmap</code> syntax and functions</h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">tm_shape</span>(contiguous_states, <span class="dt">projection =</span> <span class="dv">5070</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span><span class="kw">tm_borders</span>(<span class="dt">col =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.4</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-3" title="3"><span class="st">  </span><span class="kw">tm_fill</span>(<span class="dt">col =</span> <span class="st">&quot;REGION&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.6</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-4" title="4"><span class="st">  </span><span class="kw">tm_style_beaver</span>(<span class="dt">title =</span> <span class="st">&quot;Regions of the USA&quot;</span>, </a>
-<a class="sourceLine" id="cb17-5" title="5">                  <span class="dt">attr.color =</span> <span class="st">&quot;navy&quot;</span>, </a>
-<a class="sourceLine" id="cb17-6" title="6">                  <span class="dt">title.position =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;top&quot;</span>), </a>
-<a class="sourceLine" id="cb17-7" title="7">                  <span class="dt">title.bg.color =</span> <span class="st">&quot;yellow&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning in tm_style_beaver(title = &quot;Regions of the USA&quot;, attr.color =
-## &quot;navy&quot;, : tm_style_beaver is deprecated as of tmap version 2.0. Please use
-## tm_style(&quot;beaver&quot;, ...) instead</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(contiguous_states, <span class="at">projection =</span> <span class="dv">5070</span>) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">&quot;black&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">&quot;REGION&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">&quot;Regions of the USA&quot;</span>, </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">attr.color =</span> <span class="st">&quot;navy&quot;</span>, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title.position =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;top&quot;</span>), </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title.bg.color =</span> <span class="st">&quot;lightblue&quot;</span>)</span></code></pre></div>
 <p><img src="031_thematic_mapping_files/figure-html/tmap-syntax-1.png" width="672" /></p>
 </div>
 </div>
@@ -720,7 +701,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -738,7 +719,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -759,7 +740,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

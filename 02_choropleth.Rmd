@@ -88,6 +88,7 @@ starbucksNC <- st_as_sf(starbucksNC, coords = c("Longitude", "Latitude"),  crs =
 Generate the map with multiple layers.  You can read more about additional arguments such as `homebutton, legend, alpha, cex` in the [`mapview()` documentation](https://r-spatial.github.io/mapview/reference/mapView.html).  Read about the many more mapview functions in the [full documentation](https://r-spatial.github.io/mapview/reference/).
 
 ```{r}
+library(leafem)
 mymap <- mapview(nc_pop, 
                  zcol = "estimate", 
                  homebutton = FALSE) + 

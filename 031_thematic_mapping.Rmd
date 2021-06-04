@@ -24,7 +24,6 @@ us_geo <- tigris::states(class = "sf")
 
 ```{r get-data, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
 us_geo <- tigris::states(class = "sf")
-# us_geo_spdf <- states()  # spdf uses @data slots -- old school
 ```
 
 ## Data Structure 
@@ -110,17 +109,15 @@ BlsWage_ToJoin <- Salary4Helpers %>%
 ```
 
 
-## Append data
+## Join data
 
-Using the `append_data()` function of the `tmaptools` package, append BLS data to the previously loaded shape object
+Use the `dplyr::left_join()` function or the base-R `merge()` function to append BLS data to the previously loaded shape object
 
 ```{r make_nice_df, message=FALSE, warning=FALSE}
-HelperShapeObject <- append_data(us_geo, BlsWage_ToJoin, 
-                                 key.shp = "NAME",
-                                 key.data = "State")
+HelperShapeObject <- left_join(us_geo, BlsWage_ToJoin, by = c("NAME" = "State"))
+
 as_tibble(HelperShapeObject)
 ```
-
 
 ## Quick Thematic Map
 
@@ -135,10 +132,10 @@ Filter to only the contiguous 48 states + D.C.
 
 ```{r subset-data}
 contiguous_states <- HelperShapeObject %>% 
-  filter(REGION != 9) %>% 
+  filter(REGION != 9) %>%
   filter(STUSPS != "AK") %>% 
   filter(STUSPS != "HI")
-  
+
 ```
 
 
@@ -177,10 +174,10 @@ tm_shape(contiguous_states, projection = 5070) +
 tm_shape(contiguous_states, projection = 5070) +
   tm_borders(col = "black", alpha = 0.4) +
   tm_fill(col = "REGION", alpha = 0.6) +
-  tm_style_beaver(title = "Regions of the USA", 
+  tm_layout(title = "Regions of the USA", 
                   attr.color = "navy", 
                   title.position = c("center", "top"), 
-                  title.bg.color = "yellow")
+                  title.bg.color = "lightblue")
 ```
 
 

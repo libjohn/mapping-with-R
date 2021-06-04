@@ -69,3 +69,4 @@ You can save a map as an interactive HTML page or a static `.png, .pdf, or .jpeg
 - `mapshot(starNCmap, url = "map.html")`
 
 
+

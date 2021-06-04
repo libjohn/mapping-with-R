@@ -3,28 +3,21 @@ title: "Faceted Thematic Mapping"
 output: html_document
 ---
 
-
 ```{r load-libraries, message=FALSE, warning=FALSE}
 library(tidyverse)       # Tidyverse for Tidy Data
 library(readxl)
-library(tmap)            # Thematic Mapping
-library(tmaptools) 
 library(tigris)          # Get Census Geography Poloygons
 library(sf)
 library(tidycensus)
-library(viridis)        # Loading required package: viridisLite
-library(ggplot2)        #-- version 2.2.1.90000
-              #devtools::install_github("tidyverse/ggplot2")
 ```
-
 
 ## Shapefiles as sf 
 
 Using the `tigris` package get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.
 
 ```{r get-data, message=FALSE, warning=FALSE}
-us_geo <- tigris::states(class = "sf")
-# us_geo_spdf <- states()  # spdf uses @data slots -- old school
+us_geo <- tigris::states(class = "sf") %>% 
+  shift_geometry()
 ```
 
 ## Get BLS data
@@ -47,162 +40,74 @@ https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographic
         
             - Excel
             
-- Read the Data in with the RStudio "Import Dataset" wizard available in the *Environment* tab.  This will generate the code below and ensure the import
+### Import the Data into R 
+    
+```{r message=FALSE, warning=FALSE}
+my_xl_files <- fs::dir_ls(path = "data", glob = "*.xlsx")
 
-    - Skips the first 4 lines
-    - Coerces the 2nd column to numeric
-
-```{r get-blsdata, message=FALSE, warning=FALSE}
-Salary4Helpers <- 
-  read_excel("data/OES_Report.xlsx",
-             col_types = c("text", "numeric"), 
-             skip = 4)
-
-# Salary4Helpers
+my_df <- my_xl_files %>% 
+  map_dfr(read_excel, 
+          col_types = c("text", "numeric"), 
+          skip = 4, 
+          .id = "sheet")
 ```
 
-### Load more BLS Wages 
-
-read in the XLXS files for the other occupations:  Secondary School Teacher, Waiter, Legislator, and Paralegals
-
-```{r other_occupations_data, message=FALSE, warning=FALSE}
-legislators <- 
-  read_excel("data/OES_legislator.xlsx",
-             col_types = c("text", "numeric"), 
-             skip = 4)
-
-paralegals <- 
-  read_excel("data/OES_paralegals.xlsx",
-             col_types = c("text", "numeric"), 
-             skip = 4)
-
-teachers <- 
-  read_excel("data/OES_secondary_school_teacher.xlsx",
-             col_types = c("text", "numeric"), 
-             skip = 4)
-
-waiters <- 
-  read_excel("data/OES_waiters.xlsx",
-             col_types = c("text", "numeric"), 
-             skip = 4)
-
+```{r}
+state_names <- us_geo %>% 
+  filter(REGION != "9") %>% 
+  select(NAME) %>% 
+  st_drop_geometry()
 ```
-
-        
 
 ### Wrangle the data
 
-Before we join the BLS data to the shapefile we need to transform the structure of the downloaded BLS data
+Before we join the BLS data to the shapefile `us_geo` we need to transform BLS data
 
-```{r wrangle_bls_data, message=FALSE, warning=FALSE}
-BlsWage_ToJoin <- Salary4Helpers %>% 
-  rename(Area = "Area Name") %>% 
-  rename(wages = "Annual mean wage(2)") %>% 
-  mutate(State = gsub("\\(\\d{7}\\)", "", Area)) %>% 
-  filter(wages != "NA_character_") %>% 
-  select(State, wages)
-
-#BlsWage_ToJoin
+```{r}
+my_df <- my_df %>% 
+  rename(area = "Area Name",
+         wages = "Annual mean wage(2)",
+         type = sheet) %>% 
+  mutate(State = str_extract(area, '.*(?=\\()')) %>% 
+  mutate(type = str_extract(type, "(?<=data/OES_)\\w+")) 
 ```
 
+### Missing data
 
-```{r wrangle_other_ocupations}
+Some of the BLS data are missing making it hard to visualize.  As a remedy to this problem we will wrangle the data by preserving shape geometry even for states without any wage data.
 
+```{r}
+missing_states_legislators <- state_names %>% 
+  anti_join(my_df %>% filter(type == "legislator"), 
+            by = c("NAME" = "State")) %>% 
+  mutate(type = "legislator") %>% 
+  rename(State = NAME)
 
-legislators <- legislators %>% 
-  rename(Area = "Area Name") %>% 
-  rename(wages = "Annual mean wage(2)") %>% 
-  mutate(State = gsub("\\(\\d{7}\\)", "", Area)) %>% 
-  filter(wages != "NA_character_") %>% 
-  select(State, wages)
-
-paralegals <- paralegals %>% 
-  rename(Area = "Area Name") %>% 
-  rename(wages = "Annual mean wage(2)") %>% 
-  mutate(State = gsub("\\(\\d{7}\\)", "", Area)) %>% 
-  filter(wages != "NA_character_") %>% 
-  select(State, wages)
-
-teachers <- teachers %>% 
-  rename(Area = "Area Name") %>% 
-  rename(wages = "Annual mean wage(2)") %>% 
-  mutate(State = gsub("\\(\\d{7}\\)", "", Area)) %>% 
-  filter(wages != "NA_character_") %>% 
-  select(State, wages)
-
-waiters <- waiters %>% 
-  rename(Area = "Area Name") %>% 
-  rename(wages = "Annual mean wage(2)") %>% 
-  mutate(State = gsub("\\(\\d{7}\\)", "", Area)) %>% 
-  filter(wages != "NA_character_") %>% 
-  select(State, wages)
-
+missing_states_legislators
 ```
 
-
-
-### Append data
-
-Using the `append_data()` function of the `tmaptools` package, append BLS data to the previously loaded shape object
-
-```{r make_nice_df}
-paralegals <- append_data(us_geo, paralegals, 
-                                 key.shp = "NAME",
-                                 key.data = "State")
-
-waiters <- append_data(us_geo, waiters, 
-                                 key.shp = "NAME",
-                                 key.data = "State")
-
-teachers <- append_data(us_geo, teachers, 
-                                 key.shp = "NAME",
-                                 key.data = "State")
-
-legislators <- append_data(us_geo, legislators, 
-                                 key.shp = "NAME",
-                                 key.data = "State")
+```{r}
+my_df <- my_df %>% 
+  bind_rows(missing_states_legislators)
 ```
 
-```{r append_bls_data}
-HelperShapeObject <- append_data(us_geo, BlsWage_ToJoin, 
-                                 key.shp = "NAME",
-                                 key.data = "State")
+### Join data
+
+Using the `dplyr::left_join` merge BLS data to the previously loaded shape object
+
+```{r}
+my_df <- us_geo %>% 
+  left_join(my_df, by = c("NAME" = "State"))
 ```
 
+### 50 states
 
+Filter to the 50 states + D.C.
 
-### Contiguous 48 states
-
-Filter to only the contiguous 48 states + D.C.
-
-```{r subset-data}
-contiguous_states <- HelperShapeObject %>% 
-  filter(REGION != 9) %>% 
-  filter(STUSPS != "AK") %>% 
-  filter(STUSPS != "HI")
-
-
-paralegals <- paralegals %>% 
-  filter(REGION != 9) %>% 
-  filter(STUSPS != "AK") %>% 
-  filter(STUSPS != "HI")
-
-waiters <- waiters %>% 
-  filter(REGION != 9) %>% 
-  filter(STUSPS != "AK") %>% 
-  filter(STUSPS != "HI")
-
-teachers <- teachers %>% 
-  filter(REGION != 9) %>% 
-  filter(STUSPS != "AK") %>% 
-  filter(STUSPS != "HI")
-
-legislators <- legislators %>% 
-  filter(REGION != 9) %>% 
-  filter(STUSPS != "AK") %>% 
-  filter(STUSPS != "HI")
+```{r}
+my_df <- my_df %>% 
+  filter(REGION != 9) 
 ```
-
 
 ## Get Population Data -- Tidycensus
 
@@ -221,78 +126,19 @@ variables_census <- load_variables(2015, "acs5", cache = TRUE)
 us_pop <- 
   get_acs(geography = "state",
           variables = "B06011_001E",
-          # state = "NC",
-          geometry = FALSE)
+          geometry = TRUE)  %>% 
+  shift_geometry()
 
 us_pop <- us_pop %>% 
-  filter(NAME != "Alaska") %>% 
-  filter(NAME != "Hawaii") %>% 
+  mutate(type = "USA Median Income") %>% 
+  rename(wages = estimate) %>% 
   filter(NAME != "Puerto Rico")
 ```
 
 ### Append Census Data
 
-```{r make_nice_df2}
-appended_population_and_states_shapefile <- append_data(contiguous_states, us_pop, 
-                                 key.shp = "GEOID",
-                                 key.data = "GEOID")
-```
-
-
-## Make Tall
-
-Wrangle the data into a tall format and single data frame
-
-```{r make_tall}
-contiguous_states_slim <- contiguous_states %>% 
-  select(GEOID, NAME, wages, geometry) %>% 
-  mutate(category = "Substance Abuse Soc.Wrk") %>% 
-  rename(variable = wages)
-```
-
-```{r wrangle_pop}
-population_states_slim <- appended_population_and_states_shapefile %>% 
-  select(GEOID, NAME, estimate, geometry) %>% 
-  mutate(category = "Median Income") %>% 
-  rename(variable = estimate)
-```
-
-
-```{r wrangle_other_bls}
-paralegals <- paralegals %>% 
-  select(GEOID, NAME, wages, geometry) %>% 
-  mutate(category = "Paralegals") %>% 
-  rename(variable = wages)
-
-waiters <- waiters %>% 
-  select(GEOID, NAME, wages, geometry) %>% 
-  mutate(category = "Waiters") %>% 
-  rename(variable = wages)
-
-teachers <- teachers %>% 
-  select(GEOID, NAME, wages, geometry) %>% 
-  mutate(category = "Teachers") %>% 
-  rename(variable = wages)
-
-legislators <- legislators %>% 
-  select(GEOID, NAME, wages, geometry) %>% 
-  mutate(category = "Legislators") %>% 
-  rename(variable = wages)
-```
-
-### Bind Rows 
-
-To combine all the smaller data frames into one tall format, bind the rows.
-
-base::`rbind` works.  `dplyr::bind_rows` did not work.
-
-```{r bind_tall}
-tall <- rbind(contiguous_states_slim,
-              population_states_slim,
-              paralegals,
-              waiters,
-              teachers,
-              legislators)
+```{r}
+my_df <- bind_rows(my_df, us_pop)
 ```
 
 ### More Munging
@@ -300,42 +146,36 @@ tall <- rbind(contiguous_states_slim,
 Make the category variable a categorical factor with levels.  This will improve the order of the facets when displayed.
 
 ```{r}
-display_levels <- c("Median Income", "Legislators", 
-                    "Paralegals", "Substance Abuse Soc.Wrk", 
-                    "Teachers", "Waiters")
+display_levels <- c("USA Median Income", "Legislator", 
+                    "Paralegals", "Substance Abuse Counselor", 
+                    "Teacher", "Waiters")
 
-tall <- tall %>% 
-  mutate(category = factor(category, display_levels)) %>% 
-  rename(Wages = variable)
-```
-
-
-
-## Facet_grid
-
-`facet_wrap` works better than `facet_grid` because there is more control over the display of the rows and columns.  The first example, below, does not run.  I keep it only to document something that could work.
-
-```{}
-tall %>% 
-  ggplot(aes(fill = variable, color = variable)) +
-  geom_sf() +
-  coord_sf(crs = 5070) +
-  scale_fill_viridis(option = "viridis") + 
-  scale_color_viridis(option = "viridis") +
-  facet_grid(. ~ category)
+my_df <- my_df %>% 
+  mutate(category = case_when(
+    type == "USA Median Income" ~ "USA Median Income",
+    type == "legislator" ~ "Legislator",
+    type == "paralegals" ~ "Paralegals",
+    type == "Report" ~ "Substance Abuse Counselor",
+    type == "secondary_school_teacher" ~ "Teacher",
+    type == "waiters" ~ "Waiters"
+  )) %>% 
+  mutate(category = factor(category, display_levels))
 ```
 
 ### Display Map
 
-```{r facet_wrap_it_up}
-tall %>% 
-  ggplot(aes(fill = Wages, color = Wages)) +
+```{r}
+my_df %>% 
+  ggplot(aes(fill = wages, color = wages)) +
   geom_sf() +
   coord_sf(crs = 5070, datum = NA) +
-  scale_fill_viridis(option = "viridis") + 
-  scale_color_viridis(option = "viridis") +
-  facet_wrap(~ category, nrow = 3, ncol = 2)
+  scale_fill_viridis_c() + 
+  scale_color_viridis_c() +
+  facet_wrap(~ category, 
+             nrow = 3, ncol = 2)
 ```
+
+
 
 ### Save Map
 

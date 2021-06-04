@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -14,12 +13,22 @@
 
 <title>Faceted Thematic Mapping</title>
 
+<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -29,29 +38,47 @@
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -60,9 +87,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -115,42 +142,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
-<link rel="stylesheet" href="libs-local\duke.css" type="text/css" />
-<link rel="stylesheet" href="libs-local\cc-fonts.css" type="text/css" />
+
+<link rel="stylesheet" href="libs-local/duke.css" type="text/css" />
+<link rel="stylesheet" href="libs-local/cc-fonts.css" type="text/css" />
 
 
 
@@ -159,10 +156,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -179,40 +172,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -240,7 +206,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -252,7 +218,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -263,10 +229,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -278,7 +257,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -314,6 +292,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -342,6 +321,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -403,7 +388,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -484,13 +469,13 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/libjohn/mapping-with-R">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
      
     <span class="caret"></span>
@@ -509,7 +494,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -518,21 +503,16 @@ div.tocify {
 </div>
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)       <span class="co"># Tidyverse for Tidy Data</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(readxl)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(tmap)            <span class="co"># Thematic Mapping</span></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(tmaptools) </a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="kw">library</span>(tigris)          <span class="co"># Get Census Geography Poloygons</span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="kw">library</span>(sf)</a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="kw">library</span>(tidycensus)</a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="kw">library</span>(viridis)        <span class="co"># Loading required package: viridisLite</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="kw">library</span>(ggplot2)        <span class="co">#-- version 2.2.1.90000</span></a>
-<a class="sourceLine" id="cb1-10" title="10">              <span class="co">#devtools::install_github(&quot;tidyverse/ggplot2&quot;)</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)       <span class="co"># Tidyverse for Tidy Data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)          <span class="co"># Get Census Geography Poloygons</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span></code></pre></div>
 <div id="shapefiles-as-sf" class="section level2">
 <h2>Shapefiles as sf</h2>
 <p>Using the <code>tigris</code> package get Census Tiger shapefiles for census geographies. Tigris will return the shapefile in the <code>sf</code>, or simple features, format.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">us_geo &lt;-<span class="st"> </span>tigris<span class="op">::</span><span class="kw">states</span>(<span class="dt">class =</span> <span class="st">&quot;sf&quot;</span>)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="co"># us_geo_spdf &lt;- states()  # spdf uses @data slots -- old school</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>us_geo <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">states</span>(<span class="at">class =</span> <span class="st">&quot;sf&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shift_geometry</span>()</span></code></pre></div>
 </div>
 <div id="get-bls-data" class="section level2">
 <h2>Get BLS data</h2>
@@ -552,145 +532,60 @@ div.tocify {
 </ul></li>
 </ul></li>
 </ul></li>
-<li><p>Read the Data in with the RStudio “Import Dataset” wizard available in the <em>Environment</em> tab. This will generate the code below and ensure the import</p>
-<ul>
-<li>Skips the first 4 lines</li>
-<li>Coerces the 2nd column to numeric</li>
-</ul></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">Salary4Helpers &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">read_excel</span>(<span class="st">&quot;data/OES_Report.xlsx&quot;</span>,</a>
-<a class="sourceLine" id="cb3-3" title="3">             <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;numeric&quot;</span>), </a>
-<a class="sourceLine" id="cb3-4" title="4">             <span class="dt">skip =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb3-5" title="5"></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co"># Salary4Helpers</span></a></code></pre></div>
-<div id="load-more-bls-wages" class="section level3">
-<h3>Load more BLS Wages</h3>
-<p>read in the XLXS files for the other occupations: Secondary School Teacher, Waiter, Legislator, and Paralegals</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">legislators &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw">read_excel</span>(<span class="st">&quot;data/OES_legislator.xlsx&quot;</span>,</a>
-<a class="sourceLine" id="cb4-3" title="3">             <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;numeric&quot;</span>), </a>
-<a class="sourceLine" id="cb4-4" title="4">             <span class="dt">skip =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb4-5" title="5"></a>
-<a class="sourceLine" id="cb4-6" title="6">paralegals &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="st">  </span><span class="kw">read_excel</span>(<span class="st">&quot;data/OES_paralegals.xlsx&quot;</span>,</a>
-<a class="sourceLine" id="cb4-8" title="8">             <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;numeric&quot;</span>), </a>
-<a class="sourceLine" id="cb4-9" title="9">             <span class="dt">skip =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb4-10" title="10"></a>
-<a class="sourceLine" id="cb4-11" title="11">teachers &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="st">  </span><span class="kw">read_excel</span>(<span class="st">&quot;data/OES_secondary_school_teacher.xlsx&quot;</span>,</a>
-<a class="sourceLine" id="cb4-13" title="13">             <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;numeric&quot;</span>), </a>
-<a class="sourceLine" id="cb4-14" title="14">             <span class="dt">skip =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb4-15" title="15"></a>
-<a class="sourceLine" id="cb4-16" title="16">waiters &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="st">  </span><span class="kw">read_excel</span>(<span class="st">&quot;data/OES_waiters.xlsx&quot;</span>,</a>
-<a class="sourceLine" id="cb4-18" title="18">             <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;numeric&quot;</span>), </a>
-<a class="sourceLine" id="cb4-19" title="19">             <span class="dt">skip =</span> <span class="dv">4</span>)</a></code></pre></div>
+<div id="import-the-data-into-r" class="section level3">
+<h3>Import the Data into R</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>my_xl_files <span class="ot">&lt;-</span> fs<span class="sc">::</span><span class="fu">dir_ls</span>(<span class="at">path =</span> <span class="st">&quot;data&quot;</span>, <span class="at">glob =</span> <span class="st">&quot;*.xlsx&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> my_xl_files <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">map_dfr</span>(read_excel, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>          <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">&quot;text&quot;</span>, <span class="st">&quot;numeric&quot;</span>), </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">skip =</span> <span class="dv">4</span>, </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">.id =</span> <span class="st">&quot;sheet&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>state_names <span class="ot">&lt;-</span> us_geo <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(REGION <span class="sc">!=</span> <span class="st">&quot;9&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NAME) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>()</span></code></pre></div>
 </div>
 <div id="wrangle-the-data" class="section level3">
 <h3>Wrangle the data</h3>
-<p>Before we join the BLS data to the shapefile we need to transform the structure of the downloaded BLS data</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">BlsWage_ToJoin &lt;-<span class="st"> </span>Salary4Helpers <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Area =</span> <span class="st">&quot;Area Name&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">wages =</span> <span class="st">&quot;Annual mean wage(2)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">State =</span> <span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">d{7}</span><span class="ch">\\</span><span class="st">)&quot;</span>, <span class="st">&quot;&quot;</span>, Area)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span><span class="kw">filter</span>(wages <span class="op">!=</span><span class="st"> &quot;NA_character_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="st">  </span><span class="kw">select</span>(State, wages)</a>
-<a class="sourceLine" id="cb5-7" title="7"></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co">#BlsWage_ToJoin</span></a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">legislators &lt;-<span class="st"> </span>legislators <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Area =</span> <span class="st">&quot;Area Name&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">wages =</span> <span class="st">&quot;Annual mean wage(2)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">State =</span> <span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">d{7}</span><span class="ch">\\</span><span class="st">)&quot;</span>, <span class="st">&quot;&quot;</span>, Area)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span><span class="kw">filter</span>(wages <span class="op">!=</span><span class="st"> &quot;NA_character_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="st">  </span><span class="kw">select</span>(State, wages)</a>
-<a class="sourceLine" id="cb6-7" title="7"></a>
-<a class="sourceLine" id="cb6-8" title="8">paralegals &lt;-<span class="st"> </span>paralegals <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Area =</span> <span class="st">&quot;Area Name&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">wages =</span> <span class="st">&quot;Annual mean wage(2)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">State =</span> <span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">d{7}</span><span class="ch">\\</span><span class="st">)&quot;</span>, <span class="st">&quot;&quot;</span>, Area)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="st">  </span><span class="kw">filter</span>(wages <span class="op">!=</span><span class="st"> &quot;NA_character_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="st">  </span><span class="kw">select</span>(State, wages)</a>
-<a class="sourceLine" id="cb6-14" title="14"></a>
-<a class="sourceLine" id="cb6-15" title="15">teachers &lt;-<span class="st"> </span>teachers <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Area =</span> <span class="st">&quot;Area Name&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">wages =</span> <span class="st">&quot;Annual mean wage(2)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-18" title="18"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">State =</span> <span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">d{7}</span><span class="ch">\\</span><span class="st">)&quot;</span>, <span class="st">&quot;&quot;</span>, Area)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-19" title="19"><span class="st">  </span><span class="kw">filter</span>(wages <span class="op">!=</span><span class="st"> &quot;NA_character_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-20" title="20"><span class="st">  </span><span class="kw">select</span>(State, wages)</a>
-<a class="sourceLine" id="cb6-21" title="21"></a>
-<a class="sourceLine" id="cb6-22" title="22">waiters &lt;-<span class="st"> </span>waiters <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-23" title="23"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Area =</span> <span class="st">&quot;Area Name&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-24" title="24"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">wages =</span> <span class="st">&quot;Annual mean wage(2)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-25" title="25"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">State =</span> <span class="kw">gsub</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">d{7}</span><span class="ch">\\</span><span class="st">)&quot;</span>, <span class="st">&quot;&quot;</span>, Area)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-26" title="26"><span class="st">  </span><span class="kw">filter</span>(wages <span class="op">!=</span><span class="st"> &quot;NA_character_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-27" title="27"><span class="st">  </span><span class="kw">select</span>(State, wages)</a></code></pre></div>
+<p>Before we join the BLS data to the shapefile <code>us_geo</code> we need to transform BLS data</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> my_df <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">area =</span> <span class="st">&quot;Area Name&quot;</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>         <span class="at">wages =</span> <span class="st">&quot;Annual mean wage(2)&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">type =</span> sheet) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">State =</span> <span class="fu">str_extract</span>(area, <span class="st">&#39;.*(?=</span><span class="sc">\\</span><span class="st">()&#39;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">str_extract</span>(type, <span class="st">&quot;(?&lt;=data/OES_)</span><span class="sc">\\</span><span class="st">w+&quot;</span>)) </span></code></pre></div>
 </div>
-<div id="append-data" class="section level3">
-<h3>Append data</h3>
-<p>Using the <code>append_data()</code> function of the <code>tmaptools</code> package, append BLS data to the previously loaded shape object</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">paralegals &lt;-<span class="st"> </span><span class="kw">append_data</span>(us_geo, paralegals, </a>
-<a class="sourceLine" id="cb7-2" title="2">                                 <span class="dt">key.shp =</span> <span class="st">&quot;NAME&quot;</span>,</a>
-<a class="sourceLine" id="cb7-3" title="3">                                 <span class="dt">key.data =</span> <span class="st">&quot;State&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: This function is deprecated and has been migrated to github.com/
-## mtennekes/oldtmaptools</code></pre>
-<pre><code>## Under coverage: 3 out of 56 shape features did not get appended data. Run under_coverage() to get the corresponding feature id numbers and key values.</code></pre>
-<pre><code>## Over coverage: 1 out of 54 data records were not appended. Run over_coverage() to get the corresponding data row numbers and key values.</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">waiters &lt;-<span class="st"> </span><span class="kw">append_data</span>(us_geo, waiters, </a>
-<a class="sourceLine" id="cb11-2" title="2">                                 <span class="dt">key.shp =</span> <span class="st">&quot;NAME&quot;</span>,</a>
-<a class="sourceLine" id="cb11-3" title="3">                                 <span class="dt">key.data =</span> <span class="st">&quot;State&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: This function is deprecated and has been migrated to github.com/
-## mtennekes/oldtmaptools</code></pre>
-<pre><code>## Under coverage: 3 out of 56 shape features did not get appended data. Run under_coverage() to get the corresponding feature id numbers and key values.
-## Over coverage: 1 out of 54 data records were not appended. Run over_coverage() to get the corresponding data row numbers and key values.</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">teachers &lt;-<span class="st"> </span><span class="kw">append_data</span>(us_geo, teachers, </a>
-<a class="sourceLine" id="cb14-2" title="2">                                 <span class="dt">key.shp =</span> <span class="st">&quot;NAME&quot;</span>,</a>
-<a class="sourceLine" id="cb14-3" title="3">                                 <span class="dt">key.data =</span> <span class="st">&quot;State&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: This function is deprecated and has been migrated to github.com/
-## mtennekes/oldtmaptools</code></pre>
-<pre><code>## Under coverage: 3 out of 56 shape features did not get appended data. Run under_coverage() to get the corresponding feature id numbers and key values.
-## Over coverage: 1 out of 54 data records were not appended. Run over_coverage() to get the corresponding data row numbers and key values.</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">legislators &lt;-<span class="st"> </span><span class="kw">append_data</span>(us_geo, legislators, </a>
-<a class="sourceLine" id="cb17-2" title="2">                                 <span class="dt">key.shp =</span> <span class="st">&quot;NAME&quot;</span>,</a>
-<a class="sourceLine" id="cb17-3" title="3">                                 <span class="dt">key.data =</span> <span class="st">&quot;State&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: This function is deprecated and has been migrated to github.com/
-## mtennekes/oldtmaptools</code></pre>
-<pre><code>## Under coverage: 15 out of 56 shape features did not get appended data. Run under_coverage() to get the corresponding feature id numbers and key values.</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">HelperShapeObject &lt;-<span class="st"> </span><span class="kw">append_data</span>(us_geo, BlsWage_ToJoin, </a>
-<a class="sourceLine" id="cb20-2" title="2">                                 <span class="dt">key.shp =</span> <span class="st">&quot;NAME&quot;</span>,</a>
-<a class="sourceLine" id="cb20-3" title="3">                                 <span class="dt">key.data =</span> <span class="st">&quot;State&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: This function is deprecated and has been migrated to github.com/
-## mtennekes/oldtmaptools</code></pre>
-<pre><code>## Under coverage: 3 out of 56 shape features did not get appended data. Run under_coverage() to get the corresponding feature id numbers and key values.</code></pre>
+<div id="missing-data" class="section level3">
+<h3>Missing data</h3>
+<p>Some of the BLS data are missing making it hard to visualize. As a remedy to this problem we will wrangle the data by preserving shape geometry even for states without any wage data.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>missing_states_legislators <span class="ot">&lt;-</span> state_names <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(my_df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(type <span class="sc">==</span> <span class="st">&quot;legislator&quot;</span>), </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;NAME&quot;</span> <span class="ot">=</span> <span class="st">&quot;State&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="st">&quot;legislator&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">State =</span> NAME)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>missing_states_legislators</span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["State"],"name":[1],"type":["chr"],"align":["left"]},{"label":["type"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"North Carolina","2":"legislator"},{"1":"Vermont","2":"legislator"},{"1":"Kentucky","2":"legislator"},{"1":"Maine","2":"legislator"},{"1":"South Dakota","2":"legislator"},{"1":"District of Columbia","2":"legislator"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
 </div>
-<div id="contiguous-48-states" class="section level3">
-<h3>Contiguous 48 states</h3>
-<p>Filter to only the contiguous 48 states + D.C.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1">contiguous_states &lt;-<span class="st"> </span>HelperShapeObject <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="st">  </span><span class="kw">filter</span>(REGION <span class="op">!=</span><span class="st"> </span><span class="dv">9</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-3" title="3"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;AK&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-4" title="4"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;HI&quot;</span>)</a>
-<a class="sourceLine" id="cb23-5" title="5"></a>
-<a class="sourceLine" id="cb23-6" title="6"></a>
-<a class="sourceLine" id="cb23-7" title="7">paralegals &lt;-<span class="st"> </span>paralegals <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-8" title="8"><span class="st">  </span><span class="kw">filter</span>(REGION <span class="op">!=</span><span class="st"> </span><span class="dv">9</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-9" title="9"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;AK&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-10" title="10"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;HI&quot;</span>)</a>
-<a class="sourceLine" id="cb23-11" title="11"></a>
-<a class="sourceLine" id="cb23-12" title="12">waiters &lt;-<span class="st"> </span>waiters <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-13" title="13"><span class="st">  </span><span class="kw">filter</span>(REGION <span class="op">!=</span><span class="st"> </span><span class="dv">9</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-14" title="14"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;AK&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-15" title="15"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;HI&quot;</span>)</a>
-<a class="sourceLine" id="cb23-16" title="16"></a>
-<a class="sourceLine" id="cb23-17" title="17">teachers &lt;-<span class="st"> </span>teachers <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-18" title="18"><span class="st">  </span><span class="kw">filter</span>(REGION <span class="op">!=</span><span class="st"> </span><span class="dv">9</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-19" title="19"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;AK&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-20" title="20"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;HI&quot;</span>)</a>
-<a class="sourceLine" id="cb23-21" title="21"></a>
-<a class="sourceLine" id="cb23-22" title="22">legislators &lt;-<span class="st"> </span>legislators <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-23" title="23"><span class="st">  </span><span class="kw">filter</span>(REGION <span class="op">!=</span><span class="st"> </span><span class="dv">9</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-24" title="24"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;AK&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-25" title="25"><span class="st">  </span><span class="kw">filter</span>(STUSPS <span class="op">!=</span><span class="st"> &quot;HI&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> my_df <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">bind_rows</span>(missing_states_legislators)</span></code></pre></div>
+</div>
+<div id="join-data" class="section level3">
+<h3>Join data</h3>
+<p>Using the <code>dplyr::left_join</code> merge BLS data to the previously loaded shape object</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> us_geo <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(my_df, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;NAME&quot;</span> <span class="ot">=</span> <span class="st">&quot;State&quot;</span>))</span></code></pre></div>
+</div>
+<div id="states" class="section level3">
+<h3>50 states</h3>
+<p>Filter to the 50 states + D.C.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> my_df <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(REGION <span class="sc">!=</span> <span class="dv">9</span>) </span></code></pre></div>
 </div>
 </div>
 <div id="get-population-data-tidycensus" class="section level2">
@@ -698,108 +593,59 @@ div.tocify {
 <div id="identify-and-pick-census-variables" class="section level3">
 <h3>identify and pick census variables</h3>
 <p>B01003_001E = Total Population B06011_001E = Median income in the past 12 months –!!Total:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">variables_census &lt;-<span class="st"> </span><span class="kw">load_variables</span>(<span class="dv">2015</span>, <span class="st">&quot;acs5&quot;</span>, <span class="dt">cache =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>variables_census <span class="ot">&lt;-</span> <span class="fu">load_variables</span>(<span class="dv">2015</span>, <span class="st">&quot;acs5&quot;</span>, <span class="at">cache =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <div id="get-median-income" class="section level3">
 <h3>Get Median Income</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">us_pop &lt;-<span class="st"> </span></a>
-<a class="sourceLine" id="cb25-2" title="2"><span class="st">  </span><span class="kw">get_acs</span>(<span class="dt">geography =</span> <span class="st">&quot;state&quot;</span>,</a>
-<a class="sourceLine" id="cb25-3" title="3">          <span class="dt">variables =</span> <span class="st">&quot;B06011_001E&quot;</span>,</a>
-<a class="sourceLine" id="cb25-4" title="4">          <span class="co"># state = &quot;NC&quot;,</span></a>
-<a class="sourceLine" id="cb25-5" title="5">          <span class="dt">geometry =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<pre><code>## Getting data from the 2013-2017 5-year ACS</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">us_pop &lt;-<span class="st"> </span>us_pop <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-2" title="2"><span class="st">  </span><span class="kw">filter</span>(NAME <span class="op">!=</span><span class="st"> &quot;Alaska&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-3" title="3"><span class="st">  </span><span class="kw">filter</span>(NAME <span class="op">!=</span><span class="st"> &quot;Hawaii&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb27-4" title="4"><span class="st">  </span><span class="kw">filter</span>(NAME <span class="op">!=</span><span class="st"> &quot;Puerto Rico&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>us_pop <span class="ot">&lt;-</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_acs</span>(<span class="at">geography =</span> <span class="st">&quot;state&quot;</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">variables =</span> <span class="st">&quot;B06011_001E&quot;</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">geometry =</span> <span class="cn">TRUE</span>)  <span class="sc">%&gt;%</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shift_geometry</span>()</span></code></pre></div>
+<pre><code>## Getting data from the 2015-2019 5-year ACS</code></pre>
+<pre><code>## Downloading feature geometry from the Census website.  To cache shapefiles for use in future sessions, set `options(tigris_use_cache = TRUE)`.</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>us_pop <span class="ot">&lt;-</span> us_pop <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="st">&quot;USA Median Income&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">wages =</span> estimate) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(NAME <span class="sc">!=</span> <span class="st">&quot;Puerto Rico&quot;</span>)</span></code></pre></div>
 </div>
 <div id="append-census-data" class="section level3">
 <h3>Append Census Data</h3>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">appended_population_and_states_shapefile &lt;-<span class="st"> </span><span class="kw">append_data</span>(contiguous_states, us_pop, </a>
-<a class="sourceLine" id="cb28-2" title="2">                                 <span class="dt">key.shp =</span> <span class="st">&quot;GEOID&quot;</span>,</a>
-<a class="sourceLine" id="cb28-3" title="3">                                 <span class="dt">key.data =</span> <span class="st">&quot;GEOID&quot;</span>)</a></code></pre></div>
-<pre><code>## Warning: This function is deprecated and has been migrated to github.com/
-## mtennekes/oldtmaptools</code></pre>
-<pre><code>## Keys match perfectly.</code></pre>
-</div>
-</div>
-<div id="make-tall" class="section level2">
-<h2>Make Tall</h2>
-<p>Wrangle the data into a tall format and single data frame</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">contiguous_states_slim &lt;-<span class="st"> </span>contiguous_states <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb31-2" title="2"><span class="st">  </span><span class="kw">select</span>(GEOID, NAME, wages, geometry) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb31-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="st">&quot;Substance Abuse Soc.Wrk&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb31-4" title="4"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">variable =</span> wages)</a></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1">population_states_slim &lt;-<span class="st"> </span>appended_population_and_states_shapefile <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-2" title="2"><span class="st">  </span><span class="kw">select</span>(GEOID, NAME, estimate, geometry) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="st">&quot;Median Income&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-4" title="4"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">variable =</span> estimate)</a></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">paralegals &lt;-<span class="st"> </span>paralegals <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="st">  </span><span class="kw">select</span>(GEOID, NAME, wages, geometry) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="st">&quot;Paralegals&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-4" title="4"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">variable =</span> wages)</a>
-<a class="sourceLine" id="cb33-5" title="5"></a>
-<a class="sourceLine" id="cb33-6" title="6">waiters &lt;-<span class="st"> </span>waiters <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-7" title="7"><span class="st">  </span><span class="kw">select</span>(GEOID, NAME, wages, geometry) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="st">&quot;Waiters&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-9" title="9"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">variable =</span> wages)</a>
-<a class="sourceLine" id="cb33-10" title="10"></a>
-<a class="sourceLine" id="cb33-11" title="11">teachers &lt;-<span class="st"> </span>teachers <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-12" title="12"><span class="st">  </span><span class="kw">select</span>(GEOID, NAME, wages, geometry) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-13" title="13"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="st">&quot;Teachers&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-14" title="14"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">variable =</span> wages)</a>
-<a class="sourceLine" id="cb33-15" title="15"></a>
-<a class="sourceLine" id="cb33-16" title="16">legislators &lt;-<span class="st"> </span>legislators <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-17" title="17"><span class="st">  </span><span class="kw">select</span>(GEOID, NAME, wages, geometry) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-18" title="18"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="st">&quot;Legislators&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb33-19" title="19"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">variable =</span> wages)</a></code></pre></div>
-<div id="bind-rows" class="section level3">
-<h3>Bind Rows</h3>
-<p>To combine all the smaller data frames into one tall format, bind the rows.</p>
-<p>base::<code>rbind</code> works. <code>dplyr::bind_rows</code> did not work.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">tall &lt;-<span class="st"> </span><span class="kw">rbind</span>(contiguous_states_slim,</a>
-<a class="sourceLine" id="cb34-2" title="2">              population_states_slim,</a>
-<a class="sourceLine" id="cb34-3" title="3">              paralegals,</a>
-<a class="sourceLine" id="cb34-4" title="4">              waiters,</a>
-<a class="sourceLine" id="cb34-5" title="5">              teachers,</a>
-<a class="sourceLine" id="cb34-6" title="6">              legislators)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(my_df, us_pop)</span></code></pre></div>
 </div>
 <div id="more-munging" class="section level3">
 <h3>More Munging</h3>
 <p>Make the category variable a categorical factor with levels. This will improve the order of the facets when displayed.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1">display_levels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Median Income&quot;</span>, <span class="st">&quot;Legislators&quot;</span>, </a>
-<a class="sourceLine" id="cb35-2" title="2">                    <span class="st">&quot;Paralegals&quot;</span>, <span class="st">&quot;Substance Abuse Soc.Wrk&quot;</span>, </a>
-<a class="sourceLine" id="cb35-3" title="3">                    <span class="st">&quot;Teachers&quot;</span>, <span class="st">&quot;Waiters&quot;</span>)</a>
-<a class="sourceLine" id="cb35-4" title="4"></a>
-<a class="sourceLine" id="cb35-5" title="5">tall &lt;-<span class="st"> </span>tall <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb35-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="kw">factor</span>(category, display_levels)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb35-7" title="7"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Wages =</span> variable)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>display_levels <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;USA Median Income&quot;</span>, <span class="st">&quot;Legislator&quot;</span>, </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Paralegals&quot;</span>, <span class="st">&quot;Substance Abuse Counselor&quot;</span>, </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;Teacher&quot;</span>, <span class="st">&quot;Waiters&quot;</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>my_df <span class="ot">&lt;-</span> my_df <span class="sc">%&gt;%</span> </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    type <span class="sc">==</span> <span class="st">&quot;USA Median Income&quot;</span> <span class="sc">~</span> <span class="st">&quot;USA Median Income&quot;</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    type <span class="sc">==</span> <span class="st">&quot;legislator&quot;</span> <span class="sc">~</span> <span class="st">&quot;Legislator&quot;</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    type <span class="sc">==</span> <span class="st">&quot;paralegals&quot;</span> <span class="sc">~</span> <span class="st">&quot;Paralegals&quot;</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    type <span class="sc">==</span> <span class="st">&quot;Report&quot;</span> <span class="sc">~</span> <span class="st">&quot;Substance Abuse Counselor&quot;</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    type <span class="sc">==</span> <span class="st">&quot;secondary_school_teacher&quot;</span> <span class="sc">~</span> <span class="st">&quot;Teacher&quot;</span>,</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    type <span class="sc">==</span> <span class="st">&quot;waiters&quot;</span> <span class="sc">~</span> <span class="st">&quot;Waiters&quot;</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">category =</span> <span class="fu">factor</span>(category, display_levels))</span></code></pre></div>
 </div>
-</div>
-<div id="facet_grid" class="section level2">
-<h2>Facet_grid</h2>
-<p><code>facet_wrap</code> works better than <code>facet_grid</code> because there is more control over the display of the rows and columns. The first example, below, does not run. I keep it only to document something that could work.</p>
-<pre><code>tall %&gt;% 
-  ggplot(aes(fill = variable, color = variable)) +
-  geom_sf() +
-  coord_sf(crs = 5070) +
-  scale_fill_viridis(option = &quot;viridis&quot;) + 
-  scale_color_viridis(option = &quot;viridis&quot;) +
-  facet_grid(. ~ category)</code></pre>
 <div id="display-map" class="section level3">
 <h3>Display Map</h3>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1">tall <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb37-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> Wages, <span class="dt">color =</span> Wages)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-3" title="3"><span class="st">  </span><span class="kw">geom_sf</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-4" title="4"><span class="st">  </span><span class="kw">coord_sf</span>(<span class="dt">crs =</span> <span class="dv">5070</span>, <span class="dt">datum =</span> <span class="ot">NA</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-5" title="5"><span class="st">  </span><span class="kw">scale_fill_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb37-6" title="6"><span class="st">  </span><span class="kw">scale_color_viridis</span>(<span class="dt">option =</span> <span class="st">&quot;viridis&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb37-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>category, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)</a></code></pre></div>
-<p><img src="038_facets_wrap_thematic_mapping_files/figure-html/facet_wrap_it_up-1.png" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>my_df <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">fill =</span> wages, <span class="at">color =</span> wages)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>() <span class="sc">+</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="dv">5070</span>, <span class="at">datum =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span> </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_c</span>() <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> category, </span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">nrow =</span> <span class="dv">3</span>, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code></pre></div>
+<p><img src="038_facets_wrap_thematic_mapping_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="save-map" class="section level3">
 <h3>Save Map</h3>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">ggsave</span>(<span class="st">&quot;facet_map.png&quot;</span>, <span class="dt">width =</span> <span class="dv">8</span>, <span class="dt">height =</span> <span class="dv">8</span>, <span class="dt">units =</span> <span class="st">&quot;in&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">&quot;facet_map.png&quot;</span>, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">8</span>, <span class="at">units =</span> <span class="st">&quot;in&quot;</span>)</span></code></pre></div>
 </div>
 </div>
 
@@ -837,7 +683,7 @@ div.tocify {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -855,7 +701,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -876,7 +722,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
