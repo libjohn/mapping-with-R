@@ -2126,7 +2126,7 @@ CDVS
 </div>
 <h2 id="shapefiles-as-sf">Shapefiles as sf</h2>
 <p>Using the <code>tigris</code> package, get Census Tiger shapefiles for census geographies. Tigris will return the shapefile in the <code>sf</code>, or simple features, format.</p>
-<pre><code>us_geo &lt;- tigris::states(class = &quot;sf&quot;)</code></pre>
+<pre><code>us_geo &lt;- tigris::states(class = &quot;sf&quot;) </code></pre>
 <h2 id="data-structure">Data Structure</h2>
 <p>The “Simple Features” (<code>sf</code>) data structure can easily be viewed and manipulated as a rectangular data frame, before visualizing. As an historical note – an <code>sf</code> predecessor – the <code>sp</code> data structure uses <code>@data</code> slots to hold data. We’ll focus on the <code>sf</code> package. Below are two methods of viewing the structure of the downloaded shapefiles.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2291,13 +2291,12 @@ $ geometry &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-81.74725 3..., MULTIP~</co
 <p><img src="031_thematic_mapping_files/figure-html5/make_qtm-1.png" width="624" /></p>
 </div>
 <h2 id="contiguous-48-states">Contiguous 48 states</h2>
-<p>Filter to only the contiguous 48 states + D.C.</p>
+<p>Filter to only the contiguous 50 states + D.C. Note that <code>tigris::shift_geometry()</code> will shift and resize Alaska and Hawaii.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>contiguous_states</span> <span class='op'>&lt;-</span> <span class='va'>HelperShapeObject</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>REGION</span> <span class='op'>!=</span> <span class='fl'>9</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>STUSPS</span> <span class='op'>!=</span> <span class='st'>"AK"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>STUSPS</span> <span class='op'>!=</span> <span class='st'>"HI"</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>REGION</span> <span class='op'>!=</span> <span class='fl'>9</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/tigris/man/shift_geometry.html'>shift_geometry</a></span><span class='op'>(</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
