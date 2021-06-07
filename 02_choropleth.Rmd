@@ -10,7 +10,7 @@ The [tidycensus](https://walkerke.github.io/tidycensus/index.html) package, deve
 library(tidyverse)
 library(sf)
 library(tidycensus)
-library(leaflet)
+#library(leaflet)
 library(mapview)
 ```
 

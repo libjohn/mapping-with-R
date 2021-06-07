@@ -14,7 +14,7 @@ To introduce the [`mapview` package](https://r-spatial.github.io/mapview/index.h
 ```{r libraries, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(sf)
-library(leaflet)
+#library(leaflet)
 library(mapview)
 ```
 
