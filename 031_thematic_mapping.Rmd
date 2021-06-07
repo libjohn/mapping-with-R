@@ -1,6 +1,5 @@
 ---
 title: "Thematic Mapping with tmap"
-output: html_document
 ---
 
 
@@ -19,11 +18,11 @@ library(sf)
 Using the `tigris` package, get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.  
 
 ```{}
-us_geo <- tigris::states(class = "sf")
+us_geo <- tigris::states(class = "sf") 
 ```
 
 ```{r get-data, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
-us_geo <- tigris::states(class = "sf")
+us_geo <- tigris::states(class = "sf") 
 ```
 
 ## Data Structure 
@@ -128,14 +127,12 @@ qtm(HelperShapeObject, fill = "wages")
 
 ## Contiguous 48 states
 
-Filter to only the contiguous 48 states + D.C.
+Filter to only the contiguous 50 states + D.C.  Note that `tigris::shift_geometry()` will shift and resize Alaska and Hawaii.
 
 ```{r subset-data}
 contiguous_states <- HelperShapeObject %>% 
-  filter(REGION != 9) %>%
-  filter(STUSPS != "AK") %>% 
-  filter(STUSPS != "HI")
-
+  filter(REGION != 9) %>% 
+  shift_geometry()
 ```
 
 

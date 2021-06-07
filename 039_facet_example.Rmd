@@ -1,8 +1,5 @@
 ---
 title: "Example Faceted Thematic Mapping"
-output: 
-  html_document:
-    toc: FALSE
 ---
 
 ![](facet_map.png)

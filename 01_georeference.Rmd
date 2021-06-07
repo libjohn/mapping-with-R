@@ -1,12 +1,7 @@
 ---
 title: Latitude and Longitude Coordinates
-output: html_document
-#  html_document:
-#    toc: FALSE
 ---
-&nbsp;
-
-To introduce the [`mapview` package](https://r-spatial.github.io/mapview/index.html), make an interactive map with Starbucks coffee shop locations in North Carolina (2012).  (Adapted from Machlis.)^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis]
+Use the [`mapview` package](https://r-spatial.github.io/mapview/index.html) to make interactive maps.  In this example, georeference Starbucks coffee shop locations in North Carolina (2012).  (Adapted from Machlis.)^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis]
 
 
 ## Load Libraries
@@ -14,7 +9,6 @@ To introduce the [`mapview` package](https://r-spatial.github.io/mapview/index.h
 ```{r libraries, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(sf)
-#library(leaflet)
 library(mapview)
 ```
 
@@ -31,7 +25,8 @@ starbucks <- read_csv("https://raw.githubusercontent.com/libjohn/mapping-with-R/
 starbucksNC <- starbucks  %>% 
   filter(State == "NC")
 
-starbucksNC
+starbucksNC %>% 
+  glimpse()
 ```
 
 ## Make the Map
@@ -61,12 +56,7 @@ mapview(sbux_sf)
 
 
 
-## Save the Map
 
-You can save a map as an interactive HTML page or a static `.png, .pdf, or .jpeg` file with the [`mapshot` function](https://r-spatial.github.io/mapview/reference/mapshot.html).  For example:
-
-- `mapshot(starNCmap, file = "map.png")`
-- `mapshot(starNCmap, url = "map.html")`
 
 
 

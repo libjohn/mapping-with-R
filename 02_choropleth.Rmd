@@ -1,22 +1,20 @@
 ---
 title: "tidycensus"
-output: html_document
 ---
 
-The [tidycensus](https://walkerke.github.io/tidycensus/index.html) package, developed by [Kyle Walker](https://walkerke.github.io/), is very **convenient and easy to use package for making choropleth maps** from United States Department of **Census data**, specifically from the Decennial and ACS Census reports.  This package makes it possible to gather census variables and conveniently join those variables with "Census Geography" (i.e. aka "shapefiles", or polygons.)  Visualization, or plotting, maps can be done with separate packages.  
+The [tidycensus](https://walkerke.github.io/tidycensus/index.html) package, developed by [Kyle Walker](https://walkerke.github.io/), is very **convenient and easy to use package for making choropleth maps** from United States Department of **Census data**. Tidycensus uses the Decennial or ACS Census reports.  This package makes it possible to gather census variables and conveniently join those variables with "Census Geography" (i.e. aka "shapefiles", or polygons.)  Visualization can be done with separate packages such as `mapview`, `leaflet`, or `ggplot2::geom_sf()`.  
 
 
 ```{r libraries, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(sf)
 library(tidycensus)
-#library(leaflet)
 library(mapview)
 ```
 
 ## Census API Key
 
-Use the tidycensus package to gather Census data and join that data with Census geography (i.e. geometry, i.e. shapefiles, i.e. polygons).  First, you will need to get a [free Census API key](https://api.census.gov/data/key_signup.html).  Kyle Walker's [*Basic usage of tidycensus*](https://walkerke.github.io/tidycensus/articles/basic-usage.html) documents this process. 
+you need a [free Census API key](https://api.census.gov/data/key_signup.html).  Kyle Walker's [*Basic usage of tidycensus*](https://walkerke.github.io/tidycensus/articles/basic-usage.html) documents this process. 
 
 ```{}
 census_api_key("YOUR API KEY GOES HERE")
@@ -24,14 +22,15 @@ census_api_key("YOUR API KEY GOES HERE")
 
 ### .Renviron File
 
-See also Kyle's [more detailed documentation](https://walkerke.github.io/tidycensus/reference/census_api_key.html) for putting the key into your environment file.  But skip that for the moment.
+See also Kyle's [more detailed documentation](https://walkerke.github.io/tidycensus/reference/census_api_key.html) for caching the API key in your R environment. 
 
 
 ## TidyCensus -- Get Data
 
-Create a Simple Features dataframe using `tidycensus::get_acs()`
+Create a Simple Features (i.e. `sf`) dataframe using `tidycensus::get_acs()`
 
 The Census population variable we'll use is "B01003_001".  More information about identifying Census variables is available at the [bottom of this page](#variables).
+
 ```{r load-data, message=FALSE, warning=FALSE, include=FALSE}
 nc_pop <- 
   get_acs(geography = "county",
@@ -41,6 +40,7 @@ nc_pop <-
 
 #nc_pop
 ```
+
 ```{}
 nc_pop <- 
   get_acs(geography = "county",
@@ -73,7 +73,8 @@ starbucks <- read_csv("data/All_Starbucks_Locations_in_the_US_-_Map.csv")
 ```
 
 
-Subset Starbucks Data to North Carolina
+Subset Starbucks Data to North Carolina  
+
 ```{r filter-dataset}
 starbucksNC <- starbucks  %>% 
   filter(State == "NC")
@@ -151,7 +152,7 @@ The Census is a very large collection of data.  Many casual users of Census data
 
 ## Shapefiles
 
-In the [*tmap* section](031_thematic_mapping.html) of the [Simple Features module](030_thematic_sf.html) we will use the `tigris` package to gather State level, Census geography shapefiles.  Shapefiles are an important GIS data standard.  There are many other standards, although shapefiles have a very broad user base.  If you need shapefiles for other geographies, please consult our [*GIS Data: Starting Points* guide](https://guides.library.duke.edu/gisdata) --  a very handy collection of GIS data sources, much of which will be in the shapefiles format.  
+Shapefiles are an important GIS data standard used frequently in thematic mapping.  There are many other standards, although shapefiles have a very broad user base.  If you need shapefiles for other geographies, please consult the [*guide to geospatial applications using the R programming language*](https://guides.library.duke.edu/r-geospatial) 
 
 ## End Notes
 

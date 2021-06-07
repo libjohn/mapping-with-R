@@ -1,62 +1,42 @@
-name: Mapping
-output_dir: docs
-exclude:
-- README.md
-- license.md
+# name: "Mapping in R"
+title: "Mapping in R"
+favicon: libs-local/rfun_logo.png
+base_url: https://rfun.library.duke.edu/map
+repository_url: https://github.com/libjohn/mapping-with-R
+twitter:
+  site: "@duke_data"
+description: |
+  Overview and quick-reference guide to mapping in R.
+# favicon: logo.png
+creative_commons: CC BY-NC
 navbar:
-  title: Mapping in R
+  logo:
+    image: libs-local/rfun_logo.png
+    href: https://rfun.library.duke.edu
   left:
-  - text: "Preface"
-    menu:
-      - text: "Overview"
-        href: index.html
-      - text: "Software Prequisites"
-        href: software_prereqs.html
-      - text: "Next Steps"
-        href: next.html
-      - text: "Resources"
-        href: resources.html
   - text: "Plot Coordinates"
     href: 01_georeference.html
   - text: "tidycensus"
     href: 02_choropleth.html
   - text: "Thematic Mapping"
     menu:
-      - text: "Overview"
-        href: 030_thematic_sf.html
       - text:  "ggplot2 & geom_sf"
         href: 032_thematic_mapping_geom_sf.html
       - text: "ggplot2 & facet mapping"
         href: 039_facet_example.html
       - text: "tmap"
         href: 031_thematic_mapping.html
-      - text: "Saving / Sharing"
-        href: 01_georeference.html#save_the_map
-  - text: Exercises
-    href: exercises.html
   right:
+  - text: "Resources"
+    href: "resources.html"
   - icon: fa-github
     href: https://github.com/libjohn/mapping-with-R
-  - icon: fa-home
+  - text: "CDVS"
     menu:
       - text: "Rfun Home"
         href: "https://rfun.library.duke.edu/"
       - text: "Data & Visualization Srvc"
         href: https://library.duke.edu/data/  
+output_dir: docs
 output:
-  html_document:
-    theme: flatly
-    highlight: tango
-    include:
-      after_body: libs-local/footer.html
-    toc: yes
-    toc_depth: 3
-    toc_float:
-      collapsed: no
-    css:
-    - libs-local/duke.css
-    - libs-local/cc-fonts.css
-    df_print: paged
-    lib_dir: site_libs
-    self_contained: no
-
+ distill::distill_article:

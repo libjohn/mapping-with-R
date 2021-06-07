@@ -1,6 +1,5 @@
 ---
 title: "Faceted Thematic Mapping"
-output: html_document
 ---
 
 ```{r load-libraries, message=FALSE, warning=FALSE}
@@ -56,8 +55,9 @@ my_df <- my_xl_files %>%
 state_names <- us_geo %>% 
   filter(REGION != "9") %>% 
   select(NAME) %>% 
-  st_drop_geometry()
+  st_drop_geometry() 
 ```
+
 
 ### Wrangle the data
 
@@ -69,7 +69,8 @@ my_df <- my_df %>%
          wages = "Annual mean wage(2)",
          type = sheet) %>% 
   mutate(State = str_extract(area, '.*(?=\\()')) %>% 
-  mutate(type = str_extract(type, "(?<=data/OES_)\\w+")) 
+  mutate(type = str_extract(type, "(?<=data/OES_)\\w+")) %>% 
+  filter(State != "Guam")
 ```
 
 ### Missing data
@@ -114,7 +115,7 @@ my_df <- my_df %>%
 ### identify and pick census variables
 
 B01003_001E = Total Population
-B06011_001E = Median income in the past 12 months --!!Total:
+B06011_001E = Median income in the past 12 months
 
 ```{r identify_ACS_variables}
 variables_census <- load_variables(2015, "acs5", cache = TRUE)
@@ -165,7 +166,7 @@ my_df <- my_df %>%
 ### Display Map
 
 ```{r}
-my_df %>% 
+my_df %>%
   ggplot(aes(fill = wages, color = wages)) +
   geom_sf() +
   coord_sf(crs = 5070, datum = NA) +

@@ -1,6 +1,5 @@
 ---
 title: "Thematic Mapping with geom_sf"
-output: html_document
 ---
 
 
@@ -16,10 +15,11 @@ library(ggplot2)
 
 ## Shapefiles as sf 
 
-Repeating steps from the [previous section](031_thematic_mapping.html), using the `tigris` package, get Census Tiger shapefiles for census geographies.  Coastal boundaries can be gathered with the tigris argument:  `cb = TRUE`.
+Use the `tigris` package to get Census Tiger shapefiles for census geographies.  Coastal boundaries can be gathered with the tigris argument:  `cb = TRUE`.
 
 ```{r getuscb, message=FALSE, warning=FALSE, include=FALSE}
-us_geo <- tigris::states(class = "sf", cb = TRUE)
+us_geo <- tigris::states(class = "sf", cb = TRUE) %>% 
+  shift_geometry()
 ```
 ``` r 
 us_geo <- tigris::states(class = "sf", cb = TRUE)
@@ -27,9 +27,7 @@ us_geo <- tigris::states(class = "sf", cb = TRUE)
 
 ## Get BLS data
 
-As mentioned before, the data are from the Bureau of Labor Statistics.  These data are stored in an excel file in the `data` directory of the [repository](https://github.com/libjohn/mapping-with-R):  `data/OES_Report.xlsx`.  
-
-Again, from the previous section you will see how these data were gathered, loaded, transformed, and joined. 
+In additon to shapefiles, the wage data used in this example comes from from the Bureau of Labor Statistics.  These data are stored in an excel file in the `data` directory of the [repository](https://github.com/libjohn/mapping-with-R):  `data/OES_Report.xlsx`.  
 
 ```{r getblsdata, message=FALSE, warning=FALSE}
 Salary4Helpers <- 
@@ -42,7 +40,7 @@ Salary4Helpers
 
 ## Wrangle the data
 
-As before...  
+Using the [`stringr` package](https://stringr.tidyverse.org) we can extract the text of the state names from the state code by leveraging regular expressions (i.e. regex) pattern matching techniques with stringr::str_extract().
 
 ```{r wrangleblsdata, message=FALSE, warning=FALSE}
 BlsWage_ToJoin <- Salary4Helpers %>% 
@@ -64,26 +62,26 @@ HelperShapeObject <- us_geo %>%
 ```
 
 
-## Contiguous 48 states
+## 50 states
 
-Filter to only the contiguous 48 states + D.C.
+Filter to only the 50 US states + D.C.  
+
+Alaska and Hawaii were shifted and rescaled using `tigris::shift_geometry()`, above.
 
 ```{r filterlower48, message=FALSE, warning=FALSE}
 contiguous_states <- HelperShapeObject %>% 
-  filter(GEOID < 60) %>% 
-  filter(STUSPS != "AK") %>% 
-  filter(STUSPS != "HI")
+  filter(GEOID < 60) 
 ```
 
 
 
 ## ggplot2 with geom_sf and viridis
 
-In this section we introduce making shapefiles with ggplot2.  ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. ([Learn more](https://rfun.library.duke.edu/#portfolio) about ggplot2. 
+ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. ([Learn more](https://rfun.library.duke.edu/#portfolio) about ggplot2. 
 
-In this plot I reversed the direction of the color scale.  After consulting with my visualization colleagues it seems this may have been a non-standard action on my part.  But, I leave the `direction` argument here for the curious.  
+In this plot I **reversed** the direction of the color scale.  My visualization colleagues alerted me that this is non-standard approach to visualization, but I kept the argument in this example to demonstrate the `direction` argument.  
 
-Use a pleasing projection, in this case assigned the crs projection to '5070' (`coord_sf(crs = 5070)`), and removed the gridlines (i.e [graticules](https://en.wikipedia.org/wiki/Graticule)) `coords_sf(datum = NA)` 
+Use a pleasing [projection](https://guides.library.duke.edu/r-geospatial/CRS), in this case assigned the crs projection to '5070' (`coord_sf(crs = 5070)`), and removed the gridlines (i.e [graticules](https://en.wikipedia.org/wiki/Graticule)) `coords_sf(datum = NA)` 
 
 ```{r with-ggplot-geom_sf, message=FALSE, warning=FALSE}
 contiguous_states %>% 
