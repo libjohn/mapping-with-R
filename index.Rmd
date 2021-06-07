@@ -27,4 +27,3 @@ These learning and quick-reference resource pages support the face-to-face works
 
 - [Code for Hands-on Workshop -- Spring 2019](https://github.com/libjohn/map-spring2019)
 
-jrl  
