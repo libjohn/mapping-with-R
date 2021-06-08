@@ -4,12 +4,11 @@ title: "Thematic Mapping with geom_sf"
 
 
 ```{r load-libraries, message=FALSE, warning=FALSE}
-library(tidyverse)       # Tidyverse for Tidy Data
+library(tidyverse)       
 library(readxl)
 library(tigris)
 library(sf)
 library(viridis)
-library(ggplot2) 
 ```
 
 
@@ -83,7 +82,7 @@ In this plot I **reversed** the _direction_ of the color scale.  Reversing the c
 
 Use a pleasing projection.  In this case assign the CRS projection to '5070' 
 
-> `coord_sf(crs = 5070)`&nbsp; Help with [projection/CRS](https://guides.library.duke.edu/r-geospatial/CRS)
+> `coord_sf(crs = 5070)`&nbsp; Help with [projection/CRS](https://guides.library.duke.edu/r-geospatial/CRS)  
 > `coords_sf(datum = NA)` Remove gridlines, i.e [graticules](https://en.wikipedia.org/wiki/Graticule) 
 
 ```{r with-ggplot-geom_sf, message=FALSE, warning=FALSE}

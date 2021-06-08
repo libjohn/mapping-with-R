@@ -80,7 +80,7 @@ starbucksNC <- starbucks  %>%
   filter(State == "NC")
 ```
 
-Convert the `starbuckNC` dataframe to a spatial (sf) object and assign the same projection as the `nc_pop` spatial object.
+Convert the `starbucksNC` data frame to a spatial (sf) object and assign the same projection as the `nc_pop` spatial object.
 
 ```{r convert2sf}
 starbucksNC <- st_as_sf(starbucksNC, coords = c("Longitude", "Latitude"),  crs = st_crs(nc_pop))
@@ -111,7 +111,7 @@ addLogo(mymap, "images/Rfun3.png",
 
 ## Alaska & Hawaii - Shift 
 
-Shift and re-scale Alaska and Hawaii for better cartographic display of the entire US.
+Shift and re-scale Alaska and Hawaii for convenient cartographic display of the entire US.
 
 ```{r shiftgeoakhi, message=FALSE, warning=FALSE}
 
@@ -120,18 +120,10 @@ population <- get_acs(geography = "state",
                 geometry = TRUE,
                 shift_geo = TRUE)
 
- 
-```
-
-
-```{r buildshift, message=FALSE, warning=FALSE}
 mapviewOptions(legend.pos = "bottomright")
 mapviewOptions(leafletWidth = 800)
-#mapviewOptions()
-#mapviewOptions(default = TRUE)
 mapview(population, zcol = "estimate", native.crs = TRUE, crs = 5070)
 ```
-
 
 
 ##  Census
