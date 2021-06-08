@@ -40,7 +40,7 @@ https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographic
         
             - Excel
             
-### Import the Data into R 
+### Import the data into R 
     
 ```{r message=FALSE, warning=FALSE}
 my_xl_files <- fs::dir_ls(path = "data", glob = "*.xlsx")
@@ -98,9 +98,9 @@ my_df <- us_geo %>%
   left_join(my_df, by = c("NAME" = "State"))
 ```
 
-## Get Population Data -- Tidycensus
+## Get census data -- tidycensus
 
-### identify and pick census variables
+### Identify and pick census variables
 
 If you're not sure what 2015 ACS Census data variables you need, you'll want to investigate the variables.
 
@@ -113,9 +113,11 @@ I'm using Median income.
 - B01003_001E = Total Population  
 - B06011_001E = Median income in the past 12 months  
 
-### Get Median Income
+_Note:  I realize mean and median are not the same measure.  This is a demonstration of procedure, not a recommendation for research practice and data comparison.  Of course, you will be more rigorous with your own research._
 
-Now that I know the Census ACS variable, I can use the `tidycensus::get_acs()` function to gather the median income variable for each state, along with the geometry (i.e. shapefiles).  
+### Get BLS mean income
+
+Now that I know the Census ACS variable, I can use the `tidycensus::get_acs()` function to gather the mean income variable for each state, along with the geometry (i.e. shapefiles).  
 
 ```{r get_median_income}
 us_pop <- 
@@ -129,7 +131,7 @@ us_pop <- us_pop %>%
   rename(wages = estimate) 
 ```
 
-### Append Census Data
+### Append Census data
 
 Now combine the tidycensus data and geometry (i.e. `us_pop` variable data & shapefiles) with the BLS data and previously associate shapefiles gatheried via `tigris::states()`
 
@@ -137,7 +139,7 @@ Now combine the tidycensus data and geometry (i.e. `us_pop` variable data & shap
 my_df <- bind_rows(my_df, us_pop)
 ```
 
-### More Munging
+### More munging
 
 Make the category variable a categorical factor with levels.  This will improve the order of the facets when displayed.
 
@@ -158,7 +160,7 @@ my_df <- my_df %>%
   mutate(category = factor(category, display_levels))
 ```
 
-### Display Map
+### Display map
 
 ```{r makethemap, fig.height=9, fig.width=8, dev='svg'}
 my_df %>%
@@ -170,13 +172,13 @@ my_df %>%
   facet_wrap(~ category, 
              nrow = 3, ncol = 2) +
   theme(legend.position = "top") +
-  labs(title = "2015 Median USA Wages by Professions",
-       subtitle = "A comparison",
+  labs(title = "2015 Mean USA Wages by Professions",
+       subtitle = "A comparison of BLS mean income with Census median income",
        color = "", fill = "",
        caption = "Source: BLS & Census") 
 ```
 
-### Save Map
+### Save map
 
 ```{r save_it}
 ggsave("facet_map.svg", width = 8, height = 9, units = "in")

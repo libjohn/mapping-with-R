@@ -2151,7 +2151,7 @@ CDVS
 </ul></li>
 </ul></li>
 </ul>
-<h3 id="import-the-data-into-r">Import the Data into R</h3>
+<h3 id="import-the-data-into-r">Import the data into R</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>my_xl_files</span> <span class='op'>&lt;-</span> <span class='fu'>fs</span><span class='fu'>::</span><span class='fu'><a href='http://fs.r-lib.org/reference/dir_ls.html'>dir_ls</a></span><span class='op'>(</span>path <span class='op'>=</span> <span class='st'>"data"</span>, glob <span class='op'>=</span> <span class='st'>"*.xlsx"</span><span class='op'>)</span>
@@ -2218,8 +2218,8 @@ CDVS
 </code></pre>
 </div>
 </div>
-<h2 id="get-population-data-tidycensus">Get Population Data – Tidycensus</h2>
-<h3 id="identify-and-pick-census-variables">identify and pick census variables</h3>
+<h2 id="get-census-data-tidycensus">Get census data – tidycensus</h2>
+<h3 id="identify-and-pick-census-variables">Identify and pick census variables</h3>
 <p>If you’re not sure what 2015 ACS Census data variables you need, you’ll want to investigate the variables.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2233,8 +2233,9 @@ CDVS
 </li>
 <li>B06011_001E = Median income in the past 12 months</li>
 </ul>
-<h3 id="get-median-income">Get Median Income</h3>
-<p>Now that I know the Census ACS variable, I can use the <code>tidycensus::get_acs()</code> function to gather the median income variable for each state, along with the geometry (i.e. shapefiles).</p>
+<p><em>Note: I realize mean and median are not the same measure. This is a demonstration of procedure, not a recommendation for research practice and data comparison. Of course, you will be more rigorous with your own research.</em></p>
+<h3 id="get-bls-mean-income">Get BLS mean income</h3>
+<p>Now that I know the Census ACS variable, I can use the <code>tidycensus::get_acs()</code> function to gather the mean income variable for each state, along with the geometry (i.e. shapefiles).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>us_pop</span> <span class='op'>&lt;-</span> 
@@ -2249,7 +2250,7 @@ CDVS
 </code></pre>
 </div>
 </div>
-<h3 id="append-census-data">Append Census Data</h3>
+<h3 id="append-census-data">Append Census data</h3>
 <p>Now combine the tidycensus data and geometry (i.e. <code>us_pop</code> variable data &amp; shapefiles) with the BLS data and previously associate shapefiles gatheried via <code>tigris::states()</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2257,7 +2258,7 @@ CDVS
 </code></pre>
 </div>
 </div>
-<h3 id="more-munging">More Munging</h3>
+<h3 id="more-munging">More munging</h3>
 <p>Make the category variable a categorical factor with levels. This will improve the order of the facets when displayed.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
@@ -2278,7 +2279,7 @@ CDVS
 </code></pre>
 </div>
 </div>
-<h3 id="display-map">Display Map</h3>
+<h3 id="display-map">Display map</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>my_df</span> <span class='op'>%&gt;%</span>
@@ -2290,15 +2291,15 @@ CDVS
   <span class='fu'>facet_wrap</span><span class='op'>(</span><span class='op'>~</span> <span class='va'>category</span>, 
              nrow <span class='op'>=</span> <span class='fl'>3</span>, ncol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"top"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"2015 Median USA Wages by Professions"</span>,
-       subtitle <span class='op'>=</span> <span class='st'>"A comparison"</span>,
+  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"2015 Mean USA Wages by Professions"</span>,
+       subtitle <span class='op'>=</span> <span class='st'>"A comparison of BLS mean income with Census median income"</span>,
        color <span class='op'>=</span> <span class='st'>""</span>, fill <span class='op'>=</span> <span class='st'>""</span>,
        caption <span class='op'>=</span> <span class='st'>"Source: BLS &amp; Census"</span><span class='op'>)</span> 
 </code></pre>
 </div>
 <p><img src="038_facets_wrap_thematic_mapping_files/figure-html5/makethemap-1.svg" width="768" /></p>
 </div>
-<h3 id="save-map">Save Map</h3>
+<h3 id="save-map">Save map</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggsave</span><span class='op'>(</span><span class='st'>"facet_map.svg"</span>, width <span class='op'>=</span> <span class='fl'>8</span>, height <span class='op'>=</span> <span class='fl'>9</span>, units <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span>
