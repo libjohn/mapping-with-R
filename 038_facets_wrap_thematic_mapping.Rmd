@@ -3,7 +3,7 @@ title: "Faceted Thematic Mapping"
 ---
 
 ```{r load-libraries, message=FALSE, warning=FALSE}
-library(tidyverse)       # Tidyverse for Tidy Data
+library(tidyverse)       
 library(readxl)
 library(tigris)          # Get Census Geography Poloygons
 library(sf)
@@ -15,15 +15,16 @@ library(tidycensus)
 Using the `tigris` package get Census Tiger shapefiles for census geographies.  Tigris will return the shapefile in the `sf`, or simple features, format.
 
 ```{r get-data, message=FALSE, warning=FALSE}
-us_geo <- tigris::states(class = "sf") %>% 
-  shift_geometry()
+us_geo <- tigris::states(class = "sf", cb = TRUE) %>%   #cb is a more generalized, less detailed file.
+  shift_geometry() %>% 
+  filter(as.numeric(GEOID) < 60)
 ```
 
 ## Get BLS data
 
-I've already downloaded and stored some data from the Bureau of Labor Statistics.  Thoses data are stored in an excel file in the `data` directory of the repository:  `data/OES_Report.xlsx`.  **The goal is to attach this data to the previously downloaded shapefiles.**  
+I've already downloaded and stored some data from the Bureau of Labor Statistics.  Those data are stored in an excel file in the `data` directory of the github repository:  `data/OES_Report.xlsx`.  **The goal is to attach this data to the previously downloaded shapefiles.**  
 
-But you may be intersted in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.  
+But you may be interested in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.  
 
 https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographical%20areas
 
@@ -49,11 +50,9 @@ my_df <- my_xl_files %>%
           col_types = c("text", "numeric"), 
           skip = 4, 
           .id = "sheet")
-```
 
-```{r}
 state_names <- us_geo %>% 
-  filter(REGION != "9") %>% 
+  # filter(REGION != "9") %>% jrljrl
   select(NAME) %>% 
   st_drop_geometry() 
 ```
@@ -69,8 +68,7 @@ my_df <- my_df %>%
          wages = "Annual mean wage(2)",
          type = sheet) %>% 
   mutate(State = str_extract(area, '.*(?=\\()')) %>% 
-  mutate(type = str_extract(type, "(?<=data/OES_)\\w+")) %>% 
-  filter(State != "Guam")
+  mutate(type = str_extract(type, "(?<=data/OES_)\\w+"))
 ```
 
 ### Missing data
@@ -106,16 +104,16 @@ my_df <- us_geo %>%
 Filter to the 50 states + D.C.
 
 ```{r}
-my_df <- my_df %>% 
-  filter(REGION != 9) 
+my_df <- my_df # %>%  jrljrl
+  # filter(REGION != 9) 
 ```
 
 ## Get Population Data -- Tidycensus
 
 ### identify and pick census variables
 
-B01003_001E = Total Population
-B06011_001E = Median income in the past 12 months
+- B01003_001E = Total Population  
+- B06011_001E = Median income in the past 12 months  
 
 ```{r identify_ACS_variables}
 variables_census <- load_variables(2015, "acs5", cache = TRUE)

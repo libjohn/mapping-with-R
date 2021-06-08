@@ -41,12 +41,11 @@ nc_pop <-
 #nc_pop
 ```
 
-```{}
-nc_pop <- 
-  get_acs(geography = "county",
-          variables = "B01003_001",
-          state = "NC",
-          geometry = TRUE)
+```{r eval=FALSE, echo=TRUE}
+nc_pop <- get_acs(geography = "county",
+                  variables = "B01003_001",
+                  state = "NC",
+                  geometry = TRUE)
 ```
 
 
