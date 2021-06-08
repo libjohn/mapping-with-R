@@ -2126,7 +2126,8 @@ CDVS
 </div>
 <h2 id="shapefiles-as-sf">Shapefiles as sf</h2>
 <p>Use the <code>tigris</code> package to get Census Tiger shapefiles for census geographies. Coastal boundaries can be gathered with the tigris argument: <code>cb = TRUE</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>us_geo <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">states</span>(<span class="at">class =</span> <span class="st">&quot;sf&quot;</span>, <span class="at">cb =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>us_geo <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">states</span>(<span class="at">class =</span> <span class="st">&quot;sf&quot;</span>, <span class="at">cb =</span> <span class="cn">TRUE</span>)<span class="er">)</span> <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shift_geometry</span>()</span></code></pre></div>
 <h2 id="get-bls-data">Get BLS data</h2>
 <p>In additon to shapefiles, the wage data used in this example comes from from the Bureau of Labor Statistics. These data are stored in an excel file in the <code>data</code> directory of the <a href="https://github.com/libjohn/mapping-with-R">repository</a>: <code>data/OES_Report.xlsx</code>.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2188,8 +2189,11 @@ CDVS
 </div>
 <h2 id="ggplot2-with-geom_sf-and-viridis">ggplot2 with geom_sf and viridis</h2>
 <p>ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. (<a href="https://rfun.library.duke.edu/#portfolio">Learn more</a> about ggplot2.</p>
-<p>In this plot I <strong>reversed</strong> the direction of the color scale. My visualization colleagues alerted me that this is non-standard approach to visualization, but I kept the argument in this example to demonstrate the <code>direction</code> argument.</p>
-<p>Use a pleasing <a href="https://guides.library.duke.edu/r-geospatial/CRS">projection</a>, in this case assigned the crs projection to ‘5070’ (<code>coord_sf(crs = 5070)</code>), and removed the gridlines (i.e <a href="https://en.wikipedia.org/wiki/Graticule">graticules</a>) <code>coords_sf(datum = NA)</code></p>
+<p>In this plot I <strong>reversed</strong> the <em>direction</em> of the color scale. Reversing the color pallette’s direction is not a visualization best practice, but I use this approach to demonstrate the <code>direction</code> argument.</p>
+<p>Use a pleasing projection. In this case assign the CRS projection to ‘5070’</p>
+<blockquote>
+<p><code>coord_sf(crs = 5070)</code>  Help with <a href="https://guides.library.duke.edu/r-geospatial/CRS">projection/CRS</a> <code>coords_sf(datum = NA)</code> Remove gridlines, i.e <a href="https://en.wikipedia.org/wiki/Graticule">graticules</a></p>
+</blockquote>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>contiguous_states</span> <span class='op'>%&gt;%</span> 

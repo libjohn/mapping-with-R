@@ -22,7 +22,8 @@ us_geo <- tigris::states(class = "sf", cb = TRUE) %>%
   shift_geometry()
 ```
 ``` r 
-us_geo <- tigris::states(class = "sf", cb = TRUE)
+us_geo <- tigris::states(class = "sf", cb = TRUE)) %>% 
+  shift_geometry()
 ```
 
 ## Get BLS data
@@ -74,14 +75,16 @@ contiguous_states <- HelperShapeObject %>%
 ```
 
 
-
 ## ggplot2 with geom_sf and viridis
 
 ggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. ([Learn more](https://rfun.library.duke.edu/#portfolio) about ggplot2. 
 
-In this plot I **reversed** the direction of the color scale.  My visualization colleagues alerted me that this is non-standard approach to visualization, but I kept the argument in this example to demonstrate the `direction` argument.  
+In this plot I **reversed** the _direction_ of the color scale.  Reversing the color pallette's direction is not a visualization best practice, but I use this approach to demonstrate the `direction` argument.  
 
-Use a pleasing [projection](https://guides.library.duke.edu/r-geospatial/CRS), in this case assigned the crs projection to '5070' (`coord_sf(crs = 5070)`), and removed the gridlines (i.e [graticules](https://en.wikipedia.org/wiki/Graticule)) `coords_sf(datum = NA)` 
+Use a pleasing projection.  In this case assign the CRS projection to '5070' 
+
+> `coord_sf(crs = 5070)`&nbsp; Help with [projection/CRS](https://guides.library.duke.edu/r-geospatial/CRS)
+> `coords_sf(datum = NA)` Remove gridlines, i.e [graticules](https://en.wikipedia.org/wiki/Graticule) 
 
 ```{r with-ggplot-geom_sf, message=FALSE, warning=FALSE}
 contiguous_states %>% 

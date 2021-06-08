@@ -1,7 +1,7 @@
 ---
 title: Latitude and Longitude Coordinates
 ---
-Use the [`mapview` package](https://r-spatial.github.io/mapview/index.html) to make interactive maps.  In this example, georeference Starbucks coffee shop locations in North Carolina (2012).  (Adapted from Machlis.)^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis]
+Use the [`mapview` package](https://r-spatial.github.io/mapview/index.html) to make interactive maps.  In this example, georeference Starbucks coffee shop locations in North Carolina (2012)^[[5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis].
 
 
 ## Load Libraries
@@ -31,7 +31,7 @@ starbucksNC %>%
 
 ## Make the Map
 
-In this example, plot latitude (y coordinates) and longitude (x coordinates), then set the map projection to a common projection standard, WGS84, via the argument `crs = 4326`.)
+In this example, plot latitude (y coordinates) and longitude (x coordinates), then set the map projection^[[projection/CRS](https://guides.library.duke.edu/r-geospatial/CRS)] to a common projection standard, WGS84, via the argument `crs = 4326`.)
 
 ```{r map1}
 mapview(starbucksNC, xcol = "Longitude", ycol = "Latitude", crs = 4269, grid = FALSE)
