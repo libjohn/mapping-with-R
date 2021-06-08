@@ -2114,16 +2114,9 @@ CDVS
 
 <div class="d-article">
 <p><img src="facet_map.png" /></p>
-<p>Ignoring the data wrangling, the faceted map above was created with the following simplified code. See also the <a href="038_facets_wrap_thematic_mapping.html">full code</a> including wrangling and workflow.</p>
-<pre><code>sf_data %&gt;% 
-  ggplot(aes(fill = wages, color = wages)) +
-  geom_sf() +
-  coord_sf(crs = 5070, datum = NA) +
-  scale_fill_viridis_c() + 
-  scale_color_viridis_c() +
-  facet_wrap(~ category, 
-             nrow = 3, ncol = 2)</code></pre>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p>Beyond the the data wrangling, this faceted map was created using the <code>ggplot2::facet_wrap()</code> function.<br />
+See Also: <a href="038_facets_wrap_thematic_mapping.html">full data wrangling code</a> and workflow.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
