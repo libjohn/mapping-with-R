@@ -2210,7 +2210,7 @@ CDVS
 </div>
 </div>
 <h3 id="join-data">Join data</h3>
-<p>Using the <code>dplyr::left_join</code> merge BLS data to the previously loaded shape object</p>
+<p>Using the <code>dplyr::left_join</code>, merge BLS data with the <code>us_geo</code> geometry, i.e. the shapefile object</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>my_df</span> <span class='op'>&lt;-</span> <span class='va'>us_geo</span> <span class='op'>%&gt;%</span> 
@@ -2220,18 +2220,21 @@ CDVS
 </div>
 <h2 id="get-population-data-tidycensus">Get Population Data – Tidycensus</h2>
 <h3 id="identify-and-pick-census-variables">identify and pick census variables</h3>
-<ul>
-<li>B01003_001E = Total Population<br />
-</li>
-<li>B06011_001E = Median income in the past 12 months</li>
-</ul>
+<p>If you’re not sure what 2015 ACS Census data variables you need, you’ll want to investigate the variables.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>variables_census</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/tidycensus/man/load_variables.html'>load_variables</a></span><span class='op'>(</span><span class='fl'>2015</span>, <span class='st'>"acs5"</span>, cache <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>
+<p>I’m using Median income.</p>
+<ul>
+<li>B01003_001E = Total Population<br />
+</li>
+<li>B06011_001E = Median income in the past 12 months</li>
+</ul>
 <h3 id="get-median-income">Get Median Income</h3>
+<p>Now that I know the Census ACS variable, I can use the <code>tidycensus::get_acs()</code> function to gather the median income variable for each state, along with the geometry (i.e. shapefiles).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>us_pop</span> <span class='op'>&lt;-</span> 
@@ -2242,12 +2245,12 @@ CDVS
 
 <span class='va'>us_pop</span> <span class='op'>&lt;-</span> <span class='va'>us_pop</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>mutate</span><span class='op'>(</span>type <span class='op'>=</span> <span class='st'>"USA Median Income"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'>rename</span><span class='op'>(</span>wages <span class='op'>=</span> <span class='va'>estimate</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>NAME</span> <span class='op'>!=</span> <span class='st'>"Puerto Rico"</span><span class='op'>)</span>
+  <span class='fu'>rename</span><span class='op'>(</span>wages <span class='op'>=</span> <span class='va'>estimate</span><span class='op'>)</span> 
 </code></pre>
 </div>
 </div>
 <h3 id="append-census-data">Append Census Data</h3>
+<p>Now combine the tidycensus data and geometry (i.e. <code>us_pop</code> variable data &amp; shapefiles) with the BLS data and previously associate shapefiles gatheried via <code>tigris::states()</code></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>my_df</span> <span class='op'>&lt;-</span> <span class='fu'>bind_rows</span><span class='op'>(</span><span class='va'>my_df</span>, <span class='va'>us_pop</span><span class='op'>)</span>
@@ -2287,7 +2290,7 @@ CDVS
   <span class='fu'>facet_wrap</span><span class='op'>(</span><span class='op'>~</span> <span class='va'>category</span>, 
              nrow <span class='op'>=</span> <span class='fl'>3</span>, ncol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"top"</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Median USA Wages by Professions"</span>,
+  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"2015 Median USA Wages by Professions"</span>,
        subtitle <span class='op'>=</span> <span class='st'>"A comparison"</span>,
        color <span class='op'>=</span> <span class='st'>""</span>, fill <span class='op'>=</span> <span class='st'>""</span>,
        caption <span class='op'>=</span> <span class='st'>"Source: BLS &amp; Census"</span><span class='op'>)</span> 

@@ -91,7 +91,7 @@ my_df <- my_df %>%
 
 ### Join data
 
-Using the `dplyr::left_join` merge BLS data to the previously loaded shape object
+Using the `dplyr::left_join`, merge BLS data with the `us_geo` geometry, i.e. the shapefile object
 
 ```{r}
 my_df <- us_geo %>% 
@@ -102,14 +102,20 @@ my_df <- us_geo %>%
 
 ### identify and pick census variables
 
-- B01003_001E = Total Population  
-- B06011_001E = Median income in the past 12 months  
+If you're not sure what 2015 ACS Census data variables you need, you'll want to investigate the variables.
 
 ```{r identify_ACS_variables}
 variables_census <- load_variables(2015, "acs5", cache = TRUE)
 ```
 
+I'm using Median income.
+
+- B01003_001E = Total Population  
+- B06011_001E = Median income in the past 12 months  
+
 ### Get Median Income
+
+Now that I know the Census ACS variable, I can use the `tidycensus::get_acs()` function to gather the median income variable for each state, along with the geometry (i.e. shapefiles).  
 
 ```{r get_median_income}
 us_pop <- 
@@ -120,11 +126,12 @@ us_pop <-
 
 us_pop <- us_pop %>% 
   mutate(type = "USA Median Income") %>% 
-  rename(wages = estimate) %>% 
-  filter(NAME != "Puerto Rico")
+  rename(wages = estimate) 
 ```
 
 ### Append Census Data
+
+Now combine the tidycensus data and geometry (i.e. `us_pop` variable data & shapefiles) with the BLS data and previously associate shapefiles gatheried via `tigris::states()`
 
 ```{r}
 my_df <- bind_rows(my_df, us_pop)
@@ -163,7 +170,7 @@ my_df %>%
   facet_wrap(~ category, 
              nrow = 3, ncol = 2) +
   theme(legend.position = "top") +
-  labs(title = "Median USA Wages by Professions",
+  labs(title = "2015 Median USA Wages by Professions",
        subtitle = "A comparison",
        color = "", fill = "",
        caption = "Source: BLS & Census") 
