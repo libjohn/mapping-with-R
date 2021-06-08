@@ -52,7 +52,6 @@ my_df <- my_xl_files %>%
           .id = "sheet")
 
 state_names <- us_geo %>% 
-  # filter(REGION != "9") %>% jrljrl
   select(NAME) %>% 
   st_drop_geometry() 
 ```
@@ -97,15 +96,6 @@ Using the `dplyr::left_join` merge BLS data to the previously loaded shape objec
 ```{r}
 my_df <- us_geo %>% 
   left_join(my_df, by = c("NAME" = "State"))
-```
-
-### 50 states
-
-Filter to the 50 states + D.C.
-
-```{r}
-my_df <- my_df # %>%  jrljrl
-  # filter(REGION != 9) 
 ```
 
 ## Get Population Data -- Tidycensus
@@ -163,21 +153,24 @@ my_df <- my_df %>%
 
 ### Display Map
 
-```{r}
+```{r makethemap, fig.height=9, fig.width=8, dev='svg'}
 my_df %>%
   ggplot(aes(fill = wages, color = wages)) +
   geom_sf() +
   coord_sf(crs = 5070, datum = NA) +
-  scale_fill_viridis_c() + 
-  scale_color_viridis_c() +
+  scale_fill_viridis_c(labels = c("$20K", "$55K", "$87K"), breaks = c(20000, 55000, 87000)) +
+  scale_color_viridis_c(labels = c("$20K", "$55K", "$87K"), breaks = c(20000, 55000, 87000)) +
   facet_wrap(~ category, 
-             nrow = 3, ncol = 2)
+             nrow = 3, ncol = 2) +
+  theme(legend.position = "top") +
+  labs(title = "Median USA Wages by Professions",
+       subtitle = "A comparison",
+       color = "", fill = "",
+       caption = "Source: BLS & Census") 
 ```
-
-
 
 ### Save Map
 
 ```{r save_it}
-ggsave("facet_map.png", width = 8, height = 8, units = "in")
+ggsave("facet_map.svg", width = 8, height = 9, units = "in")
 ```

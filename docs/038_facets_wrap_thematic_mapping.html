@@ -2163,7 +2163,6 @@ CDVS
           .id <span class='op'>=</span> <span class='st'>"sheet"</span><span class='op'>)</span>
 
 <span class='va'>state_names</span> <span class='op'>&lt;-</span> <span class='va'>us_geo</span> <span class='op'>%&gt;%</span> 
-  <span class='co'># filter(REGION != "9") %&gt;% jrljrl</span>
   <span class='fu'>select</span><span class='op'>(</span><span class='va'>NAME</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
   <span class='fu'><a href='https://r-spatial.github.io/sf/reference/st_geometry.html'>st_drop_geometry</a></span><span class='op'>(</span><span class='op'>)</span> 
 </code></pre>
@@ -2216,15 +2215,6 @@ CDVS
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='va'>my_df</span> <span class='op'>&lt;-</span> <span class='va'>us_geo</span> <span class='op'>%&gt;%</span> 
   <span class='fu'>left_join</span><span class='op'>(</span><span class='va'>my_df</span>, by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"NAME"</span> <span class='op'>=</span> <span class='st'>"State"</span><span class='op'>)</span><span class='op'>)</span>
-</code></pre>
-</div>
-</div>
-<h3 id="states">50 states</h3>
-<p>Filter to the 50 states + D.C.</p>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>my_df</span> <span class='op'>&lt;-</span> <span class='va'>my_df</span> <span class='co'># %&gt;%  jrljrl</span>
-  <span class='co'># filter(REGION != 9) </span>
 </code></pre>
 </div>
 </div>
@@ -2292,18 +2282,23 @@ CDVS
   <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>wages</span>, color <span class='op'>=</span> <span class='va'>wages</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>geom_sf</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>coord_sf</span><span class='op'>(</span>crs <span class='op'>=</span> <span class='fl'>5070</span>, datum <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span> <span class='op'>+</span>
-  <span class='fu'>scale_fill_viridis_c</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span> 
-  <span class='fu'>scale_color_viridis_c</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_fill_viridis_c</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"$20K"</span>, <span class='st'>"$55K"</span>, <span class='st'>"$87K"</span><span class='op'>)</span>, breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>20000</span>, <span class='fl'>55000</span>, <span class='fl'>87000</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_color_viridis_c</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"$20K"</span>, <span class='st'>"$55K"</span>, <span class='st'>"$87K"</span><span class='op'>)</span>, breaks <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>20000</span>, <span class='fl'>55000</span>, <span class='fl'>87000</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
   <span class='fu'>facet_wrap</span><span class='op'>(</span><span class='op'>~</span> <span class='va'>category</span>, 
-             nrow <span class='op'>=</span> <span class='fl'>3</span>, ncol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+             nrow <span class='op'>=</span> <span class='fl'>3</span>, ncol <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>legend.position <span class='op'>=</span> <span class='st'>"top"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Median USA Wages by Professions"</span>,
+       subtitle <span class='op'>=</span> <span class='st'>"A comparison"</span>,
+       color <span class='op'>=</span> <span class='st'>""</span>, fill <span class='op'>=</span> <span class='st'>""</span>,
+       caption <span class='op'>=</span> <span class='st'>"Source: BLS &amp; Census"</span><span class='op'>)</span> 
 </code></pre>
 </div>
-<p><img src="038_facets_wrap_thematic_mapping_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
+<p><img src="038_facets_wrap_thematic_mapping_files/figure-html5/makethemap-1.svg" width="768" /></p>
 </div>
 <h3 id="save-map">Save Map</h3>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggsave</span><span class='op'>(</span><span class='st'>"facet_map.png"</span>, width <span class='op'>=</span> <span class='fl'>8</span>, height <span class='op'>=</span> <span class='fl'>8</span>, units <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span>
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggsave</span><span class='op'>(</span><span class='st'>"facet_map.svg"</span>, width <span class='op'>=</span> <span class='fl'>8</span>, height <span class='op'>=</span> <span class='fl'>9</span>, units <span class='op'>=</span> <span class='st'>"in"</span><span class='op'>)</span>
 </code></pre>
 </div>
 </div>

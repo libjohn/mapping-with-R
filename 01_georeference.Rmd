@@ -47,11 +47,15 @@ sbux_sf <- st_as_sf(starbucksNC, coords = c("Longitude", "Latitude"),  crs = 432
 
 ### Now Map the sf object.
 
-Below, you can plot the latitude and longitude coordinate, and set the `map.types` argument to `openStreetMap`.  Base maps are set with `map.types`.  For example a high contrast, black and white basemap can be set with the argument `map.types = "Stamen.Toner"`. See available [map types](http://leaflet-extras.github.io/leaflet-providers/preview/), or leave out the map.types argument for a set of default base maps to choose via the layering button.
+Below, you can plot the latitude and longitude coordinate, and set the `map.types` argument.  
+
+This time with a different basemap...
+
+Base maps are set with `map.types`.  For example a high contrast, black and white basemap can be set with the argument `map.types = "Stamen.Toner"`. See available [map types](http://leaflet-extras.github.io/leaflet-providers/preview/).  If you leave out the map.types argument the end-user can pick from a set of default base maps via the layering button.
 
 ```{r plotmap}
-#mapview(sbuxsfc, map.types = "Stamen.Toner")
-mapview(sbux_sf)
+# mapview(sbux_sf)
+mapview(sbux_sf, map.types = "Stamen.Toner") 
 ```
 
 
