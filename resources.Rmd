@@ -4,7 +4,7 @@ title: "Resources"
 
 ## Hands-on Exercises
 
-- [Code for Workshop -- Spring 2019](https://github.com/libjohn/map-spring2019)
+- [Code for Workshop -- Spring 2020](https://github.com/engine143/map-spring2020)
 
 
 ## Supporting Materials
