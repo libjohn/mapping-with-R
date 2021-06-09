@@ -115,7 +115,7 @@ I'm using Median income.
 
 _Note:  I realize mean and median are not the same measure.  This is a demonstration of procedure, not a recommendation for research practice and data comparison.  Of course, you will be more rigorous with your own research._
 
-### Get BLS mean income
+### Get ACS median income
 
 Now that I know the Census ACS variable, I can use the `tidycensus::get_acs()` function to gather the mean income variable for each state, along with the geometry (i.e. shapefiles).  
 

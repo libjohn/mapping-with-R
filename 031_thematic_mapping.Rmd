@@ -125,7 +125,7 @@ qtm(HelperShapeObject, fill = "wages")
 ```
 
 
-## Contiguous 48 states
+## 50 states
 
 Filter to only the contiguous 50 states + D.C.  Note that `tigris::shift_geometry()` will shift and resize Alaska and Hawaii.
 
