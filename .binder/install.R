@@ -1,0 +1,17 @@
+install.packages(
+  "fs",
+  "knitr",
+  "leafem",
+  "mapview",
+  "readxl",
+  "rmarkdown",
+  "scales",
+  "sf",
+  "tidycensus",
+  "tidyverse",
+  "tigris",
+  "tmap",
+  "tmaptools",
+  "viridis",
+  "xaringan"
+)

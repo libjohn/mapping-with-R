@@ -1,4 +1,15 @@
-# README
+# README  
+
+<!-- badges: start -->
+<!-- DOI: All versions.  NOTYET -->
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.NOTYET (Latest Version Release)-blue "DOI")](https://doi.org/10.5281/NOTYET)  
+
+[![ORCID](https://img.shields.io/badge/ORCID-0000--0002--3600--0972-A6CE39?logo=ORCID&logoColor=A6CE39 "ORCID")](https://orcid.org/0000-0002-3600-0972)
+
+[![Creative Commons CC BY-NC](https://img.shields.io/badge/Creative Commons-BY--NC-EF9421?logo=creative commons&logoColor=EF9421 "CC BY-NC")](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+
+[![Launch Rstudio Binder](http://mybinder.org/badge_logo.svg "Launch RStudio Binder/Container")](https://mybinder.org/v2/gh/libjohn/mapping-with-R/master?urlpath=rstudio)
+<!-- badges: end -->
 
 Learning materials for the *Mapping with R* workshop, part of the [Rfun](https://rfun.library.duke.edu/) learning series hosted by the [Data & Visualization Services](https://library.duke.edu/data/) Department.
 
