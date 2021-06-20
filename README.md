@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 <!-- DOI: All versions.  NOTYET -->
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.NOTYET (Latest Version Release)-blue "DOI")](https://doi.org/10.5281/NOTYET)  
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.4999316 (Latest Version Release)-blue "DOI")](https://doi.org/10.5281/4999316) 
 
 [![ORCID](https://img.shields.io/badge/ORCID-0000--0002--3600--0972-A6CE39?logo=ORCID&logoColor=A6CE39 "ORCID")](https://orcid.org/0000-0002-3600-0972)
 
