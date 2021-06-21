@@ -1,4 +1,5 @@
 install.packages(c(
+  "distill",
   "fs",
   "knitr",
   "leafem",
