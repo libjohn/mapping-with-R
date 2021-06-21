@@ -1,4 +1,4 @@
-install.packages(
+install.packages(c(
   "fs",
   "knitr",
   "leafem",
@@ -14,4 +14,4 @@ install.packages(
   "tmaptools",
   "viridis",
   "xaringan"
-)
+))
