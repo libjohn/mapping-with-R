@@ -1,15 +1,4 @@
-# README  
-
-<!-- badges: start -->
-<!-- DOI: All versions.  NOTYET -->
-[![DOI](images/doi_badge.svg "DOI")](https://doi.org/10.5281/zenodo.4999316) 
-
-[![ORCID](https://img.shields.io/badge/ORCID-0000--0002--3600--0972-A6CE39?logo=ORCID&logoColor=A6CE39 "ORCID")](https://orcid.org/0000-0002-3600-0972)
-
-[![Creative Commons CC BY-NC](images/CC_BY_NC.svg "CC BY-NC")](https://creativecommons.org/licenses/by-nc-nd/4.0/)
-
-[![Launch Rstudio Binder](http://mybinder.org/badge_logo.svg "Launch RStudio Binder/Container")](https://mybinder.org/v2/gh/libjohn/mapping-with-R/master?urlpath=rstudio)
-<!-- badges: end -->
+# README
 
 Learning materials for the *Mapping with R* workshop, part of the [Rfun](https://rfun.library.duke.edu/) learning series hosted by the [Data & Visualization Services](https://library.duke.edu/data/) Department.
 
@@ -38,4 +27,9 @@ The objective of this workshop is to introduce practical georeferencing (lat/lon
 - [Introduction to visualising spatial data in R](https://cran.r-project.org/doc/contrib/intro-spatial-rl.pdf). Lovelace, Cheshire, and Oldroyd
 - [tmap in a nutshell](https://cran.r-project.org/web/packages/tmap/vignettes/tmap-nutshell.html)
 - [viridis color palettes](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+
+Major Revisions:  
+
+- 2018, Fall
+- 2019, Spring
 

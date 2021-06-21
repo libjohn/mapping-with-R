@@ -1,7 +1,7 @@
 Type: Compendium
 Package: Mapping with R: R workshop and website training materials
 Title: Mapping with R
-Version: 1.1.0
+Version: 1.1.3
 Authors@R: 
     person(given = "John",
            family = "Little",
