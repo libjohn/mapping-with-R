@@ -1,0 +1,331 @@
+[
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "Code for Workshop – Spring 2020"
+  },
+  {
+    "objectID": "resources.html#hands-on-exercises",
+    "href": "resources.html#hands-on-exercises",
+    "title": "Resources",
+    "section": "",
+    "text": "Code for Workshop – Spring 2020"
+  },
+  {
+    "objectID": "resources.html#supporting-materials",
+    "href": "resources.html#supporting-materials",
+    "title": "Resources",
+    "section": "Supporting Materials",
+    "text": "Supporting Materials\n\nSlides\nGuide to geospatial applications using the R programming language"
+  },
+  {
+    "objectID": "resources.html#supporting-materials-1",
+    "href": "resources.html#supporting-materials-1",
+    "title": "Resources",
+    "section": "Supporting Materials",
+    "text": "Supporting Materials\n\nR We having Fun Yet‽: aka “Rfun”. Free face-to-face, hands-on learning lab series for the Duke University Community.\n\nsimple features package\nmapview - package\ntidycensus\ntigiris get shapefiles\nGeocomputation with R by Lovelace, Nowosad, and Muenchow\nSpatial Data Science - by Pebesma and Bivand\nInteractive Primers: Free interactive mini-labs for learning R/Tidyverse\nR for Data Science: Book by Garrett Grolemund and Hadley Wickham. Free, online.\nTidyverse Documentation"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Mapping in R",
+    "section": "",
+    "text": "These learning and quick-reference resource pages support the face-to-face workshop, Mapping with R, offered via the Center for Data & Visualization Sciences, Duke University Libraries. The exercises and workshop are designed to help you learn georeferencing, make a choropleth with USA census data via the tidycensus package, and briefly introduce the sf package, simple features.\n\n\n\n\n\n\nBox code repository"
+  },
+  {
+    "objectID": "index.html#overview",
+    "href": "index.html#overview",
+    "title": "Mapping in R",
+    "section": "",
+    "text": "These learning and quick-reference resource pages support the face-to-face workshop, Mapping with R, offered via the Center for Data & Visualization Sciences, Duke University Libraries. The exercises and workshop are designed to help you learn georeferencing, make a choropleth with USA census data via the tidycensus package, and briefly introduce the sf package, simple features.\n\n\n\n\n\n\nBox code repository"
+  },
+  {
+    "objectID": "039_facet_example.html",
+    "href": "039_facet_example.html",
+    "title": "Example Faceted Thematic Mapping",
+    "section": "",
+    "text": "Beyond the the data wrangling, this faceted map was created using the ggplot2::facet_wrap() function.\nSee Also: full data wrangling code and workflow.\n\nsf_data %&gt;% \n  ggplot(aes(fill = wages, color = wages)) +\n  geom_sf() +\n  coord_sf(crs = 5070, datum = NA) +\n  scale_fill_viridis_c() + \n  scale_color_viridis_c() +\n  facet_wrap(~ category, \n             nrow = 3, ncol = 2)\n\n\n\n\nReuseCC BY-NC 4.0"
+  },
+  {
+    "objectID": "032_thematic_mapping_geom_sf.html",
+    "href": "032_thematic_mapping_geom_sf.html",
+    "title": "Thematic Mapping with geom_sf",
+    "section": "",
+    "text": "library(tidyverse)       \nlibrary(readxl)\nlibrary(tigris)\nlibrary(sf)\nlibrary(viridis)"
+  },
+  {
+    "objectID": "032_thematic_mapping_geom_sf.html#shapefiles-as-sf",
+    "href": "032_thematic_mapping_geom_sf.html#shapefiles-as-sf",
+    "title": "Thematic Mapping with geom_sf",
+    "section": "Shapefiles as sf",
+    "text": "Shapefiles as sf\nUse the tigris package to get Census Tiger shapefiles for census geographies. Coastal boundaries can be gathered with the tigris argument: cb = TRUE.\n\nus_geo &lt;- tigris::states(class = \"sf\", cb = TRUE) %&gt;% \n  shift_geometry()\n\nus_geo &lt;- tigris::states(class = \"sf\", cb = TRUE)) %&gt;% \n  shift_geometry()"
+  },
+  {
+    "objectID": "032_thematic_mapping_geom_sf.html#get-bls-data",
+    "href": "032_thematic_mapping_geom_sf.html#get-bls-data",
+    "title": "Thematic Mapping with geom_sf",
+    "section": "Get BLS data",
+    "text": "Get BLS data\nIn additon to shapefiles, the wage data used in this example comes from from the Bureau of Labor Statistics. These data are stored in an excel file in the data directory of the repository: data/OES_Report.xlsx.\n\nSalary4Helpers &lt;- \n  read_excel(\"data/OES_Report.xlsx\",\n             col_types = c(\"text\", \"numeric\"), \n             skip = 4)\n\nSalary4Helpers"
+  },
+  {
+    "objectID": "032_thematic_mapping_geom_sf.html#wrangle-the-data",
+    "href": "032_thematic_mapping_geom_sf.html#wrangle-the-data",
+    "title": "Thematic Mapping with geom_sf",
+    "section": "Wrangle the data",
+    "text": "Wrangle the data\nUsing the stringr package we can extract the text of the state names from the state code by leveraging regular expressions (i.e. regex) pattern matching techniques with stringr::str_extract().\n\nBlsWage_ToJoin &lt;- Salary4Helpers %&gt;% \n  rename(wages = \"Annual mean wage(2)\") %&gt;% \n  mutate(State = str_extract(`Area Name`, \"\\\\w+.*(?=\\\\()\")) %&gt;% \n  drop_na(wages) %&gt;% \n  select(State, wages)"
+  },
+  {
+    "objectID": "032_thematic_mapping_geom_sf.html#join-data",
+    "href": "032_thematic_mapping_geom_sf.html#join-data",
+    "title": "Thematic Mapping with geom_sf",
+    "section": "Join data",
+    "text": "Join data\nUse the dplyr::left_join function to append BLS variable to the sf tibble (data frame).\n\nHelperShapeObject &lt;- us_geo %&gt;% \n  left_join(BlsWage_ToJoin,\n            by = c(\"NAME\" = \"State\"))"
+  },
+  {
+    "objectID": "032_thematic_mapping_geom_sf.html#states",
+    "href": "032_thematic_mapping_geom_sf.html#states",
+    "title": "Thematic Mapping with geom_sf",
+    "section": "50 states",
+    "text": "50 states\nFilter to only the 50 US states + D.C.\nAlaska and Hawaii were shifted and rescaled using tigris::shift_geometry(), above.\n\ncontiguous_states &lt;- HelperShapeObject %&gt;% \n  filter(GEOID &lt; 60)"
+  },
+  {
+    "objectID": "032_thematic_mapping_geom_sf.html#ggplot2-with-geom_sf-and-viridis",
+    "href": "032_thematic_mapping_geom_sf.html#ggplot2-with-geom_sf-and-viridis",
+    "title": "Thematic Mapping with geom_sf",
+    "section": "ggplot2 with geom_sf and viridis",
+    "text": "ggplot2 with geom_sf and viridis\nggplot2 is one of the more popular and broadly distributed graphics packages used in the R community. (Learn more about ggplot2.\nIn this plot I reversed the direction of the color scale. Reversing the color pallette’s direction is not a visualization best practice, but I use this approach to demonstrate the direction argument.\nUse a pleasing projection. In this case assign the CRS projection to ‘5070’\n\ncoord_sf(crs = 5070)  Help with projection/CRS\ncoords_sf(datum = NA) Remove gridlines, i.e graticules\n\n\ncontiguous_states %&gt;% \n  ggplot(aes(fill = wages, color = wages)) +\n  geom_sf() +\n  coord_sf(crs = 5070, datum = NA) +\n  scale_fill_viridis(direction = -1, label = scales::dollar) + \n  scale_color_viridis(direction = -1, label = scales::dollar) +\n  labs(title = \"Annual Mean Wages by State\",\n       subtitle = \"Mental Health and Substance Abuse Social Workers(SOC Code211023)\", \n       caption = \"Data Source: BLS.gov - Occupational Employment Statistics ; 2016\")"
+  },
+  {
+    "objectID": "032_thematic_mapping_geom_sf.html#end-notes",
+    "href": "032_thematic_mapping_geom_sf.html#end-notes",
+    "title": "Thematic Mapping with geom_sf",
+    "section": "End Notes",
+    "text": "End Notes\nThis session inspired by https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html"
+  },
+  {
+    "objectID": "02_choropleth.html",
+    "href": "02_choropleth.html",
+    "title": "tidycensus",
+    "section": "",
+    "text": "The tidycensus package, developed by Kyle Walker, is very convenient and easy to use package for making choropleth maps from United States Department of Census data. Tidycensus uses the Decennial or ACS Census reports. This package makes it possible to gather census variables and conveniently join those variables with “Census Geography” (i.e. aka “shapefiles”, or polygons.) Visualization can be done with separate packages such as mapview, leaflet, or ggplot2::geom_sf().\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(tidycensus)\nlibrary(mapview)"
+  },
+  {
+    "objectID": "02_choropleth.html#census-api-key",
+    "href": "02_choropleth.html#census-api-key",
+    "title": "tidycensus",
+    "section": "Census API Key",
+    "text": "Census API Key\nyou need a free Census API key. Kyle Walker’s Basic usage of tidycensus documents this process.\ncensus_api_key(\"YOUR API KEY GOES HERE\")\n\n.Renviron File\nSee also Kyle’s more detailed documentation for caching the API key in your R environment."
+  },
+  {
+    "objectID": "02_choropleth.html#tidycensus-get-data",
+    "href": "02_choropleth.html#tidycensus-get-data",
+    "title": "tidycensus",
+    "section": "TidyCensus – Get Data",
+    "text": "TidyCensus – Get Data\nCreate a Simple Features (i.e. sf) dataframe using tidycensus::get_acs()\nThe Census population variable we’ll use is “B01003_001”. More information about identifying Census variables is available at the bottom of this page.\n\nnc_pop &lt;- \n  get_acs(geography = \"county\",\n          variables = \"B01003_001\",\n          state = \"NC\",\n          geometry = TRUE)"
+  },
+  {
+    "objectID": "02_choropleth.html#make-choropleth-via-mapview",
+    "href": "02_choropleth.html#make-choropleth-via-mapview",
+    "title": "tidycensus",
+    "section": "Make Choropleth via mapview",
+    "text": "Make Choropleth via mapview\nIdentify which variable will be used to create the color ramp shading. Assign this variable with the zcol argument. The estimate variable was extracted via the tidycensus::get_acs() function.\n\nmapview(nc_pop, zcol = \"estimate\")"
+  },
+  {
+    "objectID": "02_choropleth.html#add-another-layer",
+    "href": "02_choropleth.html#add-another-layer",
+    "title": "tidycensus",
+    "section": "Add another layer",
+    "text": "Add another layer\nNow we’ll geolocate the Starbucks stores and add those locations as a layer over our choropleth. The Starbucks locations were generated and plotted in the previous exercise. Here we regenerate the StarbuckNC object.\n\nLoad Lat/Long Data\n\nstarbucks &lt;- read_csv(\"data/All_Starbucks_Locations_in_the_US_-_Map.csv\",\n                      show_col_types = FALSE)\n\nSubset Starbucks Data to North Carolina\n\nstarbucksNC &lt;- starbucks  %&gt;% \n  filter(State == \"NC\")\n\nConvert the starbucksNC data frame to a spatial (sf) object and assign the same projection as the nc_pop spatial object.\n\nstarbucksNC &lt;- st_as_sf(starbucksNC, coords = c(\"Longitude\", \"Latitude\"),  crs = st_crs(nc_pop))\n\nGenerate the map with multiple layers. You can read more about additional arguments such as homebutton, legend, alpha, cex in the mapview() documentation. Read about the many more mapview functions in the full documentation.\n\nlibrary(leafem)\nmymap &lt;- mapview(nc_pop, \n                 zcol = \"estimate\", \n                 homebutton = FALSE) + \n  mapview(starbucksNC, \n          zcol = \"Name\", \n          legend = FALSE, \n          alpha = 0.5, cex = 3, \n          col.regions = \"orange\",\n          homebutton = FALSE) \n\naddLogo(mymap, \"images/Rfun3.png\",\n        position = \"bottomright\",\n        offset.x = 8,\n        offset.y = 38,\n        width = 100,\n        height = 100)"
+  },
+  {
+    "objectID": "02_choropleth.html#alaska-hawaii---shift",
+    "href": "02_choropleth.html#alaska-hawaii---shift",
+    "title": "tidycensus",
+    "section": "Alaska & Hawaii - Shift",
+    "text": "Alaska & Hawaii - Shift\nShift and re-scale Alaska and Hawaii for convenient cartographic display of the entire US.\n\npopulation &lt;- get_acs(geography = \"state\",\n                variables = \"B01003_001\",\n                geometry = TRUE,\n                shift_geo = TRUE)\n\nGetting data from the 2017-2021 5-year ACS\n\n\nWarning: The `shift_geo` argument is deprecated and will be removed in a future\nrelease. We recommend using `tigris::shift_geometry()` instead.\n\n\nUsing feature geometry obtained from the albersusa package\n\n\nPlease note: Alaska and Hawaii are being shifted and are not to scale.\n\n\nold-style crs object detected; please recreate object with a recent sf::st_crs()\n\nmapviewOptions(legend.pos = \"bottomright\")\nmapviewOptions(leafletWidth = 800)\nmapview(population, zcol = \"estimate\", native.crs = TRUE, crs = 5070)\n\nWarning: sf layer is not long-lat data\n\n\nWarning: sf layer has inconsistent datum (+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +ellps=sphere +units=m +no_defs).\nNeed '+proj=longlat +datum=WGS84'"
+  },
+  {
+    "objectID": "02_choropleth.html#census",
+    "href": "02_choropleth.html#census",
+    "title": "tidycensus",
+    "section": "Census",
+    "text": "Census\nDuring the workshop I will discuss the following concepts in more detail.\n\nACS v Decennial\nVariable Names / Numbers\nMore on Census Geography (shapefiles)\n\n\nVariables\nThe Census is a very large collection of data. Many casual users of Census data are interested in a single data point, for example population by County. Given the complexity and richness of available Census data, finding a useful data variable can be quite a bit of work. The links below are a some methods one might use to identify the proper code name with a Census data variable.\n\nSearching for Variables\nSee Also Tiger Metadata\nSee Also SocialExplorer Tables"
+  },
+  {
+    "objectID": "02_choropleth.html#shapefiles",
+    "href": "02_choropleth.html#shapefiles",
+    "title": "tidycensus",
+    "section": "Shapefiles",
+    "text": "Shapefiles\nShapefiles are an important GIS data standard used frequently in thematic mapping. There are many other standards, although shapefiles have a very broad user base. If you need shapefiles for other geographies, please consult the guide to geospatial applications using the R programming language"
+  },
+  {
+    "objectID": "02_choropleth.html#end-notes",
+    "href": "02_choropleth.html#end-notes",
+    "title": "tidycensus",
+    "section": "End Notes",
+    "text": "End Notes\nThis session based on\n\nKyle Walker’s TidyCensus package"
+  },
+  {
+    "objectID": "01_georeference.html",
+    "href": "01_georeference.html",
+    "title": "Latitude and Longitude Coordinates",
+    "section": "",
+    "text": "Use the mapview package to make interactive maps. In this example, georeference Starbucks coffee shop locations in North Carolina (2012). 1"
+  },
+  {
+    "objectID": "01_georeference.html#load-libraries",
+    "href": "01_georeference.html#load-libraries",
+    "title": "Latitude and Longitude Coordinates",
+    "section": "Load Libraries",
+    "text": "Load Libraries\n\nlibrary(tidyverse)\nlibrary(sf)\nlibrary(mapview)"
+  },
+  {
+    "objectID": "01_georeference.html#load-data",
+    "href": "01_georeference.html#load-data",
+    "title": "Latitude and Longitude Coordinates",
+    "section": "Load Data",
+    "text": "Load Data\n2012 Starbucks locations (data source)\n\nstarbucks &lt;- read_csv(\"https://raw.githubusercontent.com/libjohn/mapping-with-R/master/data/All_Starbucks_Locations_in_the_US_-_Map.csv\", show_col_types = FALSE)\n\n\nSubset Data to North Carolina\n\nstarbucksNC &lt;- starbucks  %&gt;% \n  filter(State == \"NC\")\n\nstarbucksNC %&gt;% \n  glimpse()\n\nRows: 229\nColumns: 23\n$ Brand                 &lt;chr&gt; \"Starbucks\", \"Starbucks\", \"Starbucks\", \"Starbuck…\n$ `Store Number`        &lt;dbl&gt; 72949, 9272, 13258, 76569, 76100, 2970, 8495, 13…\n$ Name                  &lt;chr&gt; \"Farm Fresh-Elizabeth City #469\", \"Roanoke Rapid…\n$ `Ownership Type`      &lt;chr&gt; \"Licensed\", \"Company Owned\", \"Company Owned\", \"L…\n$ `Facility ID`         &lt;dbl&gt; 15736, 14789, 10765, 10147, 12631, 16246, 15406,…\n$ `Features - Products` &lt;chr&gt; NA, \"Lunch, Oven-warmed Food\", \"Oven-warmed Food…\n$ `Features - Service`  &lt;chr&gt; NA, \"Starbucks Card Mobile, Wireless Hotspot\", \"…\n$ `Features - Stations` &lt;chr&gt; NA, \"Drive-Through\", NA, NA, NA, \"Drive-Through\"…\n$ `Food Region`         &lt;dbl&gt; 9999, 9999, 9999, 9999, 9999, 9999, 9999, 9999, …\n$ `Venue Type`          &lt;chr&gt; \"Unknown\", \"Unknown\", \"Unknown\", \"Unknown\", \"Unk…\n$ `Phone Number`        &lt;chr&gt; \"252-331-1368\", \"252-533-5900\", \"252-255-0790\", …\n$ Location              &lt;chr&gt; \"691 S Hughes Blvd\\nElizabeth City, NC 27909-453…\n$ `Street Address`      &lt;chr&gt; \"691 S Hughes Blvd\", \"298 Premier Blvd.\", \"5597-…\n$ `Street Line 1`       &lt;chr&gt; \"691 S Hughes Blvd\", \"298 Premier Blvd.\", \"5597-…\n$ `Street Line 2`       &lt;chr&gt; NA, NA, NA, NA, NA, \"Ste. 109\", \"101\", NA, \"Unit…\n$ City                  &lt;chr&gt; \"Elizabeth City\", \"Roanoke Rapids\", \"Kitty Hawk\"…\n$ State                 &lt;chr&gt; \"NC\", \"NC\", \"NC\", \"NC\", \"NC\", \"NC\", \"NC\", \"NC\", …\n$ Zip                   &lt;chr&gt; \"27909-4530\", \"27870-5076\", \"27949-4090\", \"27804…\n$ Country               &lt;chr&gt; \"US\", \"US\", \"US\", \"US\", \"US\", \"US\", \"US\", \"US\", …\n$ Coordinates           &lt;chr&gt; \"(36.290986, -76.25259)\", \"(36.4324, -77.6388)\",…\n$ Latitude              &lt;dbl&gt; 36.29099, 36.43240, 36.09835, 35.97197, 35.97441…\n$ Longitude             &lt;dbl&gt; -76.25259, -77.63880, -75.72458, -77.81310, -78.…\n$ `Insert Date`         &lt;chr&gt; \"06/22/2012 06:31:38 PM\", \"06/22/2012 06:31:38 P…"
+  },
+  {
+    "objectID": "01_georeference.html#make-the-map",
+    "href": "01_georeference.html#make-the-map",
+    "title": "Latitude and Longitude Coordinates",
+    "section": "Make the Map",
+    "text": "Make the Map\nIn this example, plot latitude (y coordinates) and longitude (x coordinates). Then set the map projection2 to a common projection standard such as WGS84 via the argument crs = 4326.)\n\nmapview(starbucksNC, xcol = \"Longitude\", ycol = \"Latitude\", crs = 4269, grid = FALSE)"
+  },
+  {
+    "objectID": "01_georeference.html#alternative-transform-data-to-spatial-object",
+    "href": "01_georeference.html#alternative-transform-data-to-spatial-object",
+    "title": "Latitude and Longitude Coordinates",
+    "section": "Alternative: Transform data to Spatial object",
+    "text": "Alternative: Transform data to Spatial object\nAnother way to plot the x & y coordinates is by transforming the starbucksNC tibble (i.e. the starbucksNC data frame) into a spacial data frame via the simple features function, st_as_sf(). Again, set the map projection to a common standard such as WGS84 via the crs= argument.\n\nsbux_sf &lt;- st_as_sf(starbucksNC, coords = c(\"Longitude\", \"Latitude\"),  crs = 4326)\n\n\nNow Map the sf object.\nBelow, you can plot the latitude and longitude coordinate, and set the map.types argument.\nThis time with a different basemap…\n\n# mapview(sbux_sf)\nmapview(sbux_sf, map.types = \"CartoDB.DarkMatter\")"
+  },
+  {
+    "objectID": "031_thematic_mapping.html",
+    "href": "031_thematic_mapping.html",
+    "title": "Thematic Mapping with tmap",
+    "section": "",
+    "text": "library(tidyverse)       # Tidyverse for Tidy Data\nlibrary(readxl)\nlibrary(tmap)            # Thematic Mapping\nlibrary(tmaptools) \nlibrary(tigris)          # Get Census Geography Poloygons\nlibrary(sf)"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#shapefiles-as-sf",
+    "href": "031_thematic_mapping.html#shapefiles-as-sf",
+    "title": "Thematic Mapping with tmap",
+    "section": "Shapefiles as sf",
+    "text": "Shapefiles as sf\nUsing the tigris package, get Census Tiger shapefiles for census geographies. Tigris will return the shapefile in the sf, or simple features, format.\nus_geo &lt;- tigris::states(class = \"sf\") \n\nus_geo &lt;- tigris::states(class = \"sf\")"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#data-structure",
+    "href": "031_thematic_mapping.html#data-structure",
+    "title": "Thematic Mapping with tmap",
+    "section": "Data Structure",
+    "text": "Data Structure\nThe “Simple Features” (sf) data structure can easily be viewed and manipulated as a rectangular data frame, before visualizing. As an historical note – an sf predecessor – the sp data structure uses @data slots to hold data. We’ll focus on the sf package. Below are two methods of viewing the structure of the downloaded shapefiles.\n\nclass(us_geo)\n\n[1] \"sf\"         \"data.frame\"\n\nglimpse(us_geo)\n\nRows: 56\nColumns: 15\n$ REGION   &lt;chr&gt; \"3\", \"3\", \"2\", \"2\", \"3\", \"1\", \"4\", \"1\", \"3\", \"1\", \"1\", \"3\", \"…\n$ DIVISION &lt;chr&gt; \"5\", \"5\", \"3\", \"4\", \"5\", \"1\", \"8\", \"1\", \"5\", \"1\", \"1\", \"5\", \"…\n$ STATEFP  &lt;chr&gt; \"54\", \"12\", \"17\", \"27\", \"24\", \"44\", \"16\", \"33\", \"37\", \"50\", \"…\n$ STATENS  &lt;chr&gt; \"01779805\", \"00294478\", \"01779784\", \"00662849\", \"01714934\", \"…\n$ GEOID    &lt;chr&gt; \"54\", \"12\", \"17\", \"27\", \"24\", \"44\", \"16\", \"33\", \"37\", \"50\", \"…\n$ STUSPS   &lt;chr&gt; \"WV\", \"FL\", \"IL\", \"MN\", \"MD\", \"RI\", \"ID\", \"NH\", \"NC\", \"VT\", \"…\n$ NAME     &lt;chr&gt; \"West Virginia\", \"Florida\", \"Illinois\", \"Minnesota\", \"Marylan…\n$ LSAD     &lt;chr&gt; \"00\", \"00\", \"00\", \"00\", \"00\", \"00\", \"00\", \"00\", \"00\", \"00\", \"…\n$ MTFCC    &lt;chr&gt; \"G4000\", \"G4000\", \"G4000\", \"G4000\", \"G4000\", \"G4000\", \"G4000\"…\n$ FUNCSTAT &lt;chr&gt; \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"A\", \"…\n$ ALAND    &lt;dbl&gt; 62266298634, 138961722096, 143778561906, 206232627084, 251519…\n$ AWATER   &lt;dbl&gt; 489204185, 45972570361, 6216493488, 18949394733, 6979074857, …\n$ INTPTLAT &lt;chr&gt; \"+38.6472854\", \"+28.3989775\", \"+40.1028754\", \"+46.3159573\", \"…\n$ INTPTLON &lt;chr&gt; \"-080.6183274\", \"-082.5143005\", \"-089.1526108\", \"-094.1996043…\n$ geometry &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-80.85847 3..., MULTIPOLYGON (((…"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#sf-as-data-frame",
+    "href": "031_thematic_mapping.html#sf-as-data-frame",
+    "title": "Thematic Mapping with tmap",
+    "section": "sf as data frame",
+    "text": "sf as data frame\nAnd as noted, here’s the data frame view. Notice the geometry (polygon shape) in the far-right column of the data frame.\n\nas_tibble(us_geo)\n\n\n  \n\n\n\n\nQuick Plotting\nIf you want to see a very quick view of your mapping data, you can plot the geometry data with the plot function. In this case we use the sf::st_geometry() function to plot only the geometry. You can quickly generate a faceted map by excluding the st_geometry function: e.g. plot(us_geo) but that will consume computation cycles (i.e. wait time). Therefore, I recommend trying the smaller layer for now.\n\nNote: Census geography for the USA will span the globe in part becuase Region 9 includes a multitude of pacific islands. Later we will limit to simply the “lower 48” states.\n\n\nplot(st_geometry(us_geo))"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#get-bls-data",
+    "href": "031_thematic_mapping.html#get-bls-data",
+    "title": "Thematic Mapping with tmap",
+    "section": "Get BLS data",
+    "text": "Get BLS data\nI’ve already downloaded and stored some data from the Bureau of Labor Statistics. Those data are stored in an excel file in the data directory of the repository: data/OES_Report.xlsx. The goal is to attach this data to the previously downloaded shapefiles.\nBut you may be interested in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.\nhttps://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographical%20areas\n\nOne occupation for multiple geographical areas\n\nMental Health and Substance Abuse Social Workers\n\nState\nAll States in this list\nAnnual Mean wage\n\nExcel\n\n\n\nRead the Data in with the RStudio “Import Dataset” wizard available in the Environment tab. This will generate the code below and ensure the import\n\nSkips the first 4 lines\nCoerces the 2nd column to numeric\n\n\n\nSalary4Helpers &lt;- \n  read_excel(\"data/OES_Report.xlsx\",\n             col_types = c(\"text\", \"numeric\"), \n             skip = 4)\n\nSalary4Helpers"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#wrangle-the-data",
+    "href": "031_thematic_mapping.html#wrangle-the-data",
+    "title": "Thematic Mapping with tmap",
+    "section": "Wrangle the data",
+    "text": "Wrangle the data\nBefore we join the BLS data to the shapefile we need to transform the structure of the downloaded BLS data\n\nBlsWage_ToJoin &lt;- Salary4Helpers %&gt;% \n  rename(Area = \"Area Name\") %&gt;% \n  rename(wages = \"Annual mean wage(2)\") %&gt;% \n  mutate(State = gsub(\"\\\\(\\\\d{7}\\\\)\", \"\", Area)) %&gt;% \n  filter(wages != \"NA_character_\") %&gt;% \n  select(State, wages)\n\n#BlsWage_ToJoin"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#join-data",
+    "href": "031_thematic_mapping.html#join-data",
+    "title": "Thematic Mapping with tmap",
+    "section": "Join data",
+    "text": "Join data\nUse the dplyr::left_join() function or the base-R merge() function to append BLS data to the previously loaded shape object\n\nHelperShapeObject &lt;- left_join(us_geo, BlsWage_ToJoin, by = c(\"NAME\" = \"State\"))\n\nas_tibble(HelperShapeObject)"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#quick-thematic-map",
+    "href": "031_thematic_mapping.html#quick-thematic-map",
+    "title": "Thematic Mapping with tmap",
+    "section": "Quick Thematic Map",
+    "text": "Quick Thematic Map\n\nqtm(HelperShapeObject, fill = \"wages\")"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#states",
+    "href": "031_thematic_mapping.html#states",
+    "title": "Thematic Mapping with tmap",
+    "section": "50 states",
+    "text": "50 states\nFilter to only the contiguous 50 states + D.C. Note that tigris::shift_geometry() will shift and resize Alaska and Hawaii.\n\ncontiguous_states &lt;- HelperShapeObject %&gt;% \n  filter(REGION != 9) %&gt;% \n  shift_geometry()"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#make-choropleth",
+    "href": "031_thematic_mapping.html#make-choropleth",
+    "title": "Thematic Mapping with tmap",
+    "section": "Make Choropleth",
+    "text": "Make Choropleth\n\ntm_shape(contiguous_states) +\n  tm_polygons(\"wages\", id = \"Name\")"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#projection",
+    "href": "031_thematic_mapping.html#projection",
+    "title": "Thematic Mapping with tmap",
+    "section": "Projection",
+    "text": "Projection\nMark likes the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection for the continental US. EPSG:5070\n\ncontiguous_states %&gt;% \n  st_transform(5070) %&gt;% \n  tm_shape() +\n  tm_polygons(\"wages\", id = \"Name\") \n\n\n\n\n\n\n\n\n\nAlternative Syntax\n\ntm_shape(contiguous_states, projection = 5070) +\n  tm_polygons(\"wages\", id = \"Name\")\n\n\n\n\n\n\n\n\n\n\nExplore tmap syntax and functions\n\ntm_shape(contiguous_states, projection = 5070) +\n  tm_borders(col = \"black\", alpha = 0.4) +\n  tm_fill(col = \"REGION\", alpha = 0.6) +\n  tm_layout(title = \"Regions of the USA\", \n                  attr.color = \"navy\", \n                  title.position = c(\"center\", \"top\"), \n                  title.bg.color = \"lightblue\")"
+  },
+  {
+    "objectID": "031_thematic_mapping.html#end-notes",
+    "href": "031_thematic_mapping.html#end-notes",
+    "title": "Thematic Mapping with tmap",
+    "section": "End Notes",
+    "text": "End Notes\nThis session inspired by https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html"
+  },
+  {
+    "objectID": "038_facets_wrap_thematic_mapping.html",
+    "href": "038_facets_wrap_thematic_mapping.html",
+    "title": "Faceted Thematic Mapping",
+    "section": "",
+    "text": "library(tidyverse)       \nlibrary(readxl)\nlibrary(tigris)          # Get Census Geography Poloygons\nlibrary(sf)\nlibrary(tidycensus)"
+  },
+  {
+    "objectID": "038_facets_wrap_thematic_mapping.html#shapefiles-as-sf",
+    "href": "038_facets_wrap_thematic_mapping.html#shapefiles-as-sf",
+    "title": "Faceted Thematic Mapping",
+    "section": "Shapefiles as sf",
+    "text": "Shapefiles as sf\nUsing the tigris package get Census Tiger shapefiles for census geographies. Tigris will return the shapefile in the sf, or simple features, format.\n\nus_geo &lt;- tigris::states(class = \"sf\", cb = TRUE) %&gt;%   #cb is a more generalized, less detailed file.\n  shift_geometry() %&gt;% \n  filter(as.numeric(GEOID) &lt; 60)"
+  },
+  {
+    "objectID": "038_facets_wrap_thematic_mapping.html#get-bls-data",
+    "href": "038_facets_wrap_thematic_mapping.html#get-bls-data",
+    "title": "Faceted Thematic Mapping",
+    "section": "Get BLS data",
+    "text": "Get BLS data\nI’ve already downloaded and stored some data from the Bureau of Labor Statistics. Those data are stored in an excel file in the data directory of the github repository: data/OES_Report.xlsx. The goal is to attach this data to the previously downloaded shapefiles.\nBut you may be interested in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.\nhttps://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographical%20areas\n\nOne occupation for multiple geographical areas\n\nMental Health and Substance Abuse Social Workers (Also, Secondary School Teacher, Waiter, Legislator, and Paralegals)\n\nState\nAll States in this list\nAnnual Mean wage\n\nExcel\n\n\n\n\n\nImport the data into R\n\nmy_xl_files &lt;- fs::dir_ls(path = \"data\", glob = \"*.xlsx\")\n\nmy_df &lt;- my_xl_files %&gt;% \n  map_dfr(read_excel, \n          col_types = c(\"text\", \"numeric\"), \n          skip = 4, \n          .id = \"sheet\")\n\nstate_names &lt;- us_geo %&gt;% \n  select(NAME) %&gt;% \n  st_drop_geometry() \n\n\n\nWrangle the data\nBefore we join the BLS data to the shapefile us_geo we need to transform BLS data\n\nmy_df &lt;- my_df %&gt;% \n  rename(area = \"Area Name\",\n         wages = \"Annual mean wage(2)\",\n         type = sheet) %&gt;% \n  mutate(State = str_extract(area, '.*(?=\\\\()')) %&gt;% \n  mutate(type = str_extract(type, \"(?&lt;=data/OES_)\\\\w+\"))\n\n\n\nMissing data\nSome of the BLS data are missing making it hard to visualize. As a remedy to this problem we will wrangle the data by preserving shape geometry even for states without any wage data.\n\nmissing_states_legislators &lt;- state_names %&gt;% \n  anti_join(my_df %&gt;% filter(type == \"legislator\"), \n            by = c(\"NAME\" = \"State\")) %&gt;% \n  mutate(type = \"legislator\") %&gt;% \n  rename(State = NAME)\n\nmissing_states_legislators\n\n\n  \n\n\n\n\nmy_df &lt;- my_df %&gt;% \n  bind_rows(missing_states_legislators)\n\n\n\nJoin data\nUsing the dplyr::left_join, merge BLS data with the us_geo geometry, i.e. the shapefile object\n\nmy_df &lt;- us_geo %&gt;% \n  left_join(my_df, by = c(\"NAME\" = \"State\"))"
+  },
+  {
+    "objectID": "038_facets_wrap_thematic_mapping.html#get-census-data-tidycensus",
+    "href": "038_facets_wrap_thematic_mapping.html#get-census-data-tidycensus",
+    "title": "Faceted Thematic Mapping",
+    "section": "Get census data – tidycensus",
+    "text": "Get census data – tidycensus\n\nIdentify and pick census variables\nIf you’re not sure what 2015 ACS Census data variables you need, you’ll want to investigate the variables.\n\nvariables_census &lt;- load_variables(2015, \"acs5\", cache = TRUE)\n\nI’m using Median income.\n\nB01003_001E = Total Population\n\nB06011_001E = Median income in the past 12 months\n\nNote: I realize mean and median are not the same measure. This is a demonstration of procedure, not a recommendation for research practice and data comparison. Of course, you will be more rigorous with your own research.\n\n\nGet ACS median income\nNow that I know the Census ACS variable, I can use the tidycensus::get_acs() function to gather the mean income variable for each state, along with the geometry (i.e. shapefiles).\n\nus_pop &lt;- \n  get_acs(geography = \"state\",\n          variables = \"B06011_001E\",\n          geometry = TRUE)  %&gt;% \n  shift_geometry()\n\nGetting data from the 2017-2021 5-year ACS\n\n\nDownloading feature geometry from the Census website.  To cache shapefiles for use in future sessions, set `options(tigris_use_cache = TRUE)`.\n\nus_pop &lt;- us_pop %&gt;% \n  mutate(type = \"USA Median Income\") %&gt;% \n  rename(wages = estimate) \n\n\n\nAppend Census data\nNow combine the tidycensus data and geometry (i.e. us_pop variable data & shapefiles) with the BLS data and previously associate shapefiles gatheried via tigris::states()\n\nmy_df &lt;- bind_rows(my_df, us_pop)\n\n\n\nMore munging\nMake the category variable a categorical factor with levels. This will improve the order of the facets when displayed.\n\ndisplay_levels &lt;- c(\"USA Median Income\", \"Legislator\", \n                    \"Paralegals\", \"Substance Abuse Counselor\", \n                    \"Teacher\", \"Waiters\")\n\nmy_df &lt;- my_df %&gt;% \n  mutate(category = case_when(\n    type == \"USA Median Income\" ~ \"USA Median Income\",\n    type == \"legislator\" ~ \"Legislator\",\n    type == \"paralegals\" ~ \"Paralegals\",\n    type == \"Report\" ~ \"Substance Abuse Counselor\",\n    type == \"secondary_school_teacher\" ~ \"Teacher\",\n    type == \"waiters\" ~ \"Waiters\"\n  )) %&gt;% \n  mutate(category = factor(category, display_levels))\n\n\n\nDisplay map\n\nmy_df %&gt;%\n  ggplot(aes(fill = wages, color = wages)) +\n  geom_sf() +\n  coord_sf(crs = 5070, datum = NA) +\n  scale_fill_viridis_c(labels = c(\"$20K\", \"$55K\", \"$87K\"), breaks = c(20000, 55000, 87000)) +\n  scale_color_viridis_c(labels = c(\"$20K\", \"$55K\", \"$87K\"), breaks = c(20000, 55000, 87000)) +\n  facet_wrap(~ category, \n             nrow = 3, ncol = 2) +\n  theme(legend.position = \"top\") +\n  labs(title = \"2015 Mean USA Wages by Professions\",\n       subtitle = \"A comparison of BLS mean income with Census median income\",\n       color = \"\", fill = \"\",\n       caption = \"Source: BLS & Census\") \n\n\n\n\n\n\n\n\n\n\nSave map\n\nggsave(\"facet_map.svg\", width = 8, height = 9, units = \"in\")"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2\n\n\n\n\n\nReuseCC BY-NC 4.0"
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "Mapping in R",
+    "section": "",
+    "text": "Attribution 4.0 International\n=======================================================================\nCreative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.\nUsing Creative Commons Public Licenses\nCreative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.\n Considerations for licensors: Our public licenses are\n intended for use by those authorized to give the public\n permission to use material in ways otherwise restricted by\n copyright and certain other rights. Our licenses are\n irrevocable. Licensors should read and understand the terms\n and conditions of the license they choose before applying it.\n Licensors should also secure all rights necessary before\n applying our licenses so that the public can reuse the\n material as expected. Licensors should clearly mark any\n material not subject to the license. This includes other CC-\n licensed material, or material used under an exception or\n limitation to copyright. More considerations for licensors:\nwiki.creativecommons.org/Considerations_for_licensors\n\n Considerations for the public: By using one of our public\n licenses, a licensor grants the public permission to use the\n licensed material under specified terms and conditions. If\n the licensor's permission is not necessary for any reason--for\n example, because of any applicable exception or limitation to\n copyright--then that use is not regulated by the license. Our\n licenses grant only permissions under copyright and certain\n other rights that a licensor has authority to grant. Use of\n the licensed material may still be restricted for other\n reasons, including because others have copyright or other\n rights in the material. A licensor may make special requests,\n such as asking that all changes be marked or described.\n Although not required by our licenses, you are encouraged to\n respect those requests where reasonable. More considerations\n for the public: \nwiki.creativecommons.org/Considerations_for_licensees\n=======================================================================\nCreative Commons Attribution 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\n\nreproduce and Share the Licensed Material, in whole or in part; and\nproduce, reproduce, and Share Adapted Material.\n\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)\n\nnever produces Adapted Material.\n\nDownstream recipients.\n\nOffer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nNo downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\n\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties.\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\n\nretain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nindicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nindicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\n\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\nIf You Share Adapted Material You produce, the Adapter’s License You apply must not prevent recipients of the Adapted Material from complying with this Public License.\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material; and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\nTO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES, COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n=======================================================================\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org.\n\n\n\nReuseCC BY-NC 4.0"
+  }
+]

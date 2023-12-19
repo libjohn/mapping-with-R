@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.514">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Mapping in R - Thematic Mapping with tmap</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./images/Rfun3.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet">
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./images/Rfun3.png" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Mapping in R</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./01_georeference.html"> 
+<span class="menu-text">Plot Coordinates</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./02_choropleth.html"> 
+<span class="menu-text">tidycensus</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-thematic-mapping" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Thematic Mapping</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-thematic-mapping">    
+        <li>
+    <a class="dropdown-item" href="./032_thematic_mapping_geom_sf.html">
+ <span class="dropdown-text">ggplot2 &amp; geom_sf</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./039_facet_example.html">
+ <span class="dropdown-text">ggplot2 &amp; facet mapping</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./031_thematic_mapping.html">
+ <span class="dropdown-text">tmap</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/libjohn/mapping-with-R"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-cdvs" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">CDVS</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-cdvs">    
+        <li>
+    <a class="dropdown-item" href="https://intro2R.library.duke.edu/">
+ <span class="dropdown-text">Rfun Home</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="https://library.duke.edu/data/">
+ <span class="dropdown-text">Cntr for Data &amp; Viz Sci</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#shapefiles-as-sf" id="toc-shapefiles-as-sf" class="nav-link active" data-scroll-target="#shapefiles-as-sf">Shapefiles as sf</a></li>
+  <li><a href="#data-structure" id="toc-data-structure" class="nav-link" data-scroll-target="#data-structure">Data Structure</a></li>
+  <li><a href="#sf-as-data-frame" id="toc-sf-as-data-frame" class="nav-link" data-scroll-target="#sf-as-data-frame">sf as data frame</a>
+  <ul class="collapse">
+  <li><a href="#quick-plotting" id="toc-quick-plotting" class="nav-link" data-scroll-target="#quick-plotting">Quick Plotting</a></li>
+  </ul></li>
+  <li><a href="#get-bls-data" id="toc-get-bls-data" class="nav-link" data-scroll-target="#get-bls-data">Get BLS data</a></li>
+  <li><a href="#wrangle-the-data" id="toc-wrangle-the-data" class="nav-link" data-scroll-target="#wrangle-the-data">Wrangle the data</a></li>
+  <li><a href="#join-data" id="toc-join-data" class="nav-link" data-scroll-target="#join-data">Join data</a></li>
+  <li><a href="#quick-thematic-map" id="toc-quick-thematic-map" class="nav-link" data-scroll-target="#quick-thematic-map">Quick Thematic Map</a></li>
+  <li><a href="#states" id="toc-states" class="nav-link" data-scroll-target="#states">50 states</a></li>
+  <li><a href="#make-choropleth" id="toc-make-choropleth" class="nav-link" data-scroll-target="#make-choropleth">Make Choropleth</a></li>
+  <li><a href="#projection" id="toc-projection" class="nav-link" data-scroll-target="#projection">Projection</a>
+  <ul class="collapse">
+  <li><a href="#alternative-syntax" id="toc-alternative-syntax" class="nav-link" data-scroll-target="#alternative-syntax">Alternative Syntax</a></li>
+  <li><a href="#explore-tmap-syntax-and-functions" id="toc-explore-tmap-syntax-and-functions" class="nav-link" data-scroll-target="#explore-tmap-syntax-and-functions">Explore <code>tmap</code> syntax and functions</a></li>
+  </ul></li>
+  <li><a href="#end-notes" id="toc-end-notes" class="nav-link" data-scroll-target="#end-notes">End Notes</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/libjohn/mapping-with-R/edit/main/031_thematic_mapping.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/libjohn/mapping-with-R/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Thematic Mapping with tmap</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)       <span class="co"># Tidyverse for Tidy Data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)            <span class="co"># Thematic Mapping</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmaptools) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigris)          <span class="co"># Get Census Geography Poloygons</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="shapefiles-as-sf" class="level2">
+<h2 class="anchored" data-anchor-id="shapefiles-as-sf">Shapefiles as sf</h2>
+<p>Using the <code>tigris</code> package, get Census Tiger shapefiles for census geographies. Tigris will return the shapefile in the <code>sf</code>, or simple features, format.</p>
+<pre><code>us_geo &lt;- tigris::states(class = "sf") </code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>us_geo <span class="ot">&lt;-</span> tigris<span class="sc">::</span><span class="fu">states</span>(<span class="at">class =</span> <span class="st">"sf"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-structure" class="level2">
+<h2 class="anchored" data-anchor-id="data-structure">Data Structure</h2>
+<p>The “Simple Features” (<code>sf</code>) data structure can easily be viewed and manipulated as a rectangular data frame, before visualizing. As an historical note – an <code>sf</code> predecessor – the <code>sp</code> data structure uses <code>@data</code> slots to hold data. We’ll focus on the <code>sf</code> package. Below are two methods of viewing the structure of the downloaded shapefiles.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(us_geo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "sf"         "data.frame"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(us_geo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 56
+Columns: 15
+$ REGION   &lt;chr&gt; "3", "3", "2", "2", "3", "1", "4", "1", "3", "1", "1", "3", "…
+$ DIVISION &lt;chr&gt; "5", "5", "3", "4", "5", "1", "8", "1", "5", "1", "1", "5", "…
+$ STATEFP  &lt;chr&gt; "54", "12", "17", "27", "24", "44", "16", "33", "37", "50", "…
+$ STATENS  &lt;chr&gt; "01779805", "00294478", "01779784", "00662849", "01714934", "…
+$ GEOID    &lt;chr&gt; "54", "12", "17", "27", "24", "44", "16", "33", "37", "50", "…
+$ STUSPS   &lt;chr&gt; "WV", "FL", "IL", "MN", "MD", "RI", "ID", "NH", "NC", "VT", "…
+$ NAME     &lt;chr&gt; "West Virginia", "Florida", "Illinois", "Minnesota", "Marylan…
+$ LSAD     &lt;chr&gt; "00", "00", "00", "00", "00", "00", "00", "00", "00", "00", "…
+$ MTFCC    &lt;chr&gt; "G4000", "G4000", "G4000", "G4000", "G4000", "G4000", "G4000"…
+$ FUNCSTAT &lt;chr&gt; "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "…
+$ ALAND    &lt;dbl&gt; 62266298634, 138961722096, 143778561906, 206232627084, 251519…
+$ AWATER   &lt;dbl&gt; 489204185, 45972570361, 6216493488, 18949394733, 6979074857, …
+$ INTPTLAT &lt;chr&gt; "+38.6472854", "+28.3989775", "+40.1028754", "+46.3159573", "…
+$ INTPTLON &lt;chr&gt; "-080.6183274", "-082.5143005", "-089.1526108", "-094.1996043…
+$ geometry &lt;MULTIPOLYGON [°]&gt; MULTIPOLYGON (((-80.85847 3..., MULTIPOLYGON (((…</code></pre>
+</div>
+</div>
+</section>
+<section id="sf-as-data-frame" class="level2">
+<h2 class="anchored" data-anchor-id="sf-as-data-frame">sf as data frame</h2>
+<p>And as noted, here’s the data frame view. Notice the geometry (polygon shape) in the far-right column of the data frame.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(us_geo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["REGION"],"name":[1],"type":["chr"],"align":["left"]},{"label":["DIVISION"],"name":[2],"type":["chr"],"align":["left"]},{"label":["STATEFP"],"name":[3],"type":["chr"],"align":["left"]},{"label":["STATENS"],"name":[4],"type":["chr"],"align":["left"]},{"label":["GEOID"],"name":[5],"type":["chr"],"align":["left"]},{"label":["STUSPS"],"name":[6],"type":["chr"],"align":["left"]},{"label":["NAME"],"name":[7],"type":["chr"],"align":["left"]},{"label":["LSAD"],"name":[8],"type":["chr"],"align":["left"]},{"label":["MTFCC"],"name":[9],"type":["chr"],"align":["left"]},{"label":["FUNCSTAT"],"name":[10],"type":["chr"],"align":["left"]},{"label":["ALAND"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["AWATER"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["INTPTLAT"],"name":[13],"type":["chr"],"align":["left"]},{"label":["INTPTLON"],"name":[14],"type":["chr"],"align":["left"]},{"label":["geometry"],"name":[15],"type":["s_MULTIP"],"align":["right"]}],"data":[{"1":"3","2":"5","3":"54","4":"01779805","5":"54","6":"WV","7":"West Virginia","8":"00","9":"G4000","10":"A","11":"6.226630e+10","12":"489204185","13":"+38.6472854","14":"-080.6183274","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"12","4":"00294478","5":"12","6":"FL","7":"Florida","8":"00","9":"G4000","10":"A","11":"1.389617e+11","12":"45972570361","13":"+28.3989775","14":"-082.5143005","15":"<s_MULTIP>"},{"1":"2","2":"3","3":"17","4":"01779784","5":"17","6":"IL","7":"Illinois","8":"00","9":"G4000","10":"A","11":"1.437786e+11","12":"6216493488","13":"+40.1028754","14":"-089.1526108","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"27","4":"00662849","5":"27","6":"MN","7":"Minnesota","8":"00","9":"G4000","10":"A","11":"2.062326e+11","12":"18949394733","13":"+46.3159573","14":"-094.1996043","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"24","4":"01714934","5":"24","6":"MD","7":"Maryland","8":"00","9":"G4000","10":"A","11":"2.515199e+10","12":"6979074857","13":"+38.9466584","14":"-076.6744939","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"44","4":"01219835","5":"44","6":"RI","7":"Rhode Island","8":"00","9":"G4000","10":"A","11":"2.677763e+09","12":"1323686988","13":"+41.5964850","14":"-071.5264901","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"16","4":"01779783","5":"16","6":"ID","7":"Idaho","8":"00","9":"G4000","10":"A","11":"2.140499e+11","12":"2391569647","13":"+44.3484222","14":"-114.5588538","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"33","4":"01779794","5":"33","6":"NH","7":"New Hampshire","8":"00","9":"G4000","10":"A","11":"2.319012e+10","12":"1025971768","13":"+43.6726907","14":"-071.5843145","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"37","4":"01027616","5":"37","6":"NC","7":"North Carolina","8":"00","9":"G4000","10":"A","11":"1.259333e+11","12":"13456093195","13":"+35.5397100","14":"-079.1308636","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"50","4":"01779802","5":"50","6":"VT","7":"Vermont","8":"00","9":"G4000","10":"A","11":"2.387257e+10","12":"1030754609","13":"+44.0589536","14":"-072.6710173","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"09","4":"01779780","5":"09","6":"CT","7":"Connecticut","8":"00","9":"G4000","10":"A","11":"1.254169e+10","12":"1816424193","13":"+41.5798637","14":"-072.7466572","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"10","4":"01779781","5":"10","6":"DE","7":"Delaware","8":"00","9":"G4000","10":"A","11":"5.046732e+09","12":"1399179670","13":"+38.9985661","14":"-075.4416440","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"35","4":"00897535","5":"35","6":"NM","7":"New Mexico","8":"00","9":"G4000","10":"A","11":"3.141986e+11","12":"726482113","13":"+34.4346843","14":"-106.1316181","15":"<s_MULTIP>"},{"1":"4","2":"9","3":"06","4":"01779778","5":"06","6":"CA","7":"California","8":"00","9":"G4000","10":"A","11":"4.036718e+11","12":"20293573058","13":"+37.1551773","14":"-119.5434183","15":"<s_MULTIP>"},{"1":"1","2":"2","3":"34","4":"01779795","5":"34","6":"NJ","7":"New Jersey","8":"00","9":"G4000","10":"A","11":"1.904892e+10","12":"3533083369","13":"+40.1072744","14":"-074.6652012","15":"<s_MULTIP>"},{"1":"2","2":"3","3":"55","4":"01779806","5":"55","6":"WI","7":"Wisconsin","8":"00","9":"G4000","10":"A","11":"1.402923e+11","12":"29343646672","13":"+44.6309071","14":"-089.7093916","15":"<s_MULTIP>"},{"1":"4","2":"9","3":"41","4":"01155107","5":"41","6":"OR","7":"Oregon","8":"00","9":"G4000","10":"A","11":"2.486284e+11","12":"6170965739","13":"+43.9717125","14":"-120.6229578","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"31","4":"01779792","5":"31","6":"NE","7":"Nebraska","8":"00","9":"G4000","10":"A","11":"1.989574e+11","12":"1371105730","13":"+41.5433053","14":"-099.8118646","15":"<s_MULTIP>"},{"1":"1","2":"2","3":"42","4":"01779798","5":"42","6":"PA","7":"Pennsylvania","8":"00","9":"G4000","10":"A","11":"1.158818e+11","12":"3397909903","13":"+40.9046013","14":"-077.8275298","15":"<s_MULTIP>"},{"1":"4","2":"9","3":"53","4":"01779804","5":"53","6":"WA","7":"Washington","8":"00","9":"G4000","10":"A","11":"1.721190e+11","12":"12548738684","13":"+47.4073238","14":"-120.5757999","15":"<s_MULTIP>"},{"1":"3","2":"7","3":"22","4":"01629543","5":"22","6":"LA","7":"Louisiana","8":"00","9":"G4000","10":"A","11":"1.119153e+11","12":"23736382213","13":"+30.8634368","14":"-091.7987173","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"13","4":"01705317","5":"13","6":"GA","7":"Georgia","8":"00","9":"G4000","10":"A","11":"1.494866e+11","12":"4418360134","13":"+32.6295789","14":"-083.4235109","15":"<s_MULTIP>"},{"1":"3","2":"6","3":"01","4":"01779775","5":"01","6":"AL","7":"Alabama","8":"00","9":"G4000","10":"A","11":"1.311755e+11","12":"4591897964","13":"+32.7396323","14":"-086.8434593","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"49","4":"01455989","5":"49","6":"UT","7":"Utah","8":"00","9":"G4000","10":"A","11":"2.133551e+11","12":"6529973239","13":"+39.3349925","14":"-111.6563326","15":"<s_MULTIP>"},{"1":"2","2":"3","3":"39","4":"01085497","5":"39","6":"OH","7":"Ohio","8":"00","9":"G4000","10":"A","11":"1.058237e+11","12":"10274702852","13":"+40.4149297","14":"-082.7119975","15":"<s_MULTIP>"},{"1":"3","2":"7","3":"48","4":"01779801","5":"48","6":"TX","7":"Texas","8":"00","9":"G4000","10":"A","11":"6.766816e+11","12":"18978390713","13":"+31.4347032","14":"-099.2818238","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"08","4":"01779779","5":"08","6":"CO","7":"Colorado","8":"00","9":"G4000","10":"A","11":"2.684188e+11","12":"1185716938","13":"+38.9937669","14":"-105.5087122","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"45","4":"01779799","5":"45","6":"SC","7":"South Carolina","8":"00","9":"G4000","10":"A","11":"7.786620e+10","12":"5074243221","13":"+33.8741776","14":"-080.8542639","15":"<s_MULTIP>"},{"1":"3","2":"7","3":"40","4":"01102857","5":"40","6":"OK","7":"Oklahoma","8":"00","9":"G4000","10":"A","11":"1.776642e+11","12":"3373725677","13":"+35.5900815","14":"-097.4867789","15":"<s_MULTIP>"},{"1":"3","2":"6","3":"47","4":"01325873","5":"47","6":"TN","7":"Tennessee","8":"00","9":"G4000","10":"A","11":"1.067920e+11","12":"2322601737","13":"+35.8584600","14":"-086.3496339","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"56","4":"01779807","5":"56","6":"WY","7":"Wyoming","8":"00","9":"G4000","10":"A","11":"2.514587e+11","12":"1867503716","13":"+42.9896591","14":"-107.5443922","15":"<s_MULTIP>"},{"1":"4","2":"9","3":"15","4":"01779782","5":"15","6":"HI","7":"Hawaii","8":"00","9":"G4000","10":"A","11":"1.663415e+10","12":"11777652105","13":"+19.8281671","14":"-155.4950421","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"38","4":"01779797","5":"38","6":"ND","7":"North Dakota","8":"00","9":"G4000","10":"A","11":"1.786943e+11","12":"4414779956","13":"+47.4421740","14":"-100.4608258","15":"<s_MULTIP>"},{"1":"3","2":"6","3":"21","4":"01779786","5":"21","6":"KY","7":"Kentucky","8":"00","9":"G4000","10":"A","11":"1.022830e+11","12":"2367816964","13":"+37.5336844","14":"-085.2929801","15":"<s_MULTIP>"},{"1":"9","2":"0","3":"78","4":"01802710","5":"78","6":"VI","7":"United States Virgin Islands","8":"00","9":"G4000","10":"A","11":"3.480219e+08","12":"1550236187","13":"+18.3392359","14":"-064.9500433","15":"<s_MULTIP>"},{"1":"9","2":"0","3":"69","4":"01779809","5":"69","6":"MP","7":"Commonwealth of the Northern Mariana Islands","8":"00","9":"G4000","10":"A","11":"4.722925e+08","12":"4644252458","13":"+15.0010865","14":"+145.6181702","15":"<s_MULTIP>"},{"1":"9","2":"0","3":"66","4":"01802705","5":"66","6":"GU","7":"Guam","8":"00","9":"G4000","10":"A","11":"5.435558e+08","12":"934337453","13":"+13.4417451","14":"+144.7719021","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"23","4":"01779787","5":"23","6":"ME","7":"Maine","8":"00","9":"G4000","10":"A","11":"7.988826e+10","12":"11745102727","13":"+45.4092843","14":"-068.6666160","15":"<s_MULTIP>"},{"1":"1","2":"2","3":"36","4":"01779796","5":"36","6":"NY","7":"New York","8":"00","9":"G4000","10":"A","11":"1.220491e+11","12":"19257128505","13":"+42.9133974","14":"-075.5962723","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"32","4":"01779793","5":"32","6":"NV","7":"Nevada","8":"00","9":"G4000","10":"A","11":"2.845373e+11","12":"1839636284","13":"+39.3310928","14":"-116.6151469","15":"<s_MULTIP>"},{"1":"4","2":"9","3":"02","4":"01785533","5":"02","6":"AK","7":"Alaska","8":"00","9":"G4000","10":"A","11":"1.478943e+12","12":"245378425142","13":"+63.3473560","14":"-152.8397334","15":"<s_MULTIP>"},{"1":"9","2":"0","3":"60","4":"01802701","5":"60","6":"AS","7":"American Samoa","8":"00","9":"G4000","10":"A","11":"1.977591e+08","12":"1307243751","13":"-14.2671590","14":"-170.6682674","15":"<s_MULTIP>"},{"1":"2","2":"3","3":"26","4":"01779789","5":"26","6":"MI","7":"Michigan","8":"00","9":"G4000","10":"A","11":"1.466149e+11","12":"103871870536","13":"+44.8441768","14":"-085.6604907","15":"<s_MULTIP>"},{"1":"3","2":"7","3":"05","4":"00068085","5":"05","6":"AR","7":"Arkansas","8":"00","9":"G4000","10":"A","11":"1.346608e+11","12":"3121950081","13":"+34.8955256","14":"-092.4446262","15":"<s_MULTIP>"},{"1":"3","2":"6","3":"28","4":"01779790","5":"28","6":"MS","7":"Mississippi","8":"00","9":"G4000","10":"A","11":"1.215339e+11","12":"3914344129","13":"+32.6864714","14":"-089.6561377","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"29","4":"01779791","5":"29","6":"MO","7":"Missouri","8":"00","9":"G4000","10":"A","11":"1.780523e+11","12":"2487445715","13":"+38.3507500","14":"-092.4567826","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"30","4":"00767982","5":"30","6":"MT","7":"Montana","8":"00","9":"G4000","10":"A","11":"3.769737e+11","12":"3866634365","13":"+47.0511770","14":"-109.6348174","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"20","4":"00481813","5":"20","6":"KS","7":"Kansas","8":"00","9":"G4000","10":"A","11":"2.117537e+11","12":"1345767737","13":"+38.4985464","14":"-098.3834298","15":"<s_MULTIP>"},{"1":"2","2":"3","3":"18","4":"00448508","5":"18","6":"IN","7":"Indiana","8":"00","9":"G4000","10":"A","11":"9.278936e+10","12":"1541248299","13":"+39.9013136","14":"-086.2919129","15":"<s_MULTIP>"},{"1":"9","2":"0","3":"72","4":"01779808","5":"72","6":"PR","7":"Puerto Rico","8":"00","9":"G4000","10":"A","11":"8.869136e+09","12":"4922143005","13":"+18.2176480","14":"-066.4107992","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"46","4":"01785534","5":"46","6":"SD","7":"South Dakota","8":"00","9":"G4000","10":"A","11":"1.963429e+11","12":"3386737669","13":"+44.4467957","14":"-100.2381762","15":"<s_MULTIP>"},{"1":"1","2":"1","3":"25","4":"00606926","5":"25","6":"MA","7":"Massachusetts","8":"00","9":"G4000","10":"A","11":"2.020439e+10","12":"7130660432","13":"+42.1565196","14":"-071.4895915","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"51","4":"01779803","5":"51","6":"VA","7":"Virginia","8":"00","9":"G4000","10":"A","11":"1.022582e+11","12":"8528040726","13":"+37.5222512","14":"-078.6681938","15":"<s_MULTIP>"},{"1":"3","2":"5","3":"11","4":"01702382","5":"11","6":"DC","7":"District of Columbia","8":"00","9":"G4000","10":"A","11":"1.583161e+08","12":"18709762","13":"+38.9042474","14":"-077.0165167","15":"<s_MULTIP>"},{"1":"2","2":"4","3":"19","4":"01779785","5":"19","6":"IA","7":"Iowa","8":"00","9":"G4000","10":"A","11":"1.446597e+11","12":"1085964740","13":"+42.0700243","14":"-093.4933473","15":"<s_MULTIP>"},{"1":"4","2":"8","3":"04","4":"01779777","5":"04","6":"AZ","7":"Arizona","8":"00","9":"G4000","10":"A","11":"2.943640e+11","12":"855871553","13":"+34.2039362","14":"-111.6063449","15":"<s_MULTIP>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<section id="quick-plotting" class="level3">
+<h3 class="anchored" data-anchor-id="quick-plotting">Quick Plotting</h3>
+<p>If you want to see a very quick view of your mapping data, you can plot the geometry data with the <code>plot</code> function. In this case we use the <code>sf::st_geometry()</code> function to plot only the geometry. You can quickly generate a faceted map by excluding the <code>st_geometry</code> function: e.g.&nbsp;<code>plot(us_geo)</code> but that will consume computation cycles (i.e.&nbsp;wait time). Therefore, I recommend trying the smaller layer for now.</p>
+<blockquote class="blockquote">
+<p><strong>Note:</strong> Census geography for the USA will span the globe in part becuase Region 9 includes a multitude of pacific islands. Later we will limit to simply the “lower 48” states.</p>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">st_geometry</span>(us_geo))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="031_thematic_mapping_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="get-bls-data" class="level2">
+<h2 class="anchored" data-anchor-id="get-bls-data">Get BLS data</h2>
+<p>I’ve already downloaded and stored some data from the Bureau of Labor Statistics. Those data are stored in an excel file in the <code>data</code> directory of the <a href="https://github.com/libjohn/mapping-with-R">repository</a>: <code>data/OES_Report.xlsx</code>. <strong>The goal is to attach this data to the previously downloaded shapefiles.</strong></p>
+<p>But you may be interested in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.</p>
+<p>https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographical%20areas</p>
+<ul>
+<li><p>One occupation for multiple geographical areas</p>
+<ul>
+<li><p>Mental Health and Substance Abuse Social Workers</p>
+<ul>
+<li><p>State</p></li>
+<li><p>All States in this list</p></li>
+<li><p>Annual Mean wage</p>
+<ul>
+<li>Excel</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li><p>Read the Data in with the RStudio “Import Dataset” wizard available in the <em>Environment</em> tab. This will generate the code below and ensure the import</p>
+<ul>
+<li>Skips the first 4 lines</li>
+<li>Coerces the 2nd column to numeric</li>
+</ul></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>Salary4Helpers <span class="ot">&lt;-</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">read_excel</span>(<span class="st">"data/OES_Report.xlsx"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">col_types =</span> <span class="fu">c</span>(<span class="st">"text"</span>, <span class="st">"numeric"</span>), </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">skip =</span> <span class="dv">4</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>Salary4Helpers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["Area Name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Annual mean wage(2)"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"Alabama(0100000)","2":"38080"},{"1":"Alaska(0200000)","2":"46050"},{"1":"Arizona(0400000)","2":"34560"},{"1":"Arkansas(0500000)","2":"40480"},{"1":"California(0600000)","2":"64320"},{"1":"Colorado(0800000)","2":"43480"},{"1":"Connecticut(0900000)","2":"60450"},{"1":"Delaware(1000000)","2":"54450"},{"1":"District of Columbia(1100000)","2":"57210"},{"1":"Florida(1200000)","2":"43410"},{"1":"Georgia(1300000)","2":"52750"},{"1":"Guam(6600000)","2":"40080"},{"1":"Hawaii(1500000)","2":"57290"},{"1":"Idaho(1600000)","2":"39580"},{"1":"Illinois(1700000)","2":"53240"},{"1":"Indiana(1800000)","2":"42100"},{"1":"Iowa(1900000)","2":"45380"},{"1":"Kansas(2000000)","2":"41050"},{"1":"Kentucky(2100000)","2":"38130"},{"1":"Louisiana(2200000)","2":"37270"},{"1":"Maine(2300000)","2":"59360"},{"1":"Maryland(2400000)","2":"47560"},{"1":"Massachusetts(2500000)","2":"44960"},{"1":"Michigan(2600000)","2":"49420"},{"1":"Minnesota(2700000)","2":"49310"},{"1":"Mississippi(2800000)","2":"34880"},{"1":"Missouri(2900000)","2":"35510"},{"1":"Montana(3000000)","2":"37710"},{"1":"Nebraska(3100000)","2":"36620"},{"1":"Nevada(3200000)","2":"57460"},{"1":"New Hampshire(3300000)","2":"51320"},{"1":"New Jersey(3400000)","2":"71600"},{"1":"New Mexico(3500000)","2":"37420"},{"1":"New York(3600000)","2":"56430"},{"1":"North Carolina(3700000)","2":"46490"},{"1":"North Dakota(3800000)","2":"50270"},{"1":"Ohio(3900000)","2":"41190"},{"1":"Oklahoma(4000000)","2":"35430"},{"1":"Oregon(4100000)","2":"46330"},{"1":"Pennsylvania(4200000)","2":"37600"},{"1":"Puerto Rico(7200000)","2":"23050"},{"1":"Rhode Island(4400000)","2":"47420"},{"1":"South Carolina(4500000)","2":"34680"},{"1":"South Dakota(4600000)","2":"36980"},{"1":"Tennessee(4700000)","2":"35540"},{"1":"Texas(4800000)","2":"42790"},{"1":"Utah(4900000)","2":"47140"},{"1":"Vermont(5000000)","2":"40150"},{"1":"Virginia(5100000)","2":"49250"},{"1":"Washington(5300000)","2":"51980"},{"1":"West Virginia(5400000)","2":"30920"},{"1":"Wisconsin(5500000)","2":"46220"},{"1":"Wyoming(5600000)","2":"56110"},{"1":"NA","2":"NA"},{"1":"(2)Annual wages have been calculated by multiplying the hourly mean wage by 2,080 hours.","2":"NA"},{"1":"NA","2":"NA"},{"1":"SOC code: Standard Occupational Classification code -- see http://www.bls.gov/soc/home.htm","2":"NA"},{"1":"Date extracted on :Sep 25, 2017","2":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="wrangle-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="wrangle-the-data">Wrangle the data</h2>
+<p>Before we join the BLS data to the shapefile we need to transform the structure of the downloaded BLS data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>BlsWage_ToJoin <span class="ot">&lt;-</span> Salary4Helpers <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Area =</span> <span class="st">"Area Name"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">wages =</span> <span class="st">"Annual mean wage(2)"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">State =</span> <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">(</span><span class="sc">\\</span><span class="st">d{7}</span><span class="sc">\\</span><span class="st">)"</span>, <span class="st">""</span>, Area)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(wages <span class="sc">!=</span> <span class="st">"NA_character_"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(State, wages)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#BlsWage_ToJoin</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="join-data" class="level2">
+<h2 class="anchored" data-anchor-id="join-data">Join data</h2>
+<p>Use the <code>dplyr::left_join()</code> function or the base-R <code>merge()</code> function to append BLS data to the previously loaded shape object</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>HelperShapeObject <span class="ot">&lt;-</span> <span class="fu">left_join</span>(us_geo, BlsWage_ToJoin, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"NAME"</span> <span class="ot">=</span> <span class="st">"State"</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(HelperShapeObject)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div data-pagedtable="false">
+  <script data-pagedtable-source="" type="application/json">
+{"columns":[{"label":["REGION"],"name":[1],"type":["chr"],"align":["left"]},{"label":["DIVISION"],"name":[2],"type":["chr"],"align":["left"]},{"label":["STATEFP"],"name":[3],"type":["chr"],"align":["left"]},{"label":["STATENS"],"name":[4],"type":["chr"],"align":["left"]},{"label":["GEOID"],"name":[5],"type":["chr"],"align":["left"]},{"label":["STUSPS"],"name":[6],"type":["chr"],"align":["left"]},{"label":["NAME"],"name":[7],"type":["chr"],"align":["left"]},{"label":["LSAD"],"name":[8],"type":["chr"],"align":["left"]},{"label":["MTFCC"],"name":[9],"type":["chr"],"align":["left"]},{"label":["FUNCSTAT"],"name":[10],"type":["chr"],"align":["left"]},{"label":["ALAND"],"name":[11],"type":["dbl"],"align":["right"]},{"label":["AWATER"],"name":[12],"type":["dbl"],"align":["right"]},{"label":["INTPTLAT"],"name":[13],"type":["chr"],"align":["left"]},{"label":["INTPTLON"],"name":[14],"type":["chr"],"align":["left"]},{"label":["wages"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["geometry"],"name":[16],"type":["s_MULTIP"],"align":["right"]}],"data":[{"1":"3","2":"5","3":"54","4":"01779805","5":"54","6":"WV","7":"West Virginia","8":"00","9":"G4000","10":"A","11":"6.226630e+10","12":"489204185","13":"+38.6472854","14":"-080.6183274","15":"30920","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"12","4":"00294478","5":"12","6":"FL","7":"Florida","8":"00","9":"G4000","10":"A","11":"1.389617e+11","12":"45972570361","13":"+28.3989775","14":"-082.5143005","15":"43410","16":"<s_MULTIP>"},{"1":"2","2":"3","3":"17","4":"01779784","5":"17","6":"IL","7":"Illinois","8":"00","9":"G4000","10":"A","11":"1.437786e+11","12":"6216493488","13":"+40.1028754","14":"-089.1526108","15":"53240","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"27","4":"00662849","5":"27","6":"MN","7":"Minnesota","8":"00","9":"G4000","10":"A","11":"2.062326e+11","12":"18949394733","13":"+46.3159573","14":"-094.1996043","15":"49310","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"24","4":"01714934","5":"24","6":"MD","7":"Maryland","8":"00","9":"G4000","10":"A","11":"2.515199e+10","12":"6979074857","13":"+38.9466584","14":"-076.6744939","15":"47560","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"44","4":"01219835","5":"44","6":"RI","7":"Rhode Island","8":"00","9":"G4000","10":"A","11":"2.677763e+09","12":"1323686988","13":"+41.5964850","14":"-071.5264901","15":"47420","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"16","4":"01779783","5":"16","6":"ID","7":"Idaho","8":"00","9":"G4000","10":"A","11":"2.140499e+11","12":"2391569647","13":"+44.3484222","14":"-114.5588538","15":"39580","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"33","4":"01779794","5":"33","6":"NH","7":"New Hampshire","8":"00","9":"G4000","10":"A","11":"2.319012e+10","12":"1025971768","13":"+43.6726907","14":"-071.5843145","15":"51320","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"37","4":"01027616","5":"37","6":"NC","7":"North Carolina","8":"00","9":"G4000","10":"A","11":"1.259333e+11","12":"13456093195","13":"+35.5397100","14":"-079.1308636","15":"46490","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"50","4":"01779802","5":"50","6":"VT","7":"Vermont","8":"00","9":"G4000","10":"A","11":"2.387257e+10","12":"1030754609","13":"+44.0589536","14":"-072.6710173","15":"40150","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"09","4":"01779780","5":"09","6":"CT","7":"Connecticut","8":"00","9":"G4000","10":"A","11":"1.254169e+10","12":"1816424193","13":"+41.5798637","14":"-072.7466572","15":"60450","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"10","4":"01779781","5":"10","6":"DE","7":"Delaware","8":"00","9":"G4000","10":"A","11":"5.046732e+09","12":"1399179670","13":"+38.9985661","14":"-075.4416440","15":"54450","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"35","4":"00897535","5":"35","6":"NM","7":"New Mexico","8":"00","9":"G4000","10":"A","11":"3.141986e+11","12":"726482113","13":"+34.4346843","14":"-106.1316181","15":"37420","16":"<s_MULTIP>"},{"1":"4","2":"9","3":"06","4":"01779778","5":"06","6":"CA","7":"California","8":"00","9":"G4000","10":"A","11":"4.036718e+11","12":"20293573058","13":"+37.1551773","14":"-119.5434183","15":"64320","16":"<s_MULTIP>"},{"1":"1","2":"2","3":"34","4":"01779795","5":"34","6":"NJ","7":"New Jersey","8":"00","9":"G4000","10":"A","11":"1.904892e+10","12":"3533083369","13":"+40.1072744","14":"-074.6652012","15":"71600","16":"<s_MULTIP>"},{"1":"2","2":"3","3":"55","4":"01779806","5":"55","6":"WI","7":"Wisconsin","8":"00","9":"G4000","10":"A","11":"1.402923e+11","12":"29343646672","13":"+44.6309071","14":"-089.7093916","15":"46220","16":"<s_MULTIP>"},{"1":"4","2":"9","3":"41","4":"01155107","5":"41","6":"OR","7":"Oregon","8":"00","9":"G4000","10":"A","11":"2.486284e+11","12":"6170965739","13":"+43.9717125","14":"-120.6229578","15":"46330","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"31","4":"01779792","5":"31","6":"NE","7":"Nebraska","8":"00","9":"G4000","10":"A","11":"1.989574e+11","12":"1371105730","13":"+41.5433053","14":"-099.8118646","15":"36620","16":"<s_MULTIP>"},{"1":"1","2":"2","3":"42","4":"01779798","5":"42","6":"PA","7":"Pennsylvania","8":"00","9":"G4000","10":"A","11":"1.158818e+11","12":"3397909903","13":"+40.9046013","14":"-077.8275298","15":"37600","16":"<s_MULTIP>"},{"1":"4","2":"9","3":"53","4":"01779804","5":"53","6":"WA","7":"Washington","8":"00","9":"G4000","10":"A","11":"1.721190e+11","12":"12548738684","13":"+47.4073238","14":"-120.5757999","15":"51980","16":"<s_MULTIP>"},{"1":"3","2":"7","3":"22","4":"01629543","5":"22","6":"LA","7":"Louisiana","8":"00","9":"G4000","10":"A","11":"1.119153e+11","12":"23736382213","13":"+30.8634368","14":"-091.7987173","15":"37270","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"13","4":"01705317","5":"13","6":"GA","7":"Georgia","8":"00","9":"G4000","10":"A","11":"1.494866e+11","12":"4418360134","13":"+32.6295789","14":"-083.4235109","15":"52750","16":"<s_MULTIP>"},{"1":"3","2":"6","3":"01","4":"01779775","5":"01","6":"AL","7":"Alabama","8":"00","9":"G4000","10":"A","11":"1.311755e+11","12":"4591897964","13":"+32.7396323","14":"-086.8434593","15":"38080","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"49","4":"01455989","5":"49","6":"UT","7":"Utah","8":"00","9":"G4000","10":"A","11":"2.133551e+11","12":"6529973239","13":"+39.3349925","14":"-111.6563326","15":"47140","16":"<s_MULTIP>"},{"1":"2","2":"3","3":"39","4":"01085497","5":"39","6":"OH","7":"Ohio","8":"00","9":"G4000","10":"A","11":"1.058237e+11","12":"10274702852","13":"+40.4149297","14":"-082.7119975","15":"41190","16":"<s_MULTIP>"},{"1":"3","2":"7","3":"48","4":"01779801","5":"48","6":"TX","7":"Texas","8":"00","9":"G4000","10":"A","11":"6.766816e+11","12":"18978390713","13":"+31.4347032","14":"-099.2818238","15":"42790","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"08","4":"01779779","5":"08","6":"CO","7":"Colorado","8":"00","9":"G4000","10":"A","11":"2.684188e+11","12":"1185716938","13":"+38.9937669","14":"-105.5087122","15":"43480","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"45","4":"01779799","5":"45","6":"SC","7":"South Carolina","8":"00","9":"G4000","10":"A","11":"7.786620e+10","12":"5074243221","13":"+33.8741776","14":"-080.8542639","15":"34680","16":"<s_MULTIP>"},{"1":"3","2":"7","3":"40","4":"01102857","5":"40","6":"OK","7":"Oklahoma","8":"00","9":"G4000","10":"A","11":"1.776642e+11","12":"3373725677","13":"+35.5900815","14":"-097.4867789","15":"35430","16":"<s_MULTIP>"},{"1":"3","2":"6","3":"47","4":"01325873","5":"47","6":"TN","7":"Tennessee","8":"00","9":"G4000","10":"A","11":"1.067920e+11","12":"2322601737","13":"+35.8584600","14":"-086.3496339","15":"35540","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"56","4":"01779807","5":"56","6":"WY","7":"Wyoming","8":"00","9":"G4000","10":"A","11":"2.514587e+11","12":"1867503716","13":"+42.9896591","14":"-107.5443922","15":"56110","16":"<s_MULTIP>"},{"1":"4","2":"9","3":"15","4":"01779782","5":"15","6":"HI","7":"Hawaii","8":"00","9":"G4000","10":"A","11":"1.663415e+10","12":"11777652105","13":"+19.8281671","14":"-155.4950421","15":"57290","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"38","4":"01779797","5":"38","6":"ND","7":"North Dakota","8":"00","9":"G4000","10":"A","11":"1.786943e+11","12":"4414779956","13":"+47.4421740","14":"-100.4608258","15":"50270","16":"<s_MULTIP>"},{"1":"3","2":"6","3":"21","4":"01779786","5":"21","6":"KY","7":"Kentucky","8":"00","9":"G4000","10":"A","11":"1.022830e+11","12":"2367816964","13":"+37.5336844","14":"-085.2929801","15":"38130","16":"<s_MULTIP>"},{"1":"9","2":"0","3":"78","4":"01802710","5":"78","6":"VI","7":"United States Virgin Islands","8":"00","9":"G4000","10":"A","11":"3.480219e+08","12":"1550236187","13":"+18.3392359","14":"-064.9500433","15":"NA","16":"<s_MULTIP>"},{"1":"9","2":"0","3":"69","4":"01779809","5":"69","6":"MP","7":"Commonwealth of the Northern Mariana Islands","8":"00","9":"G4000","10":"A","11":"4.722925e+08","12":"4644252458","13":"+15.0010865","14":"+145.6181702","15":"NA","16":"<s_MULTIP>"},{"1":"9","2":"0","3":"66","4":"01802705","5":"66","6":"GU","7":"Guam","8":"00","9":"G4000","10":"A","11":"5.435558e+08","12":"934337453","13":"+13.4417451","14":"+144.7719021","15":"40080","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"23","4":"01779787","5":"23","6":"ME","7":"Maine","8":"00","9":"G4000","10":"A","11":"7.988826e+10","12":"11745102727","13":"+45.4092843","14":"-068.6666160","15":"59360","16":"<s_MULTIP>"},{"1":"1","2":"2","3":"36","4":"01779796","5":"36","6":"NY","7":"New York","8":"00","9":"G4000","10":"A","11":"1.220491e+11","12":"19257128505","13":"+42.9133974","14":"-075.5962723","15":"56430","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"32","4":"01779793","5":"32","6":"NV","7":"Nevada","8":"00","9":"G4000","10":"A","11":"2.845373e+11","12":"1839636284","13":"+39.3310928","14":"-116.6151469","15":"57460","16":"<s_MULTIP>"},{"1":"4","2":"9","3":"02","4":"01785533","5":"02","6":"AK","7":"Alaska","8":"00","9":"G4000","10":"A","11":"1.478943e+12","12":"245378425142","13":"+63.3473560","14":"-152.8397334","15":"46050","16":"<s_MULTIP>"},{"1":"9","2":"0","3":"60","4":"01802701","5":"60","6":"AS","7":"American Samoa","8":"00","9":"G4000","10":"A","11":"1.977591e+08","12":"1307243751","13":"-14.2671590","14":"-170.6682674","15":"NA","16":"<s_MULTIP>"},{"1":"2","2":"3","3":"26","4":"01779789","5":"26","6":"MI","7":"Michigan","8":"00","9":"G4000","10":"A","11":"1.466149e+11","12":"103871870536","13":"+44.8441768","14":"-085.6604907","15":"49420","16":"<s_MULTIP>"},{"1":"3","2":"7","3":"05","4":"00068085","5":"05","6":"AR","7":"Arkansas","8":"00","9":"G4000","10":"A","11":"1.346608e+11","12":"3121950081","13":"+34.8955256","14":"-092.4446262","15":"40480","16":"<s_MULTIP>"},{"1":"3","2":"6","3":"28","4":"01779790","5":"28","6":"MS","7":"Mississippi","8":"00","9":"G4000","10":"A","11":"1.215339e+11","12":"3914344129","13":"+32.6864714","14":"-089.6561377","15":"34880","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"29","4":"01779791","5":"29","6":"MO","7":"Missouri","8":"00","9":"G4000","10":"A","11":"1.780523e+11","12":"2487445715","13":"+38.3507500","14":"-092.4567826","15":"35510","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"30","4":"00767982","5":"30","6":"MT","7":"Montana","8":"00","9":"G4000","10":"A","11":"3.769737e+11","12":"3866634365","13":"+47.0511770","14":"-109.6348174","15":"37710","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"20","4":"00481813","5":"20","6":"KS","7":"Kansas","8":"00","9":"G4000","10":"A","11":"2.117537e+11","12":"1345767737","13":"+38.4985464","14":"-098.3834298","15":"41050","16":"<s_MULTIP>"},{"1":"2","2":"3","3":"18","4":"00448508","5":"18","6":"IN","7":"Indiana","8":"00","9":"G4000","10":"A","11":"9.278936e+10","12":"1541248299","13":"+39.9013136","14":"-086.2919129","15":"42100","16":"<s_MULTIP>"},{"1":"9","2":"0","3":"72","4":"01779808","5":"72","6":"PR","7":"Puerto Rico","8":"00","9":"G4000","10":"A","11":"8.869136e+09","12":"4922143005","13":"+18.2176480","14":"-066.4107992","15":"23050","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"46","4":"01785534","5":"46","6":"SD","7":"South Dakota","8":"00","9":"G4000","10":"A","11":"1.963429e+11","12":"3386737669","13":"+44.4467957","14":"-100.2381762","15":"36980","16":"<s_MULTIP>"},{"1":"1","2":"1","3":"25","4":"00606926","5":"25","6":"MA","7":"Massachusetts","8":"00","9":"G4000","10":"A","11":"2.020439e+10","12":"7130660432","13":"+42.1565196","14":"-071.4895915","15":"44960","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"51","4":"01779803","5":"51","6":"VA","7":"Virginia","8":"00","9":"G4000","10":"A","11":"1.022582e+11","12":"8528040726","13":"+37.5222512","14":"-078.6681938","15":"49250","16":"<s_MULTIP>"},{"1":"3","2":"5","3":"11","4":"01702382","5":"11","6":"DC","7":"District of Columbia","8":"00","9":"G4000","10":"A","11":"1.583161e+08","12":"18709762","13":"+38.9042474","14":"-077.0165167","15":"57210","16":"<s_MULTIP>"},{"1":"2","2":"4","3":"19","4":"01779785","5":"19","6":"IA","7":"Iowa","8":"00","9":"G4000","10":"A","11":"1.446597e+11","12":"1085964740","13":"+42.0700243","14":"-093.4933473","15":"45380","16":"<s_MULTIP>"},{"1":"4","2":"8","3":"04","4":"01779777","5":"04","6":"AZ","7":"Arizona","8":"00","9":"G4000","10":"A","11":"2.943640e+11","12":"855871553","13":"+34.2039362","14":"-111.6063449","15":"34560","16":"<s_MULTIP>"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+</section>
+<section id="quick-thematic-map" class="level2">
+<h2 class="anchored" data-anchor-id="quick-thematic-map">Quick Thematic Map</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qtm</span>(HelperShapeObject, <span class="at">fill =</span> <span class="st">"wages"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="031_thematic_mapping_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="states" class="level2">
+<h2 class="anchored" data-anchor-id="states">50 states</h2>
+<p>Filter to only the contiguous 50 states + D.C. Note that <code>tigris::shift_geometry()</code> will shift and resize Alaska and Hawaii.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>contiguous_states <span class="ot">&lt;-</span> HelperShapeObject <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(REGION <span class="sc">!=</span> <span class="dv">9</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">shift_geometry</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="make-choropleth" class="level2">
+<h2 class="anchored" data-anchor-id="make-choropleth">Make Choropleth</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(contiguous_states) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">"wages"</span>, <span class="at">id =</span> <span class="st">"Name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="031_thematic_mapping_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="projection" class="level2">
+<h2 class="anchored" data-anchor-id="projection">Projection</h2>
+<p>Mark likes the USA_Contiguous_Albers_Equal_Area_Conic_USGS_version projection for the continental US. <code>EPSG:5070</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>contiguous_states <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">5070</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">"wages"</span>, <span class="at">id =</span> <span class="st">"Name"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="031_thematic_mapping_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="alternative-syntax" class="level3">
+<h3 class="anchored" data-anchor-id="alternative-syntax">Alternative Syntax</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(contiguous_states, <span class="at">projection =</span> <span class="dv">5070</span>) <span class="sc">+</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="st">"wages"</span>, <span class="at">id =</span> <span class="st">"Name"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="031_thematic_mapping_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="explore-tmap-syntax-and-functions" class="level3">
+<h3 class="anchored" data-anchor-id="explore-tmap-syntax-and-functions">Explore <code>tmap</code> syntax and functions</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(contiguous_states, <span class="at">projection =</span> <span class="dv">5070</span>) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"black"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">col =</span> <span class="st">"REGION"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">title =</span> <span class="st">"Regions of the USA"</span>, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">attr.color =</span> <span class="st">"navy"</span>, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title.position =</span> <span class="fu">c</span>(<span class="st">"center"</span>, <span class="st">"top"</span>), </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">title.bg.color =</span> <span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="031_thematic_mapping_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="end-notes" class="level2">
+<h2 class="anchored" data-anchor-id="end-notes">End Notes</h2>
+<p>This session inspired by https://www.computerworld.com/article/3175623/data-analytics/mapping-in-r-just-got-a-whole-lot-easier.html</p>
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div id="quarto-reuse" class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></div></div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        typesetMath(container);
+        return container.innerHTML
+      } else {
+        typesetMath(note);
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      typesetMath(note);
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><a href="https://rfun.library.duke.edu">Rfun</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a href="https://library.duke.edu/data">Center for Data &amp; Visualization Sciences</a></p>
+</div>
+    <div class="nav-footer-right">
+<p><a href="https://library.duke.edu/">Duke University Libraries</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

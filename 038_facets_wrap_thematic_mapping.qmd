@@ -1,0 +1,200 @@
+---
+title: "Faceted Thematic Mapping"
+---
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: true
+#| results: false
+library(tidyverse)       
+library(readxl)
+library(tigris)          # Get Census Geography Poloygons
+library(sf)
+library(tidycensus)
+```
+
+## Shapefiles as sf
+
+Using the `tigris` package get Census Tiger shapefiles for census geographies. Tigris will return the shapefile in the `sf`, or simple features, format.
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: true
+#| results: false
+us_geo <- tigris::states(class = "sf", cb = TRUE) %>%   #cb is a more generalized, less detailed file.
+  shift_geometry() %>% 
+  filter(as.numeric(GEOID) < 60)
+```
+
+## Get BLS data
+
+I've already downloaded and stored some data from the Bureau of Labor Statistics. Those data are stored in an excel file in the `data` directory of the github repository: `data/OES_Report.xlsx`. **The goal is to attach this data to the previously downloaded shapefiles.**
+
+But you may be interested in how I gathered the data. below are some summary notes documenting my steps of gathering the data from the Bureau of Labor Statistics.
+
+https://data.bls.gov/oes/#/occGeo/One%20occupation%20for%20multiple%20geographical%20areas
+
+-   One occupation for multiple geographical areas
+
+    -   Mental Health and Substance Abuse Social Workers (Also, Secondary School Teacher, Waiter, Legislator, and Paralegals)
+
+        -   State
+
+        -   All States in this list
+
+        -   Annual Mean wage
+
+            -   Excel
+
+### Import the data into R
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: true
+my_xl_files <- fs::dir_ls(path = "data", glob = "*.xlsx")
+
+my_df <- my_xl_files %>% 
+  map_dfr(read_excel, 
+          col_types = c("text", "numeric"), 
+          skip = 4, 
+          .id = "sheet")
+
+state_names <- us_geo %>% 
+  select(NAME) %>% 
+  st_drop_geometry() 
+```
+
+### Wrangle the data
+
+Before we join the BLS data to the shapefile `us_geo` we need to transform BLS data
+
+```{r}
+my_df <- my_df %>% 
+  rename(area = "Area Name",
+         wages = "Annual mean wage(2)",
+         type = sheet) %>% 
+  mutate(State = str_extract(area, '.*(?=\\()')) %>% 
+  mutate(type = str_extract(type, "(?<=data/OES_)\\w+"))
+```
+
+### Missing data
+
+Some of the BLS data are missing making it hard to visualize. As a remedy to this problem we will wrangle the data by preserving shape geometry even for states without any wage data.
+
+```{r}
+missing_states_legislators <- state_names %>% 
+  anti_join(my_df %>% filter(type == "legislator"), 
+            by = c("NAME" = "State")) %>% 
+  mutate(type = "legislator") %>% 
+  rename(State = NAME)
+
+missing_states_legislators
+```
+
+```{r}
+my_df <- my_df %>% 
+  bind_rows(missing_states_legislators)
+```
+
+### Join data
+
+Using the `dplyr::left_join`, merge BLS data with the `us_geo` geometry, i.e. the shapefile object
+
+```{r}
+my_df <- us_geo %>% 
+  left_join(my_df, by = c("NAME" = "State"))
+```
+
+## Get census data -- tidycensus
+
+### Identify and pick census variables
+
+If you're not sure what 2015 ACS Census data variables you need, you'll want to investigate the variables.
+
+```{r}
+variables_census <- load_variables(2015, "acs5", cache = TRUE)
+```
+
+I'm using Median income.
+
+-   B01003_001E = Total Population\
+-   B06011_001E = Median income in the past 12 months
+
+*Note: I realize mean and median are not the same measure. This is a demonstration of procedure, not a recommendation for research practice and data comparison. Of course, you will be more rigorous with your own research.*
+
+### Get ACS median income
+
+Now that I know the Census ACS variable, I can use the `tidycensus::get_acs()` function to gather the mean income variable for each state, along with the geometry (i.e. shapefiles).
+
+```{r}
+us_pop <- 
+  get_acs(geography = "state",
+          variables = "B06011_001E",
+          geometry = TRUE)  %>% 
+  shift_geometry()
+
+us_pop <- us_pop %>% 
+  mutate(type = "USA Median Income") %>% 
+  rename(wages = estimate) 
+```
+
+### Append Census data
+
+Now combine the tidycensus data and geometry (i.e. `us_pop` variable data & shapefiles) with the BLS data and previously associate shapefiles gatheried via `tigris::states()`
+
+```{r}
+my_df <- bind_rows(my_df, us_pop)
+```
+
+### More munging
+
+Make the category variable a categorical factor with levels. This will improve the order of the facets when displayed.
+
+```{r}
+display_levels <- c("USA Median Income", "Legislator", 
+                    "Paralegals", "Substance Abuse Counselor", 
+                    "Teacher", "Waiters")
+
+my_df <- my_df %>% 
+  mutate(category = case_when(
+    type == "USA Median Income" ~ "USA Median Income",
+    type == "legislator" ~ "Legislator",
+    type == "paralegals" ~ "Paralegals",
+    type == "Report" ~ "Substance Abuse Counselor",
+    type == "secondary_school_teacher" ~ "Teacher",
+    type == "waiters" ~ "Waiters"
+  )) %>% 
+  mutate(category = factor(category, display_levels))
+```
+
+### Display map
+
+```{r}
+#| label: makethemap
+#| fig.height: 9
+#| fig.width: 8
+#| dev: svg
+
+my_df %>%
+  ggplot(aes(fill = wages, color = wages)) +
+  geom_sf() +
+  coord_sf(crs = 5070, datum = NA) +
+  scale_fill_viridis_c(labels = c("$20K", "$55K", "$87K"), breaks = c(20000, 55000, 87000)) +
+  scale_color_viridis_c(labels = c("$20K", "$55K", "$87K"), breaks = c(20000, 55000, 87000)) +
+  facet_wrap(~ category, 
+             nrow = 3, ncol = 2) +
+  theme(legend.position = "top") +
+  labs(title = "2015 Mean USA Wages by Professions",
+       subtitle = "A comparison of BLS mean income with Census median income",
+       color = "", fill = "",
+       caption = "Source: BLS & Census") 
+```
+
+### Save map
+
+```{r}
+ggsave("facet_map.svg", width = 8, height = 9, units = "in")
+```

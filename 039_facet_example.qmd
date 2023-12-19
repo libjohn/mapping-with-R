@@ -1,0 +1,22 @@
+---
+title: "Example Faceted Thematic Mapping"
+---
+
+![](facet_map.svg)
+
+Beyond the the data wrangling, this faceted map was created using the `ggplot2::facet_wrap()` function.\
+See Also: [full data wrangling code](038_facets_wrap_thematic_mapping.html) and workflow.
+
+```{r}
+#| eval: false
+#| echo: true
+
+sf_data %>% 
+  ggplot(aes(fill = wages, color = wages)) +
+  geom_sf() +
+  coord_sf(crs = 5070, datum = NA) +
+  scale_fill_viridis_c() + 
+  scale_color_viridis_c() +
+  facet_wrap(~ category, 
+             nrow = 3, ncol = 2)
+```

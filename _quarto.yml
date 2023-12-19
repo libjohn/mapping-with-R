@@ -1,0 +1,54 @@
+project:
+  type: website
+  
+execute:
+  freeze: auto
+
+website:
+  title: "Mapping in R"
+  favicon: "images/Rfun3.png"
+  repo-url: "https://github.com/libjohn/mapping-with-R"
+  repo-actions: [edit, issue]
+  page-footer: 
+    background: light
+    left: "<a href='https://rfun.library.duke.edu'>Rfun</a>"
+    center: "<a href='https://library.duke.edu/data'>Center for Data & Visualization Sciences</a>"
+    right: "<a href='https://library.duke.edu/'>Duke University Libraries</a>"
+  navbar:
+    logo: "images/Rfun3.png"
+    left:
+      - text: "Plot Coordinates"
+        href: 01_georeference.qmd
+      - text: "tidycensus"
+        href: 02_choropleth.qmd
+      - text: "Thematic Mapping"
+        menu:
+          - text:  "ggplot2 & geom_sf"
+            href: 032_thematic_mapping_geom_sf.qmd
+          - text: "ggplot2 & facet mapping"
+            href: 039_facet_example.qmd
+          - text: "tmap"
+            href: 031_thematic_mapping.qmd
+    right:
+      - text: "Resources"
+        href: "resources.qmd"
+      - icon: "github"
+        href: "https://github.com/libjohn/mapping-with-R"
+        aria-label: GitHub
+      - text: "CDVS"
+        menu:
+          - text: "Rfun Home"
+            href: "https://intro2R.library.duke.edu/"
+          - text: "Cntr for Data & Viz Sci"
+            href: "https://library.duke.edu/data/"
+
+format:
+  html:
+    theme: sandstone
+    css: styles.css
+    toc: true
+    df-print: paged
+    license: CC BY-NC 4.0
+
+editor: visual
+

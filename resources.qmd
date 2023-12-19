@@ -1,0 +1,29 @@
+---
+title: "Resources"
+---
+
+## Hands-on Exercises
+
+- [Code for Workshop -- Spring 2020](https://github.com/engine143/map-spring2020)
+
+
+## Supporting Materials
+
+- [**Slides**](/slides/)
+
+- [Guide to geospatial applications using the R programming language](https://guides.library.duke.edu/r-geospatial)
+
+
+## Supporting Materials
+
+- [R We having Fun Yet‽](https://rfun.library.duke.edu/#portfolio): aka "**Rfun**".  Free face-to-face, hands-on learning lab series for the Duke University Community.  
+- [simple features](https://r-spatial.github.io/sf/) package
+- [mapview](https://r-spatial.github.io/mapview/) - package
+- [tidycensus](https://walkerke.github.io/tidycensus/)
+- [tigiris](https://github.com/walkerke/tigris) _get shapefiles_
+- [_Geocomputation with R_](https://geocompr.robinlovelace.net/) by Lovelace, Nowosad, and Muenchow
+- [Spatial Data Science](https://keen-swartz-3146c4.netlify.com/) - by Pebesma and Bivand
+- [Interactive Primers](https://rstudio.cloud/learn/primers):  Free interactive mini-labs for learning R/Tidyverse 
+- [R for Data Science](https://r4ds.had.co.nz/): Book by Garrett Grolemund and Hadley Wickham.  Free, online.
+- [Tidyverse Documentation](https://www.tidyverse.org/packages/)
+

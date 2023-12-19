@@ -1,0 +1,15 @@
+{
+  "hash": "0eacedde37b752464041ac89b5a9a832",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Example Faceted Thematic Mapping\"\n---\n\n\n![](facet_map.svg)\n\nBeyond the the data wrangling, this faceted map was created using the `ggplot2::facet_wrap()` function.\\\nSee Also: [full data wrangling code](038_facets_wrap_thematic_mapping.html) and workflow.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nsf_data %>% \n  ggplot(aes(fill = wages, color = wages)) +\n  geom_sf() +\n  coord_sf(crs = 5070, datum = NA) +\n  scale_fill_viridis_c() + \n  scale_color_viridis_c() +\n  facet_wrap(~ category, \n             nrow = 3, ncol = 2)\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

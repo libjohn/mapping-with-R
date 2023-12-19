@@ -1,0 +1,74 @@
+---
+title: Latitude and Longitude Coordinates
+---
+
+Use the [`mapview` package](https://r-spatial.github.io/mapview/index.html) to make interactive maps. In this example, georeference Starbucks coffee shop locations in North Carolina (2012). [^1]
+
+[^1]: [5 Visualizations in 5 Minutes](http://www.computerworld.com/article/2893271/business-intelligence/5-data-visualizations-in-5-minutes-each-in-5-lines-or-less-of-r.html). ComputerWorld.com by Sharon Machlis
+
+## Load Libraries
+
+```{r}
+#| label: libraries
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(sf)
+library(mapview)
+```
+
+## Load Data
+
+2012 Starbucks locations ([data source](https://github.com/libjohn/mapping-with-R/blob/master/data/All_Starbucks_Locations_in_the_US_-_Map.csv))
+
+```{r}
+#| label: load-data
+#| message: false
+#| warning: false
+
+starbucks <- read_csv("https://raw.githubusercontent.com/libjohn/mapping-with-R/master/data/All_Starbucks_Locations_in_the_US_-_Map.csv", show_col_types = FALSE)
+```
+
+### Subset Data to North Carolina
+
+```{r}
+#| label: filter-dataset
+#| message: false
+#| warning: false
+
+starbucksNC <- starbucks  %>% 
+  filter(State == "NC")
+
+starbucksNC %>% 
+  glimpse()
+```
+
+## Make the Map
+
+In this example, plot latitude (y coordinates) and longitude (x coordinates). Then set the map projection[^2] to a common projection standard such as *WGS84* via the argument `crs = 4326`.)
+
+[^2]: [Projection / CRS](https://guides.library.duke.edu/r-geospatial/CRS)
+
+```{r}
+mapview(starbucksNC, xcol = "Longitude", ycol = "Latitude", crs = 4269, grid = FALSE)
+```
+
+## Alternative: Transform data to Spatial object
+
+Another way to plot the x & y coordinates is by transforming the starbucksNC tibble (i.e. the starbucksNC data frame) into a spacial data frame via the simple features function, `st_as_sf()`. Again, set the [map projection](https://en.wikipedia.org/wiki/Map_projection) to a common standard such as *WGS84* via the `crs=` argument.
+
+```{r}
+sbux_sf <- st_as_sf(starbucksNC, coords = c("Longitude", "Latitude"),  crs = 4326)
+```
+
+### Now Map the sf object.
+
+Below, you can plot the latitude and longitude coordinate, and set the `map.types` argument.
+
+This time with a different basemap...
+
+```{r}
+# mapview(sbux_sf)
+mapview(sbux_sf, map.types = "CartoDB.DarkMatter") 
+```
