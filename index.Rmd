@@ -18,6 +18,21 @@ These learning and quick-reference resource pages support the face-to-face works
 
 <iframe height="315" width="500" src="https://warpwire.duke.edu/w/JZ8EAA/" frameborder="0" scrolling="0" allow="autoplay; encrypted-media; fullscreen;  picture-in-picture;" allowfullscreen></iframe>
 
+<!-- badges: start -->
+[![Box code repository](https://img.shields.io/badge/workshop%20code%20repository-blue?logo=box&labelColor=lightgrey&color=0061D5 "Box code repository")](https://duke.box.com/v/r-mapping-spring22)  
+[![Guide](https://img.shields.io/badge/%3F-Guide-informational "Guide")](https://map-rfun.library.duke.edu/)
+[![Creative Commons CC
+BY-NC](https://img.shields.io/badge/Creative%20Commons-BY--NC-EF9421?logo=creative%20commons&logoColor=EF9421 "CC BY-NC")](https://creativecommons.org/licenses/by-nc/4.0/)
+<!-- badges: end -->
+
+
+### Geospatial data in R: Processing and Analysis
+
+<iframe height="315" width="560" src="https://warpwire.duke.edu/w/cUoFAA/" frameborder="0" scrolling="0" allow="autoplay *; encrypted-media *; fullscreen *; picture-in-picture *;" allowfullscreen></iframe>
+
+<!-- badges: start -->
+[![Box code repository](https://img.shields.io/badge/workshop%20code%20repository-blue?logo=box&labelColor=lightgrey&color=0061D5 "Box code repository")](https://duke.box.com/v/r-geo-spring2022)
+<!-- badges: end -->
 
 ***
 
