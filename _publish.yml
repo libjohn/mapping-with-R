@@ -1,0 +1,4 @@
+- source: project
+  netlify:
+    - id: 051db131-88d2-4d07-870e-52362f15e431
+      url: 'https://map-rfun.library.duke.edu'
