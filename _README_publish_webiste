@@ -1,0 +1,4 @@
+This site is published to Netlify.com
+
+1. Inside RStudio > click the `Render website` button
+2. In the Terminal:  `quarto publish netlify`
