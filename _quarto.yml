@@ -40,7 +40,6 @@ website:
             url: https://github.com/libjohn/mapping-with-R
           - text: Report Bug/Error
             url: https://github.com/libjohn/mapping-with-R/issues/new
-        aria-label: GitHub
       - icon: house-door-fill
         aria-label: Home
         menu:
