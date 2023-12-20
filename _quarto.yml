@@ -33,15 +33,21 @@ website:
     right:
       - text: "Resources"
         href: "resources.qmd"
-      - icon: "github"
-        href: "https://github.com/libjohn/mapping-with-R"
+      - icon: github
         aria-label: GitHub
-      - text: "CDVS"
         menu:
-          - text: "Rfun Home"
-            href: "https://intro2R.library.duke.edu/"
-          - text: "Cntr for Data & Viz Sci"
-            href: "https://library.duke.edu/data/"
+          - text: Source Code
+            url: https://github.com/libjohn/mapping-with-R
+          - text: Report Bug/Error
+            url: https://github.com/libjohn/mapping-with-R/issues/new
+        aria-label: GitHub
+      - icon: house-door-fill
+        aria-label: Home
+        menu:
+          - text: "Rfun: An R learning resource"
+            url: https://rfun.library.duke.edu
+          - text: Center for Data & Visualization Sciences
+            url: https://library.duke.edu/data/   
 
 format:
   html:
